@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>scans2pdf.desktop</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0</project_license>
+  <name>Scans to PDF</name>
+  <summary>Create small, searchable PDFs from scanned documents</summary>
+  <description>
+    <p>
+      This program creates small, searchable PDFs from scanned documents.
+      It divides images into bitonal foreground images (text) and a color
+      background image, then compresses them separately.
+      An invisible OCR text layer is added, making the PDF searchable.
+    </p>
+    <p>
+      Color and grayscale scans need some preparation for good results.
+      Recommended tools are ScanTailor or GIMP.
+    </p>
+    <p>
+      A GUI and command line interface are included.
+    </p>
+  </description>
+  <url type="bugtracker">https://github.com/Unrud/djpdf/issues</url>
+  <url type="homepage">https://github.com/Unrud/djpdf</url>
+  <developer_name>Unrud</developer_name>
+  <releases>
+    <release version="0.0.1" date="2018-06-10" />
+  </releases>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/Unrud/djpdf/0.0.1/screenshots/1.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/Unrud/djpdf/0.0.1/screenshots/2.png</image>
+    </screenshot>
+  </screenshots>
+  <content_rating type="oars-1.1">
+    <content_attribute id="violence-cartoon">none</content_attribute>
+    <content_attribute id="violence-fantasy">none</content_attribute>
+    <content_attribute id="violence-realistic">none</content_attribute>
+    <content_attribute id="violence-bloodshed">none</content_attribute>
+    <content_attribute id="violence-sexual">none</content_attribute>
+    <content_attribute id="violence-desecration">none</content_attribute>
+    <content_attribute id="violence-slavery">none</content_attribute>
+    <content_attribute id="violence-worship">none</content_attribute>
+    <content_attribute id="drugs-alcohol">none</content_attribute>
+    <content_attribute id="drugs-narcotics">none</content_attribute>
+    <content_attribute id="drugs-tobacco">none</content_attribute>
+    <content_attribute id="sex-nudity">none</content_attribute>
+    <content_attribute id="sex-themes">none</content_attribute>
+    <content_attribute id="sex-homosexuality">none</content_attribute>
+    <content_attribute id="sex-prostitution">none</content_attribute>
+    <content_attribute id="sex-adultery">none</content_attribute>
+    <content_attribute id="sex-appearance">none</content_attribute>
+    <content_attribute id="language-profanity">none</content_attribute>
+    <content_attribute id="language-humor">none</content_attribute>
+    <content_attribute id="language-discrimination">none</content_attribute>
+    <content_attribute id="social-chat">none</content_attribute>
+    <content_attribute id="social-info">none</content_attribute>
+    <content_attribute id="social-audio">none</content_attribute>
+    <content_attribute id="social-location">none</content_attribute>
+    <content_attribute id="social-contacts">none</content_attribute>
+    <content_attribute id="money-purchasing">none</content_attribute>
+    <content_attribute id="money-gambling">none</content_attribute>
+  </content_rating>
+</component>

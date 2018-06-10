@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Scans to PDF
+Comment=Create small, searchable PDFs from scanned documents
+Terminal=false
+Exec=scans2pdf-gui
+Icon=scans2pdf
+Categories=Graphics;Scanning;OCR;
