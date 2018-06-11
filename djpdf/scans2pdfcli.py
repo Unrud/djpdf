@@ -27,15 +27,12 @@ import traceback
 import webcolors
 from argparse import ArgumentParser, ArgumentTypeError
 
-from .scans2pdf import DEFAULT_SETTINGS, build_pdf, find_ocr_languages
+from .djpdf import CONVERT_CMD, JBIG2_CMD, QPDF_CMD
+from .scans2pdf import (DEFAULT_SETTINGS, IDENTIFY_CMD, TESSERACT_CMD,
+                        build_pdf, find_ocr_languages)
 from .util import format_number
 
 VERSION = pkg_resources.get_distribution("djpdf").version
-CONVERT_CMD = "convert"
-IDENTIFY_CMD = "identify"
-TESSERACT_CMD = "tesseract"
-JBIG2_CMD = "jbig2"
-QPDF_CMD = "qpdf"
 
 
 class ColorStreamHandler(logging.StreamHandler):

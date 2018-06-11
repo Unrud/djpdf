@@ -28,7 +28,7 @@ from os import path
 from tempfile import TemporaryDirectory
 
 from . import hocr
-from .djpdf import PARALLEL_JOBS, PdfBuilder
+from .djpdf import CONVERT_CMD, PARALLEL_JOBS, PdfBuilder
 from .util import AsyncCache, format_number, run_command_async
 
 DEFAULT_SETTINGS = {
@@ -47,7 +47,6 @@ DEFAULT_SETTINGS = {
     "ocr_colors": [(0, 0, 0)],
     "filename": None
 }
-CONVERT_CMD = "convert"
 IDENTIFY_CMD = "identify"
 TESSERACT_CMD = "tesseract"
 PDF_DPI = 72
