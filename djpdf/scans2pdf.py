@@ -30,6 +30,22 @@ from . import hocr
 from .djpdf import PdfBuilder, PARALLEL_JOBS
 from .util import format_number, run_command_async, AsyncCache
 
+DEFAULT_SETTINGS = {
+    "dpi": "auto",
+    "bg_color": (0xff, 0xff, 0xff),
+    "bg_enabled": True,
+    "bg_resize": 0.5,
+    "bg_compression": "jp2",
+    "bg_quality": 50,
+    "fg_enabled": True,
+    "fg_colors": [(0, 0, 0)],
+    "fg_compression": "jbig2",
+    "fg_jbig2_threshold": 0.85,
+    "ocr_enabled": True,
+    "ocr_language": "eng",
+    "ocr_colors": [(0, 0, 0)],
+    "filename": None
+}
 CONVERT_CMD = "convert"
 IDENTIFY_CMD = "identify"
 TESSERACT_CMD = "tesseract"

@@ -16,6 +16,7 @@
 # Copyright 2015, 2017 Unrud <unrud@outlook.com>
 
 import colorama
+import copy
 import logging
 import os
 import pkg_resources
@@ -26,26 +27,10 @@ import traceback
 import webcolors
 from argparse import ArgumentParser, ArgumentTypeError
 
-from . import scans2pdf
+from .scans2pdf import build_pdf, DEFAULT_SETTINGS
 from .util import format_number
 
 VERSION = pkg_resources.get_distribution("djpdf").version
-DEFAULT_SETTINGS = {
-    "dpi": "auto",
-    "bg_color": (0xff, 0xff, 0xff),
-    "bg_enabled": True,
-    "bg_resize": 0.5,
-    "bg_compression": "jp2",
-    "bg_quality": 50,
-    "fg_enabled": True,
-    "fg_colors": ((0, 0, 0),),
-    "fg_compression": "jbig2",
-    "fg_jbig2_threshold": 0.85,
-    "ocr_enabled": True,
-    "ocr_language": "eng",
-    "ocr_colors": ((0, 0, 0),),
-    "filename": None
-}
 CONVERT_CMD = "convert"
 IDENTIFY_CMD = "identify"
 TESSERACT_CMD = "tesseract"
@@ -143,7 +128,7 @@ def type_colors(var):
                 cs.append(c)
         except ArgumentTypeError as e:
             raise ArgumentTypeError("invalid colors value: '%s'" % var) from e
-    return tuple(cs)
+    return cs
 
 
 def type_ocr_colors(var):
@@ -275,7 +260,7 @@ def main():
 
     setup_logging()
 
-    df = DEFAULT_SETTINGS.copy()
+    df = copy.deepcopy(DEFAULT_SETTINGS)
     # Autodetect features
     ocr_languages = find_ocr_languages()
     if not ocr_languages:
@@ -448,7 +433,7 @@ def main():
     out_file = ns.OUTFILE
 
     try:
-        scans2pdf.build_pdf(pages, out_file)
+        build_pdf(pages, out_file)
     except Exception as e:
         logging.debug("Exception occurred:\n%s" % traceback.format_exc())
         logging.error("Operation failed")

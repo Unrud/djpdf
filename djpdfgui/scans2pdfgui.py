@@ -15,6 +15,7 @@
 
 # Copyright 2018 Unrud <unrud@outlook.com>
 
+import copy
 import json
 import subprocess
 import tempfile
@@ -28,6 +29,8 @@ from PySide2.QtCore import (QObject, Signal, Property, Slot, QUrl, Qt,
 from PySide2.QtGui import QImage
 from PySide2.QtQml import QQmlApplicationEngine
 from PySide2.QtQuick import QQuickImageProvider
+
+from djpdf.scans2pdf import DEFAULT_SETTINGS
 
 QML_DIR = pkg_resources.resource_filename(__name__, "qml")
 IMAGE_FILE_EXTENSIONS = ("bmp", "gif", "jpeg", "jpg", "png", "pnm",
@@ -59,29 +62,11 @@ class QmlPage(QObject):
 
     def __init__(self):
         super().__init__()
-        self._data = {
-            "dpi": "auto",
-            "bg_color": (0xff, 0xff, 0xff),
-            "bg_enabled": True,
-            "bg_resize": 0.5,
-            "bg_compression": "jp2",
-            "bg_quality": 50,
-            "fg_enabled": True,
-            "fg_colors": [(0, 0, 0)],
-            "fg_compression": "jbig2",
-            "fg_jbig2_threshold": 0.85,
-            "ocr_enabled": True,
-            "ocr_language": "eng",
-            "ocr_colors": [(0, 0, 0)],
-            "filename": None
-        }
+        self._data = copy.deepcopy(DEFAULT_SETTINGS)
 
     def apply_config(self, qml_page):
-        d = qml_page._data.copy()
+        d = copy.deepcopy(qml_page._data)
         d["filename"] = self._data["filename"]
-        d["fg_colors"] = d["fg_colors"].copy()
-        if d["ocr_colors"] != "all":
-            d["ocr_colors"] = d["ocr_colors"].copy()
         self._data = d
         self.dpiChanged.emit()
         self.bgColorChanged.emit()
