@@ -46,11 +46,11 @@ DEFAULT_SETTINGS = {
     "ocr_colors": ((0, 0, 0),),
     "filename": None
 }
-_CONVERT_CMD = "convert"
-_IDENTIFY_CMD = "identify"
-_TESSERACT_CMD = "tesseract"
-_JBIG2_CMD = "jbig2"
-_QPDF_CMD = "qpdf"
+CONVERT_CMD = "convert"
+IDENTIFY_CMD = "identify"
+TESSERACT_CMD = "tesseract"
+JBIG2_CMD = "jbig2"
+QPDF_CMD = "qpdf"
 
 
 class ColorStreamHandler(logging.StreamHandler):
@@ -235,7 +235,7 @@ def update_page_from_namespace(page, ns):
 def find_ocr_languages():
     try:
         return sorted(subprocess.check_output(
-            [_TESSERACT_CMD, "--list-langs"], stderr=subprocess.STDOUT,
+            [TESSERACT_CMD, "--list-langs"], stderr=subprocess.STDOUT,
             universal_newlines=True).rstrip("\n").split("\n")[1:])
     except (FileNotFoundError, PermissionError, subprocess.CalledProcessError):
         return []
@@ -280,15 +280,15 @@ def main():
     ocr_languages = find_ocr_languages()
     if not ocr_languages:
         df["ocr_enabled"] = False
-        if test_command_exists([_TESSERACT_CMD]):
-            logging.warning("'%s' is missing language files" % _TESSERACT_CMD)
+        if test_command_exists([TESSERACT_CMD]):
+            logging.warning("'%s' is missing language files" % TESSERACT_CMD)
     elif df["ocr_language"] not in ocr_languages:
         df["ocr_language"] = ocr_languages[0]
-    if not test_command_exists([_JBIG2_CMD]):
+    if not test_command_exists([JBIG2_CMD]):
         df["fg_compression"] = "fax"
-    test_command_exists([_QPDF_CMD], fatal=True)
-    test_command_exists([_CONVERT_CMD], fatal=True)
-    test_command_exists([_IDENTIFY_CMD], fatal=True)
+    test_command_exists([QPDF_CMD], fatal=True)
+    test_command_exists([CONVERT_CMD], fatal=True)
+    test_command_exists([IDENTIFY_CMD], fatal=True)
 
     parser = ArgumentParser(
         description="Options are valid for all following images.",

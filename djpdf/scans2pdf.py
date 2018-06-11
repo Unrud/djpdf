@@ -30,10 +30,10 @@ from . import hocr
 from .djpdf import PdfBuilder, PARALLEL_JOBS
 from .util import format_number, run_command_async, AsyncCache
 
-_CONVERT_CMD = "convert"
-_IDENTIFY_CMD = "identify"
-_TESSERACT_CMD = "tesseract"
-_PDF_DPI = 72
+CONVERT_CMD = "convert"
+IDENTIFY_CMD = "identify"
+TESSERACT_CMD = "tesseract"
+PDF_DPI = 72
 
 
 def _color_to_hex(color):
@@ -124,7 +124,7 @@ class BaseImageObject(BasePageObject):
 
     @asyncio.coroutine
     def _size(self, psem):
-        outs = yield from run_command_async([_IDENTIFY_CMD,
+        outs = yield from run_command_async([IDENTIFY_CMD,
                                              "-format", "%w %h",
                                              path.abspath(
                                                  (yield from self.filename(
@@ -141,7 +141,7 @@ class BaseImageObject(BasePageObject):
 
     @asyncio.coroutine
     def _dpi(self, psem):
-        outs = yield from run_command_async([_IDENTIFY_CMD,
+        outs = yield from run_command_async([IDENTIFY_CMD,
                                              "-units", "PixelsPerInch",
                                              "-format", "%x %y",
                                              path.abspath(
@@ -163,7 +163,7 @@ class BaseImageObject(BasePageObject):
     @staticmethod
     @asyncio.coroutine
     def _is_plain_color_file(filename, color, process_semaphore):
-        outs = yield from run_command_async([_CONVERT_CMD,
+        outs = yield from run_command_async([CONVERT_CMD,
                                              "-format", "%c",
                                              path.abspath(filename),
                                              "histogram:info:-"],
@@ -203,7 +203,7 @@ class InputImage(BaseImageObject):
     def _filename(self, psem):
         fname = path.join(self._temp_dir, "image.png")
         yield from run_command_async([
-            _CONVERT_CMD,
+            CONVERT_CMD,
             "-background", _color_to_hex(self._page["bg_color"]),
             "-alpha", "remove",
             "-alpha", "off",
@@ -237,7 +237,7 @@ class BackgroundImage(BaseImageObject):
         if (self._page["fg_enabled"] and self._page["fg_colors"] or
                 self._page["bg_resize"] != 1):
             fname = path.join(self._temp_dir, "image.png")
-            cmd = [_CONVERT_CMD,
+            cmd = [CONVERT_CMD,
                    "-fill", _color_to_hex(self._page["bg_color"])]
             if self._page["fg_enabled"]:
                 for color in self._page["fg_colors"]:
@@ -312,7 +312,7 @@ class ForegroundImage(BaseImageObject):
     def _filename(self, psem):
         fname = path.join(self._temp_dir, "image.png")
         color = self._page["fg_colors"][self._color_index]
-        cmd = [_CONVERT_CMD]
+        cmd = [CONVERT_CMD]
         new_black = (0x00, 0x00, 0x00)
         if color != new_black:
             if color != (0x00, 0x00, 0x01):
@@ -407,7 +407,7 @@ class OcrImage(BaseImageObject):
                     v += 1
                     new_black = ((v >> 16) & 0xff, (v >> 8) & 0xff,
                                  (v >> 0) & 0xff)
-            cmd = [_CONVERT_CMD]
+            cmd = [CONVERT_CMD]
             cmd.extend(["-fill", _color_to_hex(new_black),
                         "-opaque", "#000000",
                         "-fill", "#000000"])
@@ -446,7 +446,7 @@ class Ocr(BasePageObject):
     def _texts(self, psem):
         if not self._page["ocr_enabled"]:
             return None
-        yield from run_command_async([_TESSERACT_CMD,
+        yield from run_command_async([TESSERACT_CMD,
                                       "-l", self._page["ocr_language"],
                                       path.abspath(
                                           (yield from self._ocr_image.filename(
@@ -502,17 +502,17 @@ class Page(BasePageObject):
                 get_dpi(psem))
         if texts is not None:
             for text in texts:
-                text["x"] *= (_PDF_DPI / dpi_x)
+                text["x"] *= (PDF_DPI / dpi_x)
                 text["y"] = ((height - text["y"] - text["height"]) *
-                             (_PDF_DPI / dpi_y))
-                text["width"] *= (_PDF_DPI / dpi_x)
-                text["height"] *= (_PDF_DPI / dpi_y)
+                             (PDF_DPI / dpi_y))
+                text["width"] *= (PDF_DPI / dpi_x)
+                text["height"] *= (PDF_DPI / dpi_y)
         # Filter empty foregrounds
         foregrounds_json = [fg for fg in foregrounds_json if fg is not None]
 
         return {
-            "width": width * (_PDF_DPI / dpi_x),
-            "height": height * (_PDF_DPI / dpi_y),
+            "width": width * (PDF_DPI / dpi_x),
+            "height": height * (PDF_DPI / dpi_y),
             "background": background,
             "foreground": foregrounds_json,
             "color": self._page["bg_color"],

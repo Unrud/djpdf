@@ -41,21 +41,21 @@ from pdfrw import PdfReader, PdfWriter
 from pdfrw.objects import (PdfArray, PdfDict, PdfName, PdfObject, PdfString)
 logging.basicConfig = _orig_basic_config
 
-_CONVERT_CMD = "convert"
-_JBIG2_CMD = "jbig2"
-_QPDF_CMD = "qpdf"
-_PDF_DECIMAL_PLACES = 3
+CONVERT_CMD = "convert"
+JBIG2_CMD = "jbig2"
+QPDF_CMD = "qpdf"
+PDF_DECIMAL_PLACES = 3
 # Don't share JBIG2Globals between multiple images, because
 # Poppler as of version 0.36  has problems showing the images
-_SHARE_JBIG2_GLOBALS = False
-_LINEARIZE_PDF = True
-_COMPRESS_PAGE_CONTENTS = True
-_FONT_FILENAME = pkg_resources.resource_filename(__name__, "tesseract-pdf.ttf")
-_UNICODE_CMAP_FILENAME = pkg_resources.resource_filename(__name__, "to-unicode.cmap")
+SHARE_JBIG2_GLOBALS = False
+LINEARIZE_PDF = True
+COMPRESS_PAGE_CONTENTS = True
+FONT_FILENAME = pkg_resources.resource_filename(__name__, "tesseract-pdf.ttf")
+UNICODE_CMAP_FILENAME = pkg_resources.resource_filename(__name__, "to-unicode.cmap")
 PARALLEL_JOBS = 1
 
 
-def _pdf_format_number(f, decimal_places=_PDF_DECIMAL_PLACES):
+def _pdf_format_number(f, decimal_places=PDF_DECIMAL_PLACES):
     return format_number(f, decimal_places, trim_leading_zero=True)
 
 
@@ -297,7 +297,7 @@ class ImageMagickImage:
     @asyncio.coroutine
     def _pdf_image(self, psem):
         with TemporaryDirectory(prefix="djpdf-") as temp_dir:
-            cmd = [_CONVERT_CMD]
+            cmd = [CONVERT_CMD]
             if self._image_mask or self.compression in ("jp2", "jpeg"):
                 cmd.extend(["-alpha", "remove",
                             "-alpha", "off"])
@@ -420,7 +420,7 @@ class Jbig2Image:
             # it's written to stdout
             symbol_mode = self.jbig2_threshold != 1
             images_with_shared_globals = []
-            if symbol_mode and _SHARE_JBIG2_GLOBALS:
+            if symbol_mode and SHARE_JBIG2_GLOBALS:
                 # Find all Jbig2Images that share the same symbol directory
                 for obj in self._factory._cache:
                     if (isinstance(obj, Jbig2Image) and
@@ -450,7 +450,7 @@ class Jbig2Image:
                 # Convert images with ImageMagick to bitonal png in parallel
                 yield from asyncio.gather(*[
                     run_command_async([
-                        _CONVERT_CMD,
+                        CONVERT_CMD,
                         "-alpha", "remove",
                         "-alpha", "off",
                         "-colorspace", "gray",
@@ -459,7 +459,7 @@ class Jbig2Image:
                         path.abspath(path.join(temp_dir,
                                                "input.%d.png" % i))], psem)
                     for i, image in enumerate(images_with_shared_globals)])
-                cmd = [_JBIG2_CMD, "-p"]
+                cmd = [JBIG2_CMD, "-p"]
                 if symbol_mode:
                     cmd.extend(["-s", "-t",
                                 format_number(self.jbig2_threshold, 4)])
@@ -598,7 +598,7 @@ class PdfBuilder:
 
     @staticmethod
     def _build_font():
-        with open(_FONT_FILENAME, "rb") as f:
+        with open(FONT_FILENAME, "rb") as f:
             embedded_font_stream = f.read()
         embedded_font = PdfDict()
         embedded_font.indirect = True
@@ -644,7 +644,7 @@ class PdfBuilder:
         cid_font.Type = PdfName.Font
         cid_font.DW = 500
 
-        with open(_UNICODE_CMAP_FILENAME, "rb") as f:
+        with open(UNICODE_CMAP_FILENAME, "rb") as f:
             unicode_cmap_stream = f.read()
         unicode_cmap = PdfDict()
         unicode_cmap.indirect = True
@@ -818,7 +818,7 @@ class PdfBuilder:
                 pdf_contents = PdfDict()
                 pdf_contents.indirect = True
                 pdf_page.Contents = pdf_contents
-                if _COMPRESS_PAGE_CONTENTS:
+                if COMPRESS_PAGE_CONTENTS:
                     pdf_contents.Filter = [PdfName.FlateDecode]
                     pdf_contents.stream = zlib.compress(
                         contents.encode("latin-1"),
@@ -837,11 +837,11 @@ class PdfBuilder:
 
         with TemporaryDirectory(prefix="djpdf-") as temp_dir:
             pdf_writer.write(path.join(temp_dir, "temp.pdf"))
-            cmd = [_QPDF_CMD,
+            cmd = [QPDF_CMD,
                    "--stream-data=preserve",
                    "--object-streams=preserve",
                    "--normalize-content=n"]
-            if _LINEARIZE_PDF:
+            if LINEARIZE_PDF:
                 cmd.extend(["--linearize"])
             cmd.extend([path.abspath(path.join(temp_dir, "temp.pdf")),
                         path.abspath(outfile)])
