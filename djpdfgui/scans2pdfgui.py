@@ -19,6 +19,7 @@ import copy
 import json
 import os
 import pkg_resources
+import sys
 import tempfile
 from djpdf.scans2pdf import DEFAULT_SETTINGS, find_ocr_languages
 from PySide2 import QtQml
@@ -40,7 +41,6 @@ IMAGE_MIME_TYPES = ("image/bmp", "image/gif", "image/jpeg", "image/png",
                     "image/webp", "image/jp2")
 PDF_FILE_EXTENSION = "pdf"
 PDF_MIME_TYPE = "application/pdf"
-SCANS2PDF_JSON_CMD = "scans2pdf-json"
 THUMBNAIL_SIZE = 256
 
 
@@ -383,7 +383,9 @@ class QmlPagesModel(QAbstractListModel):
             if status != 0:
                 self.savingError.emit()
         p.finished.connect(finished)
-        p.start(SCANS2PDF_JSON_CMD, [url.toLocalFile()])
+        p.start(sys.executable,
+                ["-c", "from djpdf.scans2pdf import main; main()",
+                 os.path.abspath(url.toLocalFile())])
         p.write(json.dumps([p._data for p in self._pages]).encode())
         p.closeWriteChannel()
 
