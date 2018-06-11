@@ -27,7 +27,7 @@ import traceback
 import webcolors
 from argparse import ArgumentParser, ArgumentTypeError
 
-from .scans2pdf import build_pdf, DEFAULT_SETTINGS
+from .scans2pdf import DEFAULT_SETTINGS, build_pdf
 from .util import format_number
 
 VERSION = pkg_resources.get_distribution("djpdf").version

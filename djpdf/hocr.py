@@ -20,7 +20,6 @@ import logging
 import re
 import sys
 import traceback
-
 from argparse import ArgumentParser
 from xml.etree.ElementTree import ElementTree
 try:

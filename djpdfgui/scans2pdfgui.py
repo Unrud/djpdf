@@ -17,20 +17,17 @@
 
 import copy
 import json
-import subprocess
-import tempfile
 import os
 import pkg_resources
-
-from PySide2 import QtQml
-from PySide2.QtWidgets import QApplication
-from PySide2.QtCore import (QObject, Signal, Property, Slot, QUrl, Qt,
-                            QAbstractListModel, QModelIndex, QProcess)
-from PySide2.QtGui import QImage
-from PySide2.QtQml import QQmlApplicationEngine
-from PySide2.QtQuick import QQuickImageProvider
-
+import tempfile
 from djpdf.scans2pdf import DEFAULT_SETTINGS
+from PySide2 import QtQml
+from PySide2.QtGui import QImage
+from PySide2.QtCore import (Property, QAbstractListModel, QModelIndex,
+                            QObject, QProcess, QUrl, Qt, Signal, Slot)
+from PySide2.QtQuick import QQuickImageProvider
+from PySide2.QtQml import QQmlApplicationEngine
+from PySide2.QtWidgets import QApplication
 
 QML_DIR = pkg_resources.resource_filename(__name__, "qml")
 IMAGE_FILE_EXTENSIONS = ("bmp", "gif", "jpeg", "jpg", "png", "pnm",

@@ -25,14 +25,13 @@ import struct
 import sys
 import traceback
 import zlib
-
-from collections import namedtuple
 from argparse import ArgumentParser
+from collections import namedtuple
 from itertools import chain
 from os import path
 from tempfile import TemporaryDirectory
 
-from .util import format_number, run_command_async, AsyncCache
+from .util import AsyncCache, format_number, run_command_async
 
 # pdfrw tampers with logging
 _orig_basic_config = logging.basicConfig

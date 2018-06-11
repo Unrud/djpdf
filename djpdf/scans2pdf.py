@@ -27,8 +27,8 @@ from os import path
 from tempfile import TemporaryDirectory
 
 from . import hocr
-from .djpdf import PdfBuilder, PARALLEL_JOBS
-from .util import format_number, run_command_async, AsyncCache
+from .djpdf import PARALLEL_JOBS, PdfBuilder
+from .util import AsyncCache, format_number, run_command_async
 
 DEFAULT_SETTINGS = {
     "dpi": "auto",
