@@ -27,7 +27,7 @@ from os import path
 from tempfile import TemporaryDirectory
 
 from . import hocr
-from .djpdf import PdfBuilder
+from .djpdf import PdfBuilder, PARALLEL_JOBS
 from .util import format_number, run_command_async, AsyncCache
 
 _CONVERT_CMD = "convert"
@@ -577,7 +577,7 @@ def build_pdf_async(pages, pdf_filename, process_semaphore):
 
 
 def build_pdf(pages, pdf_filename):
-    process_semaphore = asyncio.BoundedSemaphore(os.cpu_count())
+    process_semaphore = asyncio.BoundedSemaphore(PARALLEL_JOBS)
     loop = asyncio.get_event_loop()
     try:
         return loop.run_until_complete(build_pdf_async(pages, pdf_filename,
