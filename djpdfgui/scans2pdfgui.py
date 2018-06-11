@@ -25,7 +25,9 @@ from PySide2 import QtQml
 from PySide2.QtWidgets import QApplication
 from PySide2.QtCore import (QObject, Signal, Property, Slot, QUrl, Qt,
                             QAbstractListModel, QModelIndex, QProcess)
+from PySide2.QtGui import QImage
 from PySide2.QtQml import QQmlApplicationEngine
+from PySide2.QtQuick import QQuickImageProvider
 
 QML_DIR = pkg_resources.resource_filename(__name__, "qml")
 IMAGE_FILE_EXTENSIONS = ("bmp", "gif", "jpeg", "jpg", "png", "pnm",
@@ -40,6 +42,7 @@ PDF_FILE_EXTENSION = "pdf"
 PDF_MIME_TYPE = "application/pdf"
 SCANS2PDF_JSON_CMD = "scans2pdf-json"
 TESSERACT_CMD = "tesseract"
+THUMBNAIL_SIZE = 256
 
 
 def find_ocr_languages():
@@ -410,6 +413,26 @@ class QmlPagesModel(QAbstractListModel):
         p.closeWriteChannel()
 
 
+class ThumbnailImageProvider(QQuickImageProvider):
+
+    def __init__(self):
+        super().__init__(QQuickImageProvider.Image)
+
+    def requestImage(self, url, size, requestedSize):
+        url = QUrl(url)
+        image = QImage(url.toLocalFile())
+        width, height = image.width(), image.height()
+        if size:
+            size.setWidth(width)
+            size.setHeight(height)
+        if requestedSize.width() > 0:
+            width = requestedSize.width()
+        if requestedSize.height() > 0:
+            height = requestedSize.height()
+        return image.scaled(min(width, THUMBNAIL_SIZE),
+                            min(height, THUMBNAIL_SIZE), Qt.KeepAspectRatio)
+
+
 class QmlPlatformIntegration(QObject):
 
     pdfFileExtensionChanged = Signal()
@@ -499,6 +522,8 @@ def main():
     QtQml.qmlRegisterType(QmlPage, "djpdf", 1, 0, "DjpdfPage")
     app = QApplication([])
     engine = QQmlApplicationEngine()
+    thumbnail_image_provider = ThumbnailImageProvider()
+    engine.addImageProvider("thumbnails", thumbnail_image_provider)
     ctx = engine.rootContext()
     pages_model = QmlPagesModel()
     if os.environ.get("DJPDF_PLATFORM_INTEGRATION", "") == "flatpak":

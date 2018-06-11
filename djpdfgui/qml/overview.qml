@@ -187,7 +187,7 @@ Page {
                     Image {
                         id: image
                         asynchronous: true
-                        source: model.modelData.url
+                        source: "image://thumbnails/" + model.modelData.url
                         anchors.fill: parent
                         fillMode: Image.PreserveAspectFit
                         anchors.margins: 6
