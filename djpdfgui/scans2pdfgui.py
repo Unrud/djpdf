@@ -445,18 +445,20 @@ class QmlPlatformIntegration(QObject):
 
 class QmlFlatpakPlatformIntegration(QmlPlatformIntegration):
 
-    def __init__(self, bus, engine):
+    def __init__(self, bus):
         super().__init__()
-        self._engine = engine
         self._bus = bus
+        self.win_id = None
         obj = bus.get_object("org.freedesktop.portal.Desktop",
                              "/org/freedesktop/portal/desktop")
         self._file_chooser = dbus.Interface(
             obj, "org.freedesktop.portal.FileChooser")
 
     @property
-    def _win_id(self):
-        return b"x11:%x" % self._engine.rootObjects()[0].winId()
+    def _flatpak_win_id(self):
+        if self.win_id is None:
+            return b""
+        return b"x11:%x" % self.win_id
 
     @Property(bool, notify=QmlPlatformIntegration.enabledChanged)
     def enabled(self):
@@ -464,7 +466,7 @@ class QmlFlatpakPlatformIntegration(QmlPlatformIntegration):
 
     @Slot()
     def openOpenDialog(self):
-        reply = self._file_chooser.OpenFile(self._win_id, "Open", {
+        reply = self._file_chooser.OpenFile(self._flatpak_win_id, "Open", {
             "filters": [("Images", [(dbus.UInt32(1), m)
                                     for m in IMAGE_MIME_TYPES]),
                         ("All files", [(dbus.UInt32(0), "*")])],
@@ -480,7 +482,7 @@ class QmlFlatpakPlatformIntegration(QmlPlatformIntegration):
 
     @Slot()
     def openSaveDialog(self):
-        reply = self._file_chooser.SaveFile(self._win_id, "Save", {
+        reply = self._file_chooser.SaveFile(self._flatpak_win_id, "Save", {
             "filters": [("PDF", [(dbus.UInt32(1), PDF_MIME_TYPE)]),
                         ("All files", [(dbus.UInt32(0), "*")])],
             "current_name": "Unnamed.%s" % PDF_FILE_EXTENSION})
@@ -508,11 +510,13 @@ def main():
         import dbus.mainloop.glib
         dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
         bus = dbus.SessionBus()
-        platform_integration = QmlFlatpakPlatformIntegration(bus, engine)
+        platform_integration = QmlFlatpakPlatformIntegration(bus)
     else:
         platform_integration = QmlPlatformIntegration()
     ctx.setContextProperty("pagesModel", pages_model)
     ctx.setContextProperty("platformIntegration", platform_integration)
     engine.load(QUrl.fromLocalFile(
         os.path.join(QML_DIR, "main.qml")))
+    if os.environ.get("DJPDF_PLATFORM_INTEGRATION", "") == "flatpak":
+        platform_integration.win_id = engine.rootObjects()[0].winId()
     exit(app.exec_())
