@@ -20,6 +20,7 @@ import json
 import logging
 import os
 import re
+import subprocess
 import sys
 import traceback
 from argparse import ArgumentParser
@@ -50,6 +51,15 @@ CONVERT_CMD = "convert"
 IDENTIFY_CMD = "identify"
 TESSERACT_CMD = "tesseract"
 PDF_DPI = 72
+
+
+def find_ocr_languages():
+    try:
+        return sorted(subprocess.check_output(
+            [TESSERACT_CMD, "--list-langs"], stderr=subprocess.STDOUT,
+            universal_newlines=True).rstrip("\n").split("\n")[1:])
+    except (FileNotFoundError, PermissionError, subprocess.CalledProcessError):
+        return []
 
 
 def _color_to_hex(color):

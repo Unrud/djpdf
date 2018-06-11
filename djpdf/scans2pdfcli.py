@@ -27,7 +27,7 @@ import traceback
 import webcolors
 from argparse import ArgumentParser, ArgumentTypeError
 
-from .scans2pdf import DEFAULT_SETTINGS, build_pdf
+from .scans2pdf import DEFAULT_SETTINGS, build_pdf, find_ocr_languages
 from .util import format_number
 
 VERSION = pkg_resources.get_distribution("djpdf").version
@@ -215,15 +215,6 @@ def update_page_from_namespace(page, ns):
     if ns.ocr_colors is not None:
         page["ocr_colors"] = ns.ocr_colors
     page["filename"] = ns.INFILE
-
-
-def find_ocr_languages():
-    try:
-        return sorted(subprocess.check_output(
-            [TESSERACT_CMD, "--list-langs"], stderr=subprocess.STDOUT,
-            universal_newlines=True).rstrip("\n").split("\n")[1:])
-    except (FileNotFoundError, PermissionError, subprocess.CalledProcessError):
-        return []
 
 
 def test_command_exists(args, fatal=False):

@@ -20,7 +20,7 @@ import json
 import os
 import pkg_resources
 import tempfile
-from djpdf.scans2pdf import DEFAULT_SETTINGS
+from djpdf.scans2pdf import DEFAULT_SETTINGS, find_ocr_languages
 from PySide2 import QtQml
 from PySide2.QtGui import QImage
 from PySide2.QtCore import (Property, QAbstractListModel, QModelIndex,
@@ -41,14 +41,7 @@ IMAGE_MIME_TYPES = ("image/bmp", "image/gif", "image/jpeg", "image/png",
 PDF_FILE_EXTENSION = "pdf"
 PDF_MIME_TYPE = "application/pdf"
 SCANS2PDF_JSON_CMD = "scans2pdf-json"
-TESSERACT_CMD = "tesseract"
 THUMBNAIL_SIZE = 256
-
-
-def find_ocr_languages():
-    r = subprocess.run([TESSERACT_CMD, "--list-langs"], stdout=subprocess.PIPE,
-                       check=True, universal_newlines=True)
-    return sorted(r.stdout.rstrip("\n").split("\n")[1:])
 
 
 class QmlPage(QObject):
