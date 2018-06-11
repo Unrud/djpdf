@@ -53,9 +53,10 @@
       "name": "imagemagick",
       "sources": [
         {
-          "type": "archive",
-          "url": "https://www.imagemagick.org/download/releases/ImageMagick-7.0.7-38.tar.xz",
-          "sha256": "db6a88477dc7290a450570d215ae68caf83e0d80c868addefb608109978db17b"
+          "type": "git",
+          "url": "https://github.com/ImageMagick/ImageMagick",
+          "tag": "7.0.7-38",
+          "commit": "9b377c1c9d241c6d0b9dce835b5209105b96545f"
         }
       ],
       "cleanup": [
