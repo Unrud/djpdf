@@ -20,5 +20,5 @@ setup(
         ]
     },
     python_requires=">=3.5",
-    install_requires=["webcolors", "colorama", "pdfrw", "pyside2"]
+    install_requires=["webcolors", "colorama", "pdfrw", "pyside2", "psutil"]
 )

@@ -28,8 +28,10 @@ from os import path
 from tempfile import TemporaryDirectory
 
 from . import hocr
-from .djpdf import CONVERT_CMD, PARALLEL_JOBS, PdfBuilder
-from .util import AsyncCache, format_number, run_command_async
+from .djpdf import (CONVERT_CMD, PARALLEL_JOBS, JOB_MEMORY, RESERVED_MEMORY,
+                    PdfBuilder)
+from .util import (AsyncCache, MemoryBoundedSemaphore, format_number,
+                   run_command_async)
 
 DEFAULT_SETTINGS = {
     "dpi": "auto",
@@ -602,7 +604,8 @@ def build_pdf_async(pages, pdf_filename, process_semaphore):
 
 
 def build_pdf(pages, pdf_filename):
-    process_semaphore = asyncio.BoundedSemaphore(PARALLEL_JOBS)
+    process_semaphore = MemoryBoundedSemaphore(
+        PARALLEL_JOBS, JOB_MEMORY, RESERVED_MEMORY)
     loop = asyncio.get_event_loop()
     try:
         return loop.run_until_complete(build_pdf_async(pages, pdf_filename,

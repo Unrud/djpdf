@@ -51,7 +51,9 @@ LINEARIZE_PDF = True
 COMPRESS_PAGE_CONTENTS = True
 FONT_FILENAME = pkg_resources.resource_filename(__name__, "tesseract-pdf.ttf")
 UNICODE_CMAP_FILENAME = pkg_resources.resource_filename(__name__, "to-unicode.cmap")
-PARALLEL_JOBS = 1
+PARALLEL_JOBS = os.cpu_count() or 1
+JOB_MEMORY = 2 << 30
+RESERVED_MEMORY = 1 << 30
 
 
 def _pdf_format_number(f, decimal_places=PDF_DECIMAL_PLACES):
@@ -847,7 +849,8 @@ class PdfBuilder:
             yield from run_command_async(cmd, process_semaphore)
 
     def write(self, outfile):
-        process_semaphore = asyncio.BoundedSemaphore(PARALLEL_JOBS)
+        process_semaphore = MemoryBoundedSemaphore(
+            PARALLEL_JOBS, JOB_MEMORY, RESERVED_MEMORY)
         loop = asyncio.get_event_loop()
         try:
             return loop.run_until_complete(self.write_async(outfile,
