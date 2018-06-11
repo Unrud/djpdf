@@ -7,7 +7,7 @@
   "rename-appdata-file": "scans2pdf.appdata.xml",
   "rename-desktop-file": "scans2pdf.desktop",
   "rename-icon": "scans2pdf",
-  "finish-args": ["--socket=x11", "--env=DJPDF_PLATFORM_INTEGRATION=flatpak"],
+  "finish-args": ["--socket=x11", "--share=ipc", "--env=DJPDF_PLATFORM_INTEGRATION=flatpak"],
   "modules": [
     {
       "name": "leptonica",
