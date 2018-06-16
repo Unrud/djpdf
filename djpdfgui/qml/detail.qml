@@ -149,10 +149,17 @@ Page {
                             text: "Resize:"
                         }
                         Slider {
+                            id: bgResizeSlider
                             Layout.fillWidth: true
                             value: sv.p.bgResize
+                            stepSize: 0.01
                             onMoved: {
                                 sv.p.bgResize = Math.max(value, 0.1)
+                            }
+                            ToolTip {
+                                parent: bgResizeSlider.handle
+                                visible: bgResizeSlider.pressed
+                                text: (bgResizeSlider.value * 100).toFixed(0) + "%"
                             }
                         }
                     }
@@ -187,6 +194,7 @@ Page {
                             Layout.fillWidth: true
                         }
                         Slider {
+                            id: bgQualitySlider
                             Layout.fillWidth: true
                             value: Math.max(sv.p.bgQuality, 1)
                             from: 0
@@ -194,6 +202,11 @@ Page {
                             stepSize: 1
                             onMoved: {
                                 sv.p.bgQuality = Math.round(value)
+                            }
+                            ToolTip {
+                                parent: bgQualitySlider.handle
+                                visible: bgQualitySlider.pressed
+                                text: bgQualitySlider.value
                             }
                         }
                     }
@@ -301,10 +314,17 @@ Page {
                             text: "JBIG2 Threshold:"
                         }
                         Slider {
+                            id: fgJbig2ThresholdSlider
                             Layout.fillWidth: true
                             value: sv.p.fgJbig2Threshold
+                            stepSize: 0.01
                             onMoved: {
                                 sv.p.fgJbig2Threshold = value < 0.95 ? Math.min(Math.max(value, 0.4), 0.9) : 1
+                            }
+                            ToolTip {
+                                parent: fgJbig2ThresholdSlider.handle
+                                visible: fgJbig2ThresholdSlider.pressed
+                                text: (fgJbig2ThresholdSlider.value * 100).toFixed(0) + "%"
                             }
                         }
                     }
