@@ -196,12 +196,12 @@ Page {
                         Slider {
                             id: bgQualitySlider
                             Layout.fillWidth: true
-                            value: Math.max(sv.p.bgQuality, 1)
+                            value: sv.p.bgQuality
                             from: 0
                             to: 100
                             stepSize: 1
                             onMoved: {
-                                sv.p.bgQuality = Math.round(value)
+                                sv.p.bgQuality = Math.max(value, 1)
                             }
                             ToolTip {
                                 parent: bgQualitySlider.handle
