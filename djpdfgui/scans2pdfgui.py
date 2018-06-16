@@ -21,6 +21,7 @@ import os
 import pkg_resources
 import sys
 import tempfile
+from argparse import ArgumentParser
 from djpdf.scans2pdf import DEFAULT_SETTINGS, find_ocr_languages
 from PySide2 import QtQml
 from PySide2.QtGui import QImage
@@ -291,10 +292,11 @@ class QmlPagesModel(QAbstractListModel):
 
     _MODEL_DATA_ROLE = Qt.UserRole + 1
 
-    def __init__(self, parent=None):
+    def __init__(self, verbose=False, parent=None):
         super().__init__(parent)
         self._pages = []
         self._saving = False
+        self._verbose = verbose
 
     def roleNames(self):
         return {
@@ -383,9 +385,11 @@ class QmlPagesModel(QAbstractListModel):
             if status != 0:
                 self.savingError.emit()
         p.finished.connect(finished)
-        p.start(sys.executable,
-                ["-c", "from djpdf.scans2pdf import main; main()",
-                 os.path.abspath(url.toLocalFile())])
+        args = ["-c", "from djpdf.scans2pdf import main; main()",
+                os.path.abspath(url.toLocalFile())]
+        if self._verbose:
+            args.append("--verbose")
+        p.start(sys.executable, args)
         p.write(json.dumps([p._data for p in self._pages]).encode())
         p.closeWriteChannel()
 
@@ -498,13 +502,17 @@ class QmlFlatpakPlatformIntegration(QmlPlatformIntegration):
 
 def main():
     global dbus
+    parser = ArgumentParser()
+    parser.add_argument("-v", "--verbose", help="increase output verbosity",
+                        action="store_true")
+    args = parser.parse_args()
     QtQml.qmlRegisterType(QmlPage, "djpdf", 1, 0, "DjpdfPage")
     app = QApplication([])
     engine = QQmlApplicationEngine()
     thumbnail_image_provider = ThumbnailImageProvider()
     engine.addImageProvider("thumbnails", thumbnail_image_provider)
     ctx = engine.rootContext()
-    pages_model = QmlPagesModel()
+    pages_model = QmlPagesModel(verbose=args.verbose)
     if os.environ.get("DJPDF_PLATFORM_INTEGRATION", "") == "flatpak":
         import dbus
         import dbus.mainloop.glib
