@@ -31,7 +31,8 @@ from itertools import chain
 from os import path
 from tempfile import TemporaryDirectory
 
-from .util import AsyncCache, format_number, run_command_async
+from .util import (AsyncCache, format_number, MemoryBoundedSemaphore,
+                   run_command_async)
 
 # pdfrw tampers with logging
 _orig_basic_config = logging.basicConfig
@@ -50,7 +51,8 @@ SHARE_JBIG2_GLOBALS = False
 LINEARIZE_PDF = True
 COMPRESS_PAGE_CONTENTS = True
 FONT_FILENAME = pkg_resources.resource_filename(__name__, "tesseract-pdf.ttf")
-UNICODE_CMAP_FILENAME = pkg_resources.resource_filename(__name__, "to-unicode.cmap")
+UNICODE_CMAP_FILENAME = pkg_resources.resource_filename(
+    __name__, "to-unicode.cmap")
 PARALLEL_JOBS = os.cpu_count() or 1
 JOB_MEMORY = 2 << 30
 RESERVED_MEMORY = 1 << 30
