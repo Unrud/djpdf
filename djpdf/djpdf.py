@@ -665,7 +665,7 @@ class PdfBuilder:
         return font
 
     @asyncio.coroutine
-    def write_async(self, outfile, process_semaphore):
+    def write_async(self, outfile, process_semaphore, progress_cb=None):
         pdf_writer = PdfWriter(version="1.5")
 
         pdf_group = PdfDict()
@@ -832,6 +832,12 @@ class PdfBuilder:
                 pdf_resources.XObject = pdf_xobject
             if pdf_resources:
                 pdf_page.Resources = pdf_resources
+            # Report progress
+            nonlocal finished_pages
+            finished_pages += 1
+            if progress_cb:
+                progress_cb(finished_pages / len(self._pages))
+        finished_pages = 0
         yield from asyncio.gather(
             *[make_page(page, pdf_page, process_semaphore)
               for page, pdf_page in zip(self._pages, pdf_pages)])
@@ -848,13 +854,13 @@ class PdfBuilder:
                         path.abspath(outfile)])
             yield from run_command_async(cmd, process_semaphore)
 
-    def write(self, outfile):
+    def write(self, outfile, progress_cb=None):
         process_semaphore = MemoryBoundedSemaphore(
             PARALLEL_JOBS, JOB_MEMORY, RESERVED_MEMORY)
         loop = asyncio.get_event_loop()
         try:
-            return loop.run_until_complete(self.write_async(outfile,
-                                                            process_semaphore))
+            return loop.run_until_complete(
+                self.write_async(outfile, process_semaphore, progress_cb))
         finally:
             loop.close()
 
@@ -867,10 +873,15 @@ def main():
     args = parser.parse_args()
     if args.verbose:
         logging.getLogger().setLevel(logging.DEBUG)
+
+    def progress_cb(fraction):
+        json.dump({"fraction": fraction}, sys.stdout)
+        print()
+        sys.stdout.flush()
     try:
         recipe = json.load(sys.stdin)
         pdf_builder = PdfBuilder(recipe)
-        pdf_builder.write(args.OUTFILE)
+        pdf_builder.write(args.OUTFILE, progress_cb)
     except Exception as e:
         logging.debug("Exception occurred:\n%s" % traceback.format_exc())
         logging.error("Operation failed")

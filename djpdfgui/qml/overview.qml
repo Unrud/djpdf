@@ -80,7 +80,7 @@ Page {
             }
             ProgressBar {
                 Layout.fillWidth: true
-                indeterminate: true
+                value: pagesModel.savingProgress
             }
             Item {
                 Layout.fillHeight: true

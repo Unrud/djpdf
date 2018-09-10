@@ -588,28 +588,41 @@ class Page(BasePageObject):
 
 
 @asyncio.coroutine
-def build_pdf_async(pages, pdf_filename, process_semaphore):
+def build_pdf_async(pages, pdf_filename, process_semaphore, progress_cb=None):
     factory = RecipeFactory()
+
+    finished_pages = 0
+
+    @asyncio.coroutine
+    def progress_wrapper(fut):
+        nonlocal finished_pages
+        res = yield from fut
+        finished_pages += 1
+        if progress_cb:
+            progress_cb(finished_pages / len(pages) * 0.5)
+        return res
+
     try:
         djpdf_pages = yield from asyncio.gather(
-            *[factory.make_page(page).json(process_semaphore)
+            *[progress_wrapper(factory.make_page(page).json(process_semaphore))
               for page in pages])
         pdf_builder = PdfBuilder({
             "pages": djpdf_pages
         })
-        return (yield from pdf_builder.write_async(pdf_filename,
-                                                   process_semaphore))
+        return (yield from pdf_builder.write_async(
+            pdf_filename, process_semaphore,
+            lambda f: progress_cb(0.5 + f * 0.5) if progress_cb else None))
     finally:
         factory.cleanup()
 
 
-def build_pdf(pages, pdf_filename):
+def build_pdf(pages, pdf_filename, progress_cb=None):
     process_semaphore = MemoryBoundedSemaphore(
         PARALLEL_JOBS, JOB_MEMORY, RESERVED_MEMORY)
     loop = asyncio.get_event_loop()
     try:
-        return loop.run_until_complete(build_pdf_async(pages, pdf_filename,
-                                                       process_semaphore))
+        return loop.run_until_complete(build_pdf_async(
+            pages, pdf_filename, process_semaphore, progress_cb))
     finally:
         loop.close()
 
@@ -622,9 +635,14 @@ def main():
     args = parser.parse_args()
     if args.verbose:
         logging.getLogger().setLevel(logging.DEBUG)
+
+    def progress_cb(fraction):
+        json.dump({"fraction": fraction}, sys.stdout)
+        print()
+        sys.stdout.flush()
     try:
         recipe = json.load(sys.stdin)
-        build_pdf(recipe, args.OUTFILE)
+        build_pdf(recipe, args.OUTFILE, progress_cb)
     except Exception as e:
         logging.debug("Exception occurred:\n%s" % traceback.format_exc())
         logging.error("Operation failed")

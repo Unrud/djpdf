@@ -296,6 +296,7 @@ class QmlPagesModel(QAbstractListModel):
         super().__init__(parent)
         self._pages = []
         self._saving = False
+        self._savingProgress = 0
         self._verbose = verbose
 
     def roleNames(self):
@@ -372,12 +373,32 @@ class QmlPagesModel(QAbstractListModel):
     def saving(self):
         return self._saving
 
+    savingProgressChanged = Signal()
+
+    @Property(float, notify=savingProgressChanged)
+    def savingProgress(self):
+        return self._savingProgress
+
     @Slot("QUrl")
     def save(self, url):
         self._saving = True
         self.savingChanged.emit()
+        self._savingProgress = 0
+        self.savingProgressChanged.emit()
         p = QProcess(self)
         p.setProcessChannelMode(QProcess.ForwardedErrorChannel)
+
+        stdout_buffer = b""
+
+        def ready_read_stdout():
+            nonlocal stdout_buffer
+            stdout_buffer += p.readAllStandardOutput().data()
+            *messages, stdout_buffer = stdout_buffer.split(b"\n")
+            for message in messages:
+                progress = json.loads(messages[-1].decode())
+                self._savingProgress = progress["fraction"]
+                self.savingProgressChanged.emit()
+        p.readyReadStandardOutput.connect(ready_read_stdout)
 
         def finished(status):
             self._saving = False
