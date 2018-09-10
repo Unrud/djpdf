@@ -24,9 +24,24 @@
   <url type="homepage">https://github.com/Unrud/djpdf</url>
   <developer_name>Unrud</developer_name>
   <releases>
-    <release version="0.0.4" date="2018-06-16" />
-    <release version="0.0.3" date="2018-06-11" />
-    <release version="0.0.2" date="2018-06-11" />
+    <release version="0.0.4" date="2018-06-16">
+      ​<ul>
+        <li>Display slider values</li>
+        <li>Add --verbose argument to scans2pdf-gui</li>
+        <li>Use correct value from background quality slider</li>
+      </ul>
+    </release>
+    <release version="0.0.3" date="2018-06-11">
+      ​<ul>
+        <li>Run jobs in parallel based on available memory</li>
+        <li>Fix crash when closing GUI with Flatpak integration</li>
+      </ul>
+    </release>
+    <release version="0.0.2" date="2018-06-11">
+      ​<ul>
+        <li>reduce memory usage</li>
+      </ul>
+    </release>
     <release version="0.0.1" date="2018-06-10" />
   </releases>
   <screenshots>
@@ -37,33 +52,5 @@
       <image>https://raw.githubusercontent.com/Unrud/djpdf/0.0.4/screenshots/2.png</image>
     </screenshot>
   </screenshots>
-  <content_rating type="oars-1.1">
-    <content_attribute id="violence-cartoon">none</content_attribute>
-    <content_attribute id="violence-fantasy">none</content_attribute>
-    <content_attribute id="violence-realistic">none</content_attribute>
-    <content_attribute id="violence-bloodshed">none</content_attribute>
-    <content_attribute id="violence-sexual">none</content_attribute>
-    <content_attribute id="violence-desecration">none</content_attribute>
-    <content_attribute id="violence-slavery">none</content_attribute>
-    <content_attribute id="violence-worship">none</content_attribute>
-    <content_attribute id="drugs-alcohol">none</content_attribute>
-    <content_attribute id="drugs-narcotics">none</content_attribute>
-    <content_attribute id="drugs-tobacco">none</content_attribute>
-    <content_attribute id="sex-nudity">none</content_attribute>
-    <content_attribute id="sex-themes">none</content_attribute>
-    <content_attribute id="sex-homosexuality">none</content_attribute>
-    <content_attribute id="sex-prostitution">none</content_attribute>
-    <content_attribute id="sex-adultery">none</content_attribute>
-    <content_attribute id="sex-appearance">none</content_attribute>
-    <content_attribute id="language-profanity">none</content_attribute>
-    <content_attribute id="language-humor">none</content_attribute>
-    <content_attribute id="language-discrimination">none</content_attribute>
-    <content_attribute id="social-chat">none</content_attribute>
-    <content_attribute id="social-info">none</content_attribute>
-    <content_attribute id="social-audio">none</content_attribute>
-    <content_attribute id="social-location">none</content_attribute>
-    <content_attribute id="social-contacts">none</content_attribute>
-    <content_attribute id="money-purchasing">none</content_attribute>
-    <content_attribute id="money-gambling">none</content_attribute>
-  </content_rating>
+  <content_rating type="oars-1.1" />
 </component>
