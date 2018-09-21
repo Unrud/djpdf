@@ -148,18 +148,21 @@ Page {
                             Layout.preferredWidth: sv.leftColumnWidth
                             text: "Resize:"
                         }
-                        Slider {
-                            id: bgResizeSlider
+                        SpinBox {
                             Layout.fillWidth: true
-                            value: sv.p.bgResize
-                            stepSize: 0.01
-                            onMoved: {
-                                sv.p.bgResize = Math.max(value, 0.1)
+                            editable: true
+                            from: 1
+                            to: 100
+                            onValueModified: {
+                                sv.p.bgResize = value / 100;
                             }
-                            ToolTip {
-                                parent: bgResizeSlider.handle
-                                visible: bgResizeSlider.pressed
-                                text: (bgResizeSlider.value * 100).toFixed(0) + "%"
+                            value: Number(sv.p.bgResize * 100).toFixed(0)
+                            textFromValue: function(value, locale) {
+                                return Number(value).toLocaleString(locale, "f", 0) + "%";
+                            }
+                            valueFromText: function(text, locale) {
+                                text = text.replace(/%$/, "");
+                                return Number.fromLocaleString(locale, text);
                             }
                         }
                     }
@@ -193,21 +196,15 @@ Page {
                         Item {
                             Layout.fillWidth: true
                         }
-                        Slider {
-                            id: bgQualitySlider
+                        SpinBox {
                             Layout.fillWidth: true
-                            value: sv.p.bgQuality
-                            from: 0
+                            editable: true
+                            from: 1
                             to: 100
-                            stepSize: 1
-                            onMoved: {
-                                sv.p.bgQuality = Math.max(value, 1)
+                            onValueModified: {
+                                sv.p.bgQuality = value;
                             }
-                            ToolTip {
-                                parent: bgQualitySlider.handle
-                                visible: bgQualitySlider.pressed
-                                text: bgQualitySlider.value
-                            }
+                            value: sv.p.bgQuality
                         }
                     }
                 }
@@ -313,18 +310,28 @@ Page {
                             Layout.preferredWidth: sv.leftColumnWidth
                             text: "JBIG2 Threshold:"
                         }
-                        Slider {
-                            id: fgJbig2ThresholdSlider
+                        SpinBox {
                             Layout.fillWidth: true
-                            value: sv.p.fgJbig2Threshold
-                            stepSize: 0.01
-                            onMoved: {
-                                sv.p.fgJbig2Threshold = value < 0.95 ? Math.min(Math.max(value, 0.4), 0.9) : 1
+                            editable: true
+                            from: 40
+                            to: 100
+                            onValueModified: {
+                                if (90 < value && value < 100) {
+                                    var oldValue = Number(sv.p.fgJbig2Threshold * 100).toFixed(0);
+                                    if (oldValue < value)
+                                        value = 100;
+                                    else
+                                        value = 90;
+                                }
+                                sv.p.fgJbig2Threshold = value / 100;
                             }
-                            ToolTip {
-                                parent: fgJbig2ThresholdSlider.handle
-                                visible: fgJbig2ThresholdSlider.pressed
-                                text: (fgJbig2ThresholdSlider.value * 100).toFixed(0) + "%"
+                            value: Number(sv.p.fgJbig2Threshold * 100).toFixed(0)
+                            textFromValue: function(value, locale) {
+                                return Number(value).toLocaleString(locale, "f", 0) + "%";
+                            }
+                            valueFromText: function(text, locale) {
+                                text = text.replace(/%$/, "");
+                                return Number.fromLocaleString(locale, text);
                             }
                         }
                     }
