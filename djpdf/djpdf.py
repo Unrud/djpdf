@@ -438,8 +438,7 @@ class Jbig2Image:
             my_image_future = None
             for image in images_with_shared_globals:
                 future = asyncio.Future()
-                asyncio.async(image._cache.get(future))
-                images_with_shared_globals
+                asyncio.ensure_future(image._cache.get(future))
                 image_futures.append(future)
                 if image is self:
                     my_image_future = future
