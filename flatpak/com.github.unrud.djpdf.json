@@ -1,7 +1,7 @@
 {
   "app-id": "com.github.unrud.djpdf",
   "runtime": "org.freedesktop.Platform",
-  "runtime-version": "1.6",
+  "runtime-version": "18.08",
   "sdk": "org.freedesktop.Sdk",
   "command": "scans2pdf-gui",
   "rename-appdata-file": "scans2pdf.appdata.xml",
@@ -55,8 +55,8 @@
         {
           "type": "git",
           "url": "https://github.com/ImageMagick/ImageMagick",
-          "tag": "7.0.7-38",
-          "commit": "9b377c1c9d241c6d0b9dce835b5209105b96545f"
+          "tag": "7.0.8-11",
+          "commit": "fffaf414885c9b8f741477e2b344423df5ea721d"
         }
       ],
       "cleanup": [
@@ -68,8 +68,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://github.com/qpdf/qpdf/archive/release-qpdf-8.0.2.tar.gz",
-          "sha256": "87d585ad59baffe32cf7555aac4dbfde3ab1b1f3d7e2d4ca3916d1599113ee6e"
+          "url": "https://github.com/qpdf/qpdf/archive/release-qpdf-8.2.1.tar.gz",
+          "sha256": "f61319dbb44ca45f3a200bd59e8a86a906b61e2d223b104d9d2fbddcab9100ab"
         }
       ],
       "cleanup": [
@@ -86,8 +86,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://github.com/tesseract-ocr/tesseract/archive/3.05.01.tar.gz",
-          "sha256": "05898f93c5d057fada49b9a116fc86ad9310ff1726a0f499c3e5211b3af47ec1"
+          "url": "https://github.com/tesseract-ocr/tesseract/archive/3.05.02.tar.gz",
+          "sha256": "494d64ffa7069498a97b909a0e65a35a213989e0184f1ea15332933a90d43445"
         }
       ],
       "cleanup": [
@@ -410,8 +410,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://github.com/ubernostrum/webcolors/archive/1.7.tar.gz",
-          "sha256": "f9a96cae6e6a7138530e32c2537d38a2789d446d8c797f707c84fe7214e3035e"
+          "url": "https://github.com/ubernostrum/webcolors/archive/1.8.1.tar.gz",
+          "sha256": "d26cd2109576598325be05b887ec981e37154822ee4dfb6a588d6034d5fc0948"
         }
       ]
     },
@@ -426,8 +426,8 @@
       "sources": [
         {
           "type": "file",
-          "url": "http://download.qt.io/official_releases/QtForPython/pyside2/PySide2-5.11.0-5.11.0-cp35.cp36-abi3-manylinux1_x86_64.whl",
-          "sha256": "5c80a19762ba534b402662be4b9fcf0c75cd0aac5f2eedad1867380d49c27ae8"
+          "url": "http://download.qt.io/official_releases/QtForPython/pyside2/PySide2-5.11.2-5.11.2-cp35.cp36.cp37-abi3-manylinux1_x86_64.whl",
+          "sha256": "425f7dcae672db15470df994295710588bf6bd2cc9937e003b5b2ea21a0f69d5"
         }
       ]
     },
@@ -450,8 +450,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://github.com/giampaolo/psutil/archive/release-5.4.6.tar.gz",
-          "sha256": "1fbe56d7937410837ff4f8a250a9d80fcb652982982a0a2a999f906bcea4bafc"
+          "url": "https://github.com/giampaolo/psutil/archive/release-5.4.7.tar.gz",
+          "sha256": "578bcfe6e06619d47a3f75b6cbc4872cc1d24e6bdd7ec23f81bac5f2cc40072e"
         }
       ]
     },
