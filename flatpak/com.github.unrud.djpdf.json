@@ -55,8 +55,8 @@
         {
           "type": "git",
           "url": "https://github.com/ImageMagick/ImageMagick",
-          "tag": "7.0.8-11",
-          "commit": "fffaf414885c9b8f741477e2b344423df5ea721d"
+          "tag": "7.0.8-15",
+          "commit": "94ce07cb412cd7e6171ccbc1abefbb6488525c39"
         }
       ],
       "cleanup": [
@@ -78,16 +78,11 @@
     },
     {
       "name": "tesseract",
-      "build-options": {
-        "env": {
-          "LIBLEPT_HEADERSDIR": "/app/include"
-        }
-      },
       "sources": [
         {
           "type": "archive",
-          "url": "https://github.com/tesseract-ocr/tesseract/archive/3.05.02.tar.gz",
-          "sha256": "494d64ffa7069498a97b909a0e65a35a213989e0184f1ea15332933a90d43445"
+          "url": "https://github.com/tesseract-ocr/tesseract/archive/4.0.0.tar.gz",
+          "sha256": "a1f5422ca49a32e5f35c54dee5112b11b99928fc9f4ee6695cdc6768d69f61dd"
         }
       ],
       "cleanup": [
@@ -101,278 +96,63 @@
       "sources": [
         {
           "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/eng.cube.bigrams",
-          "sha256": "64adf2cc0b2a6705368aa357224d1a6739035d5fe892cd0cc457016df5b4280f"
+          "url": "https://github.com/tesseract-ocr/tessdata/raw/4.0.0/eng.traineddata",
+          "sha256": "daa0c97d651c19fba3b25e81317cd697e9908c8208090c94c3905381c23fc047"
         },
         {
           "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/eng.cube.fold",
-          "sha256": "2b229895623934b493fe69c51fcc387295d91af8b4e43cc51748b3d269a95eed"
+          "url": "https://github.com/tesseract-ocr/tessdata/raw/4.0.0/chi_sim.traineddata",
+          "sha256": "fc05d89ab31d8b4e226910f16a8bcbf78e43bae3e2580bb5feefd052efdab363"
         },
         {
           "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/eng.cube.lm",
-          "sha256": "a6f769245b0a55f42a3ce157cd19d96828483c3384c6483433ed83579ea16e36"
+          "url": "https://github.com/tesseract-ocr/tessdata/raw/4.0.0/hin.traineddata",
+          "sha256": "cc76d09fa4fed1c7a4674046e25e63760d0c9bfdce390a52113462c34a556ee6"
         },
         {
           "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/eng.cube.nn",
-          "sha256": "8f345f1c19772dd71a5214bc94175ccf647c003ab77e4143fde48f11bf3cb0ef"
+          "url": "https://github.com/tesseract-ocr/tessdata/raw/4.0.0/spa.traineddata",
+          "sha256": "0b0fcbb4665189e01ab8019e591f014dd7260460de072543edd4b2cb4ede7c96"
         },
         {
           "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/eng.cube.params",
-          "sha256": "c2aa2854951bd823d89cc86d53a6d9712a6a885de6fbaf650ff3df48bfed85d7"
+          "url": "https://github.com/tesseract-ocr/tessdata/raw/4.0.0/fra.traineddata",
+          "sha256": "eac01c1d72540d6090facb7b2f42dd0a2ee8fc57c5be1b20548ae668e2761913"
         },
         {
           "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/eng.cube.size",
-          "sha256": "e5f95de7e2754eb2df03451885277ca4573b3770816043ae2e2f09d1f7232604"
+          "url": "https://github.com/tesseract-ocr/tessdata/raw/4.0.0/ara.traineddata",
+          "sha256": "2005976778bbc14fc56a4ea8d43c6080847aeee72fcc2201488f240daca15c5b"
         },
         {
           "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/eng.cube.word-freq",
-          "sha256": "8d612bef20ae3052fce0b8650575a80d87c94d772ec6d1f0c6a1ad591586ea44"
+          "url": "https://github.com/tesseract-ocr/tessdata/raw/4.0.0/rus.traineddata",
+          "sha256": "681be2c2bead1bc7bd235df88c44e8e60ae73ae866840c0ad4e3b4c247bd37c2"
         },
         {
           "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/eng.tesseract_cube.nn",
-          "sha256": "196bedc8a5bc8c30361c2c9518f648b45b498759cb6041827ff6fbfb8da2a8d1"
+          "url": "https://github.com/tesseract-ocr/tessdata/raw/4.0.0/por.traineddata",
+          "sha256": "016c6a371bb1e4c48fe521908cf3ba3d751fade0ab846ad5d4086b563f5c528c"
         },
         {
           "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/eng.traineddata",
-          "sha256": "c0515c9f1e0c79e1069fcc05c2b2f6a6841fb5e1082d695db160333c1154f06d"
+          "url": "https://github.com/tesseract-ocr/tessdata/raw/4.0.0/deu.traineddata",
+          "sha256": "896b3b4956503ab9daa10285db330881b2d74b70d889b79262cc534b9ec699a4"
         },
         {
           "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/chi_sim.traineddata",
-          "sha256": "323ae74d4a2ff49e932dbb4d6282fe0e67ddfafda075ec85803ecd077207454c"
+          "url": "https://github.com/tesseract-ocr/tessdata/raw/4.0.0/jpn.traineddata",
+          "sha256": "6f416b902d129d8cc28e99c33244034b1cf52549e8560f6320b06d317852159a"
         },
         {
           "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/hin.cube.bigrams",
-          "sha256": "028c91d43599a63f3452af7ee35c80be68c8952eb59f7f4d7151db4af101b0b9"
+          "url": "https://github.com/tesseract-ocr/tessdata/raw/4.0.0/osd.traineddata",
+          "sha256": "e19f2ae860792fdf372cf48d8ce70ae5da3c4052962fe22e9de1f680c374bb0e"
         },
         {
           "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/hin.cube.fold",
-          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/hin.cube.lm",
-          "sha256": "1c1e1e98183dfb6ede3ca66af6cdd0c9987e4a96ff9a1e3930a8212acbb7432b"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/hin.cube.nn",
-          "sha256": "bcfad98d6b684d5a830bdc83128101c0a65ca953aa03a00d1891fd63ec1bcabb"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/hin.cube.params",
-          "sha256": "fd54bbc1cef80784ed7a065d3f346f403fd79d8fafc8199f8e0d08e4010e8394"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/hin.cube.word-freq",
-          "sha256": "053cc6668eb03170734373715b7b252e9568a14b71793aa7a973c26cd7293650"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/hin.tesseract_cube.nn",
-          "sha256": "d64510e445fea348eab6c5adbfb063b93544339c75050baec016a8aacacf2c74"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/hin.traineddata",
-          "sha256": "6e99459dbdcc40bfec132747bc233054916bed9da02f89567c9388c32e2fd6ee"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/spa.cube.bigrams",
-          "sha256": "6f398b65fc7dd21d5da27f4454b73a0582ad12ad0a02bb0667455cf4d3577b91"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/spa.cube.fold",
-          "sha256": "4d26b380235623107f854ae686cc2f7ff912df17880978da7cd6af0cc8415847"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/spa.cube.lm",
-          "sha256": "c43ab0b7bec9abbeefd01ebc1d883141d778106889d3d2692b02a6135d132655"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/spa.cube.nn",
-          "sha256": "da50617bb91c26f40c17ae5f34e8c7f9eeada47eaffaa9d226302c7692a7f4fc"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/spa.cube.params",
-          "sha256": "8a5fd21efc25a1c2314df612a2b2fe640496f8f462449c2bb17c8243d98c1e1d"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/spa.cube.size",
-          "sha256": "dfbc783769eeea6d731d78f0a87d15445d2e44fac507bca378de217d4c4c0ae7"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/spa.cube.word-freq",
-          "sha256": "ce6c3d983a4a7752a66a554dc1acfd15eaa18ea5e9d6c79c0fe30937e22cc73d"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/spa.traineddata",
-          "sha256": "f23985996bbcfe2b57864ccb082783c1c74c87429f04411a04a6ba4d3da2efda"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/fra.cube.bigrams",
-          "sha256": "6fc75a9664ed8171bd31559c9cf76f50e7cb9b2558be97a42e48a88ead146f9f"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/fra.cube.fold",
-          "sha256": "a0201844ed138342d604412ccd8cb447971b09422f9e2444d5f1c0731fa0a78f"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/fra.cube.lm",
-          "sha256": "726cce1d67f11f433ee34c6532defd25a7d54a06560bf4ea9886267491585a85"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/fra.cube.nn",
-          "sha256": "136e4ea6060e2842b0f85a9ed1af95d52ce3011843b20c73c8cd6ff6e832cf45"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/fra.cube.params",
-          "sha256": "79c4fee3822f4899398f637eec5876bb57e774852f752d45755697cdef9707ac"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/fra.cube.size",
-          "sha256": "0590c3995257d7c882783af946cc894d9a554cc831924c59ad2d52af00091a27"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/fra.cube.word-freq",
-          "sha256": "f30b1a5952fa88509c45d04751dc88230397340fbedea9640ab591637a1fd441"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/fra.tesseract_cube.nn",
-          "sha256": "4bf58e6af2401f3750217b96fd01a2a853a9a688def20d65f9ca9db295ac7911"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/fra.traineddata",
-          "sha256": "86afb23ad146467f263e8ade56fd3951b1cc28f8c4eebc34f993d3c02d88a7ab"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/ara.cube.bigrams",
-          "sha256": "c02f516e00fb3657759ad051ddd9894833e3bed96f119f465286f9f2e4ed2fd4"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/ara.cube.fold",
-          "sha256": "fc14761de7a491a0ed259a425b95643b3f9a6b77c2fa2cfc92034c0d38157446"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/ara.cube.lm",
-          "sha256": "f20e9ac408840e037d79a5c1fa352b0f41a174e094a7b16da2e4bfeec3068213"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/ara.cube.nn",
-          "sha256": "4386533c0fe5f06624c82a7a5fe55bb46ea0bd8c063b74d8d09cabc3948f4a37"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/ara.cube.params",
-          "sha256": "70d37def20064ba63ff8792624b3f7888ca4171c593e202af65be36198c814fb"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/ara.cube.size",
-          "sha256": "cdd48aa8b12d217408f444f97bf1087da8589b6da0dff117fb8c32e7c5898046"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/ara.cube.word-freq",
-          "sha256": "fc8c85c88779f0902370b7442e462ad844304fb97318afcea3fc70311fa43274"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/ara.traineddata",
-          "sha256": "21c98aaf7aeba2271ac0cc4a363d364d806649d7cb0bcab85d4b9a385f49645a"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/rus.cube.fold",
-          "sha256": "fd78accf7f97d61ec594d799e418e2d7a3a88c87acdbb428c8e63a035dcba59d"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/rus.cube.lm",
-          "sha256": "213db0880aaf83cc387317afd28dcf4afadd4f3ebc1b73bf1b2fbb249e954add"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/rus.cube.nn",
-          "sha256": "8ee9cbf3a689d2e0863a89544c633ab3514172bb490cf4c872ec92e8bfa463c0"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/rus.cube.params",
-          "sha256": "cd4f9f40e97e1a0e7c93d175ea90909084a532ef96c2b6b00db1581df21441af"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/rus.cube.size",
-          "sha256": "4ff87705ee0c0094f36cb9b277466c914782a10b7f1fabfeaa8a54c0e9dfb6e2"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/rus.cube.word-freq",
-          "sha256": "9fd93063847ae73f3024c8218fa9ee822150c1fd058e80a2fe8a11c1e151bd23"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/rus.traineddata",
-          "sha256": "1800dcaf043e95007269f07168a12258cd8b87bf413769c2b5a3d5451e45cab4"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/por.traineddata",
-          "sha256": "089fb419cd7bd135236244dd9a4b8a42dfe2ee97d97b481efdd7b92c9c6324a0"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/deu.traineddata",
-          "sha256": "cb7eb42a7e972cec7ef904fe81825d7b547c46df684c814fdb11a930b13bca3a"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/jpn.traineddata",
-          "sha256": "3c3c957cbbfb6fe66b38b46bc17f86158dfdb1688a2a28ede7ee0ec891f4aaf2"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/osd.traineddata",
-          "sha256": "9cf5d576fcc47564f11265841e5ca839001e7e6f38ff7f7aacf46d15a96b00ff"
-        },
-        {
-          "type": "file",
-          "url": "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/equ.traineddata",
-          "sha256": "3af43a2420ce927dbce68474d644625947189a82ce6ae4fd32106399146819db"
+          "url": "https://github.com/tesseract-ocr/tessdata/raw/4.0.0/equ.traineddata",
+          "sha256": "8f660323d8a7b7a0e8d2fae1a3439e6e470222bfbb990b2ab7fe9e1fb4791c0b"
         }
       ]
     },
@@ -397,8 +177,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://github.com/tartley/colorama/archive/0.3.9.tar.gz",
-          "sha256": "642ea61906cf4c826621fbdc2dfc4ad964b37f795974931b6a2cf8e0bdc41cd5"
+          "url": "https://github.com/tartley/colorama/archive/0.4.1.tar.gz",
+          "sha256": "6b2e2bb7bd96813fcafe5598886ce4f9f741450677e1ee090a119c600f04de9c"
         }
       ]
     },
@@ -450,8 +230,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://github.com/giampaolo/psutil/archive/release-5.4.7.tar.gz",
-          "sha256": "578bcfe6e06619d47a3f75b6cbc4872cc1d24e6bdd7ec23f81bac5f2cc40072e"
+          "url": "https://github.com/giampaolo/psutil/archive/release-5.4.8.tar.gz",
+          "sha256": "c10f5054e04551fcbd1703bbc2aef0f8327a32c673322aacb4c79fc84cb0826b"
         }
       ]
     },
