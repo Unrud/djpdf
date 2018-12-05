@@ -24,31 +24,36 @@
   <url type="homepage">https://github.com/Unrud/djpdf</url>
   <developer_name>Unrud</developer_name>
   <releases>
+    <release version="0.0.7" date="2018-12-05">
+      <ul>
+        <li>Update dependencies</li>
+      </ul>
+    </release>
     <release version="0.0.6" date="2018-09-21">
-      ​<ul>
+      <ul>
         <li>Use SpinBox instead of Slider</li>
       </ul>
     </release>
     <release version="0.0.5" date="2018-09-10">
-      ​<ul>
+      <ul>
         <li>show progress while creating PDF</li>
       </ul>
     </release>
     <release version="0.0.4" date="2018-06-16">
-      ​<ul>
+      <ul>
         <li>Display slider values</li>
         <li>Add --verbose argument to scans2pdf-gui</li>
         <li>Use correct value from background quality slider</li>
       </ul>
     </release>
     <release version="0.0.3" date="2018-06-11">
-      ​<ul>
+      <ul>
         <li>Run jobs in parallel based on available memory</li>
         <li>Fix crash when closing GUI with Flatpak integration</li>
       </ul>
     </release>
     <release version="0.0.2" date="2018-06-11">
-      ​<ul>
+      <ul>
         <li>reduce memory usage</li>
       </ul>
     </release>
@@ -56,10 +61,10 @@
   </releases>
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/Unrud/djpdf/0.0.6/screenshots/1.png</image>
+      <image>https://raw.githubusercontent.com/Unrud/djpdf/0.0.7/screenshots/1.png</image>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/Unrud/djpdf/0.0.6/screenshots/2.png</image>
+      <image>https://raw.githubusercontent.com/Unrud/djpdf/0.0.7/screenshots/2.png</image>
     </screenshot>
   </screenshots>
   <content_rating type="oars-1.1" />
