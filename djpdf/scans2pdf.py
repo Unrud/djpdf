@@ -452,6 +452,7 @@ class OcrImage(BaseImageObject):
 class Ocr(BasePageObject):
     def __init__(self, *args):
         super().__init__(*args)
+        self._input_image = self._factory.make_input_image(self._page)
         self._ocr_image = self._factory.make_ocr_image(self._page)
 
     def __eq__(self, other):
@@ -472,8 +473,13 @@ class Ocr(BasePageObject):
     def _texts(self, psem):
         if not self._page["ocr_enabled"]:
             return None
+        if self._page["dpi"] == "auto":
+            dpi_x, _ = yield from self._input_image.dpi(psem)
+        else:
+            dpi_x = self._page["dpi"]
         yield from run_command_async([TESSERACT_CMD,
                                       "-l", self._page["ocr_language"],
+                                      "--dpi", "%.0f" % dpi_x,
                                       path.abspath(
                                           (yield from self._ocr_image.filename(
                                                psem))),
@@ -517,8 +523,7 @@ class Page(BasePageObject):
         def get_dpi(psem):
             if self._page["dpi"] == "auto":
                 return (yield from self._input_image.dpi(psem))
-            else:
-                return self._page["dpi"], self._page["dpi"]
+            return self._page["dpi"], self._page["dpi"]
         (texts, background, foregrounds_json, (width, height),
          (dpi_x, dpi_y)) = yield from asyncio.gather(
                 self._ocr.texts(psem),
