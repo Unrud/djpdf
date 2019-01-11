@@ -1,47 +1,17 @@
 app-id: com.github.unrud.djpdf
 runtime: org.kde.Platform
-runtime-version: '5.11'
+runtime-version: '5.12'
 sdk: org.kde.Sdk
 command: scans2pdf-gui
 rename-appdata-file: scans2pdf.appdata.xml
 rename-desktop-file: scans2pdf.desktop
 rename-icon: scans2pdf
 finish-args:
-- --socket=wayland
 - --socket=x11
 - --device=dri
 - --share=ipc
 - --env=DJPDF_PLATFORM_INTEGRATION=flatpak
 modules:
-- name: llvm # pyside needs clang 5, TODO: remove with next runtime
-  buildsystem: cmake-ninja
-  builddir: true
-  build-options:
-    no-debuginfo: true
-  config-opts:
-    - -DLLVM_TARGETS_TO_BUILD=
-    - -DBUILD_SHARED_LIBS=ON
-  cleanup:
-    - '*'
-  sources:
-    - type: archive
-      url: http://releases.llvm.org/6.0.1/llvm-6.0.1.src.tar.xz
-      sha256: b6d6c324f9c71494c0ccaf3dac1f16236d970002b42bb24a6c9e1634f7d0f4e2
-
-- name: clang
-  buildsystem: cmake-ninja
-  builddir: true
-  build-options:
-    no-debuginfo: true
-  config-opts:
-    - -DBUILD_SHARED_LIBS=ON
-  cleanup:
-    - '*'
-  sources:
-    - type: archive
-      url: http://releases.llvm.org/6.0.1/cfe-6.0.1.src.tar.xz
-      sha256: 7c243f1485bddfdfedada3cd402ff4792ea82362ff91fbdac2dae67c6026b667
-
 - name: pyside2
   buildsystem: simple
   build-commands:
@@ -71,12 +41,11 @@ modules:
     - /bin
   sources:
     - type: archive
-      url: http://download.qt.io/official_releases/QtForPython/pyside2/PySide2-5.11.2-src/pyside-setup-everywhere-src-5.11.2.tar.xz
-      sha256: 18f572f1f832e476083d30fccabab167450f2a8cbe5cd9c6e6e4fa078ccb86c2
+      url: http://download.qt.io/official_releases/QtForPython/pyside2/PySide2-5.12.0-src/pyside-setup-everywhere-src-5.12.0.tar.xz
+      sha256: 890149628a6c722343d6498a9f7e1906ce3c10edcaef0cc53cd682c1798bef51
     - type: shell
       commands:
-        - sed -i 's|--include-paths=|--include-paths=/app/qt5include:/usr/include/c++/6.4.0:/usr/include/c++/6.4.0/x86_64-unknown-linux:|'
-          sources/pyside2/cmake/Macros/PySideModules.cmake
+        - sed -i 's|\(--include-paths=\)|\1/app/qt5include:|' sources/pyside2/cmake/Macros/PySideModules.cmake
 
 - name: leptonica
   sources:
@@ -117,8 +86,8 @@ modules:
   sources:
   - type: git
     url: https://github.com/ImageMagick/ImageMagick
-    tag: 7.0.8-15
-    commit: 94ce07cb412cd7e6171ccbc1abefbb6488525c39
+    tag: 7.0.8-23
+    commit: 49772fa1c7232b3888f208d2cd3401cff29e058a
   cleanup:
   - /include
   - /lib/pkgconfig
@@ -130,8 +99,8 @@ modules:
 - name: qpdf
   sources:
   - type: archive
-    url: https://github.com/qpdf/qpdf/archive/release-qpdf-8.2.1.tar.gz
-    sha256: f61319dbb44ca45f3a200bd59e8a86a906b61e2d223b104d9d2fbddcab9100ab
+    url: https://github.com/qpdf/qpdf/archive/release-qpdf-8.3.0.tar.gz
+    sha256: 8cc02ebf69231fde3d2e19dda383ee3f2b2cb5f4afdff7386c3d9c1a8cb863d2
   cleanup:
   - /include
   - /lib/pkgconfig
