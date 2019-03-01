@@ -104,11 +104,16 @@ class AsyncCache:
 
     @asyncio.coroutine
     def get(self, content_future):
-        with (yield from self._lock):
+        yield from self._lock
+        try:
             if not self._cached:
                 self._content = yield from content_future
                 self._cached = True
             return self._content
+        finally:
+            with contextlib.suppress(RuntimeError):
+                # event loop might be closed
+                self._lock.release()
 
 
 def format_number(f, decimal_places, percentage=False,

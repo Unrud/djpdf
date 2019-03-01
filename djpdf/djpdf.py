@@ -16,6 +16,7 @@
 # Copyright 2015, 2017 Unrud <unrud@outlook.com>
 
 import asyncio
+import contextlib
 import json
 import logging
 import math
@@ -408,7 +409,9 @@ class Jbig2Image:
                 self._pdf_image(process_semaphore)))
         finally:
             if self._cache_lock_acquired:
-                self._factory._cache_lock.release()
+                with contextlib.suppress(RuntimeError):
+                    # event loop might be closed
+                    self._factory._cache_lock.release()
                 self._cache_lock_acquired = False
 
     @asyncio.coroutine
