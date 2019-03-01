@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name="djpdf",
-    version="0.0.8",
+    version="0.0.9",
     packages=["djpdf", "djpdfgui"],
     package_data={
         "djpdf": ["tesseract-pdf.ttf", "to-unicode.cmap"],
