@@ -5,5 +5,5 @@ Name=Scans to PDF
 Comment=Create small, searchable PDFs from scanned documents
 Terminal=false
 Exec=scans2pdf-gui
-Icon=scans2pdf
+Icon=com.github.unrud.djpdf
 Categories=Graphics;Scanning;OCR;
