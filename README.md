@@ -13,6 +13,7 @@ A GUI and command line interface are included.
 ## Installation
 
   * [Flatpak](https://flathub.org/apps/details/com.github.unrud.djpdf)
+  * [Snap](https://snapcraft.io/djpdf)
 
 ## Screenshots
 

@@ -1,0 +1,169 @@
+name: djpdf
+adopt-info: djpdf
+title: Scans to PDF
+# WORKAROUND: Snapcraft doesn't normalize whitespaces in description from AppStream
+description: |
+  This program creates small, searchable PDFs from scanned documents.
+  It divides images into bitonal foreground images (text) and a color background image, then compresses them separately.
+  An invisible OCR text layer is added, making the PDF searchable.
+  
+  Color and grayscale scans need some preparation for good results.
+  Recommended tools are ScanTailor or GIMP.
+  
+  A GUI and command line interface are included.
+# WORKAROUND: Snapcraft doesn't accept GPL-3.0-or-later
+license: GPL-3.0
+icon: desktop/scans2pdf_128.png
+confinement: strict
+grade: stable
+base: core18
+
+architectures:
+- build-on: amd64
+
+parts:
+  jbig2enc:
+    plugin: autotools
+    source: https://github.com/agl/jbig2enc
+    source-type: git
+    source-commit: a4ff6b9191e1c824cbc36364cbeb12cab058b5da
+    build-packages:
+    - g++
+    - libleptonica-dev
+    - zlib1g-dev
+    stage-packages:
+    - liblept5
+    - zlib1g
+
+  openjpeg:
+    plugin: cmake
+    source: https://github.com/uclouvain/openjpeg/archive/v2.3.0.tar.gz
+    source-type: tar
+    source-checksum: sha256/3dc787c1bb6023ba846c2a0d9b1f6e179f1cd255172bde9eb75b01f1e6c7d71a
+
+  imagemagick:
+    plugin: autotools
+    source: https://github.com/ImageMagick/ImageMagick
+    source-type: git
+    source-tag: 7.0.8-27
+    after: [openjpeg]
+    build-packages:
+    - libjpeg-dev
+    - libpng-dev
+    - libtiff-dev
+    - libwebp-dev
+    stage-packages:
+    - libjpeg8
+    - libpng16-16
+    - libtiff5
+    - libwebpmux3
+    - libgomp1
+
+  tesseract:
+    plugin: autotools
+    source: https://github.com/tesseract-ocr/tesseract/archive/4.0.0.tar.gz
+    source-checksum: sha256/a1f5422ca49a32e5f35c54dee5112b11b99928fc9f4ee6695cdc6768d69f61dd
+    build-packages:
+    - pkg-config
+    - libleptonica-dev
+    stage-packages:
+    - liblept5
+
+  tessdata:
+    plugin: nil
+    build-packages: [wget]
+    override-pull: |
+      wget https://github.com/tesseract-ocr/tessdata/raw/4.0.0/eng.traineddata -O eng.traineddata
+      wget https://github.com/tesseract-ocr/tessdata/raw/4.0.0/chi_sim.traineddata -O chi_sim.traineddata
+      wget https://github.com/tesseract-ocr/tessdata/raw/4.0.0/hin.traineddata -O hin.traineddata
+      wget https://github.com/tesseract-ocr/tessdata/raw/4.0.0/spa.traineddata -O spa.traineddata
+      wget https://github.com/tesseract-ocr/tessdata/raw/4.0.0/fra.traineddata -O fra.traineddata
+      wget https://github.com/tesseract-ocr/tessdata/raw/4.0.0/ara.traineddata -O ara.traineddata
+      wget https://github.com/tesseract-ocr/tessdata/raw/4.0.0/rus.traineddata -O rus.traineddata
+      wget https://github.com/tesseract-ocr/tessdata/raw/4.0.0/por.traineddata -O por.traineddata
+      wget https://github.com/tesseract-ocr/tessdata/raw/4.0.0/deu.traineddata -O deu.traineddata
+      wget https://github.com/tesseract-ocr/tessdata/raw/4.0.0/jpn.traineddata -O jpn.traineddata
+      wget https://github.com/tesseract-ocr/tessdata/raw/4.0.0/osd.traineddata -O osd.traineddata
+      wget https://github.com/tesseract-ocr/tessdata/raw/4.0.0/equ.traineddata -O equ.traineddata
+      echo 'daa0c97d651c19fba3b25e81317cd697e9908c8208090c94c3905381c23fc047 *eng.traineddata
+      fc05d89ab31d8b4e226910f16a8bcbf78e43bae3e2580bb5feefd052efdab363 *chi_sim.traineddata
+      cc76d09fa4fed1c7a4674046e25e63760d0c9bfdce390a52113462c34a556ee6 *hin.traineddata
+      0b0fcbb4665189e01ab8019e591f014dd7260460de072543edd4b2cb4ede7c96 *spa.traineddata
+      eac01c1d72540d6090facb7b2f42dd0a2ee8fc57c5be1b20548ae668e2761913 *fra.traineddata
+      2005976778bbc14fc56a4ea8d43c6080847aeee72fcc2201488f240daca15c5b *ara.traineddata
+      681be2c2bead1bc7bd235df88c44e8e60ae73ae866840c0ad4e3b4c247bd37c2 *rus.traineddata
+      016c6a371bb1e4c48fe521908cf3ba3d751fade0ab846ad5d4086b563f5c528c *por.traineddata
+      896b3b4956503ab9daa10285db330881b2d74b70d889b79262cc534b9ec699a4 *deu.traineddata
+      6f416b902d129d8cc28e99c33244034b1cf52549e8560f6320b06d317852159a *jpn.traineddata
+      e19f2ae860792fdf372cf48d8ce70ae5da3c4052962fe22e9de1f680c374bb0e *osd.traineddata
+      8f660323d8a7b7a0e8d2fae1a3439e6e470222bfbb990b2ab7fe9e1fb4791c0b *equ.traineddata' > SHA256SUMS
+      sha256sum -c SHA256SUMS
+    override-build: |
+      install -Dm0644 -t "${SNAPCRAFT_PART_INSTALL}/share/tessdata" *
+
+  djpdf:
+    plugin: python
+    python-version: python3
+    source: .
+    source-type: git
+    stage-packages:
+    - python3-pkg-resources
+    - qpdf
+    - libnss3
+    - libxcomposite1
+    - libxcursor1
+    - libxtst6
+    - libxrandr2
+    - libasound2
+    - libglu1-mesa
+    - libgles2-mesa
+    - fontconfig
+    - libxkbcommon0
+    - ttf-ubuntu-font-family
+    - dmz-cursor-theme
+    - light-themes
+    - adwaita-icon-theme
+    - gnome-themes-standard
+    - shared-mime-info
+    - libgdk-pixbuf2.0-0
+    - locales-all
+    - libxslt1.1
+    - fonts-dejavu-core
+    - xfonts-base
+    - xfonts-scalable
+    - libxkbcommon-x11-0
+    parse-info: [desktop/com.github.unrud.djpdf.appdata.xml]
+    override-build: |
+      # Get version from AppStream
+      snapcraftctl set-version "$(sed -n 's/.*<release[^>][^>]*version="\([^"]*\)".*/\1/p' desktop/com.github.unrud.djpdf.appdata.xml | sort -n | tail -n1)"
+      # WORKAROUND: Snap doesn't export icons
+      sed -i 's,^\(Icon=\).*,\1${SNAP}/meta/gui/icon.png,' desktop/com.github.unrud.djpdf.desktop
+      snapcraftctl build
+      install -Dm0644 -t "${SNAPCRAFT_PART_INSTALL}/share/applications" desktop/com.github.unrud.djpdf.desktop
+
+environment:
+  TESSDATA_PREFIX: ${SNAP}/share/tessdata
+
+apps:
+  djpdf:
+    command: bin/scans2pdf-gui
+    desktop: share/applications/com.github.unrud.djpdf.desktop
+    plugs:
+    - home
+    - desktop
+    - desktop-legacy
+    - x11
+    - wayland
+    - opengl
+  scans2pdf:
+    command: bin/scans2pdf
+    plugs:
+    - home
+  scans2pdf-json:
+    command: bin/scans2pdf-json
+    plugs:
+    - home
+  djpdf-json:
+    command: bin/djpdf-json
+    plugs:
+    - home
