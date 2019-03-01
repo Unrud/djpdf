@@ -156,7 +156,7 @@ class BaseImageObject(BasePageObject):
                                                  (yield from self.filename(
                                                       psem)))],
                                             psem)
-        outs = outs.decode(sys.stdout.encoding)
+        outs = outs.decode("ascii")
         outss = outs.split()
         w, h = int(outss[0]), int(outss[1])
         return w, h
@@ -174,7 +174,7 @@ class BaseImageObject(BasePageObject):
                                                  (yield from self.filename(
                                                       psem)))],
                                             psem)
-        outs = outs.decode(sys.stdout.encoding)
+        outs = outs.decode("ascii")
         outss = outs.split()
         if len(outss) == 2:
             x, y = float(outss[0]), float(outss[1])
@@ -194,7 +194,7 @@ class BaseImageObject(BasePageObject):
                                              path.abspath(filename),
                                              "histogram:info:-"],
                                             process_semaphore)
-        outs = outs.decode(sys.stdout.encoding)
+        outs = outs.decode("ascii")
         histogram_re = re.compile(r"\s*(?P<count>\d+):\s+"
                                   r"\(\s*(?P<r>\d+),\s*(?P<g>\d+),"
                                   r"\s*(?P<b>\d+)\)")

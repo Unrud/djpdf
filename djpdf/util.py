@@ -145,7 +145,7 @@ def run_command_async(args, process_semaphore, cwd=None):
         process_semaphore.add_pid(proc.pid)
         stack.callback(process_semaphore.remove_pid, proc.pid)
         outs, errs = yield from proc.communicate()
-        errs = errs.decode(sys.stderr.encoding)
+        errs = errs.decode(sys.stderr.encoding, sys.stderr.errors)
         if errs:
             logging.debug(errs)
         if proc.returncode != 0:
