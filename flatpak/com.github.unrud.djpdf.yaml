@@ -5,6 +5,7 @@ sdk: org.kde.Sdk
 command: scans2pdf-gui
 finish-args:
 - --socket=x11
+- --socket=wayland
 - --device=dri
 - --share=ipc
 - --env=DJPDF_PLATFORM_INTEGRATION=flatpak
@@ -38,8 +39,8 @@ modules:
     - /bin
   sources:
     - type: archive
-      url: http://download.qt.io/official_releases/QtForPython/pyside2/PySide2-5.12.0-src/pyside-setup-everywhere-src-5.12.0.tar.xz
-      sha256: 890149628a6c722343d6498a9f7e1906ce3c10edcaef0cc53cd682c1798bef51
+      url: http://download.qt.io/official_releases/QtForPython/pyside2/PySide2-5.12.1-src/pyside-setup-everywhere-src-5.12.1.tar.xz
+      sha256: 6e26b6240b97558b8bf3c97810e950ef4121a03a1ebdecfb649992a505f18059
     - type: shell
       commands:
         - sed -i 's|\(--include-paths=\)|\1/app/qt5include:|' sources/pyside2/cmake/Macros/PySideModules.cmake
@@ -47,8 +48,8 @@ modules:
 - name: leptonica
   sources:
   - type: archive
-    url: https://github.com/DanBloomberg/leptonica/releases/download/1.74.4/leptonica-1.74.4.tar.gz
-    sha256: 29c35426a416bf454413c6fec24c24a0b633e26144a17e98351b6dffaa4a833b
+    url: https://github.com/DanBloomberg/leptonica/releases/download/1.77.0/leptonica-1.77.0.tar.gz
+    sha256: 161d0b368091986b6c60990edf257460bdc7da8dd18d48d4179e297bcdca5eb7
   cleanup:
   - /include
   - /lib/pkgconfig
@@ -83,8 +84,8 @@ modules:
   sources:
   - type: git
     url: https://github.com/ImageMagick/ImageMagick
-    tag: 7.0.8-23
-    commit: 49772fa1c7232b3888f208d2cd3401cff29e058a
+    tag: 7.0.8-27
+    commit: 4bffda620fb5c77531ce24581453c7b4c3812aad
   cleanup:
   - /include
   - /lib/pkgconfig
@@ -96,8 +97,8 @@ modules:
 - name: qpdf
   sources:
   - type: archive
-    url: https://github.com/qpdf/qpdf/archive/release-qpdf-8.3.0.tar.gz
-    sha256: 8cc02ebf69231fde3d2e19dda383ee3f2b2cb5f4afdff7386c3d9c1a8cb863d2
+    url: https://github.com/qpdf/qpdf/archive/release-qpdf-8.4.0.tar.gz
+    sha256: 71d9b6c77ac56521d86a481cb9e52c0774de106c1dcf7a0644a05bd1230be87e
   cleanup:
   - /include
   - /lib/pkgconfig
@@ -200,8 +201,8 @@ modules:
   - python3 -mpip install . --prefix=/app --no-index --find-links .
   sources:
   - type: archive
-    url: https://github.com/giampaolo/psutil/archive/release-5.4.8.tar.gz
-    sha256: c10f5054e04551fcbd1703bbc2aef0f8327a32c673322aacb4c79fc84cb0826b
+    url: https://github.com/giampaolo/psutil/archive/release-5.5.1.tar.gz
+    sha256: 13dc7e1047948777b37a335f9c97d7d9eaa43bbbf4fa639b63e05cfcae5b6ae6
 
 - name: djpdf
   buildsystem: simple
