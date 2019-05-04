@@ -25,6 +25,14 @@
   <url type="homepage">https://github.com/Unrud/djpdf</url>
   <developer_name>Unrud</developer_name>
   <releases>
+    <release version="0.0.10" date="2019-05-04">
+      <description>
+        <ul>
+          <li>Update dependencies</li>
+          <li>AppStream: Fix release descriptions</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.0.9" date="2019-03-01">
       <description>
         <ul>
@@ -88,10 +96,10 @@
   </releases>
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/Unrud/djpdf/0.0.9/screenshots/1.png</image>
+      <image>https://raw.githubusercontent.com/Unrud/djpdf/0.0.10/screenshots/1.png</image>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/Unrud/djpdf/0.0.9/screenshots/2.png</image>
+      <image>https://raw.githubusercontent.com/Unrud/djpdf/0.0.10/screenshots/2.png</image>
     </screenshot>
   </screenshots>
   <content_rating type="oars-1.1" />
