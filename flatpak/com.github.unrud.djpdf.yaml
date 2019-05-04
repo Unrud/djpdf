@@ -14,24 +14,11 @@ modules:
   buildsystem: simple
   build-commands:
     - mkdir -p /app/qt5include && cp -R /usr/include/Qt* /app/qt5include # https://bugreports.qt.io/browse/PYSIDE-787
-    - cd sources/shiboken2 && mkdir _build && cd _build &&
-      cmake -GNinja
+    - mkdir _build && cd _build &&
+      cmake -GNinja -j"$FLATPAK_BUILDER_N_JOBS"
+      -DCMAKE_INSTALL_PREFIX:PATH="$FLATPAK_DEST"
       -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      -DCMAKE_INSTALL_PREFIX=/app
       -DUSE_PYTHON_VERSION=3
-      -DBUILD_TESTS=OFF .. &&
-      ninja install
-    - cd sources/pyside2 && mkdir _build && cd _build &&
-      cmake -GNinja
-      -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      -DCMAKE_INSTALL_PREFIX=/app
-      -DUSE_PYTHON_VERSION=3
-      -DBUILD_TESTS=OFF .. &&
-      ninja install
-    - cd sources/pyside2-tools && mkdir _build && cd _build &&
-      cmake -GNinja
-      -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      -DCMAKE_INSTALL_PREFIX=/app
       -DBUILD_TESTS=OFF .. &&
       ninja install
   cleanup:
@@ -39,8 +26,8 @@ modules:
     - /bin
   sources:
     - type: archive
-      url: http://download.qt.io/official_releases/QtForPython/pyside2/PySide2-5.12.1-src/pyside-setup-everywhere-src-5.12.1.tar.xz
-      sha256: 6e26b6240b97558b8bf3c97810e950ef4121a03a1ebdecfb649992a505f18059
+      url: http://download.qt.io/official_releases/QtForPython/pyside2/PySide2-5.12.3-src/pyside-setup-everywhere-src-5.12.3.tar.xz
+      sha256: 4f7aab7d4bbaf1b3573cc989d704e87b0de55cce656ae5e23418a88baa4c6842
     - type: shell
       commands:
         - sed -i 's|\(--include-paths=\)|\1/app/qt5include:|' sources/pyside2/cmake/Macros/PySideModules.cmake
@@ -48,8 +35,8 @@ modules:
 - name: leptonica
   sources:
   - type: archive
-    url: https://github.com/DanBloomberg/leptonica/releases/download/1.77.0/leptonica-1.77.0.tar.gz
-    sha256: 161d0b368091986b6c60990edf257460bdc7da8dd18d48d4179e297bcdca5eb7
+    url: https://github.com/DanBloomberg/leptonica/releases/download/1.78.0/leptonica-1.78.0.tar.gz
+    sha256: e2ed2e81e7a22ddf45d2c05f0bc8b9ae7450545d995bfe28517ba408d14a5a88
   cleanup:
   - /include
   - /lib/pkgconfig
@@ -72,8 +59,8 @@ modules:
   buildsystem: cmake
   sources:
   - type: archive
-    url: https://github.com/uclouvain/openjpeg/archive/v2.3.0.tar.gz
-    sha256: 3dc787c1bb6023ba846c2a0d9b1f6e179f1cd255172bde9eb75b01f1e6c7d71a
+    url: https://github.com/uclouvain/openjpeg/archive/v2.3.1.tar.gz
+    sha256: 63f5a4713ecafc86de51bfad89cc07bb788e9bba24ebbf0c4ca637621aadb6a9
   cleanup:
   - /include
   - /lib/pkgconfig
@@ -84,8 +71,8 @@ modules:
   sources:
   - type: git
     url: https://github.com/ImageMagick/ImageMagick
-    tag: 7.0.8-27
-    commit: 4bffda620fb5c77531ce24581453c7b4c3812aad
+    tag: 7.0.8-43
+    commit: 723c2bd9cc716a9267a8afe08354d67bb60dabd5
   cleanup:
   - /include
   - /lib/pkgconfig
@@ -97,8 +84,8 @@ modules:
 - name: qpdf
   sources:
   - type: archive
-    url: https://github.com/qpdf/qpdf/archive/release-qpdf-8.4.0.tar.gz
-    sha256: 71d9b6c77ac56521d86a481cb9e52c0774de106c1dcf7a0644a05bd1230be87e
+    url: https://github.com/qpdf/qpdf/archive/release-qpdf-8.4.1.tar.gz
+    sha256: b8068d4ce23b5c8b3600fd83d6d88744f897c1e1b62a63bbff668e72984c38bb
   cleanup:
   - /include
   - /lib/pkgconfig
@@ -201,8 +188,8 @@ modules:
   - python3 -mpip install . --prefix=/app --no-index --find-links .
   sources:
   - type: archive
-    url: https://github.com/giampaolo/psutil/archive/release-5.5.1.tar.gz
-    sha256: 13dc7e1047948777b37a335f9c97d7d9eaa43bbbf4fa639b63e05cfcae5b6ae6
+    url: https://github.com/giampaolo/psutil/archive/release-5.6.2.tar.gz
+    sha256: c9156236d47bb0ca557ae9af69ced377f0a63386c594cbe5dd451cc986aca0c2
 
 - name: djpdf
   buildsystem: simple
