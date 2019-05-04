@@ -4,205 +4,205 @@ runtime-version: '5.12'
 sdk: org.kde.Sdk
 command: scans2pdf-gui
 finish-args:
-- --socket=x11
-- --socket=wayland
-- --device=dri
-- --share=ipc
-- --env=DJPDF_PLATFORM_INTEGRATION=flatpak
+  - --socket=x11
+  - --socket=wayland
+  - --device=dri
+  - --share=ipc
+  - --env=DJPDF_PLATFORM_INTEGRATION=flatpak
 modules:
-- name: pyside2
-  buildsystem: simple
-  build-commands:
-    - mkdir -p /app/qt5include && cp -R /usr/include/Qt* /app/qt5include # https://bugreports.qt.io/browse/PYSIDE-787
-    - mkdir _build && cd _build &&
-      cmake -GNinja -j"$FLATPAK_BUILDER_N_JOBS"
-      -DCMAKE_INSTALL_PREFIX:PATH="$FLATPAK_DEST"
-      -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      -DUSE_PYTHON_VERSION=3
-      -DBUILD_TESTS=OFF .. &&
-      ninja install
-  cleanup:
-    - /qt5include
-    - /bin
-  sources:
-    - type: archive
-      url: http://download.qt.io/official_releases/QtForPython/pyside2/PySide2-5.12.3-src/pyside-setup-everywhere-src-5.12.3.tar.xz
-      sha256: 4f7aab7d4bbaf1b3573cc989d704e87b0de55cce656ae5e23418a88baa4c6842
-    - type: shell
-      commands:
-        - sed -i 's|\(--include-paths=\)|\1/app/qt5include:|' sources/pyside2/cmake/Macros/PySideModules.cmake
+  - name: pyside2
+    buildsystem: simple
+    build-commands:
+      - mkdir -p /app/qt5include && cp -R /usr/include/Qt* /app/qt5include # https://bugreports.qt.io/browse/PYSIDE-787
+      - mkdir _build && cd _build &&
+        cmake -GNinja -j"$FLATPAK_BUILDER_N_JOBS"
+        -DCMAKE_INSTALL_PREFIX:PATH="$FLATPAK_DEST"
+        -DCMAKE_BUILD_TYPE=RelWithDebInfo
+        -DUSE_PYTHON_VERSION=3
+        -DBUILD_TESTS=OFF .. &&
+        ninja install
+    cleanup:
+      - /qt5include
+      - /bin
+    sources:
+      - type: archive
+        url: http://download.qt.io/official_releases/QtForPython/pyside2/PySide2-5.12.3-src/pyside-setup-everywhere-src-5.12.3.tar.xz
+        sha256: 4f7aab7d4bbaf1b3573cc989d704e87b0de55cce656ae5e23418a88baa4c6842
+      - type: shell
+        commands:
+          - sed -i 's|\(--include-paths=\)|\1/app/qt5include:|' sources/pyside2/cmake/Macros/PySideModules.cmake
 
-- name: leptonica
-  sources:
-  - type: archive
-    url: https://github.com/DanBloomberg/leptonica/releases/download/1.78.0/leptonica-1.78.0.tar.gz
-    sha256: e2ed2e81e7a22ddf45d2c05f0bc8b9ae7450545d995bfe28517ba408d14a5a88
-  cleanup:
-  - /include
-  - /lib/pkgconfig
-  - /lib/*.la
-  - /lib/*.a
+  - name: leptonica
+    sources:
+      - type: archive
+        url: https://github.com/DanBloomberg/leptonica/releases/download/1.78.0/leptonica-1.78.0.tar.gz
+        sha256: e2ed2e81e7a22ddf45d2c05f0bc8b9ae7450545d995bfe28517ba408d14a5a88
+    cleanup:
+      - /include
+      - /lib/pkgconfig
+      - /lib/*.la
+      - /lib/*.a
 
-- name: jbig2enc
-  sources:
-  - type: git
-    url: https://github.com/agl/jbig2enc
-    commit: a4ff6b9191e1c824cbc36364cbeb12cab058b5da
-  cleanup:
-  - /include
-  - /lib/pkgconfig
-  - /lib/*.la
-  - /lib/*.a
-  - /share/doc
+  - name: jbig2enc
+    sources:
+      - type: git
+        url: https://github.com/agl/jbig2enc
+        commit: a4ff6b9191e1c824cbc36364cbeb12cab058b5da
+    cleanup:
+      - /include
+      - /lib/pkgconfig
+      - /lib/*.la
+      - /lib/*.a
+      - /share/doc
 
-- name: openjpeg
-  buildsystem: cmake
-  sources:
-  - type: archive
-    url: https://github.com/uclouvain/openjpeg/archive/v2.3.1.tar.gz
-    sha256: 63f5a4713ecafc86de51bfad89cc07bb788e9bba24ebbf0c4ca637621aadb6a9
-  cleanup:
-  - /include
-  - /lib/pkgconfig
-  - /lib/*.la
-  - /lib/*.a
+  - name: openjpeg
+    buildsystem: cmake
+    sources:
+      - type: archive
+        url: https://github.com/uclouvain/openjpeg/archive/v2.3.1.tar.gz
+        sha256: 63f5a4713ecafc86de51bfad89cc07bb788e9bba24ebbf0c4ca637621aadb6a9
+    cleanup:
+      - /include
+      - /lib/pkgconfig
+      - /lib/*.la
+      - /lib/*.a
 
-- name: imagemagick
-  sources:
-  - type: git
-    url: https://github.com/ImageMagick/ImageMagick
-    tag: 7.0.8-43
-    commit: 723c2bd9cc716a9267a8afe08354d67bb60dabd5
-  cleanup:
-  - /include
-  - /lib/pkgconfig
-  - /lib/*.la
-  - /lib/*.a
-  - /share/doc
-  - /share/man
+  - name: imagemagick
+    sources:
+      - type: git
+        url: https://github.com/ImageMagick/ImageMagick
+        tag: 7.0.8-43
+        commit: 723c2bd9cc716a9267a8afe08354d67bb60dabd5
+    cleanup:
+      - /include
+      - /lib/pkgconfig
+      - /lib/*.la
+      - /lib/*.a
+      - /share/doc
+      - /share/man
 
-- name: qpdf
-  sources:
-  - type: archive
-    url: https://github.com/qpdf/qpdf/archive/release-qpdf-8.4.1.tar.gz
-    sha256: b8068d4ce23b5c8b3600fd83d6d88744f897c1e1b62a63bbff668e72984c38bb
-  cleanup:
-  - /include
-  - /lib/pkgconfig
-  - /lib/*.la
-  - /lib/*.a
-  - /share/doc
+  - name: qpdf
+    sources:
+      - type: archive
+        url: https://github.com/qpdf/qpdf/archive/release-qpdf-8.4.1.tar.gz
+        sha256: b8068d4ce23b5c8b3600fd83d6d88744f897c1e1b62a63bbff668e72984c38bb
+    cleanup:
+      - /include
+      - /lib/pkgconfig
+      - /lib/*.la
+      - /lib/*.a
+      - /share/doc
 
-- name: tesseract
-  sources:
-  - type: archive
-    url: https://github.com/tesseract-ocr/tesseract/archive/4.0.0.tar.gz
-    sha256: a1f5422ca49a32e5f35c54dee5112b11b99928fc9f4ee6695cdc6768d69f61dd
-  cleanup:
-  - /include
-  - /lib/pkgconfig
-  - /lib/*.la
-  - /lib/*.a
-  - /share/man
+  - name: tesseract
+    sources:
+      - type: archive
+        url: https://github.com/tesseract-ocr/tesseract/archive/4.0.0.tar.gz
+        sha256: a1f5422ca49a32e5f35c54dee5112b11b99928fc9f4ee6695cdc6768d69f61dd
+    cleanup:
+      - /include
+      - /lib/pkgconfig
+      - /lib/*.la
+      - /lib/*.a
+      - /share/man
 
-- name: tessdata
-  buildsystem: simple
-  build-commands:
-  - install -Dm0644 -t /app/share/tessdata *
-  sources:
-  - type: file
-    url: https://github.com/tesseract-ocr/tessdata/raw/4.0.0/eng.traineddata
-    sha256: daa0c97d651c19fba3b25e81317cd697e9908c8208090c94c3905381c23fc047
-  - type: file
-    url: https://github.com/tesseract-ocr/tessdata/raw/4.0.0/chi_sim.traineddata
-    sha256: fc05d89ab31d8b4e226910f16a8bcbf78e43bae3e2580bb5feefd052efdab363
-  - type: file
-    url: https://github.com/tesseract-ocr/tessdata/raw/4.0.0/hin.traineddata
-    sha256: cc76d09fa4fed1c7a4674046e25e63760d0c9bfdce390a52113462c34a556ee6
-  - type: file
-    url: https://github.com/tesseract-ocr/tessdata/raw/4.0.0/spa.traineddata
-    sha256: 0b0fcbb4665189e01ab8019e591f014dd7260460de072543edd4b2cb4ede7c96
-  - type: file
-    url: https://github.com/tesseract-ocr/tessdata/raw/4.0.0/fra.traineddata
-    sha256: eac01c1d72540d6090facb7b2f42dd0a2ee8fc57c5be1b20548ae668e2761913
-  - type: file
-    url: https://github.com/tesseract-ocr/tessdata/raw/4.0.0/ara.traineddata
-    sha256: 2005976778bbc14fc56a4ea8d43c6080847aeee72fcc2201488f240daca15c5b
-  - type: file
-    url: https://github.com/tesseract-ocr/tessdata/raw/4.0.0/rus.traineddata
-    sha256: 681be2c2bead1bc7bd235df88c44e8e60ae73ae866840c0ad4e3b4c247bd37c2
-  - type: file
-    url: https://github.com/tesseract-ocr/tessdata/raw/4.0.0/por.traineddata
-    sha256: 016c6a371bb1e4c48fe521908cf3ba3d751fade0ab846ad5d4086b563f5c528c
-  - type: file
-    url: https://github.com/tesseract-ocr/tessdata/raw/4.0.0/deu.traineddata
-    sha256: 896b3b4956503ab9daa10285db330881b2d74b70d889b79262cc534b9ec699a4
-  - type: file
-    url: https://github.com/tesseract-ocr/tessdata/raw/4.0.0/jpn.traineddata
-    sha256: 6f416b902d129d8cc28e99c33244034b1cf52549e8560f6320b06d317852159a
-  - type: file
-    url: https://github.com/tesseract-ocr/tessdata/raw/4.0.0/osd.traineddata
-    sha256: e19f2ae860792fdf372cf48d8ce70ae5da3c4052962fe22e9de1f680c374bb0e
-  - type: file
-    url: https://github.com/tesseract-ocr/tessdata/raw/4.0.0/equ.traineddata
-    sha256: 8f660323d8a7b7a0e8d2fae1a3439e6e470222bfbb990b2ab7fe9e1fb4791c0b
+  - name: tessdata
+    buildsystem: simple
+    build-commands:
+      - install -Dm0644 -t /app/share/tessdata *
+    sources:
+      - type: file
+        url: https://github.com/tesseract-ocr/tessdata/raw/4.0.0/eng.traineddata
+        sha256: daa0c97d651c19fba3b25e81317cd697e9908c8208090c94c3905381c23fc047
+      - type: file
+        url: https://github.com/tesseract-ocr/tessdata/raw/4.0.0/chi_sim.traineddata
+        sha256: fc05d89ab31d8b4e226910f16a8bcbf78e43bae3e2580bb5feefd052efdab363
+      - type: file
+        url: https://github.com/tesseract-ocr/tessdata/raw/4.0.0/hin.traineddata
+        sha256: cc76d09fa4fed1c7a4674046e25e63760d0c9bfdce390a52113462c34a556ee6
+      - type: file
+        url: https://github.com/tesseract-ocr/tessdata/raw/4.0.0/spa.traineddata
+        sha256: 0b0fcbb4665189e01ab8019e591f014dd7260460de072543edd4b2cb4ede7c96
+      - type: file
+        url: https://github.com/tesseract-ocr/tessdata/raw/4.0.0/fra.traineddata
+        sha256: eac01c1d72540d6090facb7b2f42dd0a2ee8fc57c5be1b20548ae668e2761913
+      - type: file
+        url: https://github.com/tesseract-ocr/tessdata/raw/4.0.0/ara.traineddata
+        sha256: 2005976778bbc14fc56a4ea8d43c6080847aeee72fcc2201488f240daca15c5b
+      - type: file
+        url: https://github.com/tesseract-ocr/tessdata/raw/4.0.0/rus.traineddata
+        sha256: 681be2c2bead1bc7bd235df88c44e8e60ae73ae866840c0ad4e3b4c247bd37c2
+      - type: file
+        url: https://github.com/tesseract-ocr/tessdata/raw/4.0.0/por.traineddata
+        sha256: 016c6a371bb1e4c48fe521908cf3ba3d751fade0ab846ad5d4086b563f5c528c
+      - type: file
+        url: https://github.com/tesseract-ocr/tessdata/raw/4.0.0/deu.traineddata
+        sha256: 896b3b4956503ab9daa10285db330881b2d74b70d889b79262cc534b9ec699a4
+      - type: file
+        url: https://github.com/tesseract-ocr/tessdata/raw/4.0.0/jpn.traineddata
+        sha256: 6f416b902d129d8cc28e99c33244034b1cf52549e8560f6320b06d317852159a
+      - type: file
+        url: https://github.com/tesseract-ocr/tessdata/raw/4.0.0/osd.traineddata
+        sha256: e19f2ae860792fdf372cf48d8ce70ae5da3c4052962fe22e9de1f680c374bb0e
+      - type: file
+        url: https://github.com/tesseract-ocr/tessdata/raw/4.0.0/equ.traineddata
+        sha256: 8f660323d8a7b7a0e8d2fae1a3439e6e470222bfbb990b2ab7fe9e1fb4791c0b
 
-- name: pdfrw
-  buildsystem: simple
-  build-commands:
-  - python3 -mpip install . --prefix=/app --no-index --find-links .
-  sources:
-  - type: archive
-    url: https://github.com/pmaupin/pdfrw/archive/v0.4.tar.gz
-    sha256: f4da059213a0fdf8f63aa3f711cfbc25a5100333514b396f71bb90cb7bd4365f
+  - name: pdfrw
+    buildsystem: simple
+    build-commands:
+      - python3 -mpip install . --prefix=/app --no-index --find-links .
+    sources:
+      - type: archive
+        url: https://github.com/pmaupin/pdfrw/archive/v0.4.tar.gz
+        sha256: f4da059213a0fdf8f63aa3f711cfbc25a5100333514b396f71bb90cb7bd4365f
 
-- name: colorama
-  buildsystem: simple
-  build-commands:
-  - python3 -mpip install . --prefix=/app --no-index --find-links .
-  sources:
-  - type: archive
-    url: https://github.com/tartley/colorama/archive/0.4.1.tar.gz
-    sha256: 6b2e2bb7bd96813fcafe5598886ce4f9f741450677e1ee090a119c600f04de9c
+  - name: colorama
+    buildsystem: simple
+    build-commands:
+      - python3 -mpip install . --prefix=/app --no-index --find-links .
+    sources:
+      - type: archive
+        url: https://github.com/tartley/colorama/archive/0.4.1.tar.gz
+        sha256: 6b2e2bb7bd96813fcafe5598886ce4f9f741450677e1ee090a119c600f04de9c
 
-- name: webcolors
-  buildsystem: simple
-  build-commands:
-  - python3 -mpip install . --prefix=/app --no-index --find-links .
-  sources:
-  - type: archive
-    url: https://github.com/ubernostrum/webcolors/archive/1.7.tar.gz
-    sha256: f9a96cae6e6a7138530e32c2537d38a2789d446d8c797f707c84fe7214e3035e
+  - name: webcolors
+    buildsystem: simple
+    build-commands:
+      - python3 -mpip install . --prefix=/app --no-index --find-links .
+    sources:
+      - type: archive
+        url: https://github.com/ubernostrum/webcolors/archive/1.7.tar.gz
+        sha256: f9a96cae6e6a7138530e32c2537d38a2789d446d8c797f707c84fe7214e3035e
 
-- name: dbus-python
-  config-opts:
-  - PYTHON_VERSION=3
-  sources:
-  - type: archive
-    url: https://dbus.freedesktop.org/releases/dbus-python/dbus-python-1.2.8.tar.gz
-    sha256: abf12bbb765e300bf8e2a1b2f32f85949eab06998dbda127952c31cb63957b6f
+  - name: dbus-python
+    config-opts:
+      - PYTHON_VERSION=3
+    sources:
+      - type: archive
+        url: https://dbus.freedesktop.org/releases/dbus-python/dbus-python-1.2.8.tar.gz
+        sha256: abf12bbb765e300bf8e2a1b2f32f85949eab06998dbda127952c31cb63957b6f
 
-- name: psutil
-  buildsystem: simple
-  build-commands:
-  - python3 -mpip install . --prefix=/app --no-index --find-links .
-  sources:
-  - type: archive
-    url: https://github.com/giampaolo/psutil/archive/release-5.6.2.tar.gz
-    sha256: c9156236d47bb0ca557ae9af69ced377f0a63386c594cbe5dd451cc986aca0c2
+  - name: psutil
+    buildsystem: simple
+    build-commands:
+      - python3 -mpip install . --prefix=/app --no-index --find-links .
+    sources:
+      - type: archive
+        url: https://github.com/giampaolo/psutil/archive/release-5.6.2.tar.gz
+        sha256: c9156236d47bb0ca557ae9af69ced377f0a63386c594cbe5dd451cc986aca0c2
 
-- name: djpdf
-  buildsystem: simple
-  build-commands:
-  - sed -i 's/"pyside2", //' setup.py # not installed with setuptools
-  - python3 -mpip install . --prefix=/app --no-index --find-links .
-  - install -Dm0644 desktop/scans2pdf_64.png /app/share/icons/hicolor/64x64/apps/com.github.unrud.djpdf.png
-  - install -Dm0644 desktop/scans2pdf_128.png /app/share/icons/hicolor/128x128/apps/com.github.unrud.djpdf.png
-  - install -Dm0644 desktop/scans2pdf_256.png /app/share/icons/hicolor/256x256/apps/com.github.unrud.djpdf.png
-  - install -Dm0644 desktop/scans2pdf_512.png /app/share/icons/hicolor/512x512/apps/com.github.unrud.djpdf.png
-  - install -Dm0644 -t /app/share/appdata desktop/com.github.unrud.djpdf.appdata.xml
-  - install -Dm0644 -t /app/share/applications desktop/com.github.unrud.djpdf.desktop
-  sources:
-  - type: git
-    path: ..
-    branch: master
+  - name: djpdf
+    buildsystem: simple
+    build-commands:
+      - sed -i 's/"pyside2", //' setup.py # not installed with setuptools
+      - python3 -mpip install . --prefix=/app --no-index --find-links .
+      - install -Dm0644 desktop/scans2pdf_64.png /app/share/icons/hicolor/64x64/apps/com.github.unrud.djpdf.png
+      - install -Dm0644 desktop/scans2pdf_128.png /app/share/icons/hicolor/128x128/apps/com.github.unrud.djpdf.png
+      - install -Dm0644 desktop/scans2pdf_256.png /app/share/icons/hicolor/256x256/apps/com.github.unrud.djpdf.png
+      - install -Dm0644 desktop/scans2pdf_512.png /app/share/icons/hicolor/512x512/apps/com.github.unrud.djpdf.png
+      - install -Dm0644 -t /app/share/appdata desktop/com.github.unrud.djpdf.appdata.xml
+      - install -Dm0644 -t /app/share/applications desktop/com.github.unrud.djpdf.desktop
+    sources:
+      - type: git
+        path: ..
+        branch: master
