@@ -135,7 +135,7 @@ parts:
     parse-info: [desktop/com.github.unrud.djpdf.appdata.xml]
     override-build: |
       # Get version from AppStream
-      snapcraftctl set-version "$(sed -n 's/.*<release[^>][^>]*version="\([^"]*\)".*/\1/p' desktop/com.github.unrud.djpdf.appdata.xml | sort -n | tail -n1)"
+      snapcraftctl set-version "$(sed -n 's/^\s*version\s*=\s*["'\'']\([^"'\'']*\)["'\''].*/\1/p' setup.py)"
       # WORKAROUND: Snap doesn't export icons
       sed -i 's,^\(Icon=\).*,\1${SNAP}/meta/gui/icon.png,' desktop/com.github.unrud.djpdf.desktop
       snapcraftctl build
