@@ -24,6 +24,10 @@ modules:
     cleanup:
       - /qt5include
       - /bin
+      - /include
+      - /lib/cmake
+      - /lib/pkgconfig
+      - /share/man
     sources:
       - type: archive
         url: http://download.qt.io/official_releases/QtForPython/pyside2/PySide2-5.12.3-src/pyside-setup-everywhere-src-5.12.3.tar.xz
@@ -66,6 +70,7 @@ modules:
       - /lib/pkgconfig
       - /lib/*.la
       - /lib/*.a
+      - /lib/openjpeg-*/*.cmake
 
   - name: imagemagick
     sources:
@@ -92,6 +97,7 @@ modules:
       - /lib/*.la
       - /lib/*.a
       - /share/doc
+      - /share/man
 
   - name: tesseract
     sources:
@@ -150,6 +156,12 @@ modules:
   - name: exempi
     config-opts:
       - --enable-unittest=no
+    cleanup:
+      - /include
+      - /lib/pkgconfig
+      - /lib/*.la
+      - /lib/*.a
+      - /share/man
     sources:
       - type: archive
         url: https://libopenraw.pages.freedesktop.org/download/exempi-2.5.0.tar.bz2
@@ -203,6 +215,10 @@ modules:
   - name: dbus-python
     config-opts:
       - PYTHON_VERSION=3
+    cleanup:
+      - /include
+      - /lib/pkgconfig
+      - '*.la'
     sources:
       - type: archive
         url: https://dbus.freedesktop.org/releases/dbus-python/dbus-python-1.2.8.tar.gz
