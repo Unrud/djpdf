@@ -166,6 +166,9 @@ modules:
       - type: archive
         url: https://libopenraw.pages.freedesktop.org/download/exempi-2.5.0.tar.bz2
         sha256: dc82fc24c0540a44a63fa4ad21775d24e00e63f1dedd3e2ae6f7aa27583b711b
+      - type: shell
+        commands:
+          - cp /usr/share/gnu-config/config.{guess,sub} .
 
   - name: pytz
     buildsystem: simple
