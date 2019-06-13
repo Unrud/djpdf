@@ -39,7 +39,7 @@ from .util import (AsyncCache, format_number, MemoryBoundedSemaphore,
 _orig_basic_config = logging.basicConfig
 logging.basicConfig = lambda *args, **kwargs: None
 from pdfrw import PdfReader, PdfWriter
-from pdfrw.objects import (PdfArray, PdfDict, PdfName, PdfObject, PdfString)
+from pdfrw.objects import PdfArray, PdfDict, PdfName, PdfObject, PdfString
 logging.basicConfig = _orig_basic_config
 
 CONVERT_CMD = "convert"

@@ -283,7 +283,8 @@ class QmlPage(QObject):
 
     @Slot(int, str)
     def changeOcrColor(self, index, val):
-        self._data["ocr_colors"][index] = (int(val[1:3], 16), int(val[3:5], 16),
+        self._data["ocr_colors"][index] = (int(val[1:3], 16),
+                                           int(val[3:5], 16),
                                            int(val[5:], 16))
         self.ocrColorsChanged.emit()
 
@@ -342,7 +343,8 @@ class QmlPagesModel(QAbstractListModel):
             return
         if index2 < index1:
             index1, index2 = index2, index1
-        self.beginMoveRows(QModelIndex(), index2, index2, QModelIndex(), index1)
+        self.beginMoveRows(QModelIndex(), index2, index2,
+                           QModelIndex(), index1)
         self._pages.insert(index1, self._pages.pop(index2))
         self.endMoveRows()
 
