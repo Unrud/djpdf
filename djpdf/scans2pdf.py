@@ -28,7 +28,7 @@ from tempfile import TemporaryDirectory
 
 from . import hocr
 from .djpdf import (CONVERT_CMD, PARALLEL_JOBS, JOB_MEMORY, RESERVED_MEMORY,
-                    PdfBuilder)
+                    PdfBuilder, SRGB_ICC_FILENAME)
 from .util import (AsyncCache, MemoryBoundedSemaphore, format_number,
                    run_command_async)
 
@@ -230,6 +230,8 @@ class InputImage(BaseImageObject):
         fname = path.join(self._temp_dir, "image.png")
         yield from run_command_async([
             CONVERT_CMD,
+            "-colorspace", "sRGB",
+            "-profile", SRGB_ICC_FILENAME,
             "-background", _color_to_hex(self._page["bg_color"]),
             "-alpha", "remove",
             "-alpha", "off",
