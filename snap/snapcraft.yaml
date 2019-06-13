@@ -13,7 +13,7 @@ description: |
   A GUI and command line interface are included.
 # WORKAROUND: Snapcraft doesn't accept GPL-3.0-or-later
 license: GPL-3.0
-icon: desktop/scans2pdf_128.png
+icon: desktop/com.github.unrud.djpdf.png
 confinement: strict
 grade: stable
 base: core18

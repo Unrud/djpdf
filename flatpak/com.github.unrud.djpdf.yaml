@@ -222,12 +222,13 @@ modules:
     build-commands:
       - sed -i 's/"pyside2", //' setup.py # not installed with setuptools
       - python3 -O -mpip install . --prefix=/app --no-index --find-links .
-      - install -Dm0644 desktop/scans2pdf_64.png /app/share/icons/hicolor/64x64/apps/com.github.unrud.djpdf.png
-      - install -Dm0644 desktop/scans2pdf_128.png /app/share/icons/hicolor/128x128/apps/com.github.unrud.djpdf.png
-      - install -Dm0644 desktop/scans2pdf_256.png /app/share/icons/hicolor/256x256/apps/com.github.unrud.djpdf.png
-      - install -Dm0644 desktop/scans2pdf_512.png /app/share/icons/hicolor/512x512/apps/com.github.unrud.djpdf.png
       - install -Dm0644 -t /app/share/appdata desktop/com.github.unrud.djpdf.appdata.xml
       - install -Dm0644 -t /app/share/applications desktop/com.github.unrud.djpdf.desktop
+      - |
+        for _size in 16 32 48 64 128 256 512; do
+          convert +set date:create +set date:modify desktop/com.github.unrud.djpdf.png -resize ${_size}x${_size} com.github.unrud.djpdf_${_size}.png || exit 1
+          install -Dm0644 com.github.unrud.djpdf_${_size}.png /app/share/icons/hicolor/${_size}x${_size}/apps/com.github.unrud.djpdf.png || exit 1
+        done
     sources:
       - type: git
         path: ..
