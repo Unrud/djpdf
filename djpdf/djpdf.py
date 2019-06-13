@@ -299,8 +299,12 @@ class ImageMagickImage:
 
     @asyncio.coroutine
     def pdf_thumbnail(self, process_semaphore):
-        return (yield from self._cache.get(
+        thumbnail = (yield from self._cache.get(
             self._pdf_image(process_semaphore))).thumbnail
+        if not thumbnail:
+            raise NotImplementedError(
+                "thumbnails not supported for image type")
+        return thumbnail
 
     @asyncio.coroutine
     def _pdf_image(self, psem):
@@ -354,9 +358,12 @@ class ImageMagickImage:
             if pdf_mask is not None:
                 pdf_image.Mask = pdf_mask
             pdf_thumbnail = pdf_reader.pages[0].Thumb
-            pdf_thumbnail.indirect = True
-            pdf_thumbnail.Length.indirect = False
-            pdf_thumbnail.ColorSpace.indirect = False
+            if not pdf_thumbnail:
+                pdf_thumbnail = None
+            else:
+                pdf_thumbnail.indirect = True
+                pdf_thumbnail.Length.indirect = False
+                pdf_thumbnail.ColorSpace.indirect = False
         return self._CacheContent(pdf_image, pdf_thumbnail)
 
 
@@ -424,7 +431,7 @@ class Jbig2Image:
 
     @asyncio.coroutine
     def pdf_thumbnail(self, process_semaphore):
-        return None
+        raise NotImplementedError("thumbnails not supported for jbig2 images")
 
     @asyncio.coroutine
     def _pdf_image(self, psem):
