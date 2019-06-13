@@ -7,7 +7,8 @@ setup(
     version="0.0.10",
     packages=["djpdf", "djpdfgui"],
     package_data={
-        "djpdf": ["tesseract-pdf.ttf", "to-unicode.cmap"],
+        "djpdf": ["argyllcms-srgb.icm", "tesseract-pdf.ttf",
+                  "to-unicode.cmap"],
         "djpdfgui": ["qml/main.qml", "qml/overview.qml", "qml/detail.qml"],
     },
     entry_points={
@@ -20,5 +21,6 @@ setup(
         ]
     },
     python_requires=">=3.5",
-    install_requires=["webcolors", "colorama", "pdfrw", "pyside2", "psutil"]
+    install_requires=["webcolors", "colorama", "pdfrw", "pyside2", "psutil",
+                      "python-xmp-toolkit"]
 )

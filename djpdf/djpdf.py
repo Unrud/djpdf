@@ -29,6 +29,8 @@ import zlib
 from argparse import ArgumentParser
 from collections import namedtuple
 from itertools import chain
+from libxmp import XMPMeta
+from libxmp.consts import XMP_NS_PDFA_ID
 from os import path
 from tempfile import TemporaryDirectory
 
@@ -54,6 +56,8 @@ COMPRESS_PAGE_CONTENTS = True
 FONT_FILENAME = pkg_resources.resource_filename(__name__, "tesseract-pdf.ttf")
 UNICODE_CMAP_FILENAME = pkg_resources.resource_filename(
     __name__, "to-unicode.cmap")
+SRGB_ICC_FILENAME = pkg_resources.resource_filename(
+    __name__, "argyllcms-srgb.icm")
 PARALLEL_JOBS = os.cpu_count() or 1
 JOB_MEMORY = 2 << 30
 RESERVED_MEMORY = 1 << 30
@@ -368,6 +372,10 @@ class Jbig2Image:
             "Can't have mask and be image mask itself")
         assert mask is None or mask._image_mask, (
             "Mask must be image mask")
+        if not image_mask:
+            raise NotImplementedError(
+                "jbig2 images must be masks, because DefaultGray color space "
+                "is missing (required for PDF/A)")
         self.compression = recipe["compression"]
         if recipe.get("jbig2_threshold") is not None:
             assert isinstance(recipe["jbig2_threshold"], (int, float))
@@ -514,6 +522,7 @@ class Jbig2Image:
                 if image._image_mask:
                     pdf_image.ImageMask = PdfBool(True)
                 else:
+                    # NOTE: DefaultGray color space is required for PDF/A
                     pdf_image.ColorSpace = PdfName.DeviceGray
                 if image_mask is not None:
                     pdf_image.Mask = image_mask
@@ -690,6 +699,18 @@ class PdfBuilder:
         # use the copy so that references to pages in links are correct
         pdf_pages = list(pdf_writer.pagearray)
 
+        srgb_colorspace = PdfDict()
+        srgb_colorspace.indirect = True
+        srgb_colorspace.N = 3  # Number of components (red, green, blue)
+        with open(SRGB_ICC_FILENAME, "rb") as f:
+            srgb_colorspace_stream = f.read()
+        srgb_colorspace.Filter = [PdfName.FlateDecode]
+        srgb_colorspace.stream = zlib.compress(
+            srgb_colorspace_stream, 9).decode("latin-1")
+        srgb_colorspace.Length1 = len(srgb_colorspace_stream)
+        default_rgb_colorspace = PdfArray([PdfName.ICCBased, srgb_colorspace])
+        default_rgb_colorspace.indirect = True
+
         # Handle all pages in parallel
         @asyncio.coroutine
         def make_page(page, pdf_page, psem):
@@ -724,6 +745,9 @@ class PdfBuilder:
                                           PdfNumber(page.height)])
             pdf_page.Group = pdf_group
             pdf_resources = PdfDict()
+            pdf_colorspace = PdfDict()
+            pdf_colorspace.DefaultRGB = default_rgb_colorspace
+            pdf_resources.ColorSpace = pdf_colorspace
             pdf_xobject = PdfDict()
             if pdf_thumbnail is not None:
                 pdf_page.Thumb = pdf_thumbnail
@@ -846,12 +870,39 @@ class PdfBuilder:
             *[make_page(page, pdf_page, process_semaphore)
               for page, pdf_page in zip(self._pages, pdf_pages)])
 
+        trailer = pdf_writer.trailer
+
+        document_id = PdfString().from_bytes(os.urandom(16))
+        trailer.ID = [document_id, document_id]
+
+        mark_info = PdfDict()
+        mark_info.Marked = PdfBool(True)
+        trailer.Root.MarkInfo = mark_info
+
+        struct_tree_root = PdfDict()
+        struct_tree_root.Type = PdfName.StructTreeRoot
+        trailer.Root.StructTreeRoot = struct_tree_root
+
+        metadata = PdfDict()
+        metadata.indirect = True
+        metadata.Type = PdfName.Metadata
+        metadata.Subtype = PdfName.XML
+        xmp = XMPMeta()
+        xmp.set_property(XMP_NS_PDFA_ID, "part", "2")
+        xmp.set_property(XMP_NS_PDFA_ID, "conformance", "A")
+        metadata_stream = xmp.serialize_to_str().encode("utf-8")
+        metadata.Filter = [PdfName.FlateDecode]
+        metadata.stream = zlib.compress(metadata_stream, 9).decode("latin-1")
+        metadata.Length1 = len(metadata_stream)
+        trailer.Root.Metadata = metadata
+
         with TemporaryDirectory(prefix="djpdf-") as temp_dir:
             pdf_writer.write(path.join(temp_dir, "temp.pdf"))
             cmd = [QPDF_CMD,
                    "--stream-data=preserve",
                    "--object-streams=preserve",
-                   "--normalize-content=n"]
+                   "--normalize-content=n",
+                   "--newline-before-endstream"]
             if LINEARIZE_PDF:
                 cmd.extend(["--linearize"])
             cmd.extend([path.abspath(path.join(temp_dir, "temp.pdf")),

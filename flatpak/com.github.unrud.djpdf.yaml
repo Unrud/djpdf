@@ -147,6 +147,32 @@ modules:
         url: https://github.com/tesseract-ocr/tessdata/raw/4.0.0/equ.traineddata
         sha256: 8f660323d8a7b7a0e8d2fae1a3439e6e470222bfbb990b2ab7fe9e1fb4791c0b
 
+  - name: exempi
+    config-opts:
+      - --enable-unittest=no
+    sources:
+      - type: archive
+        url: https://libopenraw.pages.freedesktop.org/download/exempi-2.5.0.tar.bz2
+        sha256: dc82fc24c0540a44a63fa4ad21775d24e00e63f1dedd3e2ae6f7aa27583b711b
+
+  - name: pytz
+    buildsystem: simple
+    build-commands:
+      - python3 -O -mpip install . --prefix=/app --no-index --find-links .
+    sources:
+      - type: archive
+        url: https://files.pythonhosted.org/packages/df/d5/3e3ff673e8f3096921b3f1b79ce04b832e0100b4741573154b72b756a681/pytz-2019.1.tar.gz
+        sha256: d747dd3d23d77ef44c6a3526e274af6efeb0a6f1afd5a69ba4d5be4098c8e141
+
+  - name: xmp-toolkit
+    buildsystem: simple
+    build-commands:
+      - python3 -O -mpip install . --prefix=/app --no-index --find-links .
+    sources:
+      - type: git
+        url: https://github.com/python-xmp-toolkit/python-xmp-toolkit
+        commit: 5692bdf8dac3581a0d5fb3c5aeb29be0ab6a54fc
+
   - name: pdfrw
     buildsystem: simple
     build-commands:

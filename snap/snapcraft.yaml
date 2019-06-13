@@ -109,6 +109,7 @@ parts:
     stage-packages:
     - python3-pkg-resources
     - qpdf
+    - libexempi3
     - libnss3
     - libxcomposite1
     - libxcursor1
