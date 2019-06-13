@@ -168,3 +168,5 @@ apps:
     command: bin/djpdf-json
     plugs:
     - home
+  hocr-json:
+    command: bin/hocr-json
