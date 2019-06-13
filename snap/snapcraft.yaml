@@ -45,7 +45,7 @@ parts:
     plugin: autotools
     source: https://github.com/ImageMagick/ImageMagick
     source-type: git
-    source-tag: 7.0.8-43
+    source-tag: 7.0.8-49
     after: [openjpeg]
     build-packages:
     - libjpeg-dev

@@ -71,8 +71,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/ImageMagick/ImageMagick
-        tag: 7.0.8-43
-        commit: 723c2bd9cc716a9267a8afe08354d67bb60dabd5
+        tag: 7.0.8-49
+        commit: ec9498c7945dc0700e09e2d2ad458379251969e1
     cleanup:
       - /include
       - /lib/pkgconfig
@@ -84,8 +84,8 @@ modules:
   - name: qpdf
     sources:
       - type: archive
-        url: https://github.com/qpdf/qpdf/archive/release-qpdf-8.4.1.tar.gz
-        sha256: b8068d4ce23b5c8b3600fd83d6d88744f897c1e1b62a63bbff668e72984c38bb
+        url: https://github.com/qpdf/qpdf/archive/release-qpdf-8.4.2.tar.gz
+        sha256: 741a171295e561eadf0285ae6b0b821632f9773b8db0daa95df4dc565bf566bb
     cleanup:
       - /include
       - /lib/pkgconfig
@@ -150,7 +150,7 @@ modules:
   - name: pdfrw
     buildsystem: simple
     build-commands:
-      - python3 -mpip install . --prefix=/app --no-index --find-links .
+      - python3 -O -mpip install . --prefix=/app --no-index --find-links .
     sources:
       - type: archive
         url: https://github.com/pmaupin/pdfrw/archive/v0.4.tar.gz
@@ -159,7 +159,7 @@ modules:
   - name: colorama
     buildsystem: simple
     build-commands:
-      - python3 -mpip install . --prefix=/app --no-index --find-links .
+      - python3 -O -mpip install . --prefix=/app --no-index --find-links .
     sources:
       - type: archive
         url: https://github.com/tartley/colorama/archive/0.4.1.tar.gz
@@ -168,11 +168,11 @@ modules:
   - name: webcolors
     buildsystem: simple
     build-commands:
-      - python3 -mpip install . --prefix=/app --no-index --find-links .
+      - python3 -O -mpip install . --prefix=/app --no-index --find-links .
     sources:
       - type: archive
-        url: https://github.com/ubernostrum/webcolors/archive/1.7.tar.gz
-        sha256: f9a96cae6e6a7138530e32c2537d38a2789d446d8c797f707c84fe7214e3035e
+        url: https://github.com/ubernostrum/webcolors/archive/1.9.1.tar.gz
+        sha256: ad6aee3b759b60e3eac7b72835f6a350995751f1c4dfdb56c4d42ca99740a616
 
   - name: dbus-python
     config-opts:
@@ -185,17 +185,17 @@ modules:
   - name: psutil
     buildsystem: simple
     build-commands:
-      - python3 -mpip install . --prefix=/app --no-index --find-links .
+      - python3 -O -mpip install . --prefix=/app --no-index --find-links .
     sources:
       - type: archive
-        url: https://github.com/giampaolo/psutil/archive/release-5.6.2.tar.gz
-        sha256: c9156236d47bb0ca557ae9af69ced377f0a63386c594cbe5dd451cc986aca0c2
+        url: https://github.com/giampaolo/psutil/archive/release-5.6.3.tar.gz
+        sha256: 55b86dc0a9fc4e258ae5d86d6edf317432a4e3dc45c7324b8a82838b07e74f4a
 
   - name: djpdf
     buildsystem: simple
     build-commands:
       - sed -i 's/"pyside2", //' setup.py # not installed with setuptools
-      - python3 -mpip install . --prefix=/app --no-index --find-links .
+      - python3 -O -mpip install . --prefix=/app --no-index --find-links .
       - install -Dm0644 desktop/scans2pdf_64.png /app/share/icons/hicolor/64x64/apps/com.github.unrud.djpdf.png
       - install -Dm0644 desktop/scans2pdf_128.png /app/share/icons/hicolor/128x128/apps/com.github.unrud.djpdf.png
       - install -Dm0644 desktop/scans2pdf_256.png /app/share/icons/hicolor/256x256/apps/com.github.unrud.djpdf.png
