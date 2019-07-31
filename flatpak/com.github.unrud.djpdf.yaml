@@ -30,8 +30,8 @@ modules:
       - /share/man
     sources:
       - type: archive
-        url: http://download.qt.io/official_releases/QtForPython/pyside2/PySide2-5.12.3-src/pyside-setup-everywhere-src-5.12.3.tar.xz
-        sha256: 4f7aab7d4bbaf1b3573cc989d704e87b0de55cce656ae5e23418a88baa4c6842
+        url: http://download.qt.io/official_releases/QtForPython/pyside2/PySide2-5.12.4-src/pyside-setup-everywhere-src-5.12.4.tar.xz
+        sha256: 4a64ed11eb22af46db02615f9b1f597de0feaf8555cf41f355ec2b366d5bc2b4
       - type: shell
         commands:
           - sed -i 's|\(--include-paths=\)|\1/app/qt5include:|' sources/pyside2/cmake/Macros/PySideModules.cmake
@@ -61,6 +61,8 @@ modules:
 
   - name: openjpeg
     buildsystem: cmake
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
         url: https://github.com/uclouvain/openjpeg/archive/v2.3.1.tar.gz
@@ -76,8 +78,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/ImageMagick/ImageMagick
-        tag: 7.0.8-49
-        commit: ec9498c7945dc0700e09e2d2ad458379251969e1
+        tag: 7.0.8-56
+        commit: e105c38ac3e94f458873eee1598d9a11bdca13b8
     cleanup:
       - /include
       - /lib/pkgconfig
@@ -102,8 +104,8 @@ modules:
   - name: tesseract
     sources:
       - type: archive
-        url: https://github.com/tesseract-ocr/tesseract/archive/4.0.0.tar.gz
-        sha256: a1f5422ca49a32e5f35c54dee5112b11b99928fc9f4ee6695cdc6768d69f61dd
+        url: https://github.com/tesseract-ocr/tesseract/archive/4.1.0.tar.gz
+        sha256: 5c5ed5f1a76888dc57a83704f24ae02f8319849f5c4cf19d254296978a1a1961
     cleanup:
       - /include
       - /lib/pkgconfig
@@ -173,7 +175,7 @@ modules:
   - name: pytz
     buildsystem: simple
     build-commands:
-      - python3 -O -mpip install . --prefix=/app --no-index --find-links .
+      - pip3 install . --prefix=/app --no-index --find-links .
     sources:
       - type: archive
         url: https://files.pythonhosted.org/packages/df/d5/3e3ff673e8f3096921b3f1b79ce04b832e0100b4741573154b72b756a681/pytz-2019.1.tar.gz
@@ -182,7 +184,7 @@ modules:
   - name: xmp-toolkit
     buildsystem: simple
     build-commands:
-      - python3 -O -mpip install . --prefix=/app --no-index --find-links .
+      - pip3 install . --prefix=/app --no-index --find-links .
     sources:
       - type: git
         url: https://github.com/python-xmp-toolkit/python-xmp-toolkit
@@ -191,7 +193,7 @@ modules:
   - name: pdfrw
     buildsystem: simple
     build-commands:
-      - python3 -O -mpip install . --prefix=/app --no-index --find-links .
+      - pip3 install . --prefix=/app --no-index --find-links .
     sources:
       - type: archive
         url: https://github.com/pmaupin/pdfrw/archive/v0.4.tar.gz
@@ -200,7 +202,7 @@ modules:
   - name: colorama
     buildsystem: simple
     build-commands:
-      - python3 -O -mpip install . --prefix=/app --no-index --find-links .
+      - pip3 install . --prefix=/app --no-index --find-links .
     sources:
       - type: archive
         url: https://github.com/tartley/colorama/archive/0.4.1.tar.gz
@@ -209,7 +211,7 @@ modules:
   - name: webcolors
     buildsystem: simple
     build-commands:
-      - python3 -O -mpip install . --prefix=/app --no-index --find-links .
+      - pip3 install . --prefix=/app --no-index --find-links .
     sources:
       - type: archive
         url: https://github.com/ubernostrum/webcolors/archive/1.9.1.tar.gz
@@ -230,7 +232,7 @@ modules:
   - name: psutil
     buildsystem: simple
     build-commands:
-      - python3 -O -mpip install . --prefix=/app --no-index --find-links .
+      - pip3 install . --prefix=/app --no-index --find-links .
     sources:
       - type: archive
         url: https://github.com/giampaolo/psutil/archive/release-5.6.3.tar.gz
@@ -240,7 +242,7 @@ modules:
     buildsystem: simple
     build-commands:
       - sed -i 's/"pyside2", //' setup.py # not installed with setuptools
-      - python3 -O -mpip install . --prefix=/app --no-index --find-links .
+      - pip3 install . --prefix=/app --no-index --find-links .
       - install -Dm0644 -t /app/share/appdata desktop/com.github.unrud.djpdf.appdata.xml
       - install -Dm0644 -t /app/share/applications desktop/com.github.unrud.djpdf.desktop
       - |
