@@ -101,7 +101,18 @@ parts:
     override-build: |
       install -Dm0644 -t "${SNAPCRAFT_PART_INSTALL}/share/tessdata" *
 
+  desktop-glib-only:
+    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
+    source-subdir: glib-only
+    plugin: make
+    build-packages:
+    - libglib2.0-dev
+    stage-packages:
+    - libglib2.0-bin
+
   djpdf:
+    after:
+    - desktop-glib-only
     plugin: python
     python-version: python3
     source: .
@@ -147,7 +158,7 @@ environment:
 
 apps:
   djpdf:
-    command: bin/scans2pdf-gui
+    command: desktop-launch "${SNAP}/bin/scans2pdf-gui"
     desktop: share/applications/com.github.unrud.djpdf.desktop
     plugs:
     - home
