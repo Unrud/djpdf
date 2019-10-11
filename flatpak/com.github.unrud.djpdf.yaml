@@ -243,7 +243,7 @@ modules:
     build-commands:
       - sed -i 's/"pyside2", //' setup.py # not installed with setuptools
       - pip3 install . --prefix=/app --no-index --find-links .
-      - install -Dm0644 -t /app/share/appdata desktop/com.github.unrud.djpdf.appdata.xml
+      - install -Dm0644 -t /app/share/metainfo desktop/com.github.unrud.djpdf.appdata.xml
       - install -Dm0644 -t /app/share/applications desktop/com.github.unrud.djpdf.desktop
       - |
         for _size in 16 32 48 64 128 256 512; do
