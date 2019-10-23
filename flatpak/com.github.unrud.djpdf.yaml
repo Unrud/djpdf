@@ -30,8 +30,8 @@ modules:
       - /share/man
     sources:
       - type: archive
-        url: http://download.qt.io/official_releases/QtForPython/pyside2/PySide2-5.12.4-src/pyside-setup-everywhere-src-5.12.4.tar.xz
-        sha256: 4a64ed11eb22af46db02615f9b1f597de0feaf8555cf41f355ec2b366d5bc2b4
+        url: http://download.qt.io/official_releases/QtForPython/pyside2/PySide2-5.13.1-src/pyside-setup-everywhere-src-5.13.1.tar.xz
+        sha256: c57c71ddece90b29d0934cf5fac1e1634719484637b56dcbe49eb277c1c01536
       - type: shell
         commands:
           - sed -i 's|\(--include-paths=\)|\1/app/qt5include:|' sources/pyside2/cmake/Macros/PySideModules.cmake
@@ -49,9 +49,9 @@ modules:
 
   - name: jbig2enc
     sources:
-      - type: git
-        url: https://github.com/agl/jbig2enc
-        commit: a4ff6b9191e1c824cbc36364cbeb12cab058b5da
+      - type: archive
+        url: https://github.com/agl/jbig2enc/archive/0.29.tar.gz
+        sha256: bfcf0d0448ee36046af6c776c7271cd5a644855723f0a832d1c0db4de3c21280
     cleanup:
       - /include
       - /lib/pkgconfig
@@ -78,8 +78,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/ImageMagick/ImageMagick
-        tag: 7.0.8-56
-        commit: e105c38ac3e94f458873eee1598d9a11bdca13b8
+        tag: 7.0.8-68
+        commit: cdfd76effab52bb2489feb6518178b66324dec11
     cleanup:
       - /include
       - /lib/pkgconfig
@@ -91,8 +91,8 @@ modules:
   - name: qpdf
     sources:
       - type: archive
-        url: https://github.com/qpdf/qpdf/archive/release-qpdf-8.4.2.tar.gz
-        sha256: 741a171295e561eadf0285ae6b0b821632f9773b8db0daa95df4dc565bf566bb
+        url: https://github.com/qpdf/qpdf/archive/release-qpdf-9.0.2.tar.gz
+        sha256: 8877d49857b9dcb9a5232b537d2f9ef3d5c38138c81d744d76e97237b1d49be2
     cleanup:
       - /include
       - /lib/pkgconfig
@@ -166,8 +166,8 @@ modules:
       - /share/man
     sources:
       - type: archive
-        url: https://libopenraw.pages.freedesktop.org/download/exempi-2.5.0.tar.bz2
-        sha256: dc82fc24c0540a44a63fa4ad21775d24e00e63f1dedd3e2ae6f7aa27583b711b
+        url: https://libopenraw.pages.freedesktop.org/download/exempi-2.5.1.tar.bz2
+        sha256: 100b3d5b1b3370bc2e31c0978991716c4a4478246a2ac2df6382054a0ae89bc8
       - type: shell
         commands:
           - cp /usr/share/gnu-config/config.{guess,sub} .
@@ -178,8 +178,8 @@ modules:
       - pip3 install . --prefix=/app --no-index --find-links .
     sources:
       - type: archive
-        url: https://files.pythonhosted.org/packages/df/d5/3e3ff673e8f3096921b3f1b79ce04b832e0100b4741573154b72b756a681/pytz-2019.1.tar.gz
-        sha256: d747dd3d23d77ef44c6a3526e274af6efeb0a6f1afd5a69ba4d5be4098c8e141
+        url: https://files.pythonhosted.org/packages/82/c3/534ddba230bd4fbbd3b7a3d35f3341d014cca213f369a9940925e7e5f691/pytz-2019.3.tar.gz
+        sha256: b02c06db6cf09c12dd25137e563b31700d3b80fcc4ad23abb7a315f2789819be
 
   - name: xmp-toolkit
     buildsystem: simple
@@ -214,8 +214,8 @@ modules:
       - pip3 install . --prefix=/app --no-index --find-links .
     sources:
       - type: archive
-        url: https://github.com/ubernostrum/webcolors/archive/1.9.1.tar.gz
-        sha256: ad6aee3b759b60e3eac7b72835f6a350995751f1c4dfdb56c4d42ca99740a616
+        url: https://github.com/ubernostrum/webcolors/archive/1.10.tar.gz
+        sha256: 171a95fb0c506c9804db8f6166782d1e26b7df8e8c943e550cd28ba4e491b7c7
 
   - name: dbus-python
     config-opts:
@@ -226,8 +226,8 @@ modules:
       - '*.la'
     sources:
       - type: archive
-        url: https://dbus.freedesktop.org/releases/dbus-python/dbus-python-1.2.8.tar.gz
-        sha256: abf12bbb765e300bf8e2a1b2f32f85949eab06998dbda127952c31cb63957b6f
+        url: https://dbus.freedesktop.org/releases/dbus-python/dbus-python-1.2.12.tar.gz
+        sha256: cdd4de2c4f5e58f287b12013ed7b41dee81d503c8d0d2397c5bd2fb01badf260
 
   - name: psutil
     buildsystem: simple
