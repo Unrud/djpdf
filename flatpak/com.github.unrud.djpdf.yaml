@@ -1,6 +1,6 @@
 app-id: com.github.unrud.djpdf
 runtime: org.kde.Platform
-runtime-version: '5.12'
+runtime-version: '5.13'
 sdk: org.kde.Sdk
 command: scans2pdf-gui
 finish-args:
@@ -9,6 +9,14 @@ finish-args:
   - --device=dri
   - --share=ipc
   - --env=DJPDF_PLATFORM_INTEGRATION=flatpak
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/pkgconfig
+  - /share/doc
+  - /share/man
 modules:
   - name: pyside2
     buildsystem: simple
@@ -24,14 +32,10 @@ modules:
     cleanup:
       - /qt5include
       - /bin
-      - /include
-      - /lib/cmake
-      - /lib/pkgconfig
-      - /share/man
     sources:
       - type: archive
-        url: http://download.qt.io/official_releases/QtForPython/pyside2/PySide2-5.13.1-src/pyside-setup-everywhere-src-5.13.1.tar.xz
-        sha256: c57c71ddece90b29d0934cf5fac1e1634719484637b56dcbe49eb277c1c01536
+        url: http://download.qt.io/official_releases/QtForPython/pyside2/PySide2-5.13.2-src/pyside-setup-opensource-src-5.13.2.tar.xz
+        sha256: 3e255d64df08880d0281ebe86009d5ea45f24332b308954d967c33995f75e543
       - type: shell
         commands:
           - sed -i 's|\(--include-paths=\)|\1/app/qt5include:|' sources/pyside2/cmake/Macros/PySideModules.cmake
@@ -41,64 +45,32 @@ modules:
       - type: archive
         url: https://github.com/DanBloomberg/leptonica/releases/download/1.78.0/leptonica-1.78.0.tar.gz
         sha256: e2ed2e81e7a22ddf45d2c05f0bc8b9ae7450545d995bfe28517ba408d14a5a88
-    cleanup:
-      - /include
-      - /lib/pkgconfig
-      - /lib/*.la
-      - /lib/*.a
 
   - name: jbig2enc
     sources:
       - type: archive
         url: https://github.com/agl/jbig2enc/archive/0.29.tar.gz
         sha256: bfcf0d0448ee36046af6c776c7271cd5a644855723f0a832d1c0db4de3c21280
-    cleanup:
-      - /include
-      - /lib/pkgconfig
-      - /lib/*.la
-      - /lib/*.a
-      - /share/doc
 
   - shared-modules/openjpeg/openjpeg.json
 
   - name: imagemagick
     sources:
-      - type: git
-        url: https://github.com/ImageMagick/ImageMagick
-        tag: 7.0.8-68
-        commit: cdfd76effab52bb2489feb6518178b66324dec11
-    cleanup:
-      - /include
-      - /lib/pkgconfig
-      - /lib/*.la
-      - /lib/*.a
-      - /share/doc
-      - /share/man
+      - type: archive
+        url: https://github.com/ImageMagick/ImageMagick/archive/7.0.9-10.tar.gz
+        sha256: 247f84a7385b7a444827b901dab166d5e3bf14e5995e9e499197a0b26417a244
 
   - name: qpdf
     sources:
       - type: archive
-        url: https://github.com/qpdf/qpdf/archive/release-qpdf-9.0.2.tar.gz
-        sha256: 8877d49857b9dcb9a5232b537d2f9ef3d5c38138c81d744d76e97237b1d49be2
-    cleanup:
-      - /include
-      - /lib/pkgconfig
-      - /lib/*.la
-      - /lib/*.a
-      - /share/doc
-      - /share/man
+        url: https://github.com/qpdf/qpdf/releases/download/release-qpdf-9.1.0/qpdf-9.1.0.tar.gz
+        sha256: 3abbbb7907f2e750336b9c97e67b6e806aca91ab537402ec080656d63940ed79
 
   - name: tesseract
     sources:
       - type: archive
-        url: https://github.com/tesseract-ocr/tesseract/archive/4.1.0.tar.gz
-        sha256: 5c5ed5f1a76888dc57a83704f24ae02f8319849f5c4cf19d254296978a1a1961
-    cleanup:
-      - /include
-      - /lib/pkgconfig
-      - /lib/*.la
-      - /lib/*.a
-      - /share/man
+        url: https://github.com/tesseract-ocr/tesseract/archive/4.1.1.tar.gz
+        sha256: 2a66ff0d8595bff8f04032165e6c936389b1e5727c3ce5a27b3e059d218db1cb
 
   - name: tessdata
     buildsystem: simple
@@ -145,12 +117,6 @@ modules:
   - name: exempi
     config-opts:
       - --enable-unittest=no
-    cleanup:
-      - /include
-      - /lib/pkgconfig
-      - /lib/*.la
-      - /lib/*.a
-      - /share/man
     sources:
       - type: archive
         url: https://libopenraw.pages.freedesktop.org/download/exempi-2.5.1.tar.bz2
@@ -192,8 +158,8 @@ modules:
       - pip3 install . --prefix=/app --no-index --find-links .
     sources:
       - type: archive
-        url: https://github.com/tartley/colorama/archive/0.4.1.tar.gz
-        sha256: 6b2e2bb7bd96813fcafe5598886ce4f9f741450677e1ee090a119c600f04de9c
+        url: https://github.com/tartley/colorama/archive/0.4.3.tar.gz
+        sha256: 0d93fc83f70c926cd8437b488ea9c8741f9df2ac2d2d681c40783d5ceef98e2b
 
   - name: webcolors
     buildsystem: simple
@@ -207,14 +173,10 @@ modules:
   - name: dbus-python
     config-opts:
       - PYTHON_VERSION=3
-    cleanup:
-      - /include
-      - /lib/pkgconfig
-      - '*.la'
     sources:
       - type: archive
-        url: https://dbus.freedesktop.org/releases/dbus-python/dbus-python-1.2.12.tar.gz
-        sha256: cdd4de2c4f5e58f287b12013ed7b41dee81d503c8d0d2397c5bd2fb01badf260
+        url: https://dbus.freedesktop.org/releases/dbus-python/dbus-python-1.2.14.tar.gz
+        sha256: b10206ba3dd641e4e46411ab91471c88e0eec1749860e4285193ee68df84ac31
 
   - name: psutil
     buildsystem: simple
@@ -222,8 +184,8 @@ modules:
       - pip3 install . --prefix=/app --no-index --find-links .
     sources:
       - type: archive
-        url: https://github.com/giampaolo/psutil/archive/release-5.6.3.tar.gz
-        sha256: 55b86dc0a9fc4e258ae5d86d6edf317432a4e3dc45c7324b8a82838b07e74f4a
+        url: https://github.com/giampaolo/psutil/archive/release-5.6.7.tar.gz
+        sha256: ebbed18bf912fa4981d05c5c1a0cacec2aa8c594e1608f0cf5cc7a3d4f63d4d4
 
   - name: djpdf
     buildsystem: simple
