@@ -59,20 +59,7 @@ modules:
       - /lib/*.a
       - /share/doc
 
-  - name: openjpeg
-    buildsystem: cmake
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-    sources:
-      - type: archive
-        url: https://github.com/uclouvain/openjpeg/archive/v2.3.1.tar.gz
-        sha256: 63f5a4713ecafc86de51bfad89cc07bb788e9bba24ebbf0c4ca637621aadb6a9
-    cleanup:
-      - /include
-      - /lib/pkgconfig
-      - /lib/*.la
-      - /lib/*.a
-      - /lib/openjpeg-*/*.cmake
+  - shared-modules/openjpeg/openjpeg.json
 
   - name: imagemagick
     sources:
