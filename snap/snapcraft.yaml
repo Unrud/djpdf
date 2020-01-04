@@ -180,4 +180,9 @@ parts:
       done
       # WORKAROUND: Version is not extracted from AppStream
       snapcraftctl set-version "$(sed -n 's/^\s*version\s*=\s*["'\'']\([^"'\'']*\)["'\''].*/\1/p' setup.py)"
+    override-stage: |
+      # WORKAROUND: Hardcode libexempi path
+      libexempi_path="/snap/djpdf/current/$(realpath --relative-base="${SNAPCRAFT_PART_INSTALL}" "$(find "${SNAPCRAFT_PART_INSTALL}" -name 'libexempi.so*' -print -quit)")"
+      sed -e "s|[^=]*find_library('exempi')| '$libexempi_path'|" -i "${SNAPCRAFT_PART_INSTALL}"/lib/python3.*/site-packages/libxmp/exempi.py
+      snapcraftctl stage
     parse-info: [usr/share/metainfo/com.github.unrud.djpdf.appdata.xml]
