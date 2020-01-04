@@ -1,25 +1,44 @@
 name: djpdf
-adopt-info: djpdf
-title: Scans to PDF
-# WORKAROUND: Snapcraft doesn't normalize whitespaces in description from AppStream
-description: |
-  Create small, searchable PDFs from scanned documents.
-  The program divides images into bitonal foreground images (text) and a color background image, then compresses them separately.
-  An invisible OCR text layer is added, making the PDF searchable.
-  
-  Color and grayscale scans need some preparation for good results.
-  Recommended tools are Scan Tailor or GIMP.
-  
-  A GUI and command line interface are included.
 # WORKAROUND: Snapcraft doesn't accept GPL-3.0-or-later
 license: GPL-3.0
-icon: desktop/com.github.unrud.djpdf.png
-confinement: strict
 grade: stable
+adopt-info: djpdf
+
 base: core18
+confinement: strict
 
 architectures:
   - build-on: amd64
+
+environment:
+  TESSDATA_PREFIX: ${SNAP}/share/tessdata
+
+apps:
+  djpdf:
+    command: desktop-launch "${SNAP}/bin/scans2pdf-gui"
+    plugs:
+      - home
+      - desktop
+      - desktop-legacy
+      - x11
+      - wayland
+      - opengl
+    common-id: com.github.unrud.djpdf
+    desktop: usr/share/applications/com.github.unrud.djpdf.desktop
+  scans2pdf:
+    command: bin/scans2pdf
+    plugs:
+      - home
+  scans2pdf-json:
+    command: bin/scans2pdf-json
+    plugs:
+      - home
+  djpdf-json:
+    command: bin/djpdf-json
+    plugs:
+      - home
+  hocr-json:
+    command: bin/hocr-json
 
 parts:
   jbig2enc:
@@ -118,6 +137,8 @@ parts:
     python-version: python3
     source: .
     source-type: git
+    build-packages:
+      - imagemagick
     stage-packages:
       - python3-pkg-resources
       - qpdf
@@ -145,40 +166,18 @@ parts:
       - xfonts-base
       - xfonts-scalable
       - libxkbcommon-x11-0
-    parse-info: [desktop/com.github.unrud.djpdf.appdata.xml]
+    override-pull: |
+      snapcraftctl pull
+      # WORKAROUND: Point icon to the correct location
+      sed -e 's|Icon=com.github.unrud.djpdf|Icon=/usr/share/icons/hicolor/512x512/apps/com.github.unrud.djpdf.png|' -i desktop/com.github.unrud.djpdf.desktop
     override-build: |
-      # Get version from AppStream
-      snapcraftctl set-version "$(sed -n 's/^\s*version\s*=\s*["'\'']\([^"'\'']*\)["'\''].*/\1/p' setup.py)"
-      # WORKAROUND: Snap doesn't export icons
-      sed -i 's,^\(Icon=\).*,\1${SNAP}/meta/gui/icon.png,' desktop/com.github.unrud.djpdf.desktop
       snapcraftctl build
-      install -Dm0644 -t "${SNAPCRAFT_PART_INSTALL}/share/applications" desktop/com.github.unrud.djpdf.desktop
-
-environment:
-  TESSDATA_PREFIX: ${SNAP}/share/tessdata
-
-apps:
-  djpdf:
-    command: desktop-launch "${SNAP}/bin/scans2pdf-gui"
-    desktop: share/applications/com.github.unrud.djpdf.desktop
-    plugs:
-      - home
-      - desktop
-      - desktop-legacy
-      - x11
-      - wayland
-      - opengl
-  scans2pdf:
-    command: bin/scans2pdf
-    plugs:
-      - home
-  scans2pdf-json:
-    command: bin/scans2pdf-json
-    plugs:
-      - home
-  djpdf-json:
-    command: bin/djpdf-json
-    plugs:
-      - home
-  hocr-json:
-    command: bin/hocr-json
+      install -Dm0644 -t "${SNAPCRAFT_PART_INSTALL}/usr/share/metainfo" desktop/com.github.unrud.djpdf.appdata.xml
+      install -Dm0644 -t "${SNAPCRAFT_PART_INSTALL}/usr/share/applications" desktop/com.github.unrud.djpdf.desktop
+      for s in 16 32 48 64 128 256 512; do
+        convert +set date:create +set date:modify desktop/com.github.unrud.djpdf.png -resize ${s}x${s} com.github.unrud.djpdf_${s}.png || exit 1
+        install -Dm0644 com.github.unrud.djpdf_${s}.png "${SNAPCRAFT_PART_INSTALL}/usr/share/icons/hicolor/${s}x${s}/apps/com.github.unrud.djpdf.png" || exit 1
+      done
+      # WORKAROUND: Version is not extracted from AppStream
+      snapcraftctl set-version "$(sed -n 's/^\s*version\s*=\s*["'\'']\([^"'\'']*\)["'\''].*/\1/p' setup.py)"
+    parse-info: [usr/share/metainfo/com.github.unrud.djpdf.appdata.xml]
