@@ -439,6 +439,8 @@ class ThumbnailImageProvider(QQuickImageProvider):
 
 class QmlPlatformIntegration(QObject):
 
+    window = None
+
     pdfFileExtensionChanged = Signal()
 
     @Property(str, notify=pdfFileExtensionChanged)
@@ -459,11 +461,11 @@ class QmlPlatformIntegration(QObject):
 
     @Slot()
     def openOpenDialog(self):
-        pass
+        raise NotImplementedError
 
     @Slot()
     def openSaveDialog(self):
-        pass
+        raise NotImplementedError
 
     opened = Signal("QList<QUrl>")
 
@@ -475,7 +477,6 @@ class QmlFlatpakPlatformIntegration(QmlPlatformIntegration):
     def __init__(self, bus):
         super().__init__()
         self._bus = bus
-        self.win_id = None
         obj = bus.get_object("org.freedesktop.portal.Desktop",
                              "/org/freedesktop/portal/desktop")
         self._file_chooser = dbus.Interface(
@@ -483,9 +484,9 @@ class QmlFlatpakPlatformIntegration(QmlPlatformIntegration):
 
     @property
     def _flatpak_win_id(self):
-        if self.win_id is None:
+        if self.window is None:
             return b""
-        return b"x11:%x" % self.win_id
+        return b"x11:%x" % self.window.winId()
 
     @Property(bool, notify=QmlPlatformIntegration.enabledChanged)
     def enabled(self):
@@ -537,7 +538,7 @@ def main():
     engine.addImageProvider("thumbnails", thumbnail_image_provider)
     ctx = engine.rootContext()
     pages_model = QmlPagesModel(verbose=args.verbose)
-    if os.environ.get("DJPDF_PLATFORM_INTEGRATION", "") == "flatpak":
+    if os.environ.get("DJPDF_PLATFORM") == "flatpak":
         import dbus
         import dbus.mainloop.glib
         dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
@@ -549,6 +550,5 @@ def main():
     ctx.setContextProperty("platformIntegration", platform_integration)
     engine.load(QUrl.fromLocalFile(
         os.path.join(QML_DIR, "main.qml")))
-    if os.environ.get("DJPDF_PLATFORM_INTEGRATION", "") == "flatpak":
-        platform_integration.win_id = engine.rootObjects()[0].winId()
+    platform_integration.window = engine.rootObjects()[0]
     exit(app.exec_())

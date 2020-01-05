@@ -8,7 +8,7 @@ finish-args:
   - --socket=wayland
   - --device=dri
   - --share=ipc
-  - --env=DJPDF_PLATFORM_INTEGRATION=flatpak
+  - --env=DJPDF_PLATFORM=flatpak
 cleanup:
   - '*.a'
   - '*.la'
@@ -29,6 +29,12 @@ modules:
         -DUSE_PYTHON_VERSION=3
         -DBUILD_TESTS=OFF .. &&
         ninja install
+    post-install:
+      - |
+        # Make package discoverable by setuptools
+        printf "Metadata-Version: 1.0\nName: PySide2\nVersion: %s\n" \
+          "$(python3 -c "import PySide2; print(PySide2.__version__)")" \
+          > "$(dirname "$(python3 -c "import PySide2; print(PySide2.__file__)")")/../pyside2.egg-info"
     cleanup:
       - /qt5include
       - /bin
@@ -190,14 +196,13 @@ modules:
   - name: djpdf
     buildsystem: simple
     build-commands:
-      - sed -i 's/"pyside2", //' setup.py # not installed with setuptools
       - pip3 install . --prefix=/app --no-index --find-links .
       - install -Dm0644 -t /app/share/metainfo desktop/com.github.unrud.djpdf.appdata.xml
       - install -Dm0644 -t /app/share/applications desktop/com.github.unrud.djpdf.desktop
       - |
-        for _size in 16 32 48 64 128 256 512; do
-          convert +set date:create +set date:modify desktop/com.github.unrud.djpdf.png -resize ${_size}x${_size} com.github.unrud.djpdf_${_size}.png || exit 1
-          install -Dm0644 com.github.unrud.djpdf_${_size}.png /app/share/icons/hicolor/${_size}x${_size}/apps/com.github.unrud.djpdf.png || exit 1
+        for s in 16 32 48 64 128 256 512; do
+          convert +set date:create +set date:modify desktop/com.github.unrud.djpdf.png -resize ${s}x${s} com.github.unrud.djpdf_${s}.png || exit 1
+          install -Dm0644 com.github.unrud.djpdf_${s}.png /app/share/icons/hicolor/${s}x${s}/apps/com.github.unrud.djpdf.png || exit 1
         done
     sources:
       - type: git
