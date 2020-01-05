@@ -24,7 +24,7 @@ import tempfile
 from argparse import ArgumentParser
 from djpdf.scans2pdf import DEFAULT_SETTINGS, find_ocr_languages
 from PySide2 import QtQml
-from PySide2.QtGui import QImage
+from PySide2.QtGui import QIcon, QImage
 from PySide2.QtCore import (Property, QAbstractListModel, QModelIndex,
                             QObject, QProcess, QUrl, Qt, Signal, Slot)
 from PySide2.QtQuick import QQuickImageProvider
@@ -531,6 +531,7 @@ def main():
     args = parser.parse_args()
     QtQml.qmlRegisterType(QmlPage, "djpdf", 1, 0, "DjpdfPage")
     app = QApplication([])
+    app.setWindowIcon(QIcon.fromTheme("com.github.unrud.djpdf"))
     engine = QQmlApplicationEngine()
     thumbnail_image_provider = ThumbnailImageProvider()
     engine.addImageProvider("thumbnails", thumbnail_image_provider)
