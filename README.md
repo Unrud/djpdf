@@ -14,6 +14,11 @@ A GUI and command line interface are included.
 
   * [Flatpak](https://flathub.org/apps/details/com.github.unrud.djpdf)
   * [Snap](https://snapcraft.io/djpdf)
+  * Manual:
+      * Dependencies: [ImageMagick](http://www.imagemagick.org/), [QPDF](https://github.com/qpdf/qpdf),
+        [jbig2enc](https://github.com/agl/jbig2enc), [Tesseract](https://github.com/tesseract-ocr/tesseract)
+      * Install: ``pip3 install https://github.com/Unrud/djpdf/archive/master.zip``
+      * Without GUI: ``env DJPDF_SETUP=no-gui pip3 install https://github.com/Unrud/djpdf/archive/master.zip``
 
 ## Screenshots
 
