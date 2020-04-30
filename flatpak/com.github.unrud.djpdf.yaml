@@ -1,6 +1,6 @@
 app-id: com.github.unrud.djpdf
 runtime: org.kde.Platform
-runtime-version: '5.13'
+runtime-version: '5.14'
 sdk: org.kde.Sdk
 command: scans2pdf-gui
 finish-args:
@@ -40,8 +40,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: http://download.qt.io/official_releases/QtForPython/pyside2/PySide2-5.13.2-src/pyside-setup-opensource-src-5.13.2.tar.xz
-        sha256: 3e255d64df08880d0281ebe86009d5ea45f24332b308954d967c33995f75e543
+        url: http://download.qt.io/official_releases/QtForPython/pyside2/PySide2-5.14.2.1-src/pyside-setup-opensource-src-5.14.2.1.tar.xz
+        sha256: 11f48956208a487dabf6f531e60fb88ad0e48f2979cfc9e79c1c986387c491fa
       - type: shell
         commands:
           - sed -i 's|\(--include-paths=\)|\1/app/qt5include:|' sources/pyside2/cmake/Macros/PySideModules.cmake
@@ -49,8 +49,8 @@ modules:
   - name: leptonica
     sources:
       - type: archive
-        url: https://github.com/DanBloomberg/leptonica/releases/download/1.78.0/leptonica-1.78.0.tar.gz
-        sha256: e2ed2e81e7a22ddf45d2c05f0bc8b9ae7450545d995bfe28517ba408d14a5a88
+        url: https://github.com/DanBloomberg/leptonica/releases/download/1.79.0/leptonica-1.79.0.tar.gz
+        sha256: 045966c9c5d60ebded314a9931007a56d9d2f7a6ac39cb5cc077c816f62300d8
 
   - name: jbig2enc
     sources:
@@ -63,14 +63,14 @@ modules:
   - name: imagemagick
     sources:
       - type: archive
-        url: https://github.com/ImageMagick/ImageMagick/archive/7.0.9-10.tar.gz
-        sha256: 247f84a7385b7a444827b901dab166d5e3bf14e5995e9e499197a0b26417a244
+        url: https://github.com/ImageMagick/ImageMagick/archive/7.0.10-9.tar.gz
+        sha256: ea08c7379b0ce40217656699e664d51a93eac819dde778f50ca457b110ffc5e3
 
   - name: qpdf
     sources:
       - type: archive
-        url: https://github.com/qpdf/qpdf/releases/download/release-qpdf-9.1.0/qpdf-9.1.0.tar.gz
-        sha256: 3abbbb7907f2e750336b9c97e67b6e806aca91ab537402ec080656d63940ed79
+        url: https://github.com/qpdf/qpdf/releases/download/release-qpdf-10.0.1/qpdf-10.0.1.tar.gz
+        sha256: 5d2277c738188b7f4e3f01a6db7f2937ed6df54671f1fba834cd3d7ff865827b
 
   - name: tesseract
     sources:
@@ -137,8 +137,8 @@ modules:
       - pip3 install . --prefix=/app --no-index --find-links .
     sources:
       - type: archive
-        url: https://files.pythonhosted.org/packages/82/c3/534ddba230bd4fbbd3b7a3d35f3341d014cca213f369a9940925e7e5f691/pytz-2019.3.tar.gz
-        sha256: b02c06db6cf09c12dd25137e563b31700d3b80fcc4ad23abb7a315f2789819be
+        url: https://files.pythonhosted.org/packages/f4/f6/94fee50f4d54f58637d4b9987a1b862aeb6cd969e73623e02c5c00755577/pytz-2020.1.tar.gz
+        sha256: c35965d010ce31b23eeb663ed3cc8c906275d6be1a34393a1d73a41febf4a048
 
   - name: xmp-toolkit
     buildsystem: simple
@@ -173,16 +173,16 @@ modules:
       - pip3 install . --prefix=/app --no-index --find-links .
     sources:
       - type: archive
-        url: https://github.com/ubernostrum/webcolors/archive/1.10.tar.gz
-        sha256: 171a95fb0c506c9804db8f6166782d1e26b7df8e8c943e550cd28ba4e491b7c7
+        url: https://github.com/ubernostrum/webcolors/archive/1.11.1.tar.gz
+        sha256: 6cb77d4d6f5c76e1111f28743c04ec1a86072290c5a5ae889fe333348a9aa43b
 
   - name: dbus-python
     config-opts:
       - PYTHON_VERSION=3
     sources:
       - type: archive
-        url: https://dbus.freedesktop.org/releases/dbus-python/dbus-python-1.2.14.tar.gz
-        sha256: b10206ba3dd641e4e46411ab91471c88e0eec1749860e4285193ee68df84ac31
+        url: https://dbus.freedesktop.org/releases/dbus-python/dbus-python-1.2.16.tar.gz
+        sha256: 11238f1d86c995d8aed2e22f04a1e3779f0d70e587caffeab4857f3c662ed5a4
 
   - name: psutil
     buildsystem: simple
@@ -190,8 +190,8 @@ modules:
       - pip3 install . --prefix=/app --no-index --find-links .
     sources:
       - type: archive
-        url: https://github.com/giampaolo/psutil/archive/release-5.6.7.tar.gz
-        sha256: ebbed18bf912fa4981d05c5c1a0cacec2aa8c594e1608f0cf5cc7a3d4f63d4d4
+        url: https://github.com/giampaolo/psutil/archive/release-5.7.0.tar.gz
+        sha256: 0a53c5260a096aeefdb4060512bbc3cbdec83dd8c20c5114421790b019dc61ff
 
   - name: djpdf
     buildsystem: simple
