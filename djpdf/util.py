@@ -18,6 +18,7 @@
 import asyncio
 import contextlib
 import logging
+import os
 import psutil
 import sys
 from subprocess import PIPE, CalledProcessError
@@ -133,12 +134,17 @@ def format_number(f, decimal_places, percentage=False,
 @asyncio.coroutine
 def run_command_async(args, process_semaphore, cwd=None):
     logging.debug("Running command: %s", args)
+    env = {
+        **os.environ,
+        "MAGICK_THREAD_LIMIT": "1",
+        "OMP_THREAD_LIMIT": "1"
+    }
     with contextlib.ExitStack() as stack:
         yield from process_semaphore.acquire()
         stack.callback(process_semaphore.release)
         try:
             proc = yield from asyncio.create_subprocess_exec(
-                *args, stdout=PIPE, stderr=PIPE, cwd=cwd)
+                *args, stdout=PIPE, stderr=PIPE, env=env, cwd=cwd)
         except (FileNotFoundError, PermissionError) as e:
             logging.error("Program not found: %s" % args[0])
             raise Exception("Program not found: %s" % args[0]) from e
