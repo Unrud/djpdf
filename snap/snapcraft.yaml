@@ -136,6 +136,8 @@ parts:
     python-version: python3
     source: .
     source-type: git
+    python-packages:
+      - PySide2<5.15
     build-packages:
       - imagemagick
     stage-packages:
