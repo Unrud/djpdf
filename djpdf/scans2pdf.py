@@ -195,7 +195,7 @@ class BaseImageObject(BasePageObject):
                                              "histogram:info:-"],
                                             process_semaphore)
         outs = outs.decode("ascii")
-        histogram_re = re.compile(r"\s*(?P<count>\d+):\s+"
+        histogram_re = re.compile(r"\s*(?P<count>\d+(?:(?:\.\d+)?e\+\d+)?):\s+"
                                   r"\(\s*(?P<r>\d+),\s*(?P<g>\d+),"
                                   r"\s*(?P<b>\d+)\)")
         colors = []
