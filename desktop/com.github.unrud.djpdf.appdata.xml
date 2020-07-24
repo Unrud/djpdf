@@ -25,6 +25,15 @@
   <url type="homepage">https://github.com/Unrud/djpdf</url>
   <developer_name>Unrud</developer_name>
   <releases>
+    <release version="0.1.2" date="2020-07-24">
+      <description>
+        <ul>
+          <li>Fix import of TIFF images with color palette</li>
+          <li>Fix compatibility with new ImageMagick version</li>
+          <li>Limit ImageMagick and Tesseract subprocesses to one thread</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.1.1" date="2020-01-04">
       <description>
         <ul>
@@ -111,10 +120,10 @@
   </releases>
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/Unrud/djpdf/0.1.1/screenshots/1.png</image>
+      <image>https://raw.githubusercontent.com/Unrud/djpdf/0.1.2/screenshots/1.png</image>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/Unrud/djpdf/0.1.1/screenshots/2.png</image>
+      <image>https://raw.githubusercontent.com/Unrud/djpdf/0.1.2/screenshots/2.png</image>
     </screenshot>
   </screenshots>
   <content_rating type="oars-1.1" />
