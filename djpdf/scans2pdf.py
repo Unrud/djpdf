@@ -235,6 +235,7 @@ class InputImage(BaseImageObject):
             "-background", _color_to_hex(self._page["bg_color"]),
             "-alpha", "remove",
             "-alpha", "off",
+            "-type", "TrueColor",
             path.abspath(self._page["filename"]),
             path.abspath(fname)], psem)
         return fname
