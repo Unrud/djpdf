@@ -1,3 +1,9 @@
+# Build by running "snapcraft".
+
+# WARNING:
+# Snapcraft uses caching for already build steps but it's buggy and can cause strange problems.
+# Clean the cache by running "snapcraft clean".
+
 name: djpdf
 license: GPL-3.0+
 grade: stable
@@ -169,7 +175,7 @@ parts:
       - libxkbcommon-x11-0
     override-pull: |
       snapcraftctl pull
-      # WORKAROUND: Point icon to the correct location
+      # WORKAROUND: Point icon directly to high resolution version otherwise snapcraft automatically chooses lowest resolution
       sed -e 's|Icon=com.github.unrud.djpdf|Icon=/usr/share/icons/hicolor/512x512/apps/com.github.unrud.djpdf.png|' -i desktop/com.github.unrud.djpdf.desktop
     override-build: |
       snapcraftctl build
@@ -179,8 +185,6 @@ parts:
         convert +set date:create +set date:modify desktop/com.github.unrud.djpdf.png -resize ${s}x${s} com.github.unrud.djpdf_${s}.png || exit 1
         install -Dm0644 com.github.unrud.djpdf_${s}.png "${SNAPCRAFT_PART_INSTALL}/usr/share/icons/hicolor/${s}x${s}/apps/com.github.unrud.djpdf.png" || exit 1
       done
-      # WORKAROUND: Version is not extracted from AppStream
-      snapcraftctl set-version "$(sed -n 's/^\s*version\s*=\s*["'\'']\([^"'\'']*\)["'\''].*/\1/p' setup.py)"
     override-stage: |
       # WORKAROUND: Hardcode libexempi path
       libexempi_path="/snap/djpdf/current/$(realpath --relative-base="${SNAPCRAFT_PART_INSTALL}" "$(find "${SNAPCRAFT_PART_INSTALL}" -name 'libexempi.so*' -print -quit)")"
