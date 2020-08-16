@@ -125,7 +125,7 @@ modules:
       - --enable-unittest=no
     sources:
       - type: archive
-        url: https://libopenraw.pages.freedesktop.org/download/exempi-2.5.2.tar.bz2
+        url: https://libopenraw.freedesktop.org/download/exempi-2.5.2.tar.bz2
         sha256: 52f54314aefd45945d47a6ecf4bd21f362e6467fa5d0538b0d45a06bc6eaaed5
       - type: shell
         commands:
@@ -134,7 +134,7 @@ modules:
   - name: pytz
     buildsystem: simple
     build-commands:
-      - pip3 install . --prefix=/app --no-index --find-links .
+      - pip3 install --prefix=/app .
     sources:
       - type: archive
         url: https://files.pythonhosted.org/packages/f4/f6/94fee50f4d54f58637d4b9987a1b862aeb6cd969e73623e02c5c00755577/pytz-2020.1.tar.gz
@@ -143,7 +143,7 @@ modules:
   - name: xmp-toolkit
     buildsystem: simple
     build-commands:
-      - pip3 install . --prefix=/app --no-index --find-links .
+      - pip3 install --prefix=/app .
     sources:
       - type: git
         url: https://github.com/python-xmp-toolkit/python-xmp-toolkit
@@ -152,7 +152,7 @@ modules:
   - name: pdfrw
     buildsystem: simple
     build-commands:
-      - pip3 install . --prefix=/app --no-index --find-links .
+      - pip3 install --prefix=/app .
     sources:
       - type: archive
         url: https://github.com/pmaupin/pdfrw/archive/v0.4.tar.gz
@@ -161,7 +161,7 @@ modules:
   - name: colorama
     buildsystem: simple
     build-commands:
-      - pip3 install . --prefix=/app --no-index --find-links .
+      - pip3 install --prefix=/app .
     sources:
       - type: archive
         url: https://github.com/tartley/colorama/archive/0.4.3.tar.gz
@@ -170,7 +170,7 @@ modules:
   - name: webcolors
     buildsystem: simple
     build-commands:
-      - pip3 install . --prefix=/app --no-index --find-links .
+      - pip3 install --prefix=/app .
     sources:
       - type: archive
         url: https://github.com/ubernostrum/webcolors/archive/1.11.1.tar.gz
@@ -187,7 +187,7 @@ modules:
   - name: psutil
     buildsystem: simple
     build-commands:
-      - pip3 install . --prefix=/app --no-index --find-links .
+      - pip3 install --prefix=/app .
     sources:
       - type: archive
         url: https://github.com/giampaolo/psutil/archive/release-5.7.2.tar.gz
@@ -196,7 +196,7 @@ modules:
   - name: djpdf
     buildsystem: simple
     build-commands:
-      - pip3 install . --prefix=/app --no-index --find-links .
+      - pip3 install --prefix=/app .
       - install -Dm0644 -t /app/share/metainfo desktop/com.github.unrud.djpdf.appdata.xml
       - install -Dm0644 -t /app/share/applications desktop/com.github.unrud.djpdf.desktop
       - |
