@@ -1,6 +1,6 @@
 app-id: com.github.unrud.djpdf
 runtime: org.kde.Platform
-runtime-version: '5.14'
+runtime-version: '5.15'
 sdk: org.kde.Sdk
 command: scans2pdf-gui
 finish-args:
@@ -40,8 +40,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: http://download.qt.io/official_releases/QtForPython/pyside2/PySide2-5.14.2.3-src/pyside-setup-opensource-src-5.14.2.3.tar.xz
-        sha256: 032de309505c78ba52c225aaf5fd717b8d87ae863aa7cee8ba58ba6141c59022
+        url: http://download.qt.io/official_releases/QtForPython/pyside2/PySide2-5.15.0-src/pyside-setup-opensource-src-5.15.0.tar.xz
+        sha256: f1cdee53de3b76e22c1117a014a91ed95ac16e4760776f4f12dc38cd5a7b6b68
       - type: shell
         commands:
           - sed -i 's|\(--include-paths=\)|\1/app/qt5include:|' sources/pyside2/cmake/Macros/PySideModules.cmake
@@ -49,8 +49,8 @@ modules:
   - name: leptonica
     sources:
       - type: archive
-        url: https://github.com/DanBloomberg/leptonica/releases/download/1.79.0/leptonica-1.79.0.tar.gz
-        sha256: 045966c9c5d60ebded314a9931007a56d9d2f7a6ac39cb5cc077c816f62300d8
+        url: https://github.com/DanBloomberg/leptonica/releases/download/1.80.0/leptonica-1.80.0.tar.gz
+        sha256: ec9c46c2aefbb960fb6a6b7f800fe39de48343437b6ce08e30a8d9688ed14ba4
 
   - name: jbig2enc
     sources:
@@ -63,8 +63,8 @@ modules:
   - name: imagemagick
     sources:
       - type: archive
-        url: https://github.com/ImageMagick/ImageMagick/archive/7.0.10-23.tar.gz
-        sha256: 27f8a24858cc5658aa07a13002a41d342b88e5c4e1917ff4d503dbbf8cbff91c
+        url: https://github.com/ImageMagick/ImageMagick/archive/7.0.10-28.tar.gz
+        sha256: 9f2b8b131222354b196c640fca4e53eb0bbf62246621b9d467f223366272d7a7
 
   - name: qpdf
     sources:
