@@ -24,6 +24,7 @@ import os
 import pkg_resources
 import struct
 import sys
+import tempfile
 import traceback
 import zlib
 from argparse import ArgumentParser
@@ -32,7 +33,6 @@ from itertools import chain
 from libxmp import XMPMeta
 from libxmp.consts import XMP_NS_PDFA_ID
 from os import path
-from tempfile import TemporaryDirectory
 
 from .util import (AsyncCache, format_number, MemoryBoundedSemaphore,
                    run_command_async)
@@ -61,6 +61,18 @@ SRGB_ICC_FILENAME = pkg_resources.resource_filename(
 PARALLEL_JOBS = os.cpu_count() or 1
 JOB_MEMORY = 2 << 30
 RESERVED_MEMORY = 1 << 30
+
+big_temp_dir = tempfile.gettempdir()
+if big_temp_dir == "/tmp":
+    with contextlib.suppress(OSError):
+        with tempfile.NamedTemporaryFile(dir="/var/tmp"):
+            big_temp_dir = "/var/tmp"
+
+
+def BigTemporaryDirectory(*args, dir=None, **kwargs):
+    if dir is None:
+        dir = big_temp_dir
+    return tempfile.TemporaryDirectory(*args, dir=dir, **kwargs)
 
 
 def _pdf_format_number(f, decimal_places=PDF_DECIMAL_PLACES):
@@ -308,7 +320,7 @@ class ImageMagickImage:
 
     @asyncio.coroutine
     def _pdf_image(self, psem):
-        with TemporaryDirectory(prefix="djpdf-") as temp_dir:
+        with BigTemporaryDirectory(prefix="djpdf-") as temp_dir:
             cmd = [CONVERT_CMD]
             if self._image_mask or self.compression in ("jp2", "jpeg"):
                 cmd.extend(["-alpha", "remove",
@@ -435,7 +447,7 @@ class Jbig2Image:
 
     @asyncio.coroutine
     def _pdf_image(self, psem):
-        with TemporaryDirectory(prefix="djpdf-") as temp_dir:
+        with BigTemporaryDirectory(prefix="djpdf-") as temp_dir:
             # JBIG2Globals are only used in symbol mode
             # In symbol mode jbig2 writes output to files otherwise
             # it's written to stdout
@@ -903,7 +915,7 @@ class PdfBuilder:
         metadata.Length1 = len(metadata_stream)
         trailer.Root.Metadata = metadata
 
-        with TemporaryDirectory(prefix="djpdf-") as temp_dir:
+        with BigTemporaryDirectory(prefix="djpdf-") as temp_dir:
             pdf_writer.write(path.join(temp_dir, "temp.pdf"))
             cmd = [QPDF_CMD,
                    "--stream-data=preserve",

@@ -24,11 +24,10 @@ import sys
 import traceback
 from argparse import ArgumentParser
 from os import path
-from tempfile import TemporaryDirectory
 
 from . import hocr
 from .djpdf import (CONVERT_CMD, PARALLEL_JOBS, JOB_MEMORY, RESERVED_MEMORY,
-                    PdfBuilder, SRGB_ICC_FILENAME)
+                    PdfBuilder, SRGB_ICC_FILENAME, BigTemporaryDirectory)
 from .util import (AsyncCache, MemoryBoundedSemaphore, format_number,
                    run_command_async)
 
@@ -129,7 +128,7 @@ class BasePageObject:
     def __init__(self, factory, page):
         self._factory = factory
         self._page = page
-        temp_dir = TemporaryDirectory(prefix="djpdf-")
+        temp_dir = BigTemporaryDirectory(prefix="djpdf-")
         self._temp_dir = temp_dir.name
         factory.add_cleaner(temp_dir.cleanup)
         self._cache = AsyncCache()

@@ -20,7 +20,6 @@ import json
 import os
 import pkg_resources
 import sys
-import tempfile
 from argparse import ArgumentParser
 from djpdf.scans2pdf import DEFAULT_SETTINGS, find_ocr_languages
 from PySide2 import QtQml
