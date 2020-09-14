@@ -51,13 +51,15 @@ class MemoryBoundedSemaphore():
                 count -= 1
 
     def _available_jobs(self):
-        available_memory = psutil.virtual_memory().available
-        for pid in self._pids:
-            with contextlib.suppress(psutil.NoSuchProcess):
-                available_memory += psutil.Process(pid).memory_info().rss
+        available_memory = psutil.virtual_memory().free
+        available_memory -= self._reserved_memory
         available_memory -= self._job_memory * (
             self._bound_value - self._value)
-        available_memory -= self._reserved_memory
+        for pid in self._pids:
+            with contextlib.suppress(psutil.NoSuchProcess):
+                process_memory = psutil.Process(pid).memory_info().rss
+                available_memory += min(self._job_memory, process_memory)
+        available_memory = max(0, available_memory)
         jobs = available_memory // self._job_memory
         if self._value == self._bound_value:
             # Allow at least one job, when low on memory

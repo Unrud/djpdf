@@ -60,7 +60,7 @@ UNICODE_CMAP_FILENAME = pkg_resources.resource_filename(
 SRGB_ICC_FILENAME = pkg_resources.resource_filename(
     __name__, "argyllcms-srgb.icm")
 PARALLEL_JOBS = os.cpu_count() or 1
-JOB_MEMORY = 2 << 30
+JOB_MEMORY = 1 << 30
 RESERVED_MEMORY = 1 << 30
 
 big_temp_dir = tempfile.gettempdir()
