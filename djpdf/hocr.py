@@ -115,5 +115,5 @@ def main():
             _draw_image(args.image, texts)
     except Exception as e:
         logging.debug("Exception occurred:\n%s" % traceback.format_exc())
-        logging.error("Operation failed")
-        exit(1)
+        logging.fatal("Operation failed")
+        sys.exit(1)

@@ -220,8 +220,8 @@ def test_command_exists(args, fatal=False):
             args, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     except (FileNotFoundError, PermissionError):
         if fatal:
-            logging.error("Program not found: %s" % args[0])
-            exit(1)
+            logging.fatal("Program not found: %s" % args[0])
+            sys.exit(1)
         else:
             logging.warning("Program not found: %s" % args[0])
             return False
@@ -382,7 +382,7 @@ def main():
         logging.getLogger().setLevel(logging.DEBUG)
     if ns.ocr_list_langs:
         print("\n".join(ocr_languages))
-        exit(0)
+        sys.exit(0)
 
     infile_parser = ArgumentParser(usage=parser.usage, prog=parser.prog,
                                    parents=(parser,), add_help=False)
@@ -424,5 +424,5 @@ def main():
         build_pdf(pages, out_file)
     except Exception as e:
         logging.debug("Exception occurred:\n%s" % traceback.format_exc())
-        logging.error("Operation failed")
-        exit(1)
+        logging.fatal("Operation failed")
+        sys.exit(1)

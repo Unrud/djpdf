@@ -550,4 +550,4 @@ def main():
     engine.load(QUrl.fromLocalFile(
         os.path.join(QML_DIR, "main.qml")))
     platform_integration.window = engine.rootObjects()[0]
-    exit(app.exec_())
+    sys.exit(app.exec_())
