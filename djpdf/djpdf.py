@@ -34,8 +34,8 @@ from libxmp import XMPMeta
 from libxmp.consts import XMP_NS_PDFA_ID
 from os import path
 
-from .util import (AsyncCache, format_number, MemoryBoundedSemaphore,
-                   run_command_async)
+from djpdf.util import (AsyncCache, format_number, MemoryBoundedSemaphore,
+                        run_command_async)
 
 # pdfrw tampers with logging
 _orig_basic_config = logging.basicConfig

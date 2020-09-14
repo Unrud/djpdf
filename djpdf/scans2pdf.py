@@ -25,11 +25,12 @@ import traceback
 from argparse import ArgumentParser
 from os import path
 
-from . import hocr
-from .djpdf import (CONVERT_CMD, PARALLEL_JOBS, JOB_MEMORY, RESERVED_MEMORY,
-                    PdfBuilder, SRGB_ICC_FILENAME, BigTemporaryDirectory)
-from .util import (AsyncCache, MemoryBoundedSemaphore, format_number,
-                   run_command_async)
+from djpdf import hocr
+from djpdf.djpdf import (CONVERT_CMD, PARALLEL_JOBS, JOB_MEMORY,
+                         RESERVED_MEMORY, PdfBuilder, SRGB_ICC_FILENAME,
+                         BigTemporaryDirectory)
+from djpdf.util import (AsyncCache, MemoryBoundedSemaphore, format_number,
+                        run_command_async)
 
 DEFAULT_SETTINGS = {
     "dpi": "auto",

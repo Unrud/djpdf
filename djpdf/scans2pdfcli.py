@@ -27,10 +27,10 @@ import traceback
 import webcolors
 from argparse import ArgumentParser, ArgumentTypeError
 
-from .djpdf import CONVERT_CMD, JBIG2_CMD, QPDF_CMD
-from .scans2pdf import (DEFAULT_SETTINGS, IDENTIFY_CMD, TESSERACT_CMD,
-                        build_pdf, find_ocr_languages)
-from .util import format_number
+from djpdf.djpdf import CONVERT_CMD, JBIG2_CMD, QPDF_CMD
+from djpdf.scans2pdf import (DEFAULT_SETTINGS, IDENTIFY_CMD, TESSERACT_CMD,
+                             build_pdf, find_ocr_languages)
+from djpdf.util import format_number
 
 VERSION = pkg_resources.get_distribution("djpdf").version
 
