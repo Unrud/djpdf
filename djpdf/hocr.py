@@ -31,8 +31,8 @@ else:
 
 
 def extract_text(hocr_filename):
-    bbox_regex = re.compile("bbox((\s+\d+){4})")
-    textangle_regex = re.compile("textangle(\s+\d+)")
+    bbox_regex = re.compile(r"bbox((\s+\d+){4})")
+    textangle_regex = re.compile(r"textangle(\s+\d+)")
     hocr = ElementTree()
     hocr.parse(hocr_filename)
     texts = []
