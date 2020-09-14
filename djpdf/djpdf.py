@@ -22,6 +22,7 @@ import logging
 import math
 import os
 import pkg_resources
+import signal
 import struct
 import sys
 import tempfile
@@ -939,7 +940,20 @@ class PdfBuilder:
             loop.close()
 
 
+def setup_signals():
+    # Raise SystemExit when signal arrives to run cleanup code
+    # (like destructors, try-finish etc.), otherwise the process exits
+    # without running any of them
+    def signal_handler(signal_number, stack_frame):
+        sys.exit(1)
+    signal.signal(signal.SIGTERM, signal_handler)
+    signal.signal(signal.SIGINT, signal_handler)
+    if os.name == "posix":
+        signal.signal(signal.SIGHUP, signal_handler)
+
+
 def main():
+    setup_signals()
     parser = ArgumentParser()
     parser.add_argument("-v", "--verbose", help="increase output verbosity",
                         action="store_true")

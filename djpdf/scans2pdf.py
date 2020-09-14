@@ -28,7 +28,7 @@ from os import path
 from djpdf import hocr
 from djpdf.djpdf import (CONVERT_CMD, PARALLEL_JOBS, JOB_MEMORY,
                          RESERVED_MEMORY, PdfBuilder, SRGB_ICC_FILENAME,
-                         BigTemporaryDirectory)
+                         BigTemporaryDirectory, setup_signals)
 from djpdf.util import (AsyncCache, MemoryBoundedSemaphore, format_number,
                         run_command_async)
 
@@ -635,6 +635,7 @@ def build_pdf(pages, pdf_filename, progress_cb=None):
 
 
 def main():
+    setup_signals()
     parser = ArgumentParser()
     parser.add_argument("-v", "--verbose", help="increase output verbosity",
                         action="store_true")

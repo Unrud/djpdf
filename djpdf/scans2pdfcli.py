@@ -27,7 +27,7 @@ import traceback
 import webcolors
 from argparse import ArgumentParser, ArgumentTypeError
 
-from djpdf.djpdf import CONVERT_CMD, JBIG2_CMD, QPDF_CMD
+from djpdf.djpdf import CONVERT_CMD, JBIG2_CMD, QPDF_CMD, setup_signals
 from djpdf.scans2pdf import (DEFAULT_SETTINGS, IDENTIFY_CMD, TESSERACT_CMD,
                              build_pdf, find_ocr_languages)
 from djpdf.util import format_number
@@ -246,6 +246,7 @@ def main():
     def format_number_percentage(d):
         return format_number(d, 2, percentage=True)
 
+    setup_signals()
     setup_logging()
 
     df = copy.deepcopy(DEFAULT_SETTINGS)

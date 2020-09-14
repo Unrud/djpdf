@@ -19,6 +19,7 @@ import copy
 import json
 import os
 import pkg_resources
+import signal
 import sys
 from argparse import ArgumentParser
 from djpdf.scans2pdf import DEFAULT_SETTINGS, find_ocr_languages
@@ -295,6 +296,7 @@ class QmlPagesModel(QAbstractListModel):
     def __init__(self, verbose=False, parent=None):
         super().__init__(parent)
         self._pages = []
+        self._process = None
         self._saving = False
         self._savingProgress = 0
         self._verbose = verbose
@@ -400,20 +402,27 @@ class QmlPagesModel(QAbstractListModel):
                 self._savingProgress = progress["fraction"]
                 self.savingProgressChanged.emit()
         p.readyReadStandardOutput.connect(ready_read_stdout)
-
-        def finished(status):
-            self._saving = False
-            self.savingChanged.emit()
-            if status != 0:
-                self.savingError.emit()
-        p.finished.connect(finished)
+        p.finished.connect(self._process_finished)
         args = ["-c", "from djpdf.scans2pdf import main; main()",
                 os.path.abspath(url.toLocalFile())]
         if self._verbose:
             args.append("--verbose")
         p.start(sys.executable, args)
+        self._process = p
         p.write(json.dumps([p._data for p in self._pages]).encode())
         p.closeWriteChannel()
+
+    def _process_finished(self, status):
+        self._process = None
+        self._saving = False
+        self.savingChanged.emit()
+        if status != 0:
+            self.savingError.emit()
+
+    def shutdown(self):
+        if self._process:
+            self._process.terminate()
+            self._process.waitForFinished(-1)
 
 
 class ThumbnailImageProvider(QQuickImageProvider):
@@ -525,6 +534,7 @@ class QmlFlatpakPlatformIntegration(QmlPlatformIntegration):
 
 def main():
     global dbus
+    signal.signal(signal.SIGINT, signal.SIG_DFL)
     parser = ArgumentParser()
     parser.add_argument("-v", "--verbose", help="increase output verbosity",
                         action="store_true")
@@ -550,4 +560,6 @@ def main():
     engine.load(QUrl.fromLocalFile(
         os.path.join(QML_DIR, "main.qml")))
     platform_integration.window = engine.rootObjects()[0]
-    sys.exit(app.exec_())
+    rc = app.exec_()
+    pages_model.shutdown()
+    sys.exit(rc)

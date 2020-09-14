@@ -22,6 +22,9 @@ import sys
 import traceback
 from argparse import ArgumentParser
 from xml.etree.ElementTree import ElementTree
+
+from djpdf.djpdf import setup_signals
+
 try:
     from PIL import Image, ImageDraw
 except ImportError:
@@ -100,6 +103,7 @@ def _draw_image(image_filename, texts):
 
 
 def main():
+    setup_signals()
     parser = ArgumentParser()
     parser.add_argument("-v", "--verbose", help="increase output verbosity",
                         action="store_true")
