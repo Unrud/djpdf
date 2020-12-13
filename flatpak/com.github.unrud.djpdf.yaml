@@ -40,8 +40,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: http://download.qt.io/official_releases/QtForPython/pyside2/PySide2-5.15.0-src/pyside-setup-opensource-src-5.15.0.tar.xz
-        sha256: f1cdee53de3b76e22c1117a014a91ed95ac16e4760776f4f12dc38cd5a7b6b68
+        url: http://download.qt.io/official_releases/QtForPython/pyside2/PySide2-5.15.1-src/pyside-setup-opensource-src-5.15.1.tar.xz
+        sha256: f175c1d8813257904cf0efeb58e44f68d53b9916f73adaf9ce19514c0271c3fa
       - type: shell
         commands:
           - sed -i 's|\(--include-paths=\)|\1/app/qt5include:|' sources/pyside2/cmake/Macros/PySideModules.cmake
@@ -63,14 +63,14 @@ modules:
   - name: imagemagick
     sources:
       - type: archive
-        url: https://github.com/ImageMagick/ImageMagick/archive/7.0.10-28.tar.gz
-        sha256: 9f2b8b131222354b196c640fca4e53eb0bbf62246621b9d467f223366272d7a7
+        url: https://github.com/ImageMagick/ImageMagick/archive/7.0.10-48.tar.gz
+        sha256: 8f587b3d0b5ce5cc1ba00c193c28b3224d7e9588f47f722975ae45d3f37861d6
 
   - name: qpdf
     sources:
       - type: archive
-        url: https://github.com/qpdf/qpdf/releases/download/release-qpdf-10.0.1/qpdf-10.0.1.tar.gz
-        sha256: 5d2277c738188b7f4e3f01a6db7f2937ed6df54671f1fba834cd3d7ff865827b
+        url: https://github.com/qpdf/qpdf/releases/download/release-qpdf-10.0.4/qpdf-10.0.4.tar.gz
+        sha256: b191dc4af4ea4630cdc404a4ee95a0f21c12f56ecc4ae045f04425464d7c696e
 
   - name: tesseract
     sources:
@@ -137,8 +137,8 @@ modules:
       - pip3 install --prefix=/app .
     sources:
       - type: archive
-        url: https://files.pythonhosted.org/packages/f4/f6/94fee50f4d54f58637d4b9987a1b862aeb6cd969e73623e02c5c00755577/pytz-2020.1.tar.gz
-        sha256: c35965d010ce31b23eeb663ed3cc8c906275d6be1a34393a1d73a41febf4a048
+        url: https://files.pythonhosted.org/packages/09/07/448a8887c7195450604dfc0305d80d74324c36ee18ed997664051d4bffe3/pytz-2020.4.tar.gz
+        sha256: 3e6b7dd2d1e0a59084bcee14a17af60c5c562cdc16d828e8eba2e683d3a7e268
 
   - name: xmp-toolkit
     buildsystem: simple
@@ -164,8 +164,8 @@ modules:
       - pip3 install --prefix=/app .
     sources:
       - type: archive
-        url: https://github.com/tartley/colorama/archive/0.4.3.tar.gz
-        sha256: 0d93fc83f70c926cd8437b488ea9c8741f9df2ac2d2d681c40783d5ceef98e2b
+        url: https://github.com/tartley/colorama/archive/0.4.4.tar.gz
+        sha256: 78215866046cdc2cc00bf283e3dbff18b09840604534137f300a402afedf28e2
 
   - name: webcolors
     buildsystem: simple
@@ -190,8 +190,8 @@ modules:
       - pip3 install --prefix=/app .
     sources:
       - type: archive
-        url: https://github.com/giampaolo/psutil/archive/release-5.7.2.tar.gz
-        sha256: 05192e5082838bf264af8c7f0be9a00a3075daab890ab93e1b60a6a60ec43c2a
+        url: https://github.com/giampaolo/psutil/archive/release-5.7.3.tar.gz
+        sha256: 2d85efdb0efe69e8525427e00dc927d323512704c78743b2ec482dab09c2c7e2
 
   - name: djpdf
     buildsystem: simple
@@ -200,9 +200,10 @@ modules:
       - install -Dm0644 -t /app/share/metainfo desktop/com.github.unrud.djpdf.appdata.xml
       - install -Dm0644 -t /app/share/applications desktop/com.github.unrud.djpdf.desktop
       - |
+        set -e
         for s in 16 32 48 64 128 256 512; do
-          convert +set date:create +set date:modify desktop/com.github.unrud.djpdf.png -resize ${s}x${s} com.github.unrud.djpdf_${s}.png || exit 1
-          install -Dm0644 com.github.unrud.djpdf_${s}.png /app/share/icons/hicolor/${s}x${s}/apps/com.github.unrud.djpdf.png || exit 1
+          convert +set date:create +set date:modify desktop/com.github.unrud.djpdf.png -resize ${s}x${s} com.github.unrud.djpdf_${s}.png
+          install -Dm0644 com.github.unrud.djpdf_${s}.png /app/share/icons/hicolor/${s}x${s}/apps/com.github.unrud.djpdf.png
         done
     sources:
       - type: git
