@@ -891,6 +891,17 @@ modules:
 
   - shared-modules/openjpeg/openjpeg.json
 
+  # libtiff with JPEG support
+  # https://gitlab.com/freedesktop-sdk/freedesktop-sdk/-/issues/1117
+  - name: libtiff
+    buildsystem: cmake-ninja
+    cleanup:
+       - '*.so'
+    sources:
+       - type: git
+         url: https://gitlab.com/libtiff/libtiff.git
+         tag: v4.2.0
+
   - name: imagemagick
     sources:
       - type: archive
