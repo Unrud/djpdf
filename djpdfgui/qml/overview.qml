@@ -40,7 +40,8 @@ Page {
     FileDialog {
         id: saveDialog
         title: "Save"
-        nameFilters: [ "PDF (*." + platformIntegration.pdfFileExtension + ")", "All files (*)" ]
+        defaultSuffix: platformIntegration.pdfFileExtension
+        nameFilters: [ "PDF (*." + platformIntegration.pdfFileExtension + ")" ]
         folder: shortcuts.home
         selectExisting: false
         onAccepted: pagesModel.save(saveDialog.fileUrl)

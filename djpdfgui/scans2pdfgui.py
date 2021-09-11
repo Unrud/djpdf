@@ -507,11 +507,11 @@ class QmlXdgDesktopPortalPlatformIntegration(QmlPlatformIntegration):
 
     @Slot()
     def openOpenDialog(self):
-        reply = self._file_chooser.OpenFile(self._win_id, "Open", {
-            "filters": [("Images", [(dbus.UInt32(1), m)
-                                    for m in IMAGE_MIME_TYPES]),
-                        ("All files", [(dbus.UInt32(0), "*")])],
-            "multiple": True})
+        options = {"filters": [("Images", [(dbus.UInt32(1), m)
+                                           for m in IMAGE_MIME_TYPES]),
+                               ("All files", [(dbus.UInt32(0), "*")])],
+                   "multiple": True}
+        reply = self._file_chooser.OpenFile(self._win_id, "Open", options)
 
         def on_response(result, d):
             receiver.remove()
@@ -523,10 +523,9 @@ class QmlXdgDesktopPortalPlatformIntegration(QmlPlatformIntegration):
 
     @Slot()
     def openSaveDialog(self):
-        reply = self._file_chooser.SaveFile(self._win_id, "Save", {
-            "filters": [("PDF", [(dbus.UInt32(1), PDF_MIME_TYPE)]),
-                        ("All files", [(dbus.UInt32(0), "*")])],
-            "current_name": "Unnamed.%s" % PDF_FILE_EXTENSION})
+        options = {"current_filter": ("PDF", [(dbus.UInt32(1), PDF_MIME_TYPE)]),
+                   "current_name": "Unnamed.%s" % PDF_FILE_EXTENSION}
+        reply = self._file_chooser.SaveFile(self._win_id, "Save", options)
 
         def on_response(result, d):
             receiver.remove()
