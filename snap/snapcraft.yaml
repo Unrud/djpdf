@@ -61,15 +61,15 @@ parts:
 
   openjpeg:
     plugin: cmake
-    source: https://github.com/uclouvain/openjpeg/archive/v2.3.1.tar.gz
+    source: https://github.com/uclouvain/openjpeg/archive/v2.4.0.tar.gz
     source-type: tar
-    source-checksum: sha256/63f5a4713ecafc86de51bfad89cc07bb788e9bba24ebbf0c4ca637621aadb6a9
+    source-checksum: sha256/8702ba68b442657f11aaeb2b338443ca8d5fb95b0d845757968a7be31ef7f16d
 
   imagemagick:
     plugin: autotools
-    source: https://github.com/ImageMagick/ImageMagick/archive/7.0.10-48.tar.gz
+    source: https://github.com/ImageMagick/ImageMagick/archive/7.1.0-6.tar.gz
     source-type: tar
-    source-checksum: sha256/8f587b3d0b5ce5cc1ba00c193c28b3224d7e9588f47f722975ae45d3f37861d6
+    source-checksum: sha256/0e925a1e6192bf2908bfcf1a99eec271f36844663ab3b6d2690cdaaa11b928c7
     after: [openjpeg]
     build-packages:
       - libjpeg-dev

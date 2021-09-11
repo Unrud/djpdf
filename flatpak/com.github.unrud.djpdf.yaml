@@ -854,12 +854,12 @@ modules:
     build-commands:
       - mkdir -p /app/qt5include && cp -R /usr/include/Qt* /app/qt5include # https://bugreports.qt.io/browse/PYSIDE-787
       - mkdir _build && cd _build &&
-        cmake -GNinja -j"$FLATPAK_BUILDER_N_JOBS"
+        cmake -GNinja
         -DCMAKE_INSTALL_PREFIX:PATH="$FLATPAK_DEST"
         -DCMAKE_BUILD_TYPE=RelWithDebInfo
         -DUSE_PYTHON_VERSION=3
         -DBUILD_TESTS=OFF .. &&
-        ninja install
+        ninja -j"$FLATPAK_BUILDER_N_JOBS" install
     post-install:
       - |
         # Make package discoverable by setuptools
@@ -871,8 +871,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: http://download.qt.io/official_releases/QtForPython/pyside2/PySide2-5.15.1-src/pyside-setup-opensource-src-5.15.1.tar.xz
-        sha256: f175c1d8813257904cf0efeb58e44f68d53b9916f73adaf9ce19514c0271c3fa
+        url: http://download.qt.io/official_releases/QtForPython/pyside2/PySide2-5.15.2-src/pyside-setup-opensource-src-5.15.2.tar.xz
+        sha256: b306504b0b8037079a8eab772ee774b9e877a2d84bab2dbefbe4fa6f83941418
       - type: shell
         commands:
           - sed -i 's|\(--include-paths=\)|\1/app/qt5include:|' sources/pyside2/cmake/Macros/PySideModules.cmake
@@ -880,16 +880,14 @@ modules:
   - name: leptonica
     sources:
       - type: archive
-        url: https://github.com/DanBloomberg/leptonica/releases/download/1.80.0/leptonica-1.80.0.tar.gz
-        sha256: ec9c46c2aefbb960fb6a6b7f800fe39de48343437b6ce08e30a8d9688ed14ba4
+        url: https://github.com/DanBloomberg/leptonica/releases/download/1.81.1/leptonica-1.81.1.tar.gz
+        sha256: 0f4eb315e9bdddd797f4c55fdea4e1f45fca7e3b358a2fc693fd957ce2c43ca9
 
   - name: jbig2enc
     sources:
       - type: archive
         url: https://github.com/agl/jbig2enc/archive/0.29.tar.gz
         sha256: bfcf0d0448ee36046af6c776c7271cd5a644855723f0a832d1c0db4de3c21280
-
-  - shared-modules/openjpeg/openjpeg.json
 
   # libtiff with JPEG support
   # https://gitlab.com/freedesktop-sdk/freedesktop-sdk/-/issues/1117
@@ -900,19 +898,20 @@ modules:
     sources:
        - type: git
          url: https://gitlab.com/libtiff/libtiff.git
-         tag: v4.2.0
+         tag: v4.3.0
+         commit: d21dcc67d0d3f4686ee989a085ad2bea9c58259d
 
   - name: imagemagick
     sources:
       - type: archive
-        url: https://github.com/ImageMagick/ImageMagick/archive/7.0.10-48.tar.gz
-        sha256: 8f587b3d0b5ce5cc1ba00c193c28b3224d7e9588f47f722975ae45d3f37861d6
+        url: https://github.com/ImageMagick/ImageMagick/archive/7.1.0-6.tar.gz
+        sha256: 0e925a1e6192bf2908bfcf1a99eec271f36844663ab3b6d2690cdaaa11b928c7
 
   - name: qpdf
     sources:
       - type: archive
-        url: https://github.com/qpdf/qpdf/releases/download/release-qpdf-10.0.4/qpdf-10.0.4.tar.gz
-        sha256: b191dc4af4ea4630cdc404a4ee95a0f21c12f56ecc4ae045f04425464d7c696e
+        url: https://github.com/qpdf/qpdf/releases/download/release-qpdf-10.3.2/qpdf-10.3.2.tar.gz
+        sha256: 062808c40ef8741ec8160ae00168638a712cfa1d4bf673e8e595ab5eba1da947
 
   - name: tesseract
     sources:
@@ -982,8 +981,8 @@ modules:
       - pip3 install --prefix=/app .
     sources:
       - type: archive
-        url: https://files.pythonhosted.org/packages/09/07/448a8887c7195450604dfc0305d80d74324c36ee18ed997664051d4bffe3/pytz-2020.4.tar.gz
-        sha256: 3e6b7dd2d1e0a59084bcee14a17af60c5c562cdc16d828e8eba2e683d3a7e268
+        url: https://files.pythonhosted.org/packages/b0/61/eddc6eb2c682ea6fd97a7e1018a6294be80dba08fa28e7a3570148b4612d/pytz-2021.1.tar.gz
+        sha256: 83a4a90894bf38e243cf052c8b58f381bfe9a7a483f6a9cab140bc7f702ac4da
 
   - name: xmp-toolkit
     buildsystem: simple
@@ -1026,8 +1025,8 @@ modules:
       - PYTHON_VERSION=3
     sources:
       - type: archive
-        url: https://dbus.freedesktop.org/releases/dbus-python/dbus-python-1.2.16.tar.gz
-        sha256: 11238f1d86c995d8aed2e22f04a1e3779f0d70e587caffeab4857f3c662ed5a4
+        url: https://dbus.freedesktop.org/releases/dbus-python/dbus-python-1.2.18.tar.gz
+        sha256: 92bdd1e68b45596c833307a5ff4b217ee6929a1502f5341bae28fd120acf7260
 
   - name: psutil
     buildsystem: simple
@@ -1035,8 +1034,8 @@ modules:
       - pip3 install --prefix=/app .
     sources:
       - type: archive
-        url: https://github.com/giampaolo/psutil/archive/release-5.7.3.tar.gz
-        sha256: 2d85efdb0efe69e8525427e00dc927d323512704c78743b2ec482dab09c2c7e2
+        url: https://github.com/giampaolo/psutil/archive/release-5.8.0.tar.gz
+        sha256: c015248da36109ffaa15f46fce8c0003f678cfaa408090f466c80318885e7abf
 
   - name: djpdf
     buildsystem: simple
@@ -1045,10 +1044,9 @@ modules:
       - install -Dm0644 -t /app/share/metainfo desktop/com.github.unrud.djpdf.appdata.xml
       - install -Dm0644 -t /app/share/applications desktop/com.github.unrud.djpdf.desktop
       - |
-        set -e
-        for s in 16 32 48 64 128 256 512; do
-          convert +set date:create +set date:modify desktop/com.github.unrud.djpdf.png -resize ${s}x${s} com.github.unrud.djpdf_${s}.png
-          install -Dm0644 com.github.unrud.djpdf_${s}.png /app/share/icons/hicolor/${s}x${s}/apps/com.github.unrud.djpdf.png
+        for res in 16 32 48 64 128 256 512; do
+          convert +set date:create +set date:modify desktop/com.github.unrud.djpdf.png -resize ${res}x${res} com.github.unrud.djpdf_${res}.png || exit 1
+          install -Dm0644 com.github.unrud.djpdf_${res}.png /app/share/icons/hicolor/${res}x${res}/apps/com.github.unrud.djpdf.png || exit 1
         done
     sources:
       - type: git
