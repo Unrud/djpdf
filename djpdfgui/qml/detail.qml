@@ -53,7 +53,7 @@ Page {
                 textFormat: Text.PlainText
                 horizontalAlignment: Text.AlignHCenter
                 leftPadding: 5
-                rightPadding: 5 + parent.width - width
+                rightPadding: 5 + x
                 Layout.fillWidth: true
             }
         }
@@ -172,9 +172,6 @@ Page {
                             Layout.preferredWidth: sv.leftColumnWidth
                             text: "Compression:"
                         }
-                        Item {
-                            Layout.fillWidth: true
-                        }
                         ComboBox {
                             Layout.fillWidth: true
                             id: backgr_compression
@@ -192,9 +189,6 @@ Page {
                             id: l5
                             Layout.preferredWidth: sv.leftColumnWidth
                             text: "Quality:"
-                        }
-                        Item {
-                            Layout.fillWidth: true
                         }
                         SpinBox {
                             Layout.fillWidth: true
