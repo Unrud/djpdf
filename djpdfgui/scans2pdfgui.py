@@ -75,14 +75,14 @@ class QmlPage(QObject):
 
     urlChanged = Signal()
 
-    @Property("QUrl", notify=urlChanged)
-    def url(self):
+    def readUrl(self):
         return QUrl.fromLocalFile(self._data["filename"])
 
-    @url.setter
-    def _(self, val):
+    def setUrl(self, val):
         self._data["filename"] = val.toLocalFile()
         self.urlChanged.emit()
+
+    url = Property("QUrl", readUrl, setUrl, notify=urlChanged)
 
     @Property(str, notify=urlChanged)
     def displayName(self):
@@ -90,53 +90,53 @@ class QmlPage(QObject):
 
     dpiChanged = Signal()
 
-    @Property(int, notify=dpiChanged)
-    def dpi(self):
+    def readDpi(self):
         val = self._data["dpi"]
         if val == "auto":
             return 0
         return val
 
-    @dpi.setter
-    def _(self, val):
+    def setDpi(self, val):
         self._data["dpi"] = "auto" if val == 0 else val
         self.dpiChanged.emit()
 
+    dpi = Property(int, readDpi, setDpi, notify=dpiChanged)
+
     bgColorChanged = Signal()
 
-    @Property(str, notify=bgColorChanged)
-    def bgColor(self):
+    def readBgColor(self):
         return "#%02x%02x%02x" % self._data["bg_color"]
         return self._bgColor
 
-    @bgColor.setter
-    def _(self, val):
+    def setBgColor(self, val):
         assert val[0] == "#" and len(val) == 7
         self._data["bg_color"] = (int(val[1:3], 16), int(val[3:5], 16),
                                   int(val[5:], 16))
         self.bgColorChanged.emit()
 
+    bgColor = Property(str, readBgColor, setBgColor, notify=bgColorChanged)
+
     bgChanged = Signal()
 
-    @Property(bool, notify=bgChanged)
-    def bg(self):
+    def readBg(self):
         return self._data["bg_enabled"]
 
-    @bg.setter
-    def _(self, val):
+    def setBg(self, val):
         self._data["bg_enabled"] = val
         self.bgChanged.emit()
 
+    bg = Property(bool, readBg, setBg, notify=bgChanged)
+
     bgResizeChanged = Signal()
 
-    @Property(float, notify=bgResizeChanged)
-    def bgResize(self):
+    def readBgResize(self):
         return self._data["bg_resize"]
 
-    @bgResize.setter
-    def _(self, val):
+    def setBgResize(self, val):
         self._data["bg_resize"] = val
         self.bgResizeChanged.emit()
+
+    bgResize = Property(float, readBgResize, setBgResize, notify=bgResizeChanged)
 
     bgCompressionsChanged = Signal()
 
@@ -146,36 +146,38 @@ class QmlPage(QObject):
 
     bgCompressionChanged = Signal()
 
-    @Property(str, notify=bgCompressionChanged)
-    def bgCompression(self):
+    def readBgCompression(self):
         return self._data["bg_compression"]
 
-    @bgCompression.setter
-    def _(self, val):
+    def setBgCompression(self, val):
         self._data["bg_compression"] = val
         self.bgCompressionChanged.emit()
 
+    bgCompression = Property(str, readBgCompression, setBgCompression,
+                             notify=bgCompressionChanged)
+
     bgQualityChanged = Signal()
 
-    @Property(int, notify=bgQualityChanged)
-    def bgQuality(self):
+    def readBgQuality(self):
         return self._data["bg_quality"]
 
-    @bgQuality.setter
-    def _(self, val):
+    def setBgQuality(self, val):
         self._data["bg_quality"] = val
         self.bgQualityChanged.emit()
 
+    bgQuality = Property(int, readBgQuality, setBgQuality,
+                         notify=bgQualityChanged)
+
     fgChanged = Signal()
 
-    @Property(bool, notify=fgChanged)
-    def fg(self):
+    def readFg(self):
         return self._data["fg_enabled"]
 
-    @fg.setter
-    def _(self, val):
+    def setFg(self, val):
         self._data["fg_enabled"] = val
         self.fgChanged.emit()
+
+    fg = Property(bool, readFg, setFg, notify=fgChanged)
 
     fgColorsChanged = Signal()
 
@@ -210,36 +212,39 @@ class QmlPage(QObject):
 
     fgCompressionChanged = Signal()
 
-    @Property(str, notify=fgCompressionChanged)
-    def fgCompression(self):
+    def readFgCompression(self):
         return self._data["fg_compression"]
 
-    @fgCompression.setter
-    def _(self, val):
+    def setFgCompression(self, val):
         self._data["fg_compression"] = val
         self.fgCompressionChanged.emit()
 
+    fgCompression = Property(str, readFgCompression, setFgCompression,
+                             notify=fgCompressionChanged)
+
     fgJbig2ThresholdChanged = Signal()
 
-    @Property(float, notify=fgJbig2ThresholdChanged)
-    def fgJbig2Threshold(self):
+    def readFgJbig2Threshold(self):
         return self._data["fg_jbig2_threshold"]
 
-    @fgJbig2Threshold.setter
-    def _(self, val):
+    def setFgJbig2Threshold(self, val):
         self._data["fg_jbig2_threshold"] = val
         self.fgJbig2ThresholdChanged.emit()
 
+    fgJbig2Threshold = Property(float, readFgJbig2Threshold,
+                                setFgJbig2Threshold,
+                                notify=fgJbig2ThresholdChanged)
+
     ocrChanged = Signal()
 
-    @Property(bool, notify=ocrChanged)
-    def ocr(self):
+    def readOcr(self):
         return self._data["ocr_enabled"]
 
-    @ocr.setter
-    def _(self, val):
+    def setOcr(self, val):
         self._data["ocr_enabled"] = val
         self.ocrChanged.emit()
+
+    ocr = Property(bool, readOcr, setOcr, notify=ocrChanged)
 
     ocrLangsChanged = Signal()
 
@@ -249,14 +254,14 @@ class QmlPage(QObject):
 
     ocrLangChanged = Signal()
 
-    @Property(str, notify=ocrLangChanged)
-    def ocrLang(self):
+    def readOcrLang(self):
         return self._data["ocr_language"]
 
-    @ocrLang.setter
-    def _(self, val):
+    def setOcrLang(self, val):
         self._data["ocr_language"] = val
         self.ocrLangChanged.emit()
+
+    ocrLang = Property(str, readOcrLang, setOcrLang, notify=ocrLangChanged)
 
     ocrColorsChanged = Signal()
 
