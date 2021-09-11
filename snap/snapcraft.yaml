@@ -17,12 +17,12 @@ architectures:
 
 environment:
   TESSDATA_PREFIX: ${SNAP}/share/tessdata
+  DJPDF_PLATFORM: xdg-desktop-portal
 
 apps:
   djpdf:
     command: desktop-launch "${SNAP}/bin/scans2pdf-gui"
     plugs:
-      - home
       - desktop
       - desktop-legacy
       - x11
@@ -148,6 +148,7 @@ parts:
       - imagemagick
     stage-packages:
       - python3-pkg-resources
+      - python3-dbus
       - qpdf
       - libexempi3
       - libnss3
