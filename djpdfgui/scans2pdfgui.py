@@ -485,7 +485,7 @@ class QmlPlatformIntegration(QObject):
     saved = Signal("QUrl")
 
 
-class QmlFlatpakPlatformIntegration(QmlPlatformIntegration):
+class QmlXdgDesktopPortalPlatformIntegration(QmlPlatformIntegration):
 
     def __init__(self, bus):
         super().__init__()
@@ -496,7 +496,7 @@ class QmlFlatpakPlatformIntegration(QmlPlatformIntegration):
             obj, "org.freedesktop.portal.FileChooser")
 
     @property
-    def _flatpak_win_id(self):
+    def _win_id(self):
         if self.window is None:
             return b""
         return b"x11:%x" % self.window.winId()
@@ -507,7 +507,7 @@ class QmlFlatpakPlatformIntegration(QmlPlatformIntegration):
 
     @Slot()
     def openOpenDialog(self):
-        reply = self._file_chooser.OpenFile(self._flatpak_win_id, "Open", {
+        reply = self._file_chooser.OpenFile(self._win_id, "Open", {
             "filters": [("Images", [(dbus.UInt32(1), m)
                                     for m in IMAGE_MIME_TYPES]),
                         ("All files", [(dbus.UInt32(0), "*")])],
@@ -523,7 +523,7 @@ class QmlFlatpakPlatformIntegration(QmlPlatformIntegration):
 
     @Slot()
     def openSaveDialog(self):
-        reply = self._file_chooser.SaveFile(self._flatpak_win_id, "Save", {
+        reply = self._file_chooser.SaveFile(self._win_id, "Save", {
             "filters": [("PDF", [(dbus.UInt32(1), PDF_MIME_TYPE)]),
                         ("All files", [(dbus.UInt32(0), "*")])],
             "current_name": "Unnamed.%s" % PDF_FILE_EXTENSION})
@@ -552,12 +552,12 @@ def main():
     engine.addImageProvider("thumbnails", thumbnail_image_provider)
     ctx = engine.rootContext()
     pages_model = QmlPagesModel(verbose=args.verbose)
-    if os.environ.get("DJPDF_PLATFORM") == "flatpak":
+    if "xdg-desktop-portal" in os.environ.get("DJPDF_PLATFORM", "").split(","):
         import dbus
         import dbus.mainloop.glib
         dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
         bus = dbus.SessionBus()
-        platform_integration = QmlFlatpakPlatformIntegration(bus)
+        platform_integration = QmlXdgDesktopPortalPlatformIntegration(bus)
     else:
         platform_integration = QmlPlatformIntegration()
     ctx.setContextProperty("pagesModel", pages_model)

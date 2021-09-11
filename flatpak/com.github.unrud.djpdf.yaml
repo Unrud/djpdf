@@ -8,7 +8,7 @@ finish-args:
   - --socket=wayland
   - --device=dri
   - --share=ipc
-  - --env=DJPDF_PLATFORM=flatpak
+  - --env=DJPDF_PLATFORM=xdg-desktop-portal
 cleanup:
   - '*.a'
   - '*.la'
