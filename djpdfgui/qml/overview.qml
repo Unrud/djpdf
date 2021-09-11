@@ -48,10 +48,10 @@ Page {
 
     Connections {
         target: platformIntegration
-        onOpened: function(urls) {
+        function onOpened(urls) {
             pagesModel.extend(urls);
         }
-        onSaved: function(url) {
+        function onSaved(url) {
             pagesModel.save(url);
         }
     }
@@ -64,7 +64,9 @@ Page {
 
     Connections {
         target: pagesModel
-        onSavingError: errorDialog.open()
+        function onSavingError() {
+            errorDialog.open()
+        }
     }
 
     Popup {
