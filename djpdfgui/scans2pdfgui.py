@@ -136,7 +136,8 @@ class QmlPage(QObject):
         self._data["bg_resize"] = val
         self.bgResizeChanged.emit()
 
-    bgResize = Property(float, readBgResize, setBgResize, notify=bgResizeChanged)
+    bgResize = Property(float, readBgResize, setBgResize,
+                        notify=bgResizeChanged)
 
     bgCompressionsChanged = Signal()
 
