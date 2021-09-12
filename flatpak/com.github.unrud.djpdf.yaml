@@ -1041,7 +1041,7 @@ modules:
     buildsystem: simple
     build-commands:
       - pip3 install --prefix=/app .
-      - install -Dm0644 -t /app/share/metainfo desktop/com.github.unrud.djpdf.appdata.xml
+      - install -Dm0644 -t /app/share/metainfo desktop/com.github.unrud.djpdf.metainfo.xml
       - install -Dm0644 -t /app/share/applications desktop/com.github.unrud.djpdf.desktop
       - |
         for res in 16 32 48 64 128 256 512; do

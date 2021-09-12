@@ -180,7 +180,7 @@ parts:
       sed -e 's|Icon=com.github.unrud.djpdf|Icon=/usr/share/icons/hicolor/512x512/apps/com.github.unrud.djpdf.png|' -i desktop/com.github.unrud.djpdf.desktop
     override-build: |
       snapcraftctl build
-      install -Dm0644 -t "${SNAPCRAFT_PART_INSTALL}/usr/share/metainfo" desktop/com.github.unrud.djpdf.appdata.xml
+      install -Dm0644 -t "${SNAPCRAFT_PART_INSTALL}/usr/share/metainfo" desktop/com.github.unrud.djpdf.metainfo.xml
       install -Dm0644 -t "${SNAPCRAFT_PART_INSTALL}/usr/share/applications" desktop/com.github.unrud.djpdf.desktop
       for s in 16 32 48 64 128 256 512; do
         convert +set date:create +set date:modify desktop/com.github.unrud.djpdf.png -resize ${s}x${s} com.github.unrud.djpdf_${s}.png || exit 1
@@ -191,4 +191,4 @@ parts:
       libexempi_path="/snap/djpdf/current/$(realpath --relative-base="${SNAPCRAFT_PART_INSTALL}" "$(find "${SNAPCRAFT_PART_INSTALL}" -name 'libexempi.so*' -print -quit)")"
       sed -e "s|[^=]*find_library('exempi')| '$libexempi_path'|" -i "${SNAPCRAFT_PART_INSTALL}"/lib/python3.*/site-packages/libxmp/exempi.py
       snapcraftctl stage
-    parse-info: [usr/share/metainfo/com.github.unrud.djpdf.appdata.xml]
+    parse-info: [usr/share/metainfo/com.github.unrud.djpdf.metainfo.xml]
