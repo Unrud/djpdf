@@ -525,7 +525,7 @@ class QmlXdgDesktopPortalPlatformIntegration(QmlPlatformIntegration):
 
     @Slot()
     def openSaveDialog(self):
-        options = {"current_filter": ("PDF", [(dbus.UInt32(1), PDF_MIME_TYPE)]),
+        options = {"filters": [("PDF", [(dbus.UInt32(1), PDF_MIME_TYPE)])],
                    "current_name": "Unnamed.%s" % PDF_FILE_EXTENSION}
         reply = self._file_chooser.SaveFile(
             self._win_id, "Save", options, signature="ssa{sv}")
