@@ -941,7 +941,7 @@ modules:
           metainfo="$(sed -e "s|{id}|${id}|g" \
                           -e "s|{name}|${name}|g" \
                           -e "s|{long_name}|${long_name}|g" \
-                          "ocr-extension-template-${template}.metainfo.xml")"
+                          "ocr-extension-${template}.metainfo.xml.in")"
           install -d "/app/extensions/ocr/${camel_name}/share/metainfo"
           cat <<<"$metainfo" >"/app/extensions/ocr/${camel_name}/share/metainfo/${id}.metainfo.xml"
           install -Dm0644 "$f" "/app/extensions/ocr/${camel_name}/share/tessdata/$f"
@@ -956,11 +956,11 @@ modules:
       - type: file
         path: ocr-extension-info.txt
       - type: file
-        path: ocr-extension-template-language.metainfo.xml
+        path: ocr-extension-language.metainfo.xml.in
       - type: file
-        path: ocr-extension-template-script.metainfo.xml
+        path: ocr-extension-script.metainfo.xml.in
       - type: file
-        path: ocr-extension-template-special.metainfo.xml
+        path: ocr-extension-special.metainfo.xml.in
       - type: file
         path: tesseract-wrapper.py
 
