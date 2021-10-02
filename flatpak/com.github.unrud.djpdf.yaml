@@ -882,8 +882,8 @@ modules:
   - name: leptonica
     sources:
       - type: archive
-        url: https://github.com/DanBloomberg/leptonica/releases/download/1.81.1/leptonica-1.81.1.tar.gz
-        sha256: 0f4eb315e9bdddd797f4c55fdea4e1f45fca7e3b358a2fc693fd957ce2c43ca9
+        url: https://github.com/DanBloomberg/leptonica/releases/download/1.82.0/leptonica-1.82.0.tar.gz
+        sha256: 155302ee914668c27b6fe3ca9ff2da63b245f6d62f3061c8f27563774b8ae2d6
 
   - name: jbig2enc
     sources:
@@ -906,8 +906,8 @@ modules:
   - name: imagemagick
     sources:
       - type: archive
-        url: https://github.com/ImageMagick/ImageMagick/archive/7.1.0-6.tar.gz
-        sha256: 0e925a1e6192bf2908bfcf1a99eec271f36844663ab3b6d2690cdaaa11b928c7
+        url: https://github.com/ImageMagick/ImageMagick/archive/7.1.0-8.tar.gz
+        sha256: 3d9b31ff6eb8408cf610c8bbb820b5e46010c21aecc1296b905be60ee1d127a7
 
   - name: qpdf
     sources:
@@ -983,8 +983,8 @@ modules:
       - pip3 install --prefix=/app .
     sources:
       - type: archive
-        url: https://files.pythonhosted.org/packages/b0/61/eddc6eb2c682ea6fd97a7e1018a6294be80dba08fa28e7a3570148b4612d/pytz-2021.1.tar.gz
-        sha256: 83a4a90894bf38e243cf052c8b58f381bfe9a7a483f6a9cab140bc7f702ac4da
+        url: https://files.pythonhosted.org/packages/e3/8e/1cde9d002f48a940b9d9d38820aaf444b229450c0854bdf15305ce4a3d1a/pytz-2021.3.tar.gz
+        sha256: acad2d8b20a1af07d4e4c9d2e9285c5ed9104354062f275f3fcd88dcef4f1326
 
   - name: xmp-toolkit
     buildsystem: simple
