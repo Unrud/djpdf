@@ -849,17 +849,19 @@ add-extensions:
     no-autodownload: true
     autodelete: true
 modules:
-  - name: pyside2
+  - name: qt5include
+    # https://bugreports.qt.io/browse/PYSIDE-787
     buildsystem: simple
     build-commands:
-      - mkdir -p /app/qt5include && cp -R /usr/include/Qt* /app/qt5include # https://bugreports.qt.io/browse/PYSIDE-787
-      - mkdir _build && cd _build &&
-        cmake -GNinja
-        -DCMAKE_INSTALL_PREFIX:PATH="$FLATPAK_DEST"
-        -DCMAKE_BUILD_TYPE=RelWithDebInfo
-        -DUSE_PYTHON_VERSION=3
-        -DBUILD_TESTS=OFF .. &&
-        ninja -j"$FLATPAK_BUILDER_N_JOBS" install
+      - mkdir -p /app/include/qt5
+      - cp -R /usr/include/Qt* /app/include/qt5
+
+  - name: pyside2
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_TESTS=OFF
     post-install:
       - |
         # Make package discoverable by setuptools
@@ -867,15 +869,15 @@ modules:
           "$(python3 -c "import PySide2; print(PySide2.__version__)")" \
           > "$(dirname "$(python3 -c "import PySide2; print(PySide2.__file__)")")/../pyside2.egg-info"
     cleanup:
-      - /qt5include
       - /bin
     sources:
       - type: archive
         url: http://download.qt.io/official_releases/QtForPython/pyside2/PySide2-5.15.2-src/pyside-setup-opensource-src-5.15.2.tar.xz
         sha256: b306504b0b8037079a8eab772ee774b9e877a2d84bab2dbefbe4fa6f83941418
       - type: shell
+        # use qt5include
         commands:
-          - sed -i 's|\(--include-paths=\)|\1/app/qt5include:|' sources/pyside2/cmake/Macros/PySideModules.cmake
+          - sed -i 's|\(--include-paths=\)|\1/app/include/qt5:|' sources/pyside2/cmake/Macros/PySideModules.cmake
 
   - name: leptonica
     sources:
