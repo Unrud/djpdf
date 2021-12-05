@@ -21,9 +21,7 @@ chr:language:Cherokee
 cos:language:Corsican
 cym:language:Welsh
 dan:language:Danish
-dan_frak:language:Danish - Fraktur
 deu:language:German
-deu_frak:language:German - Fraktur
 div:language:Divehi
 dzo:language:Dzongkha
 ell:language:Greek, Modern (1453-)
@@ -68,8 +66,6 @@ kir:language:Kirghiz; Kyrgyz
 kmr:language:Kurmanji (Kurdish - Latin Script)
 kor:language:Korean
 kor_vert:language:Korean (vertical)
-kur:language:Kurdish
-kur_ara:language:Kurdish (Arabic Script)
 lao:language:Lao
 lat:language:Latin
 lav:language:Latvian
@@ -98,7 +94,6 @@ rus:language:Russian
 san:language:Sanskrit
 sin:language:Sinhala; Sinhalese
 slk:language:Slovak
-slk_frak:language:Slovak - Fraktur
 slv:language:Slovenian
 snd:language:Sindhi
 spa:language:Spanish; Castilian
@@ -114,7 +109,6 @@ tam:language:Tamil
 tat:language:Tatar
 tel:language:Telugu
 tgk:language:Tajik
-tgl:language:Tagalog (new - Filipino)
 tha:language:Thai
 tir:language:Tigrinya
 ton:language:Tonga
@@ -164,5 +158,4 @@ script/Thaana:script:Thaana
 script/Thai:script:Thai
 script/Tibetan:script:Tibetan
 script/Vietnamese:script:Vietnamese
-equ:special:Math / equation detection module
 osd:special:Orientation and script detection module

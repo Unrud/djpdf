@@ -98,30 +98,28 @@ parts:
     plugin: nil
     build-packages: [wget]
     override-pull: |
-      wget https://github.com/tesseract-ocr/tessdata/raw/4.0.0/eng.traineddata -O eng.traineddata
-      wget https://github.com/tesseract-ocr/tessdata/raw/4.0.0/chi_sim.traineddata -O chi_sim.traineddata
-      wget https://github.com/tesseract-ocr/tessdata/raw/4.0.0/hin.traineddata -O hin.traineddata
-      wget https://github.com/tesseract-ocr/tessdata/raw/4.0.0/spa.traineddata -O spa.traineddata
-      wget https://github.com/tesseract-ocr/tessdata/raw/4.0.0/fra.traineddata -O fra.traineddata
-      wget https://github.com/tesseract-ocr/tessdata/raw/4.0.0/ara.traineddata -O ara.traineddata
-      wget https://github.com/tesseract-ocr/tessdata/raw/4.0.0/rus.traineddata -O rus.traineddata
-      wget https://github.com/tesseract-ocr/tessdata/raw/4.0.0/por.traineddata -O por.traineddata
-      wget https://github.com/tesseract-ocr/tessdata/raw/4.0.0/deu.traineddata -O deu.traineddata
-      wget https://github.com/tesseract-ocr/tessdata/raw/4.0.0/jpn.traineddata -O jpn.traineddata
-      wget https://github.com/tesseract-ocr/tessdata/raw/4.0.0/osd.traineddata -O osd.traineddata
-      wget https://github.com/tesseract-ocr/tessdata/raw/4.0.0/equ.traineddata -O equ.traineddata
-      echo 'daa0c97d651c19fba3b25e81317cd697e9908c8208090c94c3905381c23fc047 *eng.traineddata
-      fc05d89ab31d8b4e226910f16a8bcbf78e43bae3e2580bb5feefd052efdab363 *chi_sim.traineddata
-      cc76d09fa4fed1c7a4674046e25e63760d0c9bfdce390a52113462c34a556ee6 *hin.traineddata
-      0b0fcbb4665189e01ab8019e591f014dd7260460de072543edd4b2cb4ede7c96 *spa.traineddata
-      eac01c1d72540d6090facb7b2f42dd0a2ee8fc57c5be1b20548ae668e2761913 *fra.traineddata
-      2005976778bbc14fc56a4ea8d43c6080847aeee72fcc2201488f240daca15c5b *ara.traineddata
-      681be2c2bead1bc7bd235df88c44e8e60ae73ae866840c0ad4e3b4c247bd37c2 *rus.traineddata
-      016c6a371bb1e4c48fe521908cf3ba3d751fade0ab846ad5d4086b563f5c528c *por.traineddata
-      896b3b4956503ab9daa10285db330881b2d74b70d889b79262cc534b9ec699a4 *deu.traineddata
-      6f416b902d129d8cc28e99c33244034b1cf52549e8560f6320b06d317852159a *jpn.traineddata
-      e19f2ae860792fdf372cf48d8ce70ae5da3c4052962fe22e9de1f680c374bb0e *osd.traineddata
-      8f660323d8a7b7a0e8d2fae1a3439e6e470222bfbb990b2ab7fe9e1fb4791c0b *equ.traineddata' > SHA256SUMS
+      wget https://github.com/tesseract-ocr/tessdata_best/raw/4.1.0/eng.traineddata -O eng.traineddata
+      wget https://github.com/tesseract-ocr/tessdata_best/raw/4.1.0/chi_sim.traineddata -O chi_sim.traineddata
+      wget https://github.com/tesseract-ocr/tessdata_best/raw/4.1.0/hin.traineddata -O hin.traineddata
+      wget https://github.com/tesseract-ocr/tessdata_best/raw/4.1.0/spa.traineddata -O spa.traineddata
+      wget https://github.com/tesseract-ocr/tessdata_best/raw/4.1.0/fra.traineddata -O fra.traineddata
+      wget https://github.com/tesseract-ocr/tessdata_best/raw/4.1.0/ara.traineddata -O ara.traineddata
+      wget https://github.com/tesseract-ocr/tessdata_best/raw/4.1.0/rus.traineddata -O rus.traineddata
+      wget https://github.com/tesseract-ocr/tessdata_best/raw/4.1.0/por.traineddata -O por.traineddata
+      wget https://github.com/tesseract-ocr/tessdata_best/raw/4.1.0/deu.traineddata -O deu.traineddata
+      wget https://github.com/tesseract-ocr/tessdata_best/raw/4.1.0/jpn.traineddata -O jpn.traineddata
+      wget https://github.com/tesseract-ocr/tessdata_best/raw/4.1.0/osd.traineddata -O osd.traineddata
+      echo '8280aed0782fe27257a68ea10fe7ef324ca0f8d85bd2fd145d1c2b560bcb66ba *eng.traineddata
+      4fef2d1306c8e87616d4d3e4c6c67faf5d44be3342290cf8f2f0f6e3aa7e735b *chi_sim.traineddata
+      bd2e65a2184af08a167b0be2439e91fa5edbc4394399ca2f692b843ae26e78d6 *hin.traineddata
+      e2c1ffdad8b30f26c45d4017a9183d3a7f9aa69e59918be4f88b126fac99ab2c *spa.traineddata
+      907743d98915c91a3906dfbf6e48b97598346698fe53aaa797e1a064ffcac913 *fra.traineddata
+      ab9d157d8e38ca00e7e39c7d5363a5239e053f5b0dbdb3167dde9d8124335896 *ara.traineddata
+      b617eb6830ffabaaa795dd87ea7fd251adfe9cf0efe05eb9a2e8128b7728d6b6 *rus.traineddata
+      711de9dbb8052067bd42f16b9119967f30bada80d57e2ef24f65d09f531adb04 *por.traineddata
+      8407331d6aa0229dc927685c01a7938fc5a641d1a9524f74838cdac599f0d06e *deu.traineddata
+      36bdf9ac823f5911e624c30d0553e890b8abc7c31a65b3ef14da943658c40b79 *jpn.traineddata
+      9cf5d576fcc47564f11265841e5ca839001e7e6f38ff7f7aacf46d15a96b00ff *osd.traineddata' > SHA256SUMS
       sha256sum -c SHA256SUMS
     override-build: |
       install -Dm0644 -t "${SNAPCRAFT_PART_INSTALL}/share/tessdata" *
