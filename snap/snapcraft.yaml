@@ -67,9 +67,9 @@ parts:
 
   imagemagick:
     plugin: autotools
-    source: https://github.com/ImageMagick/ImageMagick/archive/7.1.0-8.tar.gz
+    source: https://github.com/ImageMagick/ImageMagick/archive/7.1.0-16.tar.gz
     source-type: tar
-    source-checksum: sha256/3d9b31ff6eb8408cf610c8bbb820b5e46010c21aecc1296b905be60ee1d127a7
+    source-checksum: sha256/6eec33290655c403af7ed41569e1c9a9d1c29f41df51b1a83207e5da8ef90b61
     after: [openjpeg]
     build-packages:
       - libjpeg-dev
@@ -86,8 +86,8 @@ parts:
 
   tesseract:
     plugin: autotools
-    source: https://github.com/tesseract-ocr/tesseract/archive/4.1.1.tar.gz
-    source-checksum: sha256/2a66ff0d8595bff8f04032165e6c936389b1e5727c3ce5a27b3e059d218db1cb
+    source: https://github.com/tesseract-ocr/tesseract/archive/5.0.0.tar.gz
+    source-checksum: sha256/72467b7876dc0c39ef7fbcb0f793f73aee1c78d9fabab3ab19cbac1eb42e9fed
     build-packages:
       - pkg-config
       - libleptonica-dev
