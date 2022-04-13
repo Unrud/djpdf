@@ -842,8 +842,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: http://download.qt.io/official_releases/QtForPython/pyside2/PySide2-5.15.2-src/pyside-setup-opensource-src-5.15.2.tar.xz
-        sha256: b306504b0b8037079a8eab772ee774b9e877a2d84bab2dbefbe4fa6f83941418
+        url: http://download.qt.io/official_releases/QtForPython/pyside2/PySide2-5.15.3-src/pyside-setup-opensource-src-5.15.3.tar.xz
+        sha256: 7ff5f1cc4291fffb6d5a3098b3090abe4d415da2adec740b4e901893d95d7137
       - type: shell
         # use qt5include
         commands:
@@ -864,20 +864,20 @@ modules:
   - name: imagemagick
     sources:
       - type: archive
-        url: https://github.com/ImageMagick/ImageMagick/archive/7.1.0-16.tar.gz
-        sha256: 6eec33290655c403af7ed41569e1c9a9d1c29f41df51b1a83207e5da8ef90b61
+        url: https://github.com/ImageMagick/ImageMagick/archive/7.1.0-29.tar.gz
+        sha256: 889be185fd17a9b9b3d4090e28aecdec289a4f690964a7964b4f893c7a8ec21c
 
   - name: qpdf
     sources:
       - type: archive
-        url: https://github.com/qpdf/qpdf/releases/download/release-qpdf-10.4.0/qpdf-10.4.0.tar.gz
-        sha256: 9ac6e691cc3f35a9fe44632e3fba727e1b6ef21181c0a883287abf5cf97ae222
+        url: https://github.com/qpdf/qpdf/releases/download/release-qpdf-10.6.3/qpdf-10.6.3.tar.gz
+        sha256: e8fc23b2a584ea68c963a897515d3eb3129186741dd19d13c86d31fa33493811
 
   - name: tesseract
     sources:
       - type: archive
-        url: https://github.com/tesseract-ocr/tesseract/archive/5.0.0.tar.gz
-        sha256: 72467b7876dc0c39ef7fbcb0f793f73aee1c78d9fabab3ab19cbac1eb42e9fed
+        url: https://github.com/tesseract-ocr/tesseract/archive/5.1.0.tar.gz
+        sha256: fdec8528d5a0ecc28ab5fff985e0b8ced60726f6ef33f54126f2868e323d4bd2
 
   - name: tessdata
     buildsystem: simple
@@ -935,8 +935,8 @@ modules:
       - --enable-unittest=no
     sources:
       - type: archive
-        url: https://libopenraw.freedesktop.org/download/exempi-2.5.2.tar.bz2
-        sha256: 52f54314aefd45945d47a6ecf4bd21f362e6467fa5d0538b0d45a06bc6eaaed5
+        url: https://libopenraw.freedesktop.org/download/exempi-2.6.1.tar.bz2
+        sha256: 072451ac1e0dc97ed69a2e5bfc235fd94fe093d837f65584d0e3581af5db18cd
       - type: shell
         commands:
           - cp /usr/share/gnu-config/config.{guess,sub} .
@@ -947,8 +947,8 @@ modules:
       - pip3 install --prefix=/app .
     sources:
       - type: archive
-        url: https://files.pythonhosted.org/packages/e3/8e/1cde9d002f48a940b9d9d38820aaf444b229450c0854bdf15305ce4a3d1a/pytz-2021.3.tar.gz
-        sha256: acad2d8b20a1af07d4e4c9d2e9285c5ed9104354062f275f3fcd88dcef4f1326
+        url: https://files.pythonhosted.org/packages/2f/5f/a0f653311adff905bbcaa6d3dfaf97edcf4d26138393c6ccd37a484851fb/pytz-2022.1.tar.gz
+        sha256: 1e760e2fe6a8163bc0b3d9a19c4f84342afa0a2affebfaa84b01b978a02ecaa7
 
   - name: xmp-toolkit
     buildsystem: simple
@@ -1000,8 +1000,8 @@ modules:
       - pip3 install --prefix=/app .
     sources:
       - type: archive
-        url: https://github.com/giampaolo/psutil/archive/release-5.8.0.tar.gz
-        sha256: c015248da36109ffaa15f46fce8c0003f678cfaa408090f466c80318885e7abf
+        url: https://github.com/giampaolo/psutil/archive/release-5.9.0.tar.gz
+        sha256: ea4f431c10100079f46a494894582edb43e395324f200bd82ecf60b60b46a929
 
   - name: djpdf
     buildsystem: simple
