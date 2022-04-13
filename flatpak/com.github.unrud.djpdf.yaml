@@ -1,7 +1,9 @@
 app-id: com.github.unrud.djpdf
 runtime: org.kde.Platform
-runtime-version: '5.15'
+runtime-version: '5.15-21.08'
 sdk: org.kde.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.llvm12
 command: scans2pdf-gui
 finish-args:
   - --socket=x11
@@ -824,6 +826,9 @@ modules:
   - name: pyside2
     buildsystem: cmake-ninja
     builddir: true
+    build-options:
+      prepend-path: /usr/lib/sdk/llvm12/bin
+      prepend-ld-library-path: /usr/lib/sdk/llvm12/lib
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_TESTS=OFF
@@ -855,18 +860,6 @@ modules:
       - type: archive
         url: https://github.com/agl/jbig2enc/archive/0.29.tar.gz
         sha256: bfcf0d0448ee36046af6c776c7271cd5a644855723f0a832d1c0db4de3c21280
-
-  # libtiff with JPEG support
-  # https://gitlab.com/freedesktop-sdk/freedesktop-sdk/-/issues/1117
-  - name: libtiff
-    buildsystem: cmake-ninja
-    cleanup:
-       - '*.so'
-    sources:
-       - type: git
-         url: https://gitlab.com/libtiff/libtiff.git
-         tag: v4.3.0
-         commit: d21dcc67d0d3f4686ee989a085ad2bea9c58259d
 
   - name: imagemagick
     sources:
