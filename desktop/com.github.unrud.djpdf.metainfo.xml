@@ -25,6 +25,13 @@
   <url type="homepage">https://github.com/Unrud/djpdf</url>
   <developer_name>Unrud</developer_name>
   <releases>
+    <release version="0.1.7" date="2022-04-13">
+      <description>
+        <ul>
+          <li>Fix compatibility with Python>=3.9</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.1.6" date="2021-10-02">
       <description>
         <ul>
@@ -150,10 +157,10 @@
   </releases>
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/Unrud/djpdf/0.1.6/screenshots/1.png</image>
+      <image>https://raw.githubusercontent.com/Unrud/djpdf/v0.1.7/screenshots/1.png</image>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/Unrud/djpdf/0.1.6/screenshots/2.png</image>
+      <image>https://raw.githubusercontent.com/Unrud/djpdf/v0.1.7/screenshots/2.png</image>
     </screenshot>
   </screenshots>
   <content_rating type="oars-1.1" />
