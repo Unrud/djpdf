@@ -107,7 +107,7 @@ class AsyncCache:
 
     @asyncio.coroutine
     def get(self, content_future):
-        yield from self._lock
+        yield from self._lock.acquire()
         try:
             if not self._cached:
                 self._content = yield from content_future
