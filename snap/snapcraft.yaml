@@ -58,6 +58,9 @@ parts:
     stage-packages:
       - liblept5
       - zlib1g
+    override-build: |
+      ./autogen.sh
+      snapcraftctl build
 
   openjpeg:
     plugin: cmake
@@ -93,6 +96,9 @@ parts:
       - libleptonica-dev
     stage-packages:
       - liblept5
+    override-build: |
+      ./autogen.sh
+      snapcraftctl build
 
   tessdata:
     plugin: nil
