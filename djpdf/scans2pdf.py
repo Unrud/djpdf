@@ -31,7 +31,7 @@ from djpdf.djpdf import (CONVERT_CMD, JOB_MEMORY, PARALLEL_JOBS,
                          BigTemporaryDirectory, PdfBuilder)
 from djpdf.util import (AsyncCache, MemoryBoundedSemaphore, cli_set_verbosity,
                         cli_setup, compat_asyncio_run, format_number,
-                        run_command_async)
+                        run_command)
 
 DEFAULT_SETTINGS = {
     "dpi": "auto",
@@ -149,9 +149,9 @@ class BaseImageObject(BasePageObject):
         return await self._size_cache.get(self._size(process_semaphore))
 
     async def _size(self, psem):
-        outs = await run_command_async(
-            [IDENTIFY_CMD, "-format", "%w %h",
-             path.abspath(await self.filename(psem))], psem)
+        outs = await run_command([
+            IDENTIFY_CMD, "-format", "%w %h",
+            path.abspath(await self.filename(psem))], psem)
         outs = outs.decode("ascii")
         outss = outs.split()
         w, h = int(outss[0]), int(outss[1])
@@ -161,9 +161,9 @@ class BaseImageObject(BasePageObject):
         return await self._dpi_cache.get(self._dpi(process_semaphore))
 
     async def _dpi(self, psem):
-        outs = await run_command_async(
-            [IDENTIFY_CMD, "-units", "PixelsPerInch", "-format", "%x %y",
-             path.abspath(await self.filename(psem))], psem)
+        outs = await run_command([
+            IDENTIFY_CMD, "-units", "PixelsPerInch", "-format", "%x %y",
+            path.abspath(await self.filename(psem))], psem)
         outs = outs.decode("ascii")
         outss = outs.split()
         if len(outss) == 2:
@@ -178,9 +178,9 @@ class BaseImageObject(BasePageObject):
 
     @staticmethod
     async def _is_plain_color_file(filename, color, process_semaphore):
-        outs = await run_command_async(
-            [CONVERT_CMD, "-format", "%c", path.abspath(filename),
-             "histogram:info:-"], process_semaphore)
+        outs = await run_command([
+            CONVERT_CMD, "-format", "%c", path.abspath(filename),
+            "histogram:info:-"], process_semaphore)
         outs = outs.decode("ascii")
         histogram_re = re.compile(r"\s*(?P<count>\d+(?:(?:\.\d+)?e\+\d+)?):\s+"
                                   r"\(\s*(?P<r>\d+),\s*(?P<g>\d+),"
@@ -213,7 +213,7 @@ class InputImage(BaseImageObject):
 
     async def _filename(self, psem):
         fname = path.join(self._temp_dir, "image.png")
-        await run_command_async([
+        await run_command([
             CONVERT_CMD,
             "-colorspace", "sRGB",
             "-profile", SRGB_ICC_FILENAME,
@@ -258,7 +258,7 @@ class BackgroundImage(BaseImageObject):
                                                  percentage=True),
                         path.abspath(await self._input_image.filename(psem)),
                         path.abspath(fname)])
-            await run_command_async(cmd, psem)
+            await run_command(cmd, psem)
         else:
             fname = await self._input_image.filename(psem)
         if await self._is_plain_color_file(fname, self._page["bg_color"],
@@ -333,7 +333,7 @@ class ForegroundImage(BaseImageObject):
                     "-threshold", "0",
                     path.abspath(await self._input_image.filename(psem)),
                     path.abspath(fname)])
-        await run_command_async(cmd, psem)
+        await run_command(cmd, psem)
         if await self._is_plain_color_file(fname, (0xff, 0xff, 0xff), psem):
             return None
         return fname
@@ -417,7 +417,7 @@ class OcrImage(BaseImageObject):
             cmd.extend(["-threshold", "0"])
             cmd.extend([path.abspath(await self._input_image.filename(psem)),
                         path.abspath(fname)])
-            await run_command_async(cmd, psem)
+            await run_command(cmd, psem)
         else:
             fname = await self._input_image.filename(psem)
         return fname
@@ -449,11 +449,11 @@ class Ocr(BasePageObject):
             dpi_x, _ = await self._input_image.dpi(psem)
         else:
             dpi_x = self._page["dpi"]
-        await run_command_async(
-            [TESSERACT_CMD, "-l", self._page["ocr_language"],
-             "--dpi", "%.0f" % dpi_x,
-             path.abspath(await self._ocr_image.filename(psem)),
-             path.abspath(path.join(self._temp_dir, "ocr")), "hocr"], psem)
+        await run_command([
+            TESSERACT_CMD, "-l", self._page["ocr_language"],
+            "--dpi", "%.0f" % dpi_x,
+            path.abspath(await self._ocr_image.filename(psem)),
+            path.abspath(path.join(self._temp_dir, "ocr")), "hocr"], psem)
         return hocr.extract_text(path.join(self._temp_dir, "ocr.hocr"))
 
 

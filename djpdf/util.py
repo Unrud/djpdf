@@ -149,7 +149,7 @@ def compat_asyncio_run(coro):
     return result
 
 
-async def run_command_async(args, process_semaphore, cwd=None):
+async def run_command(args, process_semaphore, cwd=None):
     logging.debug("Running command: %s", args)
     env = {
         **os.environ,

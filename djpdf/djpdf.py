@@ -37,7 +37,7 @@ from libxmp.consts import XMP_NS_PDFA_ID
 
 from djpdf.util import (AsyncCache, MemoryBoundedSemaphore, cli_set_verbosity,
                         cli_setup, compat_asyncio_run, format_number,
-                        run_command_async)
+                        run_command)
 
 # pdfrw tampers with logging
 _orig_basic_config = logging.basicConfig
@@ -349,7 +349,7 @@ class ImageMagickImage:
                 if self._mask is None:
                     return None
                 return await self._mask.pdf_image(psem)
-            _, pdf_mask = await asyncio.gather(run_command_async(cmd, psem),
+            _, pdf_mask = await asyncio.gather(run_command(cmd, psem),
                                                get_mask(psem))
             pdf_reader = PdfReader(path.join(temp_dir, "image.pdf"))
             assert len(pdf_reader.pages[0].Resources.XObject) == 1, (
@@ -471,7 +471,7 @@ class Jbig2Image:
             async def get_jbig2_images(psem):
                 # Convert images with ImageMagick to bitonal png in parallel
                 await asyncio.gather(*[
-                    run_command_async([
+                    run_command([
                         CONVERT_CMD,
                         "-alpha", "remove",
                         "-alpha", "off",
@@ -491,7 +491,7 @@ class Jbig2Image:
                 jbig2_images = []
                 jbig2_globals = None
                 if symbol_mode:
-                    await run_command_async(cmd, psem, cwd=temp_dir)
+                    await run_command(cmd, psem, cwd=temp_dir)
                     jbig2_globals = PdfDict()
                     jbig2_globals.indirect = True
                     with open(path.join(temp_dir, "output.sym"), "rb") as f:
@@ -502,7 +502,7 @@ class Jbig2Image:
                             jbig2_images.append(f.read())
                 else:
                     jbig2_images.append(
-                        await run_command_async(cmd, psem, cwd=temp_dir))
+                        await run_command(cmd, psem, cwd=temp_dir))
                 return jbig2_images, jbig2_globals
 
             async def get_image_mask(image, psem):
@@ -906,7 +906,7 @@ class PdfBuilder:
                 cmd.extend(["--linearize"])
             cmd.extend([path.abspath(path.join(temp_dir, "temp.pdf")),
                         path.abspath(outfile)])
-            await run_command_async(cmd, process_semaphore)
+            await run_command(cmd, process_semaphore)
 
 
 async def build_pdf(recipe, pdf_filename, process_semaphore=None,
