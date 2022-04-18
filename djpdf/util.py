@@ -67,13 +67,12 @@ class MemoryBoundedSemaphore():
             jobs = max(1, jobs)
         return min(self._value, jobs)
 
-    @asyncio.coroutine
-    def acquire(self):
+    async def acquire(self):
         while self._available_jobs() == 0:
             waiter = self._loop.create_future()
             self._waiters.append(waiter)
             try:
-                yield from waiter
+                await waiter
             except BaseException:
                 waiter.cancel()
                 if not waiter.cancelled() and self._available_jobs() > 0:
@@ -95,6 +94,13 @@ class MemoryBoundedSemaphore():
     def remove_pid(self, pid):
         self._pids.remove(pid)
 
+    async def __aenter__(self):
+        await self.acquire()
+        return None
+
+    async def __aexit__(self, exc_type, exc, tb):
+        self.release()
+
 
 class AsyncCache:
     _cached = None
@@ -106,12 +112,11 @@ class AsyncCache:
         self._content = None
         self._lock = asyncio.Lock()
 
-    @asyncio.coroutine
-    def get(self, content_future):
-        yield from self._lock.acquire()
+    async def get(self, content_future):
+        await self._lock.acquire()
         try:
             if not self._cached:
-                self._content = yield from content_future
+                self._content = await content_future
                 self._cached = True
             return self._content
         finally:
@@ -134,31 +139,30 @@ def format_number(f, decimal_places, percentage=False,
     return s
 
 
-@asyncio.coroutine
-def run_command_async(args, process_semaphore, cwd=None):
+async def run_command_async(args, process_semaphore, cwd=None):
     logging.debug("Running command: %s", args)
     env = {
         **os.environ,
         "MAGICK_THREAD_LIMIT": "1",
         "OMP_THREAD_LIMIT": "1"
     }
-    with contextlib.ExitStack() as stack:
-        yield from process_semaphore.acquire()
-        stack.callback(process_semaphore.release)
+    async with process_semaphore:
         try:
-            proc = yield from asyncio.create_subprocess_exec(
+            proc = await asyncio.create_subprocess_exec(
                 *args, stdout=PIPE, stderr=PIPE, env=env, cwd=cwd)
         except (FileNotFoundError, PermissionError) as e:
             logging.error("Program not found: %s" % args[0])
             raise Exception("Program not found: %s" % args[0]) from e
         process_semaphore.add_pid(proc.pid)
-        stack.callback(process_semaphore.remove_pid, proc.pid)
-        outs, errs = yield from proc.communicate()
-        errs = errs.decode(sys.stderr.encoding, sys.stderr.errors)
-        if errs:
-            logging.debug(errs)
-        if proc.returncode != 0:
-            logging.error("Command '%s' returned non-zero exit status %d",
-                          args, proc.returncode)
-            raise CalledProcessError(proc.returncode, args, None)
-        return outs
+        try:
+            outs, errs = await proc.communicate()
+        finally:
+            process_semaphore.remove_pid(proc.pid)
+    errs = errs.decode(sys.stderr.encoding, sys.stderr.errors)
+    if errs:
+        logging.debug(errs)
+    if proc.returncode != 0:
+        logging.error("Command '%s' returned non-zero exit status %d",
+                      args, proc.returncode)
+        raise CalledProcessError(proc.returncode, args, None)
+    return outs

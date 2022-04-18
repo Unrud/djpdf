@@ -306,22 +306,19 @@ class ImageMagickImage:
                 self._mask == other._mask and
                 self._image_mask == other._image_mask)
 
-    @asyncio.coroutine
-    def pdf_image(self, process_semaphore):
-        return (yield from self._cache.get(
+    async def pdf_image(self, process_semaphore):
+        return (await self._cache.get(
             self._pdf_image(process_semaphore))).image
 
-    @asyncio.coroutine
-    def pdf_thumbnail(self, process_semaphore):
-        thumbnail = (yield from self._cache.get(
+    async def pdf_thumbnail(self, process_semaphore):
+        thumbnail = (await self._cache.get(
             self._pdf_image(process_semaphore))).thumbnail
         if not thumbnail:
             raise NotImplementedError(
                 "thumbnails not supported for image type")
         return thumbnail
 
-    @asyncio.coroutine
-    def _pdf_image(self, psem):
+    async def _pdf_image(self, psem):
         with BigTemporaryDirectory(prefix="djpdf-") as temp_dir:
             cmd = [CONVERT_CMD]
             if self._image_mask or self.compression in ("jp2", "jpeg"):
@@ -348,14 +345,12 @@ class ImageMagickImage:
                         path.abspath(path.join(temp_dir, "image.pdf"))])
 
             # Prepare everything in parallel
-            @asyncio.coroutine
-            def get_mask(psem):
+            async def get_mask(psem):
                 if self._mask is None:
                     return None
-                return (yield from self._mask.pdf_image(psem))
-            _, pdf_mask = yield from asyncio.gather(
-                run_command_async(cmd, psem),
-                get_mask(psem))
+                return await self._mask.pdf_image(psem)
+            _, pdf_mask = await asyncio.gather(run_command_async(cmd, psem),
+                                               get_mask(psem))
             pdf_reader = PdfReader(path.join(temp_dir, "image.pdf"))
             assert len(pdf_reader.pages[0].Resources.XObject) == 1, (
                 "Expected exactly one image from ImageMagick")
@@ -421,9 +416,8 @@ class Jbig2Image:
                             "corruption (e.g. the numbers '6' and '8' "
                             "get replaced)")
 
-    @asyncio.coroutine
-    def pdf_image(self, process_semaphore):
-        # Multiple JBIG2Images can share one symbol directory. They have to be
+    async def pdf_image(self, process_semaphore):
+        # Multiple JBIG2Images can share one symbol dictionary. They have to be
         # handled at once. _pdf_image searches the factory cache for all images
         # it handles.
         # The factory cache lock needs to be held until futures for the caches
@@ -431,11 +425,10 @@ class Jbig2Image:
         # _pdf_image multiple times for the same set of images.
         # The lock will be released by _pdf_image if it's not already in the
         # cache.
-        yield from self._factory._cache_lock.acquire()
+        await self._factory._cache_lock.acquire()
         self._cache_lock_acquired = True
         try:
-            return (yield from self._cache.get(
-                self._pdf_image(process_semaphore)))
+            return await self._cache.get(self._pdf_image(process_semaphore))
         finally:
             if self._cache_lock_acquired:
                 with contextlib.suppress(RuntimeError):
@@ -443,12 +436,10 @@ class Jbig2Image:
                     self._factory._cache_lock.release()
                 self._cache_lock_acquired = False
 
-    @asyncio.coroutine
-    def pdf_thumbnail(self, process_semaphore):
+    async def pdf_thumbnail(self, process_semaphore):
         raise NotImplementedError("thumbnails not supported for jbig2 images")
 
-    @asyncio.coroutine
-    def _pdf_image(self, psem):
+    async def _pdf_image(self, psem):
         with BigTemporaryDirectory(prefix="djpdf-") as temp_dir:
             # JBIG2Globals are only used in symbol mode
             # In symbol mode jbig2 writes output to files otherwise
@@ -456,14 +447,14 @@ class Jbig2Image:
             symbol_mode = self.jbig2_threshold != 1
             images_with_shared_globals = []
             if symbol_mode and SHARE_JBIG2_GLOBALS:
-                # Find all Jbig2Images that share the same symbol directory
+                # Find all Jbig2Images that share the same symbol dictionary
                 for obj in self._factory._cache:
                     if (isinstance(obj, Jbig2Image) and
                             self.compression == obj.compression and
                             self.jbig2_threshold == obj.jbig2_threshold):
                         images_with_shared_globals.append(obj)
             else:
-                # The symbol directory is not shared with other Jbig2Images
+                # The symbol dictionary is not shared with other Jbig2Images
                 images_with_shared_globals.append(self)
             # Promise all handled Jbig2Images the finished image
             image_futures = []
@@ -479,10 +470,9 @@ class Jbig2Image:
             self._cache_lock_acquired = False
 
             # Prepare everything in parallel
-            @asyncio.coroutine
-            def get_jbig2_images(psem):
+            async def get_jbig2_images(psem):
                 # Convert images with ImageMagick to bitonal png in parallel
-                yield from asyncio.gather(*[
+                await asyncio.gather(*[
                     run_command_async([
                         CONVERT_CMD,
                         "-alpha", "remove",
@@ -503,7 +493,7 @@ class Jbig2Image:
                 jbig2_images = []
                 jbig2_globals = None
                 if symbol_mode:
-                    yield from run_command_async(cmd, psem, cwd=temp_dir)
+                    await run_command_async(cmd, psem, cwd=temp_dir)
                     jbig2_globals = PdfDict()
                     jbig2_globals.indirect = True
                     with open(path.join(temp_dir, "output.sym"), "rb") as f:
@@ -514,17 +504,14 @@ class Jbig2Image:
                             jbig2_images.append(f.read())
                 else:
                     jbig2_images.append(
-                        (yield from run_command_async(cmd, psem,
-                                                      cwd=temp_dir)))
+                        await run_command_async(cmd, psem, cwd=temp_dir))
                 return jbig2_images, jbig2_globals
 
-            @asyncio.coroutine
-            def get_image_mask(image, psem):
+            async def get_image_mask(image, psem):
                 if image._mask is None:
                     return None
-                return (yield from image._mask.pdf_image(psem))
-            ((jbig2_images, jbig2_globals),
-             image_masks) = yield from asyncio.gather(
+                return await image._mask.pdf_image(psem)
+            (jbig2_images, jbig2_globals), image_masks = await asyncio.gather(
                 get_jbig2_images(psem),
                 asyncio.gather(*[get_image_mask(image, psem)
                                  for image in images_with_shared_globals]))
@@ -532,7 +519,7 @@ class Jbig2Image:
             for image, jbig2_image, image_mask, image_future in zip(
                     images_with_shared_globals, jbig2_images, image_masks,
                     image_futures):
-                (width, height, xres, yres) = struct.unpack(
+                width, height, xres, yres = struct.unpack(
                     '>IIII', jbig2_image[11:27])
                 pdf_image = PdfDict()
                 pdf_image.indirect = True
@@ -585,13 +572,11 @@ class MaskImage:
         assert self.color is None or masked_image is None, (
             "Color and masked image are mutual exclusive")
 
-    @asyncio.coroutine
-    def pdf_image(self, process_semaphore):
-        return (yield from self._image.pdf_image(process_semaphore))
+    async def pdf_image(self, process_semaphore):
+        return await self._image.pdf_image(process_semaphore)
 
-    @asyncio.coroutine
-    def pdf_mask(self, process_semaphore):
-        return (yield from self._mask.pdf_image(process_semaphore))
+    async def pdf_mask(self, process_semaphore):
+        return await self._mask.pdf_image(process_semaphore)
 
 
 class Page:
@@ -698,8 +683,7 @@ class PdfBuilder:
 
         return font
 
-    @asyncio.coroutine
-    def write_async(self, outfile, process_semaphore, progress_cb=None):
+    async def write_async(self, outfile, process_semaphore, progress_cb=None):
         pdf_writer = PdfWriter(version="1.5")
 
         pdf_group = PdfDict()
@@ -733,28 +717,24 @@ class PdfBuilder:
         default_rgb_colorspace.indirect = True
 
         # Handle all pages in parallel
-        @asyncio.coroutine
-        def make_page(page, pdf_page, psem):
+        async def make_page(page, pdf_page, psem):
             # Prepare everything in parallel
-            @asyncio.coroutine
-            def get_pdf_thumbnail(psem):
+            async def get_pdf_thumbnail(psem):
                 if page.thumbnail is None:
                     return None
-                return (yield from page.thumbnail.pdf_thumbnail(psem))
+                return await page.thumbnail.pdf_thumbnail(psem)
 
-            @asyncio.coroutine
-            def get_pdf_background(psem):
+            async def get_pdf_background(psem):
                 if page.background is None:
                     return None
-                return (yield from page.background.pdf_image(psem))
+                return await page.background.pdf_image(psem)
 
-            @asyncio.coroutine
-            def get_pdf_mask(foreground, psem):
+            async def get_pdf_mask(foreground, psem):
                 if foreground.color is not None:
                     return None
-                return (yield from foreground.pdf_mask(psem))
+                return await foreground.pdf_mask(psem)
             pdf_thumbnail, pdf_background, pdf_foregrounds, pdf_masks = (
-                yield from asyncio.gather(
+                await asyncio.gather(
                     get_pdf_thumbnail(psem),
                     get_pdf_background(psem),
                     asyncio.gather(*[fg.pdf_image(psem)
@@ -887,7 +867,7 @@ class PdfBuilder:
             if progress_cb:
                 progress_cb(finished_pages / len(self._pages))
         finished_pages = 0
-        yield from asyncio.gather(
+        await asyncio.gather(
             *[make_page(page, pdf_page, process_semaphore)
               for page, pdf_page in zip(self._pages, pdf_pages)])
 
@@ -928,7 +908,7 @@ class PdfBuilder:
                 cmd.extend(["--linearize"])
             cmd.extend([path.abspath(path.join(temp_dir, "temp.pdf")),
                         path.abspath(outfile)])
-            yield from run_command_async(cmd, process_semaphore)
+            await run_command_async(cmd, process_semaphore)
 
     def write(self, outfile, progress_cb=None):
         process_semaphore = MemoryBoundedSemaphore(

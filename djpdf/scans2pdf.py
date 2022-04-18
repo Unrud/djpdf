@@ -144,36 +144,25 @@ class BaseImageObject(BasePageObject):
         self._size_cache = AsyncCache()
         self._dpi_cache = AsyncCache()
 
-    @asyncio.coroutine
-    def size(self, process_semaphore):
-        return (yield from self._size_cache.get(self._size(process_semaphore)))
+    async def size(self, process_semaphore):
+        return await self._size_cache.get(self._size(process_semaphore))
 
-    @asyncio.coroutine
-    def _size(self, psem):
-        outs = yield from run_command_async([IDENTIFY_CMD,
-                                             "-format", "%w %h",
-                                             path.abspath(
-                                                 (yield from self.filename(
-                                                      psem)))],
-                                            psem)
+    async def _size(self, psem):
+        outs = await run_command_async(
+            [IDENTIFY_CMD, "-format", "%w %h",
+             path.abspath(await self.filename(psem))], psem)
         outs = outs.decode("ascii")
         outss = outs.split()
         w, h = int(outss[0]), int(outss[1])
         return w, h
 
-    @asyncio.coroutine
-    def dpi(self, process_semaphore):
-        return (yield from self._dpi_cache.get(self._dpi(process_semaphore)))
+    async def dpi(self, process_semaphore):
+        return await self._dpi_cache.get(self._dpi(process_semaphore))
 
-    @asyncio.coroutine
-    def _dpi(self, psem):
-        outs = yield from run_command_async([IDENTIFY_CMD,
-                                             "-units", "PixelsPerInch",
-                                             "-format", "%x %y",
-                                             path.abspath(
-                                                 (yield from self.filename(
-                                                      psem)))],
-                                            psem)
+    async def _dpi(self, psem):
+        outs = await run_command_async(
+            [IDENTIFY_CMD, "-units", "PixelsPerInch", "-format", "%x %y",
+             path.abspath(await self.filename(psem))], psem)
         outs = outs.decode("ascii")
         outss = outs.split()
         if len(outss) == 2:
@@ -187,13 +176,10 @@ class BaseImageObject(BasePageObject):
         return x, y
 
     @staticmethod
-    @asyncio.coroutine
-    def _is_plain_color_file(filename, color, process_semaphore):
-        outs = yield from run_command_async([CONVERT_CMD,
-                                             "-format", "%c",
-                                             path.abspath(filename),
-                                             "histogram:info:-"],
-                                            process_semaphore)
+    async def _is_plain_color_file(filename, color, process_semaphore):
+        outs = await run_command_async(
+            [CONVERT_CMD, "-format", "%c", path.abspath(filename),
+             "histogram:info:-"], process_semaphore)
         outs = outs.decode("ascii")
         histogram_re = re.compile(r"\s*(?P<count>\d+(?:(?:\.\d+)?e\+\d+)?):\s+"
                                   r"\(\s*(?P<r>\d+),\s*(?P<g>\d+),"
@@ -221,14 +207,12 @@ class InputImage(BaseImageObject):
         return (p["filename"] == op["filename"] and
                 p["bg_color"] == op["bg_color"])
 
-    @asyncio.coroutine
-    def filename(self, process_semaphore):
-        return (yield from self._cache.get(self._filename(process_semaphore)))
+    async def filename(self, process_semaphore):
+        return await self._cache.get(self._filename(process_semaphore))
 
-    @asyncio.coroutine
-    def _filename(self, psem):
+    async def _filename(self, psem):
         fname = path.join(self._temp_dir, "image.png")
-        yield from run_command_async([
+        await run_command_async([
             CONVERT_CMD,
             "-colorspace", "sRGB",
             "-profile", SRGB_ICC_FILENAME,
@@ -257,12 +241,10 @@ class BackgroundImage(BaseImageObject):
                  p["fg_colors"] == op["fg_colors"]) and
                 self._input_image == other._input_image)
 
-    @asyncio.coroutine
-    def filename(self, process_semaphore):
-        return (yield from self._cache.get(self._filename(process_semaphore)))
+    async def filename(self, process_semaphore):
+        return await self._cache.get(self._filename(process_semaphore))
 
-    @asyncio.coroutine
-    def _filename(self, psem):
+    async def _filename(self, psem):
         if (self._page["fg_enabled"] and self._page["fg_colors"] or
                 self._page["bg_resize"] != 1):
             fname = path.join(self._temp_dir, "image.png")
@@ -273,14 +255,13 @@ class BackgroundImage(BaseImageObject):
                     cmd.extend(["-opaque", _color_to_hex(color)])
             cmd.extend(["-resize", format_number(self._page["bg_resize"], 2,
                                                  percentage=True),
-                        path.abspath(
-                            (yield from self._input_image.filename(psem))),
+                        path.abspath(await self._input_image.filename(psem)),
                         path.abspath(fname)])
-            yield from run_command_async(cmd, psem)
+            await run_command_async(cmd, psem)
         else:
-            fname = yield from self._input_image.filename(psem)
-        if (yield from self._is_plain_color_file(fname, self._page["bg_color"],
-                                                 psem)):
+            fname = await self._input_image.filename(psem)
+        if await self._is_plain_color_file(fname, self._page["bg_color"],
+                                           psem):
             return None
         return fname
 
@@ -302,19 +283,17 @@ class Background(BasePageObject):
                 p["bg_quality"] == op["bg_quality"] and
                 self._background_image == other._background_image)
 
-    @asyncio.coroutine
-    def json(self, process_semaphore):
-        return (yield from self._cache.get(self._json(process_semaphore)))
+    async def json(self, process_semaphore):
+        return await self._cache.get(self._json(process_semaphore))
 
-    @asyncio.coroutine
-    def _json(self, psem):
+    async def _json(self, psem):
         if (not self._page["bg_enabled"] or
-                (yield from self._background_image.filename(psem)) is None):
+                await self._background_image.filename(psem) is None):
             return None
         return {
             "compression": self._page["bg_compression"],
             "quality": self._page["bg_quality"],
-            "filename": (yield from self._background_image.filename(psem))
+            "filename": await self._background_image.filename(psem)
         }
 
 
@@ -333,12 +312,10 @@ class ForegroundImage(BaseImageObject):
                 op["fg_colors"][other._color_index] and
                 self._input_image == other._input_image)
 
-    @asyncio.coroutine
-    def filename(self, process_semaphore):
-        return (yield from self._cache.get(self._filename(process_semaphore)))
+    async def filename(self, process_semaphore):
+        return await self._cache.get(self._filename(process_semaphore))
 
-    @asyncio.coroutine
-    def _filename(self, psem):
+    async def _filename(self, psem):
         fname = path.join(self._temp_dir, "image.png")
         color = self._page["fg_colors"][self._color_index]
         cmd = [CONVERT_CMD]
@@ -353,12 +330,10 @@ class ForegroundImage(BaseImageObject):
                     "-fill", "#000000",
                     "-opaque", _color_to_hex(color),
                     "-threshold", "0",
-                    path.abspath(
-                        (yield from self._input_image.filename(psem))),
+                    path.abspath(await self._input_image.filename(psem)),
                     path.abspath(fname)])
-        yield from run_command_async(cmd, psem)
-        if (yield from self._is_plain_color_file(fname, (0xff, 0xff, 0xff),
-                                                 psem)):
+        await run_command_async(cmd, psem)
+        if await self._is_plain_color_file(fname, (0xff, 0xff, 0xff), psem):
             return None
         return fname
 
@@ -383,20 +358,18 @@ class Foreground(BasePageObject):
                 op["fg_colors"][other._color_index] and
                 self._foreground_image == other._foreground_image)
 
-    @asyncio.coroutine
-    def json(self, process_semaphore):
-        return (yield from self._cache.get(self._json(process_semaphore)))
+    async def json(self, process_semaphore):
+        return await self._cache.get(self._json(process_semaphore))
 
-    @asyncio.coroutine
-    def _json(self, psem):
+    async def _json(self, psem):
         if (not self._page["fg_enabled"] or
-                (yield from self._foreground_image.filename(psem)) is None):
+                await self._foreground_image.filename(psem) is None):
             return None
         color = self._page["fg_colors"][self._color_index]
         return {
             "compression": self._page["fg_compression"],
             "jbig2_threshold": self._page["fg_jbig2_threshold"],
-            "filename": (yield from self._foreground_image.filename(psem)),
+            "filename": await self._foreground_image.filename(psem),
             "color": color
         }
 
@@ -414,12 +387,10 @@ class OcrImage(BaseImageObject):
         return (p["ocr_colors"] == op["ocr_colors"] and
                 self._input_image == other._input_image)
 
-    @asyncio.coroutine
-    def filename(self, process_semaphore):
-        return (yield from self._cache.get(self._filename(process_semaphore)))
+    async def filename(self, process_semaphore):
+        return await self._cache.get(self._filename(process_semaphore))
 
-    @asyncio.coroutine
-    def _filename(self, psem):
+    async def _filename(self, psem):
         if self._page["ocr_colors"] != "all":
             fname = path.join(self._temp_dir, "image.png")
 
@@ -443,12 +414,11 @@ class OcrImage(BaseImageObject):
             for color in self._page["ocr_colors"]:
                 cmd.extend(["-opaque", _color_to_hex(color)])
             cmd.extend(["-threshold", "0"])
-            cmd.extend([path.abspath(
-                            (yield from self._input_image.filename(psem))),
+            cmd.extend([path.abspath(await self._input_image.filename(psem)),
                         path.abspath(fname)])
-            yield from run_command_async(cmd, psem)
+            await run_command_async(cmd, psem)
         else:
-            fname = yield from self._input_image.filename(psem)
+            fname = await self._input_image.filename(psem)
         return fname
 
 
@@ -468,27 +438,21 @@ class Ocr(BasePageObject):
                 p["ocr_language"] == op["ocr_language"] and
                 self._ocr_image == other._ocr_image)
 
-    @asyncio.coroutine
-    def texts(self, process_semaphore):
-        return (yield from self._cache.get(self._texts(process_semaphore)))
+    async def texts(self, process_semaphore):
+        return await self._cache.get(self._texts(process_semaphore))
 
-    @asyncio.coroutine
-    def _texts(self, psem):
+    async def _texts(self, psem):
         if not self._page["ocr_enabled"]:
             return None
         if self._page["dpi"] == "auto":
-            dpi_x, _ = yield from self._input_image.dpi(psem)
+            dpi_x, _ = await self._input_image.dpi(psem)
         else:
             dpi_x = self._page["dpi"]
-        yield from run_command_async([TESSERACT_CMD,
-                                      "-l", self._page["ocr_language"],
-                                      "--dpi", "%.0f" % dpi_x,
-                                      path.abspath(
-                                          (yield from self._ocr_image.filename(
-                                               psem))),
-                                      path.abspath(
-                                          path.join(self._temp_dir, "ocr")),
-                                      "hocr"], psem)
+        await run_command_async(
+            [TESSERACT_CMD, "-l", self._page["ocr_language"],
+             "--dpi", "%.0f" % dpi_x,
+             path.abspath(await self._ocr_image.filename(psem)),
+             path.abspath(path.join(self._temp_dir, "ocr")), "hocr"], psem)
         return hocr.extract_text(path.join(self._temp_dir, "ocr.hocr"))
 
 
@@ -516,20 +480,17 @@ class Page(BasePageObject):
                 self._background == other._background and
                 self._ocr == other._ocr)
 
-    @asyncio.coroutine
-    def json(self, process_semaphore):
-        return (yield from self._cache.get(self._json(process_semaphore)))
+    async def json(self, process_semaphore):
+        return await self._cache.get(self._json(process_semaphore))
 
-    @asyncio.coroutine
-    def _json(self, psem):
+    async def _json(self, psem):
         # Prepare everything in parallel
-        @asyncio.coroutine
-        def get_dpi(psem):
+        async def get_dpi(psem):
             if self._page["dpi"] == "auto":
-                return (yield from self._input_image.dpi(psem))
+                return await self._input_image.dpi(psem)
             return self._page["dpi"], self._page["dpi"]
         (texts, background, foregrounds_json, (width, height),
-         (dpi_x, dpi_y)) = yield from asyncio.gather(
+         (dpi_x, dpi_y)) = await asyncio.gather(
                 self._ocr.texts(psem),
                 self._background.json(psem),
                 asyncio.gather(*[fg.json(psem) for fg in self._foregrounds]),
@@ -595,31 +556,27 @@ class Page(BasePageObject):
         return page
 
 
-@asyncio.coroutine
-def build_pdf_async(pages, pdf_filename, process_semaphore, progress_cb=None):
+async def build_pdf_async(pages, pdf_filename, process_semaphore, progress_cb=None):
     factory = RecipeFactory()
 
     finished_pages = 0
 
-    @asyncio.coroutine
-    def progress_wrapper(fut):
+    async def progress_wrapper(fut):
         nonlocal finished_pages
-        res = yield from fut
+        res = await fut
         finished_pages += 1
         if progress_cb:
             progress_cb(finished_pages / len(pages) * 0.5)
         return res
 
     try:
-        djpdf_pages = yield from asyncio.gather(
-            *[progress_wrapper(factory.make_page(page).json(process_semaphore))
-              for page in pages])
-        pdf_builder = PdfBuilder({
-            "pages": djpdf_pages
-        })
-        return (yield from pdf_builder.write_async(
+        djpdf_pages = await asyncio.gather(*[
+            progress_wrapper(factory.make_page(page).json(process_semaphore))
+            for page in pages])
+        pdf_builder = PdfBuilder({"pages": djpdf_pages})
+        return await pdf_builder.write_async(
             pdf_filename, process_semaphore,
-            lambda f: progress_cb(0.5 + f * 0.5) if progress_cb else None))
+            lambda f: progress_cb(0.5 + f * 0.5) if progress_cb else None)
     finally:
         factory.cleanup()
 
