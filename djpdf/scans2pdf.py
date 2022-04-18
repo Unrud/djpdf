@@ -523,6 +523,7 @@ class Page(BasePageObject):
     @asyncio.coroutine
     def _json(self, psem):
         # Prepare everything in parallel
+        @asyncio.coroutine
         def get_dpi(psem):
             if self._page["dpi"] == "auto":
                 return (yield from self._input_image.dpi(psem))
