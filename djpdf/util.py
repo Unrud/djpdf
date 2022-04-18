@@ -19,9 +19,11 @@ import asyncio
 import contextlib
 import logging
 import os
+import signal
 import sys
 from subprocess import PIPE, CalledProcessError
 
+import colorama
 import psutil
 
 
@@ -175,3 +177,55 @@ async def run_command_async(args, process_semaphore, cwd=None):
                       args, proc.returncode)
         raise CalledProcessError(proc.returncode, args, None)
     return outs
+
+
+class ColorStreamHandler(logging.StreamHandler):
+    def __init__(self, stream=None):
+        super().__init__(stream=stream)
+        tty = hasattr(self.stream, 'isatty') and self.stream.isatty()
+        self.stream = colorama.AnsiToWin32(
+            self.stream,
+            strip=None if tty else True,
+            autoreset=True).stream
+
+    def emit(self, record):
+        try:
+            level = record.levelno
+            f = b = ""
+            if level >= logging.WARNING:
+                f = colorama.Fore.YELLOW
+            if level >= logging.ERROR:
+                f = colorama.Fore.RED
+            msg = self.format(record)
+            stream = self.stream
+            stream.write(f + b + msg)
+            stream.write(self.terminator)
+            self.flush()
+        except Exception:
+            self.handleError(record)
+
+
+def cli_setup():
+    # Setup signals:
+    # Raise SystemExit when signal arrives to run cleanup code
+    # (like destructors, try-finish etc.), otherwise the process exits
+    # without running any of them
+    def signal_handler(signal_number, stack_frame):
+        sys.exit(1)
+    signal.signal(signal.SIGTERM, signal_handler)
+    signal.signal(signal.SIGINT, signal_handler)
+    if sys.platform != "win32":
+        signal.signal(signal.SIGHUP, signal_handler)
+
+    # Setup logging:
+    ch = ColorStreamHandler(sys.stderr)
+    fmt = logging.Formatter('%(levelname)s:%(message)s')
+    ch.setFormatter(fmt)
+    logging.getLogger().addHandler(ch)
+
+
+def cli_set_verbosity(verbose):
+    if verbose:
+        logging.getLogger().setLevel(logging.DEBUG)
+    else:
+        logging.getLogger().setLevel(logging.WARNING)

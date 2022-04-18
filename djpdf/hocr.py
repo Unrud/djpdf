@@ -23,7 +23,7 @@ import traceback
 from argparse import ArgumentParser
 from xml.etree.ElementTree import ElementTree
 
-from djpdf.djpdf import setup_signals
+from djpdf.util import cli_set_verbosity, cli_setup
 
 try:
     from PIL import Image, ImageDraw
@@ -103,15 +103,14 @@ def _draw_image(image_filename, texts):
 
 
 def main():
-    setup_signals()
+    cli_setup()
     parser = ArgumentParser()
     parser.add_argument("-v", "--verbose", help="increase output verbosity",
                         action="store_true")
     if HAS_PIL:
         parser.add_argument('--image', metavar='IMAGE_FILE', action="store")
     args = parser.parse_args()
-    if args.verbose:
-        logging.getLogger().setLevel(logging.DEBUG)
+    cli_set_verbosity(args.verbose)
     try:
         texts = extract_text(sys.stdin)
         print(json.dumps(texts))

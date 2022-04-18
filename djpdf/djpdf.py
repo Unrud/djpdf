@@ -21,7 +21,6 @@ import json
 import logging
 import math
 import os
-import signal
 import struct
 import sys
 import tempfile
@@ -36,8 +35,9 @@ import pkg_resources
 from libxmp import XMPMeta
 from libxmp.consts import XMP_NS_PDFA_ID
 
-from djpdf.util import (AsyncCache, MemoryBoundedSemaphore, compat_asyncio_run,
-                        format_number, run_command_async)
+from djpdf.util import (AsyncCache, MemoryBoundedSemaphore, cli_set_verbosity,
+                        cli_setup, compat_asyncio_run, format_number,
+                        run_command_async)
 
 # pdfrw tampers with logging
 _orig_basic_config = logging.basicConfig
@@ -918,27 +918,14 @@ async def build_pdf(recipe, pdf_filename, process_semaphore=None,
     await pdf_builder.write(pdf_filename, process_semaphore, progress_cb)
 
 
-def setup_signals():
-    # Raise SystemExit when signal arrives to run cleanup code
-    # (like destructors, try-finish etc.), otherwise the process exits
-    # without running any of them
-    def signal_handler(signal_number, stack_frame):
-        sys.exit(1)
-    signal.signal(signal.SIGTERM, signal_handler)
-    signal.signal(signal.SIGINT, signal_handler)
-    if os.name == "posix":
-        signal.signal(signal.SIGHUP, signal_handler)
-
-
 def main():
-    setup_signals()
+    cli_setup()
     parser = ArgumentParser()
     parser.add_argument("-v", "--verbose", help="increase output verbosity",
                         action="store_true")
     parser.add_argument("OUTFILE")
     args = parser.parse_args()
-    if args.verbose:
-        logging.getLogger().setLevel(logging.DEBUG)
+    cli_set_verbosity(args.verbose)
 
     def progress_cb(fraction):
         json.dump({"fraction": fraction}, sys.stdout)

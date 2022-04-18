@@ -28,9 +28,10 @@ from os import path
 from djpdf import hocr
 from djpdf.djpdf import (CONVERT_CMD, JOB_MEMORY, PARALLEL_JOBS,
                          RESERVED_MEMORY, SRGB_ICC_FILENAME,
-                         BigTemporaryDirectory, PdfBuilder, setup_signals)
-from djpdf.util import (AsyncCache, MemoryBoundedSemaphore, compat_asyncio_run,
-                        format_number, run_command_async)
+                         BigTemporaryDirectory, PdfBuilder)
+from djpdf.util import (AsyncCache, MemoryBoundedSemaphore, cli_set_verbosity,
+                        cli_setup, compat_asyncio_run, format_number,
+                        run_command_async)
 
 DEFAULT_SETTINGS = {
     "dpi": "auto",
@@ -587,14 +588,13 @@ async def build_pdf(pages, pdf_filename, process_semaphore=None,
 
 
 def main():
-    setup_signals()
+    cli_setup()
     parser = ArgumentParser()
     parser.add_argument("-v", "--verbose", help="increase output verbosity",
                         action="store_true")
     parser.add_argument("OUTFILE")
     args = parser.parse_args()
-    if args.verbose:
-        logging.getLogger().setLevel(logging.DEBUG)
+    cli_set_verbosity(args.verbose)
 
     def progress_cb(fraction):
         json.dump({"fraction": fraction}, sys.stdout)

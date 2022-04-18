@@ -24,49 +24,16 @@ import sys
 import traceback
 from argparse import ArgumentParser, ArgumentTypeError
 
-import colorama
 import pkg_resources
 import webcolors
 
-from djpdf.djpdf import CONVERT_CMD, JBIG2_CMD, QPDF_CMD, setup_signals
+from djpdf.djpdf import CONVERT_CMD, JBIG2_CMD, QPDF_CMD
 from djpdf.scans2pdf import (DEFAULT_SETTINGS, IDENTIFY_CMD, TESSERACT_CMD,
                              build_pdf, find_ocr_languages)
-from djpdf.util import compat_asyncio_run, format_number
+from djpdf.util import (cli_set_verbosity, cli_setup, compat_asyncio_run,
+                        format_number)
 
 VERSION = pkg_resources.get_distribution("djpdf").version
-
-
-class ColorStreamHandler(logging.StreamHandler):
-    def __init__(self, stream=None):
-        super().__init__(stream=stream)
-        tty = hasattr(self.stream, 'isatty') and self.stream.isatty()
-        self.stream = colorama.AnsiToWin32(
-            self.stream,
-            strip=None if tty else True,
-            autoreset=True).stream
-
-    def emit(self, record):
-        try:
-            level = record.levelno
-            f = b = ""
-            if level >= logging.WARNING:
-                f = colorama.Fore.YELLOW
-            if level >= logging.ERROR:
-                f = colorama.Fore.RED
-            msg = self.format(record)
-            stream = self.stream
-            stream.write(f + b + msg)
-            stream.write(self.terminator)
-            self.flush()
-        except Exception:
-            self.handleError(record)
-
-
-def setup_logging():
-    ch = ColorStreamHandler(sys.stdout)
-    fmt = logging.Formatter('%(levelname)s:%(message)s')
-    ch.setFormatter(fmt)
-    logging.getLogger().addHandler(ch)
 
 
 def type_fraction(var):
@@ -231,6 +198,8 @@ def test_command_exists(args, fatal=False):
 
 
 def main():
+    cli_setup()
+
     def rgb_to_name_or_hex(rgb):
         try:
             return webcolors.rgb_to_name(rgb)
@@ -246,9 +215,6 @@ def main():
 
     def format_number_percentage(d):
         return format_number(d, 2, percentage=True)
-
-    setup_signals()
-    setup_logging()
 
     df = copy.deepcopy(DEFAULT_SETTINGS)
     # Autodetect features
@@ -380,8 +346,8 @@ def main():
 
     # handle global arguments
     ns = parser.parse_args(global_argv)
-    if ns.verbose:
-        logging.getLogger().setLevel(logging.DEBUG)
+    cli_set_verbosity(ns.verbose)
+
     if ns.ocr_list_langs:
         print("\n".join(ocr_languages))
         sys.exit(0)
