@@ -26,9 +26,9 @@ from argparse import ArgumentParser
 from os import path
 
 from djpdf import hocr
-from djpdf.djpdf import (CONVERT_CMD, PARALLEL_JOBS, JOB_MEMORY,
-                         RESERVED_MEMORY, PdfBuilder, SRGB_ICC_FILENAME,
-                         BigTemporaryDirectory, setup_signals)
+from djpdf.djpdf import (CONVERT_CMD, JOB_MEMORY, PARALLEL_JOBS,
+                         RESERVED_MEMORY, SRGB_ICC_FILENAME,
+                         BigTemporaryDirectory, PdfBuilder, setup_signals)
 from djpdf.util import (AsyncCache, MemoryBoundedSemaphore, format_number,
                         run_command_async)
 

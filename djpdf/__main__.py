@@ -1,4 +1,4 @@
-from djpdf import scans2pdfcli
+from djpdf.scans2pdfcli import main
 
 if __name__ == "__main__":
-    scans2pdfcli.main()
+    main()

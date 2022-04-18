@@ -15,17 +15,18 @@
 
 # Copyright 2015, 2017 Unrud <unrud@outlook.com>
 
-import colorama
 import copy
 import logging
 import os
-import pkg_resources
 import re
 import subprocess
 import sys
 import traceback
-import webcolors
 from argparse import ArgumentParser, ArgumentTypeError
+
+import colorama
+import pkg_resources
+import webcolors
 
 from djpdf.djpdf import CONVERT_CMD, JBIG2_CMD, QPDF_CMD, setup_signals
 from djpdf.scans2pdf import (DEFAULT_SETTINGS, IDENTIFY_CMD, TESSERACT_CMD,

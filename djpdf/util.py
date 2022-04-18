@@ -19,9 +19,10 @@ import asyncio
 import contextlib
 import logging
 import os
-import psutil
 import sys
 from subprocess import PIPE, CalledProcessError
+
+import psutil
 
 
 class MemoryBoundedSemaphore():

@@ -21,7 +21,6 @@ import json
 import logging
 import math
 import os
-import pkg_resources
 import signal
 import struct
 import sys
@@ -31,11 +30,13 @@ import zlib
 from argparse import ArgumentParser
 from collections import namedtuple
 from itertools import chain
-from libxmp import XMPMeta
-from libxmp.consts import XMP_NS_PDFA_ID
 from os import path
 
-from djpdf.util import (AsyncCache, format_number, MemoryBoundedSemaphore,
+import pkg_resources
+from libxmp import XMPMeta
+from libxmp.consts import XMP_NS_PDFA_ID
+
+from djpdf.util import (AsyncCache, MemoryBoundedSemaphore, format_number,
                         run_command_async)
 
 # pdfrw tampers with logging
