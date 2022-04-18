@@ -306,13 +306,11 @@ class ImageMagickImage:
                 self._mask == other._mask and
                 self._image_mask == other._image_mask)
 
-    async def pdf_image(self, process_semaphore):
-        return (await self._cache.get(
-            self._pdf_image(process_semaphore))).image
+    async def pdf_image(self, psem):
+        return (await self._cache.get(self._pdf_image(psem))).image
 
-    async def pdf_thumbnail(self, process_semaphore):
-        thumbnail = (await self._cache.get(
-            self._pdf_image(process_semaphore))).thumbnail
+    async def pdf_thumbnail(self, psem):
+        thumbnail = (await self._cache.get(self._pdf_image(psem))).thumbnail
         if not thumbnail:
             raise NotImplementedError(
                 "thumbnails not supported for image type")
@@ -416,7 +414,7 @@ class Jbig2Image:
                             "corruption (e.g. the numbers '6' and '8' "
                             "get replaced)")
 
-    async def pdf_image(self, process_semaphore):
+    async def pdf_image(self, psem):
         # Multiple JBIG2Images can share one symbol dictionary. They have to be
         # handled at once. _pdf_image searches the factory cache for all images
         # it handles.
@@ -428,13 +426,13 @@ class Jbig2Image:
         await self._factory._cache_lock.acquire()
         self._cache_lock_acquired = True
         try:
-            return await self._cache.get(self._pdf_image(process_semaphore))
+            return await self._cache.get(self._pdf_image(psem))
         finally:
             if self._cache_lock_acquired:
                 self._factory._cache_lock.release()
                 self._cache_lock_acquired = False
 
-    async def pdf_thumbnail(self, process_semaphore):
+    async def pdf_thumbnail(self, psem):
         raise NotImplementedError("thumbnails not supported for jbig2 images")
 
     async def _pdf_image(self, psem):
@@ -570,11 +568,11 @@ class MaskImage:
         assert self.color is None or masked_image is None, (
             "Color and masked image are mutual exclusive")
 
-    async def pdf_image(self, process_semaphore):
-        return await self._image.pdf_image(process_semaphore)
+    async def pdf_image(self, psem):
+        return await self._image.pdf_image(psem)
 
-    async def pdf_mask(self, process_semaphore):
-        return await self._mask.pdf_image(process_semaphore)
+    async def pdf_mask(self, psem):
+        return await self._mask.pdf_image(psem)
 
 
 class Page:
@@ -681,7 +679,7 @@ class PdfBuilder:
 
         return font
 
-    async def write(self, outfile, process_semaphore, progress_cb=None):
+    async def write(self, outfile, psem, progress_cb=None):
         pdf_writer = PdfWriter(version="1.5")
 
         pdf_group = PdfDict()
@@ -866,7 +864,7 @@ class PdfBuilder:
                 progress_cb(finished_pages / len(self._pages))
         finished_pages = 0
         await asyncio.gather(
-            *[make_page(page, pdf_page, process_semaphore)
+            *[make_page(page, pdf_page, psem)
               for page, pdf_page in zip(self._pages, pdf_pages)])
 
         trailer = pdf_writer.trailer
@@ -906,7 +904,7 @@ class PdfBuilder:
                 cmd.extend(["--linearize"])
             cmd.extend([path.abspath(path.join(temp_dir, "temp.pdf")),
                         path.abspath(outfile)])
-            await run_command(cmd, process_semaphore)
+            await run_command(cmd, psem)
 
 
 async def build_pdf(recipe, pdf_filename, process_semaphore=None,

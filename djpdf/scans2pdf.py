@@ -145,8 +145,8 @@ class BaseImageObject(BasePageObject):
         self._size_cache = AsyncCache()
         self._dpi_cache = AsyncCache()
 
-    async def size(self, process_semaphore):
-        return await self._size_cache.get(self._size(process_semaphore))
+    async def size(self, psem):
+        return await self._size_cache.get(self._size(psem))
 
     async def _size(self, psem):
         outs = await run_command([
@@ -157,8 +157,8 @@ class BaseImageObject(BasePageObject):
         w, h = int(outss[0]), int(outss[1])
         return w, h
 
-    async def dpi(self, process_semaphore):
-        return await self._dpi_cache.get(self._dpi(process_semaphore))
+    async def dpi(self, psem):
+        return await self._dpi_cache.get(self._dpi(psem))
 
     async def _dpi(self, psem):
         outs = await run_command([
@@ -177,10 +177,10 @@ class BaseImageObject(BasePageObject):
         return x, y
 
     @staticmethod
-    async def _is_plain_color_file(filename, color, process_semaphore):
+    async def _is_plain_color_file(filename, color, psem):
         outs = await run_command([
             CONVERT_CMD, "-format", "%c", path.abspath(filename),
-            "histogram:info:-"], process_semaphore)
+            "histogram:info:-"], psem)
         outs = outs.decode("ascii")
         histogram_re = re.compile(r"\s*(?P<count>\d+(?:(?:\.\d+)?e\+\d+)?):\s+"
                                   r"\(\s*(?P<r>\d+),\s*(?P<g>\d+),"
@@ -208,8 +208,8 @@ class InputImage(BaseImageObject):
         return (p["filename"] == op["filename"] and
                 p["bg_color"] == op["bg_color"])
 
-    async def filename(self, process_semaphore):
-        return await self._cache.get(self._filename(process_semaphore))
+    async def filename(self, psem):
+        return await self._cache.get(self._filename(psem))
 
     async def _filename(self, psem):
         fname = path.join(self._temp_dir, "image.png")
@@ -242,8 +242,8 @@ class BackgroundImage(BaseImageObject):
                  p["fg_colors"] == op["fg_colors"]) and
                 self._input_image == other._input_image)
 
-    async def filename(self, process_semaphore):
-        return await self._cache.get(self._filename(process_semaphore))
+    async def filename(self, psem):
+        return await self._cache.get(self._filename(psem))
 
     async def _filename(self, psem):
         if (self._page["fg_enabled"] and self._page["fg_colors"] or
@@ -284,8 +284,8 @@ class Background(BasePageObject):
                 p["bg_quality"] == op["bg_quality"] and
                 self._background_image == other._background_image)
 
-    async def json(self, process_semaphore):
-        return await self._cache.get(self._json(process_semaphore))
+    async def json(self, psem):
+        return await self._cache.get(self._json(psem))
 
     async def _json(self, psem):
         if (not self._page["bg_enabled"] or
@@ -313,8 +313,8 @@ class ForegroundImage(BaseImageObject):
                 op["fg_colors"][other._color_index] and
                 self._input_image == other._input_image)
 
-    async def filename(self, process_semaphore):
-        return await self._cache.get(self._filename(process_semaphore))
+    async def filename(self, psem):
+        return await self._cache.get(self._filename(psem))
 
     async def _filename(self, psem):
         fname = path.join(self._temp_dir, "image.png")
@@ -359,8 +359,8 @@ class Foreground(BasePageObject):
                 op["fg_colors"][other._color_index] and
                 self._foreground_image == other._foreground_image)
 
-    async def json(self, process_semaphore):
-        return await self._cache.get(self._json(process_semaphore))
+    async def json(self, psem):
+        return await self._cache.get(self._json(psem))
 
     async def _json(self, psem):
         if (not self._page["fg_enabled"] or
@@ -388,8 +388,8 @@ class OcrImage(BaseImageObject):
         return (p["ocr_colors"] == op["ocr_colors"] and
                 self._input_image == other._input_image)
 
-    async def filename(self, process_semaphore):
-        return await self._cache.get(self._filename(process_semaphore))
+    async def filename(self, psem):
+        return await self._cache.get(self._filename(psem))
 
     async def _filename(self, psem):
         if self._page["ocr_colors"] != "all":
@@ -439,8 +439,8 @@ class Ocr(BasePageObject):
                 p["ocr_language"] == op["ocr_language"] and
                 self._ocr_image == other._ocr_image)
 
-    async def texts(self, process_semaphore):
-        return await self._cache.get(self._texts(process_semaphore))
+    async def texts(self, psem):
+        return await self._cache.get(self._texts(psem))
 
     async def _texts(self, psem):
         if not self._page["ocr_enabled"]:
@@ -481,8 +481,8 @@ class Page(BasePageObject):
                 self._background == other._background and
                 self._ocr == other._ocr)
 
-    async def json(self, process_semaphore):
-        return await self._cache.get(self._json(process_semaphore))
+    async def json(self, psem):
+        return await self._cache.get(self._json(psem))
 
     async def _json(self, psem):
         # Prepare everything in parallel
