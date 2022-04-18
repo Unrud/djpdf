@@ -162,6 +162,8 @@ async def run_command_async(args, process_semaphore, cwd=None):
         try:
             outs, errs = await proc.communicate()
         finally:
+            with contextlib.suppress(ProcessLookupError):
+                proc.kill()
             process_semaphore.remove_pid(proc.pid)
     errs = errs.decode(sys.stderr.encoding, sys.stderr.errors)
     if errs:
