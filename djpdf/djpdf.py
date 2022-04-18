@@ -36,8 +36,8 @@ import pkg_resources
 from libxmp import XMPMeta
 from libxmp.consts import XMP_NS_PDFA_ID
 
-from djpdf.util import (AsyncCache, MemoryBoundedSemaphore, format_number,
-                        run_command_async)
+from djpdf.util import (AsyncCache, MemoryBoundedSemaphore, compat_asyncio_run,
+                        format_number, run_command_async)
 
 # pdfrw tampers with logging
 _orig_basic_config = logging.basicConfig
@@ -431,9 +431,7 @@ class Jbig2Image:
             return await self._cache.get(self._pdf_image(process_semaphore))
         finally:
             if self._cache_lock_acquired:
-                with contextlib.suppress(RuntimeError):
-                    # event loop might be closed
-                    self._factory._cache_lock.release()
+                self._factory._cache_lock.release()
                 self._cache_lock_acquired = False
 
     async def pdf_thumbnail(self, process_semaphore):
@@ -683,7 +681,7 @@ class PdfBuilder:
 
         return font
 
-    async def write_async(self, outfile, process_semaphore, progress_cb=None):
+    async def write(self, outfile, process_semaphore, progress_cb=None):
         pdf_writer = PdfWriter(version="1.5")
 
         pdf_group = PdfDict()
@@ -910,15 +908,14 @@ class PdfBuilder:
                         path.abspath(outfile)])
             await run_command_async(cmd, process_semaphore)
 
-    def write(self, outfile, progress_cb=None):
+
+async def build_pdf(recipe, pdf_filename, process_semaphore=None,
+                    progress_cb=None):
+    if process_semaphore is None:
         process_semaphore = MemoryBoundedSemaphore(
             PARALLEL_JOBS, JOB_MEMORY, RESERVED_MEMORY)
-        loop = asyncio.get_event_loop()
-        try:
-            return loop.run_until_complete(
-                self.write_async(outfile, process_semaphore, progress_cb))
-        finally:
-            loop.close()
+    pdf_builder = PdfBuilder(recipe)
+    await pdf_builder.write(pdf_filename, process_semaphore, progress_cb)
 
 
 def setup_signals():
@@ -949,8 +946,8 @@ def main():
         sys.stdout.flush()
     try:
         recipe = json.load(sys.stdin)
-        pdf_builder = PdfBuilder(recipe)
-        pdf_builder.write(args.OUTFILE, progress_cb)
+        compat_asyncio_run(build_pdf(recipe, args.OUTFILE,
+                                     progress_cb=progress_cb))
     except Exception:
         logging.debug("Exception occurred:\n%s" % traceback.format_exc())
         logging.fatal("Operation failed")

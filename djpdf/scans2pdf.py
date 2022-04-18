@@ -29,8 +29,8 @@ from djpdf import hocr
 from djpdf.djpdf import (CONVERT_CMD, JOB_MEMORY, PARALLEL_JOBS,
                          RESERVED_MEMORY, SRGB_ICC_FILENAME,
                          BigTemporaryDirectory, PdfBuilder, setup_signals)
-from djpdf.util import (AsyncCache, MemoryBoundedSemaphore, format_number,
-                        run_command_async)
+from djpdf.util import (AsyncCache, MemoryBoundedSemaphore, compat_asyncio_run,
+                        format_number, run_command_async)
 
 DEFAULT_SETTINGS = {
     "dpi": "auto",
@@ -556,7 +556,12 @@ class Page(BasePageObject):
         return page
 
 
-async def build_pdf_async(pages, pdf_filename, process_semaphore, progress_cb=None):
+async def build_pdf(pages, pdf_filename, process_semaphore=None,
+                    progress_cb=None):
+    if process_semaphore is None:
+        process_semaphore = MemoryBoundedSemaphore(
+            PARALLEL_JOBS, JOB_MEMORY, RESERVED_MEMORY)
+
     factory = RecipeFactory()
 
     finished_pages = 0
@@ -574,22 +579,11 @@ async def build_pdf_async(pages, pdf_filename, process_semaphore, progress_cb=No
             progress_wrapper(factory.make_page(page).json(process_semaphore))
             for page in pages])
         pdf_builder = PdfBuilder({"pages": djpdf_pages})
-        return await pdf_builder.write_async(
+        return await pdf_builder.write(
             pdf_filename, process_semaphore,
             lambda f: progress_cb(0.5 + f * 0.5) if progress_cb else None)
     finally:
         factory.cleanup()
-
-
-def build_pdf(pages, pdf_filename, progress_cb=None):
-    process_semaphore = MemoryBoundedSemaphore(
-        PARALLEL_JOBS, JOB_MEMORY, RESERVED_MEMORY)
-    loop = asyncio.get_event_loop()
-    try:
-        return loop.run_until_complete(build_pdf_async(
-            pages, pdf_filename, process_semaphore, progress_cb))
-    finally:
-        loop.close()
 
 
 def main():
@@ -608,7 +602,8 @@ def main():
         sys.stdout.flush()
     try:
         recipe = json.load(sys.stdin)
-        build_pdf(recipe, args.OUTFILE, progress_cb)
+        compat_asyncio_run(build_pdf(recipe, args.OUTFILE,
+                                     progress_cb=progress_cb))
     except Exception:
         logging.debug("Exception occurred:\n%s" % traceback.format_exc())
         logging.fatal("Operation failed")

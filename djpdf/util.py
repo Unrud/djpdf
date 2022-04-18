@@ -107,22 +107,17 @@ class AsyncCache:
     _content = None
     _lock = None
 
-    def __init__(self):
+    def __init__(self, *, loop=None):
         self._cached = False
         self._content = None
-        self._lock = asyncio.Lock()
+        self._lock = asyncio.Lock(loop=loop)
 
     async def get(self, content_future):
-        await self._lock.acquire()
-        try:
+        async with self._lock:
             if not self._cached:
                 self._content = await content_future
                 self._cached = True
-            return self._content
-        finally:
-            with contextlib.suppress(RuntimeError):
-                # event loop might be closed
-                self._lock.release()
+        return self._content
 
 
 def format_number(f, decimal_places, percentage=False,
@@ -137,6 +132,16 @@ def format_number(f, decimal_places, percentage=False,
     if percentage:
         s += "%"
     return s
+
+
+def compat_asyncio_run(coro):
+    if sys.version_info >= (3, 7):
+        return asyncio.run(coro)
+    # Fallback without proper cancellation of the remaining tasks
+    loop = asyncio.get_event_loop()
+    result = loop.run_until_complete(coro)
+    loop.close()
+    return result
 
 
 async def run_command_async(args, process_semaphore, cwd=None):

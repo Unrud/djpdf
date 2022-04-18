@@ -31,7 +31,7 @@ import webcolors
 from djpdf.djpdf import CONVERT_CMD, JBIG2_CMD, QPDF_CMD, setup_signals
 from djpdf.scans2pdf import (DEFAULT_SETTINGS, IDENTIFY_CMD, TESSERACT_CMD,
                              build_pdf, find_ocr_languages)
-from djpdf.util import format_number
+from djpdf.util import compat_asyncio_run, format_number
 
 VERSION = pkg_resources.get_distribution("djpdf").version
 
@@ -423,7 +423,7 @@ def main():
     out_file = ns.OUTFILE
 
     try:
-        build_pdf(pages, out_file)
+        compat_asyncio_run(build_pdf(pages, out_file))
     except Exception:
         logging.debug("Exception occurred:\n%s" % traceback.format_exc())
         logging.fatal("Operation failed")
