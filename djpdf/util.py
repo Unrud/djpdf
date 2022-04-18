@@ -117,6 +117,8 @@ class AsyncCache:
             if not self._cached:
                 self._content = await content_future
                 self._cached = True
+        if asyncio.iscoroutine(content_future):
+            content_future.close()
         return self._content
 
 
