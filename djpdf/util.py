@@ -21,6 +21,7 @@ import logging
 import os
 import signal
 import sys
+import warnings
 from subprocess import PIPE, CalledProcessError
 
 import colorama
@@ -227,5 +228,7 @@ def cli_setup():
 def cli_set_verbosity(verbose):
     if verbose:
         logging.getLogger().setLevel(logging.DEBUG)
+        warnings.simplefilter("default")
     else:
         logging.getLogger().setLevel(logging.WARNING)
+        warnings.simplefilter("ignore")
