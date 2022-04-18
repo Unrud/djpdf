@@ -106,11 +106,11 @@ def type_quality(var):
 def type_color(var):
     try:
         return webcolors.name_to_rgb(var)
-    except ValueError as e:
+    except ValueError:
         pass
     try:
         return webcolors.hex_to_rgb(var)
-    except ValueError as e:
+    except ValueError:
         pass
     raise ArgumentTypeError("invalid color value: '%s'" % var)
 
@@ -140,7 +140,7 @@ def type_dpi(var):
         return var
     try:
         d = float(var)
-    except ValueError as e:
+    except ValueError:
         raise ArgumentTypeError("invalid dpi value: '%s'" % var)
     if d <= 0:
         raise ArgumentTypeError("invalid dpi value: '%s' "
@@ -234,7 +234,7 @@ def main():
     def rgb_to_name_or_hex(rgb):
         try:
             return webcolors.rgb_to_name(rgb)
-        except ValueError as e:
+        except ValueError:
             pass
         return webcolors.rgb_to_hex(rgb)
 
@@ -424,7 +424,7 @@ def main():
 
     try:
         build_pdf(pages, out_file)
-    except Exception as e:
+    except Exception:
         logging.debug("Exception occurred:\n%s" % traceback.format_exc())
         logging.fatal("Operation failed")
         sys.exit(1)

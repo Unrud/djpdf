@@ -971,7 +971,7 @@ def main():
         recipe = json.load(sys.stdin)
         pdf_builder = PdfBuilder(recipe)
         pdf_builder.write(args.OUTFILE, progress_cb)
-    except Exception as e:
+    except Exception:
         logging.debug("Exception occurred:\n%s" % traceback.format_exc())
         logging.fatal("Operation failed")
         sys.exit(1)

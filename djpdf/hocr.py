@@ -44,7 +44,7 @@ def extract_text(hocr_filename):
             continue
         try:
             textangle = textangle_regex.search(line.attrib["title"]).group(1)
-        except Exception as e:
+        except Exception:
             logging.info("Can't extract textangle from ocr_line: %s" %
                          line.attrib.get("title"))
             logging.debug("Exception occurred:\n%s" % traceback.format_exc())
@@ -64,7 +64,7 @@ def extract_text(hocr_filename):
                 continue
             try:
                 box = bbox_regex.search(word.attrib["title"]).group(1).split()
-            except Exception as e:
+            except Exception:
                 logging.info("Can't extract bbox from ocrx_word: %s" %
                              word.attrib.get("title"))
                 logging.debug(
@@ -117,7 +117,7 @@ def main():
         print(json.dumps(texts))
         if HAS_PIL and args.image is not None:
             _draw_image(args.image, texts)
-    except Exception as e:
+    except Exception:
         logging.debug("Exception occurred:\n%s" % traceback.format_exc())
         logging.fatal("Operation failed")
         sys.exit(1)
