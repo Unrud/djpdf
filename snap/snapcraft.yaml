@@ -30,20 +30,6 @@ apps:
       - opengl
     common-id: com.github.unrud.djpdf
     desktop: usr/share/applications/com.github.unrud.djpdf.desktop
-  scans2pdf:
-    command: bin/scans2pdf
-    plugs:
-      - home
-  scans2pdf-json:
-    command: bin/scans2pdf-json
-    plugs:
-      - home
-  djpdf-json:
-    command: bin/djpdf-json
-    plugs:
-      - home
-  hocr-json:
-    command: bin/hocr-json
 
 parts:
   jbig2enc:
