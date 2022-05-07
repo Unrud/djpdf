@@ -34,7 +34,7 @@ apps:
 parts:
   jbig2enc:
     plugin: autotools
-    source: https://github.com/agl/jbig2enc/archive/0.29.tar.gz
+    source: https://github.com/agl/jbig2enc/archive/refs/tags/0.29.tar.gz
     source-type: tar
     source-checksum: sha256/bfcf0d0448ee36046af6c776c7271cd5a644855723f0a832d1c0db4de3c21280
     build-packages:
@@ -50,15 +50,15 @@ parts:
 
   openjpeg:
     plugin: cmake
-    source: https://github.com/uclouvain/openjpeg/archive/v2.4.0.tar.gz
+    source: https://github.com/uclouvain/openjpeg/archive/refs/tags/v2.4.0.tar.gz
     source-type: tar
     source-checksum: sha256/8702ba68b442657f11aaeb2b338443ca8d5fb95b0d845757968a7be31ef7f16d
 
   imagemagick:
     plugin: autotools
-    source: https://github.com/ImageMagick/ImageMagick/archive/7.1.0-29.tar.gz
+    source: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-33.tar.gz
     source-type: tar
-    source-checksum: sha256/889be185fd17a9b9b3d4090e28aecdec289a4f690964a7964b4f893c7a8ec21c
+    source-checksum: sha256/dd18045614c19d11739311b207688c2cd480ed309d466685f1811f7a11df98ee
     after: [openjpeg]
     build-packages:
       - libjpeg-dev
@@ -75,7 +75,7 @@ parts:
 
   tesseract:
     plugin: autotools
-    source: https://github.com/tesseract-ocr/tesseract/archive/5.1.0.tar.gz
+    source: https://github.com/tesseract-ocr/tesseract/archive/refs/tags/5.1.0.tar.gz
     source-checksum: sha256/fdec8528d5a0ecc28ab5fff985e0b8ced60726f6ef33f54126f2868e323d4bd2
     build-packages:
       - pkg-config
