@@ -56,9 +56,9 @@ parts:
 
   imagemagick:
     plugin: autotools
-    source: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-34.tar.gz
+    source: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-35.tar.gz
     source-type: tar
-    source-checksum: sha256/6a5bc9627ecff8cc35f99a7e10b395de6c02b4ddce46522e9d6362a90f7a1043
+    source-checksum: sha256/b368a792a3f104c819b496b495348e53ae28b8d15b71c18ced886083822ff30c
     after: [openjpeg]
     build-packages:
       - libjpeg-dev
