@@ -880,8 +880,8 @@ modules:
   - name: imagemagick
     sources:
       - type: archive
-        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-35.tar.gz
-        sha256: b368a792a3f104c819b496b495348e53ae28b8d15b71c18ced886083822ff30c
+        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-37.tar.gz
+        sha256: a54888a1a46dbb808705a3e6c6b5ecb93ee30189a8ae6ea0f02300a0ab0d0996
         x-checker-data:
           type: json
           url: https://api.github.com/repos/ImageMagick/ImageMagick/releases/latest
@@ -1036,8 +1036,8 @@ modules:
       - pip3 install --prefix=/app .
     sources:
       - type: archive
-        url: https://github.com/ubernostrum/webcolors/archive/refs/tags/1.11.1.tar.gz
-        sha256: 6cb77d4d6f5c76e1111f28743c04ec1a86072290c5a5ae889fe333348a9aa43b
+        url: https://github.com/ubernostrum/webcolors/archive/refs/tags/1.12.tar.gz
+        sha256: fee37e6319a4985ceab4a35943543c080140ca87ed1c671163ffc39d2c8f2f07
         x-checker-data:
           type: json
           url: https://api.github.com/repos/ubernostrum/webcolors/tags
@@ -1062,8 +1062,8 @@ modules:
       - pip3 install --prefix=/app .
     sources:
       - type: archive
-        url: https://github.com/giampaolo/psutil/archive/refs/tags/release-5.9.0.tar.gz
-        sha256: ea4f431c10100079f46a494894582edb43e395324f200bd82ecf60b60b46a929
+        url: https://github.com/giampaolo/psutil/archive/refs/tags/release-5.9.1.tar.gz
+        sha256: 9717c7fae41d9b81fe2589d17206920401078aa5329a571b13299e3aef978362
         x-checker-data:
           type: json
           url: https://api.github.com/repos/giampaolo/psutil/tags
