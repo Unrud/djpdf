@@ -880,8 +880,8 @@ modules:
   - name: imagemagick
     sources:
       - type: archive
-        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-37.tar.gz
-        sha256: a54888a1a46dbb808705a3e6c6b5ecb93ee30189a8ae6ea0f02300a0ab0d0996
+        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-38.tar.gz
+        sha256: c04abd6b873e160a67e971b39f248c6cbfc279dd3f4812d9a0ad63b30ab0063a
         x-checker-data:
           type: json
           url: https://api.github.com/repos/ImageMagick/ImageMagick/releases/latest
@@ -1022,8 +1022,8 @@ modules:
       - pip3 install --prefix=/app .
     sources:
       - type: archive
-        url: https://github.com/tartley/colorama/archive/refs/tags/0.4.4.tar.gz
-        sha256: 78215866046cdc2cc00bf283e3dbff18b09840604534137f300a402afedf28e2
+        url: https://github.com/tartley/colorama/archive/refs/tags/0.4.5.tar.gz
+        sha256: b6fcb66accc1ef6106b564ca39f616f065f35c9d07bc1c04d2c219b381f5a557
         x-checker-data:
           type: json
           url: https://api.github.com/repos/tartley/colorama/tags
