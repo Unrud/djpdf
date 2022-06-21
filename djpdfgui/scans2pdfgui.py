@@ -453,7 +453,10 @@ class ThumbnailImageProvider(QQuickImageProvider):
 
 class QmlPlatformIntegration(QObject):
 
-    window = None
+    def __init__(self, app):
+        super().__init__()
+        self.app = app
+        self.window = None
 
     pdfFileExtensionChanged = Signal()
 
@@ -488,8 +491,8 @@ class QmlPlatformIntegration(QObject):
 
 class QmlXdgDesktopPortalPlatformIntegration(QmlPlatformIntegration):
 
-    def __init__(self, bus):
-        super().__init__()
+    def __init__(self, app, bus):
+        super().__init__(app)
         self._bus = bus
         obj = bus.get_object("org.freedesktop.portal.Desktop",
                              "/org/freedesktop/portal/desktop")
@@ -498,9 +501,13 @@ class QmlXdgDesktopPortalPlatformIntegration(QmlPlatformIntegration):
 
     @property
     def _win_id(self):
-        if self.window is None:
-            return b""
-        return b"x11:%x" % self.window.winId()
+        platform = self.app.platformName()
+        if self.window is not None:
+            if platform == "wayland":
+                return b""  # TODO: https://bugreports.qt.io/browse/QTBUG-76983
+            if platform == "xcb":
+                return b"x11:%x" % self.window.winId()
+        return b""
 
     @Property(bool, notify=QmlPlatformIntegration.enabledChanged)
     def enabled(self):
@@ -559,9 +566,9 @@ def main():
         import dbus.mainloop.glib
         dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
         bus = dbus.SessionBus()
-        platform_integration = QmlXdgDesktopPortalPlatformIntegration(bus)
+        platform_integration = QmlXdgDesktopPortalPlatformIntegration(app, bus)
     else:
-        platform_integration = QmlPlatformIntegration()
+        platform_integration = QmlPlatformIntegration(app)
     ctx.setContextProperty("pagesModel", pages_model)
     ctx.setContextProperty("platformIntegration", platform_integration)
     engine.load(QUrl.fromLocalFile(
