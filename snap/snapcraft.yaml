@@ -18,6 +18,8 @@ architectures:
 environment:
   TESSDATA_PREFIX: ${SNAP}/share/tessdata
   DJPDF_PLATFORM: xdg-desktop-portal
+  # Qt: Prefer x11 to wayland
+  QT_QPA_PLATFORM: xcb;wayland
 
 apps:
   djpdf:

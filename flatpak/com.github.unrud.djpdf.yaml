@@ -11,6 +11,8 @@ finish-args:
   - --device=dri
   - --share=ipc
   - --env=DJPDF_PLATFORM=xdg-desktop-portal
+  # Qt: Prefer x11 to wayland
+  - --env=QT_QPA_PLATFORM=xcb;wayland
 cleanup:
   - '*.a'
   - '*.la'
