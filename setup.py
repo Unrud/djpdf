@@ -30,7 +30,7 @@ if enable_gui:
 
 setup(
     name="djpdf",
-    version="0.2.0",
+    version="0.2.1",
     packages=packages,
     package_data=package_data,
     entry_points={"console_scripts": console_scripts},
