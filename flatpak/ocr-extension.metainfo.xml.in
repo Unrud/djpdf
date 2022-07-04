@@ -4,8 +4,8 @@
   <extends>com.github.unrud.djpdf</extends>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0-or-later</project_license>
-  <name>OCR Script {long_name}</name>
-  <summary>OCR extension for {long_name} script ({name})</summary>
+  <name>OCR {title}</name>
+  <summary>OCR extension for {title} ({name})</summary>
   <url type="bugtracker">https://github.com/Unrud/djpdf/issues</url>
   <url type="homepage">https://github.com/Unrud/djpdf</url>
   <developer_name>Unrud</developer_name>

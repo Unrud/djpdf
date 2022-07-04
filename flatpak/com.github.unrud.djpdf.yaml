@@ -27,796 +27,166 @@ add-extensions:
     subdirectories: true
     no-autodownload: true
     autodelete: true
-  com.github.unrud.djpdf.OCR.Afr:
-    directory: extensions/ocr/Afr
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Amh:
-    directory: extensions/ocr/Amh
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Ara:
-    directory: extensions/ocr/Ara
-    bundle: true
-    no-autodownload: false
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Asm:
-    directory: extensions/ocr/Asm
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.AzeCyrl:
-    directory: extensions/ocr/AzeCyrl
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Aze:
-    directory: extensions/ocr/Aze
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Bel:
-    directory: extensions/ocr/Bel
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Ben:
-    directory: extensions/ocr/Ben
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Bod:
-    directory: extensions/ocr/Bod
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Bos:
-    directory: extensions/ocr/Bos
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Bre:
-    directory: extensions/ocr/Bre
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Bul:
-    directory: extensions/ocr/Bul
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Cat:
-    directory: extensions/ocr/Cat
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Ceb:
-    directory: extensions/ocr/Ceb
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Ces:
-    directory: extensions/ocr/Ces
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ChiSim:
-    directory: extensions/ocr/ChiSim
-    bundle: true
-    no-autodownload: false
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ChiSimVert:
-    directory: extensions/ocr/ChiSimVert
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ChiTra:
-    directory: extensions/ocr/ChiTra
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ChiTraVert:
-    directory: extensions/ocr/ChiTraVert
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Chr:
-    directory: extensions/ocr/Chr
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Cos:
-    directory: extensions/ocr/Cos
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Cym:
-    directory: extensions/ocr/Cym
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Dan:
-    directory: extensions/ocr/Dan
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Deu:
-    directory: extensions/ocr/Deu
-    bundle: true
-    no-autodownload: false
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Div:
-    directory: extensions/ocr/Div
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Dzo:
-    directory: extensions/ocr/Dzo
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Ell:
-    directory: extensions/ocr/Ell
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Enm:
-    directory: extensions/ocr/Enm
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Epo:
-    directory: extensions/ocr/Epo
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Est:
-    directory: extensions/ocr/Est
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Eus:
-    directory: extensions/ocr/Eus
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Fao:
-    directory: extensions/ocr/Fao
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Fas:
-    directory: extensions/ocr/Fas
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Fil:
-    directory: extensions/ocr/Fil
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Fin:
-    directory: extensions/ocr/Fin
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Fra:
-    directory: extensions/ocr/Fra
-    bundle: true
-    no-autodownload: false
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Frk:
-    directory: extensions/ocr/Frk
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Frm:
-    directory: extensions/ocr/Frm
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Fry:
-    directory: extensions/ocr/Fry
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Gla:
-    directory: extensions/ocr/Gla
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Gle:
-    directory: extensions/ocr/Gle
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Glg:
-    directory: extensions/ocr/Glg
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Grc:
-    directory: extensions/ocr/Grc
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Guj:
-    directory: extensions/ocr/Guj
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Hat:
-    directory: extensions/ocr/Hat
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Heb:
-    directory: extensions/ocr/Heb
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Hin:
-    directory: extensions/ocr/Hin
-    bundle: true
-    no-autodownload: false
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Hrv:
-    directory: extensions/ocr/Hrv
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Hun:
-    directory: extensions/ocr/Hun
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Hye:
-    directory: extensions/ocr/Hye
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Iku:
-    directory: extensions/ocr/Iku
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Ind:
-    directory: extensions/ocr/Ind
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Isl:
-    directory: extensions/ocr/Isl
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ItaOld:
-    directory: extensions/ocr/ItaOld
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Ita:
-    directory: extensions/ocr/Ita
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Jav:
-    directory: extensions/ocr/Jav
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Jpn:
-    directory: extensions/ocr/Jpn
-    bundle: true
-    no-autodownload: false
-    autodelete: true
-  com.github.unrud.djpdf.OCR.JpnVert:
-    directory: extensions/ocr/JpnVert
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Kan:
-    directory: extensions/ocr/Kan
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.KatOld:
-    directory: extensions/ocr/KatOld
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Kat:
-    directory: extensions/ocr/Kat
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Kaz:
-    directory: extensions/ocr/Kaz
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Khm:
-    directory: extensions/ocr/Khm
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Kir:
-    directory: extensions/ocr/Kir
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Kor:
-    directory: extensions/ocr/Kor
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.KorVert:
-    directory: extensions/ocr/KorVert
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Lao:
-    directory: extensions/ocr/Lao
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Lat:
-    directory: extensions/ocr/Lat
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Lav:
-    directory: extensions/ocr/Lav
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Lit:
-    directory: extensions/ocr/Lit
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Ltz:
-    directory: extensions/ocr/Ltz
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Mal:
-    directory: extensions/ocr/Mal
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Mar:
-    directory: extensions/ocr/Mar
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Mkd:
-    directory: extensions/ocr/Mkd
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Mlt:
-    directory: extensions/ocr/Mlt
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Mon:
-    directory: extensions/ocr/Mon
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Mri:
-    directory: extensions/ocr/Mri
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Msa:
-    directory: extensions/ocr/Msa
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Mya:
-    directory: extensions/ocr/Mya
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Nep:
-    directory: extensions/ocr/Nep
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Nld:
-    directory: extensions/ocr/Nld
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Nor:
-    directory: extensions/ocr/Nor
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Oci:
-    directory: extensions/ocr/Oci
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Ori:
-    directory: extensions/ocr/Ori
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Pan:
-    directory: extensions/ocr/Pan
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Pol:
-    directory: extensions/ocr/Pol
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Por:
-    directory: extensions/ocr/Por
-    bundle: true
-    no-autodownload: false
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Pus:
-    directory: extensions/ocr/Pus
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Que:
-    directory: extensions/ocr/Que
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Ron:
-    directory: extensions/ocr/Ron
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Rus:
-    directory: extensions/ocr/Rus
-    bundle: true
-    no-autodownload: false
-    autodelete: true
-  com.github.unrud.djpdf.OCR.San:
-    directory: extensions/ocr/San
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Sin:
-    directory: extensions/ocr/Sin
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Slk:
-    directory: extensions/ocr/Slk
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Slv:
-    directory: extensions/ocr/Slv
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Snd:
-    directory: extensions/ocr/Snd
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.SpaOld:
-    directory: extensions/ocr/SpaOld
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Spa:
-    directory: extensions/ocr/Spa
-    bundle: true
-    no-autodownload: false
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Sqi:
-    directory: extensions/ocr/Sqi
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.SrpLatn:
-    directory: extensions/ocr/SrpLatn
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Srp:
-    directory: extensions/ocr/Srp
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Sun:
-    directory: extensions/ocr/Sun
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Swa:
-    directory: extensions/ocr/Swa
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Swe:
-    directory: extensions/ocr/Swe
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Syr:
-    directory: extensions/ocr/Syr
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Tam:
-    directory: extensions/ocr/Tam
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Tat:
-    directory: extensions/ocr/Tat
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Tel:
-    directory: extensions/ocr/Tel
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Tgk:
-    directory: extensions/ocr/Tgk
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Tha:
-    directory: extensions/ocr/Tha
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Tir:
-    directory: extensions/ocr/Tir
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Ton:
-    directory: extensions/ocr/Ton
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Tur:
-    directory: extensions/ocr/Tur
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Uig:
-    directory: extensions/ocr/Uig
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Ukr:
-    directory: extensions/ocr/Ukr
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Urd:
-    directory: extensions/ocr/Urd
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.UzbCyrl:
-    directory: extensions/ocr/UzbCyrl
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Uzb:
-    directory: extensions/ocr/Uzb
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Vie:
-    directory: extensions/ocr/Vie
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Yid:
-    directory: extensions/ocr/Yid
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.Yor:
-    directory: extensions/ocr/Yor
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ScriptArabic:
-    directory: extensions/ocr/ScriptArabic
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ScriptArmenian:
-    directory: extensions/ocr/ScriptArmenian
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ScriptBengali:
-    directory: extensions/ocr/ScriptBengali
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ScriptCanadianAboriginal:
-    directory: extensions/ocr/ScriptCanadianAboriginal
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ScriptCherokee:
-    directory: extensions/ocr/ScriptCherokee
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ScriptCyrillic:
-    directory: extensions/ocr/ScriptCyrillic
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ScriptDevanagari:
-    directory: extensions/ocr/ScriptDevanagari
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ScriptEthiopic:
-    directory: extensions/ocr/ScriptEthiopic
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ScriptFraktur:
-    directory: extensions/ocr/ScriptFraktur
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ScriptGeorgian:
-    directory: extensions/ocr/ScriptGeorgian
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ScriptGreek:
-    directory: extensions/ocr/ScriptGreek
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ScriptGujarati:
-    directory: extensions/ocr/ScriptGujarati
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ScriptGurmukhi:
-    directory: extensions/ocr/ScriptGurmukhi
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ScriptHangul:
-    directory: extensions/ocr/ScriptHangul
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ScriptHangulVert:
-    directory: extensions/ocr/ScriptHangulVert
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ScriptHanS:
-    directory: extensions/ocr/ScriptHanS
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ScriptHanSVert:
-    directory: extensions/ocr/ScriptHanSVert
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ScriptHanT:
-    directory: extensions/ocr/ScriptHanT
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ScriptHanTVert:
-    directory: extensions/ocr/ScriptHanTVert
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ScriptHebrew:
-    directory: extensions/ocr/ScriptHebrew
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ScriptJapanese:
-    directory: extensions/ocr/ScriptJapanese
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ScriptJapaneseVert:
-    directory: extensions/ocr/ScriptJapaneseVert
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ScriptKannada:
-    directory: extensions/ocr/ScriptKannada
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ScriptKhmer:
-    directory: extensions/ocr/ScriptKhmer
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ScriptLao:
-    directory: extensions/ocr/ScriptLao
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ScriptLatin:
-    directory: extensions/ocr/ScriptLatin
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ScriptMalayalam:
-    directory: extensions/ocr/ScriptMalayalam
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ScriptMyanmar:
-    directory: extensions/ocr/ScriptMyanmar
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ScriptOriya:
-    directory: extensions/ocr/ScriptOriya
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ScriptSinhala:
-    directory: extensions/ocr/ScriptSinhala
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ScriptSyriac:
-    directory: extensions/ocr/ScriptSyriac
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ScriptTamil:
-    directory: extensions/ocr/ScriptTamil
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ScriptTelugu:
-    directory: extensions/ocr/ScriptTelugu
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ScriptThaana:
-    directory: extensions/ocr/ScriptThaana
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ScriptThai:
-    directory: extensions/ocr/ScriptThai
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ScriptTibetan:
-    directory: extensions/ocr/ScriptTibetan
-    bundle: true
-    no-autodownload: true
-    autodelete: true
-  com.github.unrud.djpdf.OCR.ScriptVietnamese:
-    directory: extensions/ocr/ScriptVietnamese
-    bundle: true
-    no-autodownload: true
-    autodelete: true
+  # Generated: ./ocr-extensions-generator.py ocr-extensions.json
+  com.github.unrud.djpdf.OCR.Afr: {"directory": "extensions/ocr/Afr", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Amh: {"directory": "extensions/ocr/Amh", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Ara: {"directory": "extensions/ocr/Ara", "bundle": true, "no-autodownload": false, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Asm: {"directory": "extensions/ocr/Asm", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Aze: {"directory": "extensions/ocr/Aze", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.AzeCyrl: {"directory": "extensions/ocr/AzeCyrl", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Bel: {"directory": "extensions/ocr/Bel", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Ben: {"directory": "extensions/ocr/Ben", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Bod: {"directory": "extensions/ocr/Bod", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Bos: {"directory": "extensions/ocr/Bos", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Bre: {"directory": "extensions/ocr/Bre", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Bul: {"directory": "extensions/ocr/Bul", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Cat: {"directory": "extensions/ocr/Cat", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Ceb: {"directory": "extensions/ocr/Ceb", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Ces: {"directory": "extensions/ocr/Ces", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ChiSim: {"directory": "extensions/ocr/ChiSim", "bundle": true, "no-autodownload": false, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ChiSimVert: {"directory": "extensions/ocr/ChiSimVert", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ChiTra: {"directory": "extensions/ocr/ChiTra", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ChiTraVert: {"directory": "extensions/ocr/ChiTraVert", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Chr: {"directory": "extensions/ocr/Chr", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Cos: {"directory": "extensions/ocr/Cos", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Cym: {"directory": "extensions/ocr/Cym", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Dan: {"directory": "extensions/ocr/Dan", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Deu: {"directory": "extensions/ocr/Deu", "bundle": true, "no-autodownload": false, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Div: {"directory": "extensions/ocr/Div", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Dzo: {"directory": "extensions/ocr/Dzo", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Ell: {"directory": "extensions/ocr/Ell", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Enm: {"directory": "extensions/ocr/Enm", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Epo: {"directory": "extensions/ocr/Epo", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Est: {"directory": "extensions/ocr/Est", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Eus: {"directory": "extensions/ocr/Eus", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Fao: {"directory": "extensions/ocr/Fao", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Fas: {"directory": "extensions/ocr/Fas", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Fil: {"directory": "extensions/ocr/Fil", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Fin: {"directory": "extensions/ocr/Fin", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Fra: {"directory": "extensions/ocr/Fra", "bundle": true, "no-autodownload": false, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Frk: {"directory": "extensions/ocr/Frk", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Frm: {"directory": "extensions/ocr/Frm", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Fry: {"directory": "extensions/ocr/Fry", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Gla: {"directory": "extensions/ocr/Gla", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Gle: {"directory": "extensions/ocr/Gle", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Glg: {"directory": "extensions/ocr/Glg", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Grc: {"directory": "extensions/ocr/Grc", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Guj: {"directory": "extensions/ocr/Guj", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Hat: {"directory": "extensions/ocr/Hat", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Heb: {"directory": "extensions/ocr/Heb", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Hin: {"directory": "extensions/ocr/Hin", "bundle": true, "no-autodownload": false, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Hrv: {"directory": "extensions/ocr/Hrv", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Hun: {"directory": "extensions/ocr/Hun", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Hye: {"directory": "extensions/ocr/Hye", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Iku: {"directory": "extensions/ocr/Iku", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Ind: {"directory": "extensions/ocr/Ind", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Isl: {"directory": "extensions/ocr/Isl", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Ita: {"directory": "extensions/ocr/Ita", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ItaOld: {"directory": "extensions/ocr/ItaOld", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Jav: {"directory": "extensions/ocr/Jav", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Jpn: {"directory": "extensions/ocr/Jpn", "bundle": true, "no-autodownload": false, "autodelete": true}
+  com.github.unrud.djpdf.OCR.JpnVert: {"directory": "extensions/ocr/JpnVert", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Kan: {"directory": "extensions/ocr/Kan", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Kat: {"directory": "extensions/ocr/Kat", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.KatOld: {"directory": "extensions/ocr/KatOld", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Kaz: {"directory": "extensions/ocr/Kaz", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Khm: {"directory": "extensions/ocr/Khm", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Kir: {"directory": "extensions/ocr/Kir", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Kmr: {"directory": "extensions/ocr/Kmr", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Kor: {"directory": "extensions/ocr/Kor", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.KorVert: {"directory": "extensions/ocr/KorVert", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Lao: {"directory": "extensions/ocr/Lao", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Lat: {"directory": "extensions/ocr/Lat", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Lav: {"directory": "extensions/ocr/Lav", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Lit: {"directory": "extensions/ocr/Lit", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Ltz: {"directory": "extensions/ocr/Ltz", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Mal: {"directory": "extensions/ocr/Mal", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Mar: {"directory": "extensions/ocr/Mar", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Mkd: {"directory": "extensions/ocr/Mkd", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Mlt: {"directory": "extensions/ocr/Mlt", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Mon: {"directory": "extensions/ocr/Mon", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Mri: {"directory": "extensions/ocr/Mri", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Msa: {"directory": "extensions/ocr/Msa", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Mya: {"directory": "extensions/ocr/Mya", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Nep: {"directory": "extensions/ocr/Nep", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Nld: {"directory": "extensions/ocr/Nld", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Nor: {"directory": "extensions/ocr/Nor", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Oci: {"directory": "extensions/ocr/Oci", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Ori: {"directory": "extensions/ocr/Ori", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Pan: {"directory": "extensions/ocr/Pan", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Pol: {"directory": "extensions/ocr/Pol", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Por: {"directory": "extensions/ocr/Por", "bundle": true, "no-autodownload": false, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Pus: {"directory": "extensions/ocr/Pus", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Que: {"directory": "extensions/ocr/Que", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Ron: {"directory": "extensions/ocr/Ron", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Rus: {"directory": "extensions/ocr/Rus", "bundle": true, "no-autodownload": false, "autodelete": true}
+  com.github.unrud.djpdf.OCR.San: {"directory": "extensions/ocr/San", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Sin: {"directory": "extensions/ocr/Sin", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Slk: {"directory": "extensions/ocr/Slk", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Slv: {"directory": "extensions/ocr/Slv", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Snd: {"directory": "extensions/ocr/Snd", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Spa: {"directory": "extensions/ocr/Spa", "bundle": true, "no-autodownload": false, "autodelete": true}
+  com.github.unrud.djpdf.OCR.SpaOld: {"directory": "extensions/ocr/SpaOld", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Sqi: {"directory": "extensions/ocr/Sqi", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Srp: {"directory": "extensions/ocr/Srp", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.SrpLatn: {"directory": "extensions/ocr/SrpLatn", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Sun: {"directory": "extensions/ocr/Sun", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Swa: {"directory": "extensions/ocr/Swa", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Swe: {"directory": "extensions/ocr/Swe", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Syr: {"directory": "extensions/ocr/Syr", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Tam: {"directory": "extensions/ocr/Tam", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Tat: {"directory": "extensions/ocr/Tat", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Tel: {"directory": "extensions/ocr/Tel", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Tgk: {"directory": "extensions/ocr/Tgk", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Tha: {"directory": "extensions/ocr/Tha", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Tir: {"directory": "extensions/ocr/Tir", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Ton: {"directory": "extensions/ocr/Ton", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Tur: {"directory": "extensions/ocr/Tur", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Uig: {"directory": "extensions/ocr/Uig", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Ukr: {"directory": "extensions/ocr/Ukr", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Urd: {"directory": "extensions/ocr/Urd", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Uzb: {"directory": "extensions/ocr/Uzb", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.UzbCyrl: {"directory": "extensions/ocr/UzbCyrl", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Vie: {"directory": "extensions/ocr/Vie", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Yid: {"directory": "extensions/ocr/Yid", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.Yor: {"directory": "extensions/ocr/Yor", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ScriptArabic: {"directory": "extensions/ocr/ScriptArabic", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ScriptArmenian: {"directory": "extensions/ocr/ScriptArmenian", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ScriptBengali: {"directory": "extensions/ocr/ScriptBengali", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ScriptCanadianAboriginal: {"directory": "extensions/ocr/ScriptCanadianAboriginal", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ScriptCherokee: {"directory": "extensions/ocr/ScriptCherokee", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ScriptCyrillic: {"directory": "extensions/ocr/ScriptCyrillic", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ScriptDevanagari: {"directory": "extensions/ocr/ScriptDevanagari", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ScriptEthiopic: {"directory": "extensions/ocr/ScriptEthiopic", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ScriptFraktur: {"directory": "extensions/ocr/ScriptFraktur", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ScriptGeorgian: {"directory": "extensions/ocr/ScriptGeorgian", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ScriptGreek: {"directory": "extensions/ocr/ScriptGreek", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ScriptGujarati: {"directory": "extensions/ocr/ScriptGujarati", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ScriptGurmukhi: {"directory": "extensions/ocr/ScriptGurmukhi", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ScriptHanS: {"directory": "extensions/ocr/ScriptHanS", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ScriptHanSVert: {"directory": "extensions/ocr/ScriptHanSVert", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ScriptHanT: {"directory": "extensions/ocr/ScriptHanT", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ScriptHanTVert: {"directory": "extensions/ocr/ScriptHanTVert", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ScriptHangul: {"directory": "extensions/ocr/ScriptHangul", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ScriptHangulVert: {"directory": "extensions/ocr/ScriptHangulVert", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ScriptHebrew: {"directory": "extensions/ocr/ScriptHebrew", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ScriptJapanese: {"directory": "extensions/ocr/ScriptJapanese", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ScriptJapaneseVert: {"directory": "extensions/ocr/ScriptJapaneseVert", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ScriptKannada: {"directory": "extensions/ocr/ScriptKannada", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ScriptKhmer: {"directory": "extensions/ocr/ScriptKhmer", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ScriptLao: {"directory": "extensions/ocr/ScriptLao", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ScriptLatin: {"directory": "extensions/ocr/ScriptLatin", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ScriptMalayalam: {"directory": "extensions/ocr/ScriptMalayalam", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ScriptMyanmar: {"directory": "extensions/ocr/ScriptMyanmar", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ScriptOriya: {"directory": "extensions/ocr/ScriptOriya", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ScriptSinhala: {"directory": "extensions/ocr/ScriptSinhala", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ScriptSyriac: {"directory": "extensions/ocr/ScriptSyriac", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ScriptTamil: {"directory": "extensions/ocr/ScriptTamil", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ScriptTelugu: {"directory": "extensions/ocr/ScriptTelugu", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ScriptThaana: {"directory": "extensions/ocr/ScriptThaana", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ScriptThai: {"directory": "extensions/ocr/ScriptThai", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ScriptTibetan: {"directory": "extensions/ocr/ScriptTibetan", "bundle": true, "no-autodownload": true, "autodelete": true}
+  com.github.unrud.djpdf.OCR.ScriptVietnamese: {"directory": "extensions/ocr/ScriptVietnamese", "bundle": true, "no-autodownload": true, "autodelete": true}
 modules:
   - name: qt-include
     # https://bugreports.qt.io/browse/PYSIDE-787
@@ -917,37 +287,7 @@ modules:
   - name: tessdata
     buildsystem: simple
     build-commands:
-      - |
-        set -e
-        cut -d: -f1 ocr-extension-info.txt | while read name; do
-          if [ ! -f "$name.traineddata" ]; then
-            echo "no traineddata for ${name} found" >&2
-            exit 1
-          fi
-        done
-        install -Dm0644 -t /app/share/tessdata eng.traineddata osd.traineddata
-        rm eng.traineddata osd.traineddata
-        install -d /app/extensions/ocr
-        for f in *.traineddata script/*.traineddata; do
-          name="${f%.traineddata}"
-          camel_name="$(sed -e 's/[/_]\(.\?\)\|\(^.\)/\U\1\2/g' <<<"$name")"
-          id="com.github.unrud.djpdf.OCR.${camel_name}"
-          info="$(grep "^${name}:" ocr-extension-info.txt)"
-          if [ -z "$info" ]; then
-            echo "no info for ${name} found" >&2
-            exit 1
-          fi
-          template="$(cut -d: -f2 <<<"$info")"
-          long_name="$(cut -d: -f3- <<<"$info")"
-          metainfo="$(sed -e "s|{id}|${id}|g" \
-                          -e "s|{name}|${name}|g" \
-                          -e "s|{long_name}|${long_name}|g" \
-                          "ocr-extension-${template}.metainfo.xml.in")"
-          install -d "/app/extensions/ocr/${camel_name}/share/metainfo"
-          cat <<<"$metainfo" >"/app/extensions/ocr/${camel_name}/share/metainfo/${id}.metainfo.xml"
-          install -Dm0644 "$f" "/app/extensions/ocr/${camel_name}/share/tessdata/$f"
-          appstream-compose --basename="$id" --prefix="/app/extensions/ocr/${camel_name}" --origin=flatpak "$id"
-        done
+      - chmod +x ocr-extensions-installer.py && ./ocr-extensions-installer.py ocr-extensions.json ocr-extension.metainfo.xml.in .
       - mv /app/bin/tesseract /app/bin/tesseract.real
       - install -Dm0755 tesseract-wrapper.py /app/bin/tesseract
     sources:
@@ -960,13 +300,11 @@ modules:
           version-query: '.tag_name'
           url-query: '"https://github.com/tesseract-ocr/tessdata_best/archive/refs/tags/" + $version + ".tar.gz"'
       - type: file
-        path: ocr-extension-info.txt
+        path: ocr-extensions-installer.py
       - type: file
-        path: ocr-extension-language.metainfo.xml.in
+        path: ocr-extensions.json
       - type: file
-        path: ocr-extension-script.metainfo.xml.in
-      - type: file
-        path: ocr-extension-special.metainfo.xml.in
+        path: ocr-extension.metainfo.xml.in
       - type: file
         path: tesseract-wrapper.py
 
