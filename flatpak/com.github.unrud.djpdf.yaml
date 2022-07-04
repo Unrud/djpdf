@@ -215,15 +215,23 @@ modules:
     cleanup:
       - /bin
     sources:
+      # PySide2>5.15.3 is broken on aarch64
       - type: archive
-        url: https://download.qt.io/official_releases/QtForPython/pyside2/PySide2-5.15.3-src/pyside-setup-opensource-src-5.15.3.tar.xz
-        sha256: 7ff5f1cc4291fffb6d5a3098b3090abe4d415da2adec740b4e901893d95d7137
+        url: https://download.qt.io/official_releases/QtForPython/pyside2/PySide2-5.15.5-src/pyside-setup-opensource-src-5.15.5.tar.xz
+        sha256: 3920a4fb353300260c9bc46ff70f1fb975c5e7efa22e9d51222588928ce19b33
+        skip-arches:
+          - aarch64
         x-checker-data:
           type: html
           url: https://download.qt.io/official_releases/QtForPython/pyside2/
           version-pattern: '>PySide2-([\d.]+)-src/<'
           versions: {'>=': '5.15', '<': '5.16'}
           url-template: https://download.qt.io/official_releases/QtForPython/pyside2/PySide2-$version-src/pyside-setup-opensource-src-$version.tar.xz
+      - type: archive
+        url: https://download.qt.io/official_releases/QtForPython/pyside2/PySide2-5.15.3-src/pyside-setup-opensource-src-5.15.3.tar.xz
+        sha256: 7ff5f1cc4291fffb6d5a3098b3090abe4d415da2adec740b4e901893d95d7137
+        only-arches:
+          - aarch64
       - type: shell
         # use qt-include
         commands:
@@ -254,8 +262,8 @@ modules:
   - name: imagemagick
     sources:
       - type: archive
-        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-39.tar.gz
-        sha256: eb8150517933caad6288a0fbf01e7616bfe95d0f650fac227541668ee10aff05
+        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-40.tar.gz
+        sha256: 1e729073dffbddcba599a96706e4657a40c431629e16041d716fe78ba341a448
         x-checker-data:
           type: json
           url: https://api.github.com/repos/ImageMagick/ImageMagick/releases/latest
@@ -313,8 +321,8 @@ modules:
       - --enable-unittest=no
     sources:
       - type: archive
-        url: https://libopenraw.freedesktop.org/download/exempi-2.6.1.tar.bz2
-        sha256: 072451ac1e0dc97ed69a2e5bfc235fd94fe093d837f65584d0e3581af5db18cd
+        url: https://libopenraw.freedesktop.org/download/exempi-2.6.2.tar.bz2
+        sha256: 4d17d4c93df2a95da3e3172c45b7a5bf317dd31dafd1c7a340169728c7089d1d
         x-checker-data:
           type: html
           url: https://libopenraw.freedesktop.org/exempi/
