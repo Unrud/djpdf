@@ -57,16 +57,49 @@ Page {
         }
     }
 
-    MessageDialog {
-        id: errorDialog
-        title: "Error"
-        text: "Failed to create PDF"
-    }
-
     Connections {
         target: pagesModel
         function onSavingError() {
             errorDialog.open()
+        }
+    }
+
+    Popup {
+        property string text
+
+        id: errorDialog
+        parent: stack
+        x: Math.round((parent.width - width) / 2)
+        y: Math.round((parent.height - height) / 2)
+        modal: true
+        focus: true
+        width: parent.width * 0.8
+        height: Math.min(parent.height * 0.8, implicitHeight)
+        closePolicy: Popup.CloseOnEscape
+        onClosed: text = ""
+        ColumnLayout {
+            anchors.fill: parent
+            Label {
+                text: "Failed to create PDF"
+                font.bold: true
+                horizontalAlignment: Text.AlignHCenter
+                Layout.fillWidth: true
+            }
+            ScrollView {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                TextArea {
+                    text: errorDialog.text
+                    wrapMode: TextEdit.Wrap
+                    selectByMouse: true
+                    readOnly: true
+                }
+            }
+            Button {
+                text: "OK"
+                Layout.alignment: Qt.AlignRight
+                onClicked: errorDialog.close()
+            }
         }
     }
 
