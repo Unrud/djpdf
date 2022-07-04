@@ -138,21 +138,21 @@ Page {
             focus: true
             activeFocusOnTab: true
             model: pagesModel
-            highlightMoveDuration: 0
-            highlight: Rectangle {
-                color: pagesView.activeFocus ? paletteActive.highlight : "transparent"
-            }
+
             Keys.onSpacePressed: {
                 event.accepted = true
                 stack.push("detail.qml", {p: pagesView.currentItem.p,
                                           modelIndex: pagesView.currentItem.modelIndex})
             }
 
+            cellWidth: 100
+            cellHeight: 150
             delegate: MouseArea {
                 id: pageDelegate
 
                 property int modelIndex: index
                 property DjpdfPage p: model.modelData
+                property bool active: GridView.isCurrentItem && pagesView.activeFocus
 
                 onClicked: stack.push("detail.qml", {p: p, modelIndex: modelIndex})
 
@@ -161,8 +161,8 @@ Page {
                     pagesView.currentIndex = modelIndex
                 }
 
-                width: 100
-                height: 100
+                width: pagesView.cellWidth
+                height: pagesView.cellHeight
                 drag.target: pageItem
                 Item {
                     id: pageItem
@@ -195,41 +195,59 @@ Page {
 
                     Image {
                         id: image
+                        anchors {
+                            left: parent.left
+                            right: parent.right
+                            top: parent.top
+                            bottom: title.top
+                            margins: 6
+                        }
                         asynchronous: true
                         source: "image://thumbnails/" + model.modelData.url
-                        anchors.fill: parent
                         fillMode: Image.PreserveAspectFit
-                        anchors.margins: 6
+                        verticalAlignment: Image.AlignBottom
                         z: 1
                     }
                     Rectangle {
-                        id: imageBorder
-                        color: paletteActive.text
-                        anchors.centerIn: image
-                        width: image.paintedWidth + 2
-                        height: image.paintedHeight + 2
+                        anchors {
+                            horizontalCenter: image.horizontalCenter
+                            bottom: image.bottom
+                            bottomMargin: (image.paintedHeight-height)/2
+                        }
+                        width: image.paintedWidth + 4
+                        height: image.paintedHeight + 4
                         visible: image.status === Image.Ready
+                        color: paletteActive.text
                     }
-                    DropShadow {
-                        anchors.fill: source
-                        cached: true
-                        horizontalOffset: 0
-                        verticalOffset: 1
-                        radius: 8
-                        samples: 16
-                        color: source.color
-                        smooth: true
-                        source: imageBorder
+                    BusyIndicator {
+                        anchors.centerIn: image
+                        running: image.status !== Image.Ready
                     }
 
-                    BusyIndicator {
-                        running: image.status !== Image.Ready
-                        anchors.centerIn: parent
+                    Label {
+                        id: title
+                        anchors { fill: parent; topMargin: 100 }
+                        color: pageDelegate.active ? paletteActive.highlightedText : paletteActive.text
+                        text: pageDelegate.p.displayName
+                        wrapMode: Text.Wrap
+                        horizontalAlignment: Text.AlignHCenter
+                        elide: Text.ElideRight
+                        leftPadding: 5
+                        rightPadding: 5
+                        bottomPadding: 3
+                        z: 1
+                    }
+                    Rectangle {
+                        anchors { horizontalCenter: title.horizontalCenter; top: title.top }
+                        color: paletteActive.highlight
+                        visible: pageDelegate.active
+                        height: title.contentHeight + 3
+                        width: title.contentWidth + 6
                     }
                 }
 
                 DropArea {
-                    anchors { fill: parent; margins: 15 }
+                    anchors { fill: parent; margins: 5 }
                     keys: [ pagesView.dragKey ]
                     onEntered: pagesModel.swap(drag.source.modelIndex, pageDelegate.modelIndex)
                 }
