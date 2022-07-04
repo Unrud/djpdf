@@ -135,6 +135,7 @@ Page {
 
             id: pagesView
             focus: true
+            activeFocusOnTab: true
             model: pagesModel
             highlightMoveDuration: 0
             highlight: Rectangle {
