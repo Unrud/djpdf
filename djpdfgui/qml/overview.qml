@@ -249,7 +249,7 @@ Page {
                 DropArea {
                     anchors { fill: parent; margins: 5 }
                     keys: [ pagesView.dragKey ]
-                    onEntered: pagesModel.swap(drag.source.modelIndex, pageDelegate.modelIndex)
+                    onEntered: pagesModel.move(drag.source.modelIndex, pageDelegate.modelIndex)
                 }
             }
         }

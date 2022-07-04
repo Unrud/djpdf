@@ -351,14 +351,15 @@ class QmlPagesModel(QAbstractListModel):
         self.countChanged.emit()
 
     @Slot(int, int)
-    def swap(self, index1, index2):
-        if index1 == index2:
+    def move(self, from_index, to_index):
+        if from_index == to_index:
             return
-        if index2 < index1:
-            index1, index2 = index2, index1
-        self.beginMoveRows(QModelIndex(), index2, index2,
-                           QModelIndex(), index1)
-        self._pages.insert(index1, self._pages.pop(index2))
+        move_rows_dest_index = to_index
+        if from_index < to_index:
+            move_rows_dest_index += 1
+        self.beginMoveRows(QModelIndex(), from_index, from_index,
+                           QModelIndex(), move_rows_dest_index)
+        self._pages.insert(to_index, self._pages.pop(from_index))
         self.endMoveRows()
 
     @Slot(int)
