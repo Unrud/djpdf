@@ -71,6 +71,7 @@ Page {
     }
 
     Popup {
+        parent: stack
         x: Math.round((parent.width - width) / 2)
         y: Math.round((parent.height - height) / 2)
         modal: true
@@ -80,6 +81,9 @@ Page {
             anchors.fill: parent
             Label {
                 text: "Saving..."
+                font.bold: true
+                horizontalAlignment: Text.AlignHCenter
+                Layout.fillWidth: true
             }
             ProgressBar {
                 Layout.fillWidth: true

@@ -41,6 +41,7 @@ Page {
             }
             ToolButton {
                 text: "Remove"
+                highlighted: true
                 onClicked: {
                     stack.pop()
                     pagesModel.remove(sv.modelIndex)
