@@ -18,11 +18,10 @@
 import copy
 import json
 import os
-import pkg_resources
 import signal
 import sys
 from argparse import ArgumentParser
-from djpdf.scans2pdf import DEFAULT_SETTINGS, find_ocr_languages
+
 from PySide2 import QtQml
 from PySide2.QtGui import QIcon, QImage
 from PySide2.QtCore import (Property, QAbstractListModel, QModelIndex,
@@ -31,7 +30,14 @@ from PySide2.QtQuick import QQuickImageProvider
 from PySide2.QtQml import QQmlApplicationEngine
 from PySide2.QtWidgets import QApplication
 
-QML_DIR = pkg_resources.resource_filename(__name__, "qml")
+from djpdf.scans2pdf import DEFAULT_SETTINGS, find_ocr_languages
+
+if sys.version_info < (3, 9):
+    import importlib_resources
+else:
+    import importlib.resources as importlib_resources
+
+QML_RESOURCE = importlib_resources.files("djpdfgui").joinpath("qml")
 IMAGE_FILE_EXTENSIONS = ("bmp", "gif", "jpeg", "jpg", "png", "pnm",
                          "ppm", "pbm", "pgm", "xbm", "xpm", "tif",
                          "tiff", "webp", "jp2")
@@ -571,9 +577,10 @@ def main():
         platform_integration = QmlPlatformIntegration(app)
     ctx.setContextProperty("pagesModel", pages_model)
     ctx.setContextProperty("platformIntegration", platform_integration)
-    engine.load(QUrl.fromLocalFile(
-        os.path.join(QML_DIR, "main.qml")))
-    platform_integration.window = engine.rootObjects()[0]
-    rc = app.exec_()
-    pages_model.shutdown()
-    sys.exit(rc)
+    with importlib_resources.as_file(QML_RESOURCE) as qml_dir:
+        engine.load(QUrl.fromLocalFile(
+            os.path.join(os.fspath(qml_dir), "main.qml")))
+        platform_integration.window = engine.rootObjects()[0]
+        rc = app.exec_()
+        pages_model.shutdown()
+        sys.exit(rc)

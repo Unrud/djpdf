@@ -31,13 +31,17 @@ from collections import namedtuple
 from itertools import chain
 from os import path
 
-import pkg_resources
 from libxmp import XMPMeta
 from libxmp.consts import XMP_NS_PDFA_ID
 
 from djpdf.util import (AsyncCache, MemoryBoundedSemaphore, cli_set_verbosity,
                         cli_setup, compat_asyncio_run, format_number,
                         run_command)
+
+if sys.version_info < (3, 9):
+    import importlib_resources
+else:
+    import importlib.resources as importlib_resources
 
 # pdfrw tampers with logging
 _orig_basic_config = logging.basicConfig
@@ -55,11 +59,12 @@ PDF_DECIMAL_PLACES = 3
 SHARE_JBIG2_GLOBALS = False
 LINEARIZE_PDF = True
 COMPRESS_PAGE_CONTENTS = True
-FONT_FILENAME = pkg_resources.resource_filename(__name__, "tesseract-pdf.ttf")
-UNICODE_CMAP_FILENAME = pkg_resources.resource_filename(
-    __name__, "to-unicode.cmap")
-SRGB_ICC_FILENAME = pkg_resources.resource_filename(
-    __name__, "argyllcms-srgb.icm")
+FONT_RESOURCE = importlib_resources.files("djpdf").joinpath(
+    "tesseract-pdf.ttf")
+UNICODE_CMAP_RESOURCE = importlib_resources.files("djpdf").joinpath(
+    "to-unicode.cmap")
+SRGB_ICC_RESOURCE = importlib_resources.files("djpdf").joinpath(
+    "argyllcms-srgb.icm")
 PARALLEL_JOBS = os.cpu_count() or 1
 JOB_MEMORY = 1 << 30
 RESERVED_MEMORY = 1 << 30
@@ -614,8 +619,7 @@ class PdfBuilder:
 
     @staticmethod
     def _build_font():
-        with open(FONT_FILENAME, "rb") as f:
-            embedded_font_stream = f.read()
+        embedded_font_stream = FONT_RESOURCE.read_bytes()
         embedded_font = PdfDict()
         embedded_font.indirect = True
         embedded_font.Filter = [PdfName.FlateDecode]
@@ -660,8 +664,7 @@ class PdfBuilder:
         cid_font.Type = PdfName.Font
         cid_font.DW = 500
 
-        with open(UNICODE_CMAP_FILENAME, "rb") as f:
-            unicode_cmap_stream = f.read()
+        unicode_cmap_stream = UNICODE_CMAP_RESOURCE.read_bytes()
         unicode_cmap = PdfDict()
         unicode_cmap.indirect = True
         unicode_cmap.Filter = [PdfName.FlateDecode]
@@ -703,8 +706,7 @@ class PdfBuilder:
         srgb_colorspace = PdfDict()
         srgb_colorspace.indirect = True
         srgb_colorspace.N = 3  # Number of components (red, green, blue)
-        with open(SRGB_ICC_FILENAME, "rb") as f:
-            srgb_colorspace_stream = f.read()
+        srgb_colorspace_stream = SRGB_ICC_RESOURCE.read_bytes()
         srgb_colorspace.Filter = [PdfName.FlateDecode]
         srgb_colorspace.stream = zlib.compress(
             srgb_colorspace_stream, 9).decode("latin-1")

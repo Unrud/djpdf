@@ -18,6 +18,7 @@
 import asyncio
 import json
 import logging
+import os
 import re
 import subprocess
 import sys
@@ -27,11 +28,16 @@ from os import path
 
 from djpdf import hocr
 from djpdf.djpdf import (CONVERT_CMD, JOB_MEMORY, PARALLEL_JOBS,
-                         RESERVED_MEMORY, SRGB_ICC_FILENAME,
+                         RESERVED_MEMORY, SRGB_ICC_RESOURCE,
                          BigTemporaryDirectory, PdfBuilder)
 from djpdf.util import (AsyncCache, MemoryBoundedSemaphore, cli_set_verbosity,
                         cli_setup, compat_asyncio_run, format_number,
                         run_command)
+
+if sys.version_info < (3, 9):
+    import importlib_resources
+else:
+    import importlib.resources as importlib_resources
 
 DEFAULT_SETTINGS = {
     "dpi": "auto",
@@ -213,16 +219,17 @@ class InputImage(BaseImageObject):
 
     async def _filename(self, psem):
         fname = path.join(self._temp_dir, "image.png")
-        await run_command([
-            CONVERT_CMD,
-            "-colorspace", "sRGB",
-            "-profile", SRGB_ICC_FILENAME,
-            "-background", _color_to_hex(self._page["bg_color"]),
-            "-alpha", "remove",
-            "-alpha", "off",
-            "-type", "TrueColor",
-            path.abspath(self._page["filename"]),
-            path.abspath(fname)], psem)
+        with importlib_resources.as_file(SRGB_ICC_RESOURCE) as srgb_icc_path:
+            await run_command([
+                CONVERT_CMD,
+                "-colorspace", "sRGB",
+                "-profile", os.fspath(srgb_icc_path),
+                "-background", _color_to_hex(self._page["bg_color"]),
+                "-alpha", "remove",
+                "-alpha", "off",
+                "-type", "TrueColor",
+                path.abspath(self._page["filename"]),
+                path.abspath(fname)], psem)
         return fname
 
 

@@ -20,13 +20,15 @@ console_scripts = ["scans2pdf = djpdf.scans2pdfcli:main",
                    "djpdf-json = djpdf.djpdf:main",
                    "hocr-json = djpdf.hocr:main"]
 install_requires = ["webcolors", "colorama", "pdfrw", "psutil",
-                    "python-xmp-toolkit"]
+                    "python-xmp-toolkit",
+                    "importlib_metadata; python_version<'3.8'",
+                    "importlib_resources>=1.4; python_version<'3.9'"]
 if enable_gui:
     packages.append("djpdfgui")
     package_data["djpdfgui"] = ["qml/main.qml", "qml/overview.qml",
                                 "qml/detail.qml"]
     console_scripts.append("scans2pdf-gui = djpdfgui.scans2pdfgui:main")
-    install_requires.extend(["pyside2", "setuptools"])
+    install_requires.append("pyside2")
 
 setup(
     name="djpdf",
@@ -34,5 +36,5 @@ setup(
     packages=packages,
     package_data=package_data,
     entry_points={"console_scripts": console_scripts},
-    python_requires=">=3.5",
+    python_requires=">=3.6",
     install_requires=install_requires)

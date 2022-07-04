@@ -24,7 +24,6 @@ import sys
 import traceback
 from argparse import ArgumentParser, ArgumentTypeError
 
-import pkg_resources
 import webcolors
 
 from djpdf.djpdf import CONVERT_CMD, JBIG2_CMD, QPDF_CMD
@@ -33,7 +32,12 @@ from djpdf.scans2pdf import (DEFAULT_SETTINGS, IDENTIFY_CMD, TESSERACT_CMD,
 from djpdf.util import (cli_set_verbosity, cli_setup, compat_asyncio_run,
                         format_number)
 
-VERSION = pkg_resources.get_distribution("djpdf").version
+if sys.version_info < (3, 8):
+    import importlib_metadata
+else:
+    import importlib.metadata as importlib_metadata
+
+VERSION = importlib_metadata.version("djpdf")
 
 
 def type_fraction(var):
