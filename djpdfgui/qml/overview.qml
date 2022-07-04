@@ -75,6 +75,7 @@ Page {
         x: Math.round((parent.width - width) / 2)
         y: Math.round((parent.height - height) / 2)
         modal: true
+        focus: true
         visible: pagesModel.saving
         closePolicy: Popup.NoAutoClose
         ColumnLayout {
