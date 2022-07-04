@@ -136,6 +136,7 @@ Page {
             id: pagesView
             focus: true
             model: pagesModel
+            highlightMoveDuration: 0
             highlight: Rectangle {
                 color: pagesView.activeFocus ? paletteActive.highlight : "transparent"
             }
@@ -152,6 +153,11 @@ Page {
                 property DjpdfPage p: model.modelData
 
                 onClicked: stack.push("detail.qml", {p: p, modelIndex: modelIndex})
+
+                onPressed: {
+                    pagesView.forceActiveFocus(Qt.MouseFocusReason)
+                    pagesView.currentIndex = modelIndex
+                }
 
                 width: 100
                 height: 100
