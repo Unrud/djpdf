@@ -50,10 +50,10 @@ Page {
     Connections {
         target: platformIntegration
         function onOpened(urls) {
-            pagesModel.extend(urls);
+            pagesModel.extend(urls)
         }
         function onSaved(url) {
-            pagesModel.save(url);
+            pagesModel.save(url)
         }
     }
 
@@ -83,25 +83,24 @@ Page {
             }
             ProgressBar {
                 Layout.fillWidth: true
-                value: pagesModel.savingProgress
-            }
-            Item {
                 Layout.fillHeight: true
+                value: pagesModel.savingProgress
+                bottomPadding: 5
             }
         }
     }
 
     header: ToolBar {
         RowLayout {
-
             anchors.fill: parent
             ToolButton {
                 text: "+"
                 onClicked: {
-                    if (platformIntegration.enabled)
-                        platformIntegration.openOpenDialog();
-                    else
-                        openDialog.open();
+                    if (platformIntegration.enabled) {
+                        platformIntegration.openOpenDialog()
+                    } else {
+                        openDialog.open()
+                    }
                 }
             }
             Item {
@@ -111,10 +110,11 @@ Page {
                 text: "Create"
                 enabled: pagesModel.count > 0
                 onClicked: {
-                    if (platformIntegration.enabled)
-                        platformIntegration.openSaveDialog();
-                    else
-                        saveDialog.open();
+                    if (platformIntegration.enabled) {
+                        platformIntegration.openSaveDialog()
+                    } else {
+                        saveDialog.open()
+                    }
                 }
             }
         }
@@ -127,61 +127,55 @@ Page {
         }
 
         GridView {
-            id: listView
+            property string dragKey: "9e8acb18cd58e838"
 
+            id: pagesView
             focus: true
             model: pagesModel
             highlight: Rectangle {
-                color: listView.activeFocus ? paletteActive.highlight : "transparent"
+                color: pagesView.activeFocus ? paletteActive.highlight : "transparent"
             }
             Keys.onSpacePressed: {
                 event.accepted = true
-                stack.push("detail.qml", {p: listView.currentItem.p,
-                                          modelIndex: listView.currentItem.visualIndex})
+                stack.push("detail.qml", {p: pagesView.currentItem.p,
+                                          modelIndex: pagesView.currentItem.modelIndex})
             }
 
             delegate: MouseArea {
-                id: delegateRoot
+                id: pageDelegate
 
-                property int visualIndex: index
+                property int modelIndex: index
                 property DjpdfPage p: model.modelData
 
-                onReleased: {
-                    if (!drag.active)
-                        stack.push("detail.qml", {p: model.modelData,
-                                                  modelIndex: index})
-                }
+                onClicked: stack.push("detail.qml", {p: p, modelIndex: modelIndex})
 
                 width: 100
                 height: 100
-                drag.target: icon
+                drag.target: pageItem
                 Item {
-                    id: icon
-                    //color: "transparent"
-                    //highlighted: GridView.isCurrentItem
-                    //onClicked: listView.currentIndex = index
-                    width: 100
-                    height: 100
+                    id: pageItem
+                    width: pageDelegate.width
+                    height: pageDelegate.height
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.verticalCenter: parent.verticalCenter
 
-                    Drag.active: delegateRoot.drag.active
-                    Drag.source: delegateRoot
+                    Drag.active: pageDelegate.drag.active
+                    Drag.source: pageDelegate
                     Drag.hotSpot.x: width/2
                     Drag.hotSpot.y: height/2
-                    Drag.keys: ["73439a2262016118"]
+                    Drag.keys: [ pagesView.dragKey ]
 
                     states: [
                         State {
-                            when: icon.Drag.active
+                            when: pageItem.Drag.active
                             ParentChange {
-                                target: icon
-                                parent: listView
+                                target: pageItem
+                                parent: pagesView
                             }
 
                             AnchorChanges {
-                                target: icon;
-                                anchors.horizontalCenter: undefined;
+                                target: pageItem
+                                anchors.horizontalCenter: undefined
                                 anchors.verticalCenter: undefined
                             }
                         }
@@ -197,14 +191,13 @@ Page {
                         z: 1
                     }
                     Rectangle {
-                        id: borderx
+                        id: imageBorder
                         color: paletteActive.text
                         anchors.centerIn: image
                         width: image.paintedWidth + 2
                         height: image.paintedHeight + 2
                         visible: image.status === Image.Ready
                     }
-
                     DropShadow {
                         anchors.fill: source
                         cached: true
@@ -212,9 +205,9 @@ Page {
                         verticalOffset: 1
                         radius: 8
                         samples: 16
-                        color: paletteActive.text
+                        color: source.color
                         smooth: true
-                        source: borderx
+                        source: imageBorder
                     }
 
                     BusyIndicator {
@@ -225,10 +218,8 @@ Page {
 
                 DropArea {
                     anchors { fill: parent; margins: 15 }
-                    keys: ["73439a2262016118"]
-                    onEntered: {
-                        pagesModel.swap(drag.source.visualIndex, delegateRoot.visualIndex)
-                    }
+                    keys: [ pagesView.dragKey ]
+                    onEntered: pagesModel.swap(drag.source.modelIndex, pageDelegate.modelIndex)
                 }
             }
         }

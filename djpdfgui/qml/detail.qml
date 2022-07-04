@@ -86,10 +86,11 @@ Page {
                     text: sv.p.dpi !== 0 ? sv.p.dpi : ""
                     validator: RegExpValidator { regExp: /[0-9]*/ }
                     onEditingFinished: {
-                        if (text === "")
+                        if (text === "") {
                             sv.p.dpi = 0
-                        else
+                        } else {
                             sv.p.dpi = parseInt(text)
+                        }
                     }
                 }
             }
@@ -133,9 +134,7 @@ Page {
                         id: backgr
                         Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
                         checked: sv.p.bg
-                        onToggled: {
-                            sv.p.bg = checked && true
-                        }
+                        onToggled: sv.p.bg = checked && true
                     }
                 }
 
@@ -153,16 +152,14 @@ Page {
                             editable: true
                             from: 1
                             to: 100
-                            onValueModified: {
-                                sv.p.bgResize = value / 100;
-                            }
+                            onValueModified: sv.p.bgResize = value / 100
                             value: Number(sv.p.bgResize * 100).toFixed(0)
                             textFromValue: function(value, locale) {
-                                return Number(value).toLocaleString(locale, "f", 0) + "%";
+                                return Number(value).toLocaleString(locale, "f", 0) + "%"
                             }
                             valueFromText: function(text, locale) {
-                                text = text.replace(/%$/, "");
-                                return Number.fromLocaleString(locale, text);
+                                text = text.replace(/%$/, "")
+                                return Number.fromLocaleString(locale, text)
                             }
                         }
                     }
@@ -178,9 +175,7 @@ Page {
                             model: sv.p.bgCompressions
                             onCountChanged: currentIndex = find(sv.p.bgCompression)
                             currentIndex: find(sv.p.bgCompression)
-                            onActivated: {
-                                sv.p.bgCompression = currentText + ""
-                            }
+                            onActivated: sv.p.bgCompression = currentText + ""
                         }
                     }
                     RowLayout {
@@ -195,9 +190,7 @@ Page {
                             editable: true
                             from: 1
                             to: 100
-                            onValueModified: {
-                                sv.p.bgQuality = value;
-                            }
+                            onValueModified: sv.p.bgQuality = value
                             value: sv.p.bgQuality
                         }
                     }
@@ -216,9 +209,7 @@ Page {
                         Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
                         id: foreground
                         checked: sv.p.fg
-                        onToggled: {
-                            sv.p.fg = checked && true
-                        }
+                        onToggled: sv.p.fg = checked && true
                     }
                 }
 
@@ -261,9 +252,7 @@ Page {
                                     Button {
                                         Layout.fillWidth: true
                                         text: "Remove"
-                                        onClicked: {
-                                            sv.p.removeFgColor(index)
-                                        }
+                                        onClicked: sv.p.removeFgColor(index)
                                     }
                                 }
                             }
@@ -292,9 +281,7 @@ Page {
                             model: sv.p.fgCompressions
                             onCountChanged: currentIndex = find(sv.p.fgCompression)
                             currentIndex: find(sv.p.fgCompression)
-                            onActivated: {
-                                sv.p.fgCompression = currentText + ""
-                            }
+                            onActivated: sv.p.fgCompression = currentText + ""
                         }
                     }
                     RowLayout {
@@ -311,21 +298,22 @@ Page {
                             to: 100
                             onValueModified: {
                                 if (90 < value && value < 100) {
-                                    var oldValue = Number(sv.p.fgJbig2Threshold * 100).toFixed(0);
-                                    if (oldValue < value)
-                                        value = 100;
-                                    else
-                                        value = 90;
+                                    var oldValue = Number(sv.p.fgJbig2Threshold * 100).toFixed(0)
+                                    if (oldValue < value) {
+                                        value = 100
+                                    } else {
+                                        value = 90
+                                    }
                                 }
-                                sv.p.fgJbig2Threshold = value / 100;
+                                sv.p.fgJbig2Threshold = value / 100
                             }
                             value: Number(sv.p.fgJbig2Threshold * 100).toFixed(0)
                             textFromValue: function(value, locale) {
-                                return Number(value).toLocaleString(locale, "f", 0) + "%";
+                                return Number(value).toLocaleString(locale, "f", 0) + "%"
                             }
                             valueFromText: function(text, locale) {
-                                text = text.replace(/%$/, "");
-                                return Number.fromLocaleString(locale, text);
+                                text = text.replace(/%$/, "")
+                                return Number.fromLocaleString(locale, text)
                             }
                         }
                     }
@@ -357,9 +345,7 @@ Page {
                         Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
                         id: ocr
                         checked: sv.p.ocr
-                        onToggled: {
-                            sv.p.ocr = checked && true
-                        }
+                        onToggled: sv.p.ocr = checked && true
                     }
                 }
                 Layout.fillWidth: true
@@ -379,9 +365,7 @@ Page {
                             model: sv.p.ocrLangs
                             onCountChanged: currentIndex = find(sv.p.ocrLang)
                             currentIndex: find(sv.p.ocrLang)
-                            onActivated: {
-                                sv.p.ocrLang = currentText + ""
-                            }
+                            onActivated: sv.p.ocrLang = currentText + ""
                         }
                     }
                     RowLayout {
@@ -419,9 +403,7 @@ Page {
                                     Button {
                                         Layout.fillWidth: true
                                         text: "Remove"
-                                        onClicked: {
-                                            sv.p.removeOcrColor(index)
-                                        }
+                                        onClicked: sv.p.removeOcrColor(index)
                                     }
                                 }
                             }
@@ -444,20 +426,14 @@ Page {
                 Button {
                     Layout.fillWidth: true
                     text: "Apply to all"
-                    onClicked: {
-                        pagesModel.applyToAll(sv.p)
-                    }
+                    onClicked: pagesModel.applyToAll(sv.p)
                 }
                 Button {
                     Layout.fillWidth: true
                     text: "Apply to following"
-                    onClicked: {
-                        pagesModel.applyToFollowing(sv.modelIndex, sv.p)
-                    }
+                    onClicked: pagesModel.applyToFollowing(sv.modelIndex, sv.p)
                 }
             }
-
-
         }
     }
 }

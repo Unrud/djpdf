@@ -21,7 +21,6 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 
 ApplicationWindow {
-
     SystemPalette { id: paletteActive; colorGroup: SystemPalette.Active }
     SystemPalette { id: paletteDisabled; colorGroup: SystemPalette.Disabled }
     visible: true
