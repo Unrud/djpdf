@@ -59,7 +59,8 @@ Page {
 
     Connections {
         target: pagesModel
-        function onSavingError() {
+        function onSavingError(message) {
+            errorDialog.text = message
             errorDialog.open()
         }
     }

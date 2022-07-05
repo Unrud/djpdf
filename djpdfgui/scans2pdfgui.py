@@ -381,7 +381,7 @@ class QmlPagesModel(QAbstractListModel):
             if qml_page is not p:
                 p.apply_config(qml_page)
 
-    savingError = Signal()
+    savingError = Signal(str)
 
     savingChanged = Signal()
 
@@ -402,20 +402,39 @@ class QmlPagesModel(QAbstractListModel):
         self._savingProgress = 0
         self.savingProgressChanged.emit()
         p = QProcess(self)
-        p.setProcessChannelMode(QProcess.ForwardedErrorChannel)
+        p.setProcessChannelMode(QProcess.SeparateChannels)
 
         stdout_buffer = b""
+        stderr_buffer = b""
 
         def ready_read_stdout():
             nonlocal stdout_buffer
             stdout_buffer += p.readAllStandardOutput().data()
             *messages, stdout_buffer = stdout_buffer.split(b"\n")
             for message in messages:
-                progress = json.loads(messages[-1].decode())
+                progress = json.loads(messages[-1].decode(sys.stdout.encoding))
                 self._savingProgress = progress["fraction"]
                 self.savingProgressChanged.emit()
+
+        def ready_read_stderr():
+            nonlocal stderr_buffer
+            stderr_data = p.readAllStandardError().data()
+            stderr_buffer += stderr_data
+            sys.stderr.buffer.write(stderr_data)
+            sys.stderr.buffer.flush()
+
+        def process_finished(status):
+            self._process = None
+            self._saving = False
+            self.savingChanged.emit()
+            if status != 0:
+                message = stderr_buffer.decode(sys.stderr.encoding,
+                                               sys.stderr.errors)
+                self.savingError.emit(message)
+
         p.readyReadStandardOutput.connect(ready_read_stdout)
-        p.finished.connect(self._process_finished)
+        p.readyReadStandardError.connect(ready_read_stderr)
+        p.finished.connect(process_finished)
         args = ["-c", "from djpdf.scans2pdf import main; main()",
                 os.path.abspath(url.toLocalFile())]
         if self._verbose:
@@ -424,13 +443,6 @@ class QmlPagesModel(QAbstractListModel):
         self._process = p
         p.write(json.dumps([p._data for p in self._pages]).encode())
         p.closeWriteChannel()
-
-    def _process_finished(self, status):
-        self._process = None
-        self._saving = False
-        self.savingChanged.emit()
-        if status != 0:
-            self.savingError.emit()
 
     def shutdown(self):
         if self._process:
