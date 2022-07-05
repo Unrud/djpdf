@@ -25,6 +25,16 @@
   <url type="homepage">https://github.com/Unrud/djpdf</url>
   <developer_name>Unrud</developer_name>
   <releases>
+    <release version="0.3.0" date="2022-07-05">
+      <description>
+        <ul>
+          <li>Fixed bug that messed up the page order when dragging and dropping pages</li>
+          <li>Display file names in overview</li>
+          <li>Make PDF creation cancelable</li>
+          <li>Show error log when PDF creation fails</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.2.1" date="2022-06-21">
       <description>
         <ul>
@@ -177,10 +187,10 @@
   </releases>
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/Unrud/djpdf/v0.2.1/screenshots/1.png</image>
+      <image>https://raw.githubusercontent.com/Unrud/djpdf/v0.3.0/screenshots/1.png</image>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/Unrud/djpdf/v0.2.1/screenshots/2.png</image>
+      <image>https://raw.githubusercontent.com/Unrud/djpdf/v0.3.0/screenshots/2.png</image>
     </screenshot>
   </screenshots>
   <content_rating type="oars-1.1" />
