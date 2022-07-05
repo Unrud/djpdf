@@ -309,6 +309,7 @@ class QmlPagesModel(QAbstractListModel):
         super().__init__(parent)
         self._pages = []
         self._process = None
+        self._process_canceled = False
         self._saving = False
         self._savingProgress = 0
         self._verbose = verbose
@@ -395,12 +396,27 @@ class QmlPagesModel(QAbstractListModel):
     def savingProgress(self):
         return self._savingProgress
 
+    savingCancelableChanged = Signal()
+
+    @Property(bool, notify=savingCancelableChanged)
+    def savingCancelable(self):
+        return bool(self._process and not self._process_canceled)
+
+    @Slot()
+    def cancelSaving(self):
+        if self.savingCancelable:
+            self._process.terminate()
+            self._process_canceled = True
+            self.savingCancelableChanged.emit()
+
     @Slot("QUrl")
     def save(self, url):
         self._saving = True
         self.savingChanged.emit()
         self._savingProgress = 0
         self.savingProgressChanged.emit()
+        self._process_canceled = False
+        self.savingCancelableChanged.emit()
         p = QProcess(self)
         p.setProcessChannelMode(QProcess.SeparateChannels)
 
@@ -427,7 +443,8 @@ class QmlPagesModel(QAbstractListModel):
             self._process = None
             self._saving = False
             self.savingChanged.emit()
-            if status != 0:
+            self.savingCancelableChanged.emit()
+            if not self._process_canceled and status != 0:
                 message = stderr_buffer.decode(sys.stderr.encoding,
                                                sys.stderr.errors)
                 self.savingError.emit(message)
@@ -441,6 +458,7 @@ class QmlPagesModel(QAbstractListModel):
             args.append("--verbose")
         p.start(sys.executable, args)
         self._process = p
+        self.savingCancelableChanged.emit()
         p.write(json.dumps([p._data for p in self._pages]).encode())
         p.closeWriteChannel()
 

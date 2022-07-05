@@ -124,7 +124,14 @@ Page {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 value: pagesModel.savingProgress
-                bottomPadding: 5
+                topPadding: 15
+                bottomPadding: 15
+            }
+            Button {
+                text: "Cancel"
+                Layout.alignment: Qt.AlignRight
+                onClicked: pagesModel.cancelSaving()
+                enabled: pagesModel.savingCancelable
             }
         }
     }
