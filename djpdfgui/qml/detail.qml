@@ -426,13 +426,37 @@ Page {
             RowLayout {
                 Button {
                     Layout.fillWidth: true
+                    Layout.preferredWidth: (parent.width-parent.spacing) / 2
                     text: "Apply to all"
                     onClicked: pagesModel.applyToAll(sv.p)
                 }
                 Button {
                     Layout.fillWidth: true
+                    Layout.preferredWidth: (parent.width-parent.spacing) / 2
                     text: "Apply to following"
                     onClicked: pagesModel.applyToFollowing(sv.modelIndex, sv.p)
+                }
+            }
+            RowLayout {
+                Button {
+                    Layout.fillWidth: true
+                    Layout.preferredWidth: (parent.width-parent.spacing) / 2
+                    text: "Load default settings"
+                    onClicked: sv.p.loadUserDefaults()
+                }
+                Button {
+                    MessageDialog {
+                        id: saveUserDefaultsDialog
+                        title: "Overwrite?"
+                        text: "Replace default settings?"
+                        icon: StandardIcon.Question
+                        standardButtons: StandardButton.Yes | StandardButton.No
+                        onAccepted: sv.p.saveUserDefaults()
+                    }
+                    Layout.fillWidth: true
+                    Layout.preferredWidth: (parent.width-parent.spacing) / 2
+                    text: "Save default settings"
+                    onClicked: saveUserDefaultsDialog.open()
                 }
             }
         }

@@ -15,11 +15,13 @@
 
 # Copyright 2018 Unrud <unrud@outlook.com>
 
+import contextlib
 import copy
 import json
 import os
 import signal
 import sys
+import tempfile
 from argparse import ArgumentParser
 
 from PySide2 import QtQml
@@ -49,6 +51,10 @@ IMAGE_MIME_TYPES = ("image/bmp", "image/gif", "image/jpeg", "image/png",
 PDF_FILE_EXTENSION = "pdf"
 PDF_MIME_TYPE = "application/pdf"
 THUMBNAIL_SIZE = 256
+USER_SETTINGS_PATH = os.path.join(
+    os.environ.get("XDG_CONFIG_HOME",
+                   os.path.join(os.path.expanduser("~"), ".config")),
+    "djpdf", "default.json")
 
 
 class QmlPage(QObject):
@@ -61,23 +67,145 @@ class QmlPage(QObject):
         super().__init__()
         self._data = copy.deepcopy(DEFAULT_SETTINGS)
 
-    def apply_config(self, qml_page):
-        d = copy.deepcopy(qml_page._data)
-        d["filename"] = self._data["filename"]
-        self._data = d
-        self.dpiChanged.emit()
-        self.bgColorChanged.emit()
-        self.bgChanged.emit()
-        self.bgResizeChanged.emit()
-        self.bgCompressionChanged.emit()
-        self.bgQualityChanged.emit()
-        self.fgChanged.emit()
-        self.fgColorsChanged.emit()
-        self.fgCompressionChanged.emit()
-        self.fgJbig2ThresholdChanged.emit()
-        self.ocrChanged.emit()
-        self.ocrLangChanged.emit()
-        self.ocrColorsChanged.emit()
+    @Slot()
+    def loadUserDefaults(self):
+        self._update(DEFAULT_SETTINGS)
+        try:
+            with open(USER_SETTINGS_PATH) as f:
+                user_settings = json.load(f)
+        except FileNotFoundError:
+            pass
+        except (IsADirectoryError, PermissionError,
+                UnicodeDecodeError, json.JSONDecodeError) as e:
+            print("Failed to load settings: %r" % e, file=sys.stderr)
+        else:
+            self._update(user_settings)
+
+    @Slot()
+    def saveUserDefaults(self):
+        user_defaults = {}
+        for key, default_value in DEFAULT_SETTINGS.items():
+            if key == "filename":
+                continue
+            value = self._data[key]
+            if value == default_value:
+                continue
+            user_defaults[key] = value
+        dir = os.path.dirname(USER_SETTINGS_PATH)
+        os.makedirs(dir, exist_ok=True)
+        temp = tempfile.NamedTemporaryFile("w", dir=dir, delete=False)
+        try:
+            json.dump(user_defaults, temp)
+            temp.close()
+            os.replace(temp.name, USER_SETTINGS_PATH)
+        except BaseException:
+            temp.close()
+            with contextlib.suppress(FileNotFoundError):
+                os.remove(temp.name)
+            raise
+
+    def _update(self, d):
+        def log_settings_error(key=None):
+            if key is None:
+                print("Invalid settings: %r" % d, file=sys.stderr)
+                return
+            value = d.get(key)
+            if value is None:
+                return
+            print("invalid settings [%r]: %r" % (key, value), file=sys.stderr)
+        if not isinstance(d, dict):
+            log_settings_error()
+            return
+
+        def set_(key, signal, value):
+            if self._data[key] != value:
+                self._data[key] = value
+                signal.emit()
+
+        dpi = d.get("dpi")
+        if dpi == "auto":
+            set_("dpi", self.dpiChanged, dpi)
+        elif isinstance(dpi, int):
+            set_("dpi", self.dpiChanged, max(1, dpi))
+        else:
+            log_settings_error("dpi")
+        bg_color = d.get("bg_color")
+        if (isinstance(bg_color, (list, tuple)) and len(bg_color) == 3 and
+                all(isinstance(v, int) for v in bg_color)):
+            set_("bg_color", self.bgColorChanged,
+                 tuple(max(0, min(0xff, v)) for v in bg_color))
+        else:
+            log_settings_error("bg_color")
+        bg_enabled = d.get("bg_enabled")
+        if isinstance(bg_enabled, bool):
+            set_("bg_enabled", self.bgChanged, bg_enabled)
+        else:
+            log_settings_error("bg_enabled")
+        bg_resize = d.get("bg_resize")
+        if isinstance(bg_resize, (float, int)):
+            set_("bg_resize", self.bgResizeChanged,
+                 max(0.01, min(1, bg_resize)))
+        else:
+            log_settings_error("bg_resize")
+        bg_compression = d.get("bg_compression")
+        if bg_compression in self._BG_COMPRESSIONS:
+            set_("bg_compression", self.bgCompressionChanged, bg_compression)
+        else:
+            log_settings_error("bg_compression")
+        bg_quality = d.get("bg_quality")
+        if isinstance(bg_quality, int):
+            set_("bg_quality", self.bgQualityChanged,
+                 max(1, min(100, bg_quality)))
+        else:
+            log_settings_error("bg_quality")
+        fg_enabled = d.get("fg_enabled")
+        if isinstance(fg_enabled, bool):
+            set_("fg_enabled", self.fgChanged, fg_enabled)
+        else:
+            log_settings_error("fg_enabled")
+        fg_colors = d.get("fg_colors")
+        if (isinstance(fg_colors, list) and all(
+                isinstance(c, (list, tuple)) and len(c) == 3
+                and all(isinstance(v, int) for v in c) for c in fg_colors)):
+            set_("fg_colors", self.fgColorsChanged,
+                 [tuple(max(0, min(0xff, v)) for v in c) for c in fg_colors])
+        else:
+            log_settings_error("fg_colors")
+        fg_compression = d.get("fg_compression")
+        if fg_compression in self._FG_COMPRESSIONS:
+            set_("fg_compression", self.fgCompressionChanged, fg_compression)
+        else:
+            log_settings_error("fg_compression")
+        fg_jbig2_threshold = d.get("fg_jbig2_threshold")
+        if isinstance(fg_jbig2_threshold, (float, int)):
+            set_("fg_jbig2_threshold", self.fgJbig2ThresholdChanged,
+                 1 if fg_jbig2_threshold >= 1
+                 else max(0.4, min(0.9, fg_jbig2_threshold)))
+        else:
+            log_settings_error("fg_jbig2_threshold")
+        ocr_enabled = d.get("ocr_enabled")
+        if isinstance(ocr_enabled, bool):
+            set_("ocr_enabled", self.ocrChanged, ocr_enabled)
+        else:
+            log_settings_error("ocr_enabled")
+        ocr_language = d.get("ocr_language")
+        if ocr_language in self._OCR_LANGS:
+            set_("ocr_language", self.ocrLangChanged, ocr_language)
+        else:
+            log_settings_error("ocr_language")
+        ocr_colors = d.get("ocr_colors")
+        if ocr_colors == "all":
+            set_("ocr_colors", self.ocrColorsChanged, ocr_colors)
+        elif (isinstance(ocr_colors, list) and all(
+                isinstance(c, (list, tuple)) and len(c) == 3 and
+                all(isinstance(v, int) for v in c) for c in ocr_colors)):
+            set_("ocr_colors", self.ocrColorsChanged,
+                 [tuple(max(0, min(0xff, v)) for v in c) for c in ocr_colors])
+        else:
+            log_settings_error("ocr_colors")
+
+    def apply_page_settings(self, qml_page):
+        self._update(qml_page._data)
 
     urlChanged = Signal()
 
@@ -103,8 +231,7 @@ class QmlPage(QObject):
         return val
 
     def setDpi(self, val):
-        self._data["dpi"] = "auto" if val == 0 else val
-        self.dpiChanged.emit()
+        self._update({"dpi": "auto" if val == 0 else val})
 
     dpi = Property(int, readDpi, setDpi, notify=dpiChanged)
 
@@ -116,9 +243,8 @@ class QmlPage(QObject):
 
     def setBgColor(self, val):
         assert val[0] == "#" and len(val) == 7
-        self._data["bg_color"] = (int(val[1:3], 16), int(val[3:5], 16),
-                                  int(val[5:], 16))
-        self.bgColorChanged.emit()
+        self._update({"bg_color": (
+            int(val[1:3], 16), int(val[3:5], 16), int(val[5:], 16))})
 
     bgColor = Property(str, readBgColor, setBgColor, notify=bgColorChanged)
 
@@ -128,8 +254,7 @@ class QmlPage(QObject):
         return self._data["bg_enabled"]
 
     def setBg(self, val):
-        self._data["bg_enabled"] = val
-        self.bgChanged.emit()
+        self._update({"bg_enabled": val})
 
     bg = Property(bool, readBg, setBg, notify=bgChanged)
 
@@ -139,8 +264,7 @@ class QmlPage(QObject):
         return self._data["bg_resize"]
 
     def setBgResize(self, val):
-        self._data["bg_resize"] = val
-        self.bgResizeChanged.emit()
+        self._update({"bg_resize": val})
 
     bgResize = Property(float, readBgResize, setBgResize,
                         notify=bgResizeChanged)
@@ -157,8 +281,7 @@ class QmlPage(QObject):
         return self._data["bg_compression"]
 
     def setBgCompression(self, val):
-        self._data["bg_compression"] = val
-        self.bgCompressionChanged.emit()
+        self._update({"bg_compression": val})
 
     bgCompression = Property(str, readBgCompression, setBgCompression,
                              notify=bgCompressionChanged)
@@ -169,8 +292,7 @@ class QmlPage(QObject):
         return self._data["bg_quality"]
 
     def setBgQuality(self, val):
-        self._data["bg_quality"] = val
-        self.bgQualityChanged.emit()
+        self._update({"bg_quality": val})
 
     bgQuality = Property(int, readBgQuality, setBgQuality,
                          notify=bgQualityChanged)
@@ -181,8 +303,7 @@ class QmlPage(QObject):
         return self._data["fg_enabled"]
 
     def setFg(self, val):
-        self._data["fg_enabled"] = val
-        self.fgChanged.emit()
+        self._update({"fg_enabled": val})
 
     fg = Property(bool, readFg, setFg, notify=fgChanged)
 
@@ -195,21 +316,23 @@ class QmlPage(QObject):
     @Slot(str)
     def addFgColor(self, val):
         assert val[0] == "#" and len(val) == 7
-        self._data["fg_colors"].append((int(val[1:3], 16), int(val[3:5], 16),
-                                        int(val[5:], 16)))
-        self.fgColorsChanged.emit()
+        self._update({"fg_colors": [
+            *self._data["fg_colors"],
+            (int(val[1:3], 16), int(val[3:5], 16), int(val[5:], 16))]})
 
     @Slot(int)
     def removeFgColor(self, index):
-        del self._data["fg_colors"][index]
-        self.fgColorsChanged.emit()
+        self._update({"fg_colors": [
+            *self._data["fg_colors"][:index],
+            *self._data["fg_colors"][index+1:]]})
 
     @Slot(int, str)
     def changeFgColor(self, index, val):
         assert val[0] == "#" and len(val) == 7
-        self._data["fg_colors"][index] = (int(val[1:3], 16), int(val[3:5], 16),
-                                          int(val[5:], 16))
-        self.fgColorsChanged.emit()
+        self._update({"fg_colors": [
+            *self._data["fg_colors"][:index],
+            (int(val[1:3], 16), int(val[3:5], 16), int(val[5:], 16)),
+            *self._data["fg_colors"][index+1:]]})
 
     fgCompressionsChanged = Signal()
 
@@ -223,8 +346,7 @@ class QmlPage(QObject):
         return self._data["fg_compression"]
 
     def setFgCompression(self, val):
-        self._data["fg_compression"] = val
-        self.fgCompressionChanged.emit()
+        self._update({"fg_compression": val})
 
     fgCompression = Property(str, readFgCompression, setFgCompression,
                              notify=fgCompressionChanged)
@@ -235,8 +357,7 @@ class QmlPage(QObject):
         return self._data["fg_jbig2_threshold"]
 
     def setFgJbig2Threshold(self, val):
-        self._data["fg_jbig2_threshold"] = val
-        self.fgJbig2ThresholdChanged.emit()
+        self._update({"fg_jbig2_threshold": val})
 
     fgJbig2Threshold = Property(float, readFgJbig2Threshold,
                                 setFgJbig2Threshold,
@@ -248,8 +369,7 @@ class QmlPage(QObject):
         return self._data["ocr_enabled"]
 
     def setOcr(self, val):
-        self._data["ocr_enabled"] = val
-        self.ocrChanged.emit()
+        self._update({"ocr_enabled": val})
 
     ocr = Property(bool, readOcr, setOcr, notify=ocrChanged)
 
@@ -265,8 +385,7 @@ class QmlPage(QObject):
         return self._data["ocr_language"]
 
     def setOcrLang(self, val):
-        self._data["ocr_language"] = val
-        self.ocrLangChanged.emit()
+        self._update({"ocr_language": val})
 
     ocrLang = Property(str, readOcrLang, setOcrLang, notify=ocrLangChanged)
 
@@ -280,25 +399,25 @@ class QmlPage(QObject):
 
     @Slot(str)
     def addOcrColor(self, val):
-        if self._data["ocr_colors"] == "all":
-            self._data["ocr_colors"] = []
-        self._data["ocr_colors"].append((int(val[1:3], 16), int(val[3:5], 16),
-                                         int(val[5:], 16)))
-        self.ocrColorsChanged.emit()
+        ocr_colors = self._data["ocr_colors"]
+        if ocr_colors == "all":
+            ocr_colors = []
+        self._update({"ocr_colors": [
+            *ocr_colors,
+            (int(val[1:3], 16), int(val[3:5], 16), int(val[5:], 16))]})
 
     @Slot(int)
     def removeOcrColor(self, index):
-        del self._data["ocr_colors"][index]
-        if not self._data["ocr_colors"]:
-            self._data["ocr_colors"] = "all"
-        self.ocrColorsChanged.emit()
+        self._update({"ocr_colors": [
+            *self._data["ocr_colors"][:index],
+            *self._data["ocr_colors"][index+1:]] or "all"})
 
     @Slot(int, str)
     def changeOcrColor(self, index, val):
-        self._data["ocr_colors"][index] = (int(val[1:3], 16),
-                                           int(val[3:5], 16),
-                                           int(val[5:], 16))
-        self.ocrColorsChanged.emit()
+        self._update({"ocr_colors": [
+            *self._data["ocr_colors"][:index],
+            (int(val[1:3], 16), int(val[3:5], 16), int(val[5:], 16)),
+            *self._data["ocr_colors"][index+1:]]})
 
 
 class QmlPagesModel(QAbstractListModel):
@@ -344,6 +463,7 @@ class QmlPagesModel(QAbstractListModel):
 
         def create_page(url):
             p = QmlPage()
+            p.loadUserDefaults()
             p.url = url
             return p
         self._pages.extend(map(create_page, urls))
@@ -374,13 +494,13 @@ class QmlPagesModel(QAbstractListModel):
     def applyToAll(self, qml_page):
         for p in self._pages:
             if qml_page is not p:
-                p.apply_config(qml_page)
+                p.apply_page_settings(qml_page)
 
     @Slot(int, QmlPage)
     def applyToFollowing(self, index, qml_page):
         for p in self._pages[index:]:
             if qml_page is not p:
-                p.apply_config(qml_page)
+                p.apply_page_settings(qml_page)
 
     savingError = Signal(str)
 
