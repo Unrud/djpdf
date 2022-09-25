@@ -105,7 +105,7 @@ Page {
                     Layout.fillWidth: true
                     onClicked: {
                         colorDialog.fn = function() {
-                            sv.p.bgColor = colorDialog.color + ""
+                            sv.p.bgColor = colorDialog.color
                         }
                         colorDialog.color = sv.p.bgColor
                         colorDialog.open()
@@ -132,7 +132,6 @@ Page {
                         font.bold: true
                     }
                     Switch {
-                        id: backgr
                         Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
                         checked: sv.p.bg
                         onToggled: sv.p.bg = checked && true
@@ -140,7 +139,7 @@ Page {
                 }
 
                 ColumnLayout {
-                    enabled: backgr.checked
+                    enabled: sv.p.bg
                     anchors.fill: parent
                     RowLayout {
                         Label {
@@ -172,7 +171,6 @@ Page {
                         }
                         ComboBox {
                             Layout.fillWidth: true
-                            id: backgr_compression
                             model: sv.p.bgCompressions
                             onCountChanged: currentIndex = find(sv.p.bgCompression)
                             currentIndex: find(sv.p.bgCompression)
@@ -180,7 +178,7 @@ Page {
                         }
                     }
                     RowLayout {
-                        enabled: backgr_compression.currentText === "jp2" || backgr_compression.currentText === "jpeg"
+                        enabled: sv.p.bgCompression === "jp2" || sv.p.bgCompression === "jpeg"
                         Label {
                             id: l5
                             Layout.preferredWidth: sv.leftColumnWidth
@@ -208,7 +206,6 @@ Page {
                     }
                     Switch {
                         Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-                        id: foreground
                         checked: sv.p.fg
                         onToggled: sv.p.fg = checked && true
                     }
@@ -216,7 +213,7 @@ Page {
 
                 ColumnLayout {
                     anchors.fill: parent
-                    enabled: foreground.checked
+                    enabled: sv.p.fg
                     RowLayout {
                         Label {
                             id: l6
@@ -233,12 +230,11 @@ Page {
                                         Layout.fillWidth: true
                                         onClicked: {
                                             colorDialog.fn = function() {
-                                                sv.p.changeFgColor(index, colorDialog.color + "")
+                                                sv.p.changeFgColor(index, colorDialog.color)
                                             }
                                             colorDialog.color = sv.p.fgColors[index]
                                             colorDialog.open()
                                         }
-                                        id: foreground_color_btn
                                         Rectangle {
                                             color: parent.enabled ? paletteActive.buttonText : paletteDisabled.buttonText
                                             anchors.fill: parent
@@ -277,7 +273,6 @@ Page {
                             text: "Compression:"
                         }
                         ComboBox {
-                            id: compression
                             Layout.fillWidth: true
                             model: sv.p.fgCompressions
                             onCountChanged: currentIndex = find(sv.p.fgCompression)
@@ -344,7 +339,6 @@ Page {
                     }
                     Switch {
                         Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-                        id: ocr
                         checked: sv.p.ocr
                         onToggled: sv.p.ocr = checked && true
                     }
@@ -353,7 +347,7 @@ Page {
 
                 ColumnLayout {
                     anchors.fill: parent
-                    enabled: ocr.checked
+                    enabled: sv.p.ocr
                     RowLayout {
                         Layout.fillWidth: true
                         Label {
@@ -385,7 +379,7 @@ Page {
                                         Layout.fillWidth: true
                                         onClicked: {
                                             colorDialog.fn = function() {
-                                                sv.p.changeOcrColor(index, colorDialog.color + "")
+                                                sv.p.changeOcrColor(index, colorDialog.color)
                                             }
                                             colorDialog.color = sv.p.ocrColors[index]
                                             colorDialog.open()
@@ -413,7 +407,7 @@ Page {
                                 text: sv.p.ocrColors.length === 0 ? "All colors" : "Add"
                                 onClicked: {
                                     colorDialog.fn = function() {
-                                        sv.p.addOcrColor(colorDialog.color + "")
+                                        sv.p.addOcrColor(colorDialog.color)
                                     }
                                     colorDialog.color = "#ffffff"
                                     colorDialog.open()
