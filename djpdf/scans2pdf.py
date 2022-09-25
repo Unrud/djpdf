@@ -49,7 +49,7 @@ DEFAULT_SETTINGS = {
     "fg_enabled": True,
     "fg_colors": [(0, 0, 0)],
     "fg_compression": "jbig2",
-    "fg_jbig2_threshold": 0.85,
+    "fg_jbig2_threshold": 0.9,
     "ocr_enabled": True,
     "ocr_language": "eng",
     "ocr_colors": [(0, 0, 0)],
