@@ -25,6 +25,16 @@
   <url type="homepage">https://github.com/Unrud/djpdf</url>
   <developer_name>Unrud</developer_name>
   <releases>
+    <release version="0.3.1" date="2022-09-25">
+      <description>
+        <ul>
+          <li>Make default values configurable</li>
+          <li>Fix typo in help</li>
+          <li>Raise default JBIG2 symbol threshold to 90%</li>
+          <li>Fix race when using FileChooser dialog</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.3.0" date="2022-07-05">
       <description>
         <ul>
@@ -187,10 +197,10 @@
   </releases>
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/Unrud/djpdf/v0.3.0/screenshots/1.png</image>
+      <image>https://raw.githubusercontent.com/Unrud/djpdf/v0.3.1/screenshots/1.png</image>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/Unrud/djpdf/v0.3.0/screenshots/2.png</image>
+      <image>https://raw.githubusercontent.com/Unrud/djpdf/v0.3.1/screenshots/2.png</image>
     </screenshot>
   </screenshots>
   <content_rating type="oars-1.1" />
