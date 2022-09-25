@@ -550,37 +550,55 @@ class QmlXdgDesktopPortalPlatformIntegration(QmlPlatformIntegration):
     def enabled(self):
         return True
 
+    def _call_with_response(self, call_fn, callback):
+        def on_response(*args, path=None):
+            if path is not None:
+                responses.append((path, args))
+            # process responses
+            nonlocal response_path
+            if response_path is None:
+                return
+            for path, args in responses:
+                if path != response_path:
+                    continue
+                response_path = None
+                receiver.remove()
+                callback(*args)
+                break
+            responses.clear()
+        responses = []
+        response_path = None
+        receiver = self._bus.add_signal_receiver(
+            on_response, "Response", "org.freedesktop.portal.Request",
+            path_keyword="path")
+        try:
+            response_path = call_fn()
+        except BaseException:
+            receiver.remove()
+            raise
+        on_response()
+
     @Slot()
     def openOpenDialog(self):
+        def on_response(result, d):
+            if result == 0:
+                self.opened.emit(d["uris"])
         options = {"filters": [("Images", [(dbus.UInt32(1), m)
                                            for m in IMAGE_MIME_TYPES]),
                                ("All files", [(dbus.UInt32(0), "*")])],
                    "multiple": True}
-        reply = self._file_chooser.OpenFile(
-            self._win_id, "Open", options, signature="ssa{sv}")
-
-        def on_response(result, d):
-            receiver.remove()
-            if result == 0:
-                self.opened.emit(d["uris"])
-        receiver = self._bus.add_signal_receiver(
-            on_response, "Response", "org.freedesktop.portal.Request", None,
-            reply)
+        self._call_with_response(lambda: self._file_chooser.OpenFile(
+            self._win_id, "Open", options, signature="ssa{sv}"), on_response)
 
     @Slot()
     def openSaveDialog(self):
-        options = {"filters": [("PDF", [(dbus.UInt32(1), PDF_MIME_TYPE)])],
-                   "current_name": "Unnamed.%s" % PDF_FILE_EXTENSION}
-        reply = self._file_chooser.SaveFile(
-            self._win_id, "Save", options, signature="ssa{sv}")
-
         def on_response(result, d):
-            receiver.remove()
             if result == 0:
                 self.saved.emit(d["uris"][0])
-        receiver = self._bus.add_signal_receiver(
-            on_response, "Response", "org.freedesktop.portal.Request", None,
-            reply)
+        options = {"filters": [("PDF", [(dbus.UInt32(1), PDF_MIME_TYPE)])],
+                   "current_name": "Unnamed.%s" % PDF_FILE_EXTENSION}
+        self._call_with_response(lambda: self._file_chooser.SaveFile(
+            self._win_id, "Save", options, signature="ssa{sv}"), on_response)
 
 
 def main():
