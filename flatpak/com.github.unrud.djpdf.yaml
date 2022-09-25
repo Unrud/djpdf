@@ -262,8 +262,8 @@ modules:
   - name: imagemagick
     sources:
       - type: archive
-        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-47.tar.gz
-        sha256: ad489af583bdfc0b5edd6c2106c955bf3af68fe838f6bd32c0ee8505ec6891ff
+        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-49.tar.gz
+        sha256: 18863242462733245308281353eeef27e86a8d0f5f805f8f5fb6293d5bc66b5d
         x-checker-data:
           type: json
           url: https://api.github.com/repos/ImageMagick/ImageMagick/releases/latest
@@ -271,15 +271,19 @@ modules:
           url-query: '"https://github.com/ImageMagick/ImageMagick/archive/refs/tags/" + $version + ".tar.gz"'
 
   - name: qpdf
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/qpdf/qpdf/releases/download/release-qpdf-10.6.3/qpdf-10.6.3.tar.gz
-        sha256: e8fc23b2a584ea68c963a897515d3eb3129186741dd19d13c86d31fa33493811
+        url: https://github.com/qpdf/qpdf/releases/download/v11.1.0/qpdf-11.1.0.tar.gz
+        sha256: 34a7cf3ac6e239510e9a20d7cbe10a4aff0f572c20e0a9bed0badb820a69e22d
         x-checker-data:
           type: json
           url: https://api.github.com/repos/qpdf/qpdf/releases/latest
           version-query: '.tag_name'
-          url-query: '.assets[] | select(.name == "qpdf-" + ($version | sub("^release-qpdf-"; "")) + ".tar.gz").browser_download_url'
+          url-query: '.assets[] | select(.name == "qpdf-" + ($version | sub("^v"; "")) + ".tar.gz").browser_download_url'
 
   - name: tesseract
     sources:
