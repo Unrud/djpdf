@@ -171,10 +171,16 @@ Page {
                         }
                         ComboBox {
                             Layout.fillWidth: true
+                            id: bgCompressionComboBox
                             model: sv.p.bgCompressions
-                            onCountChanged: currentIndex = find(sv.p.bgCompression)
-                            currentIndex: find(sv.p.bgCompression)
-                            onActivated: sv.p.bgCompression = currentText + ""
+                            Component.onCompleted: currentIndex = indexOfValue(sv.p.bgCompression)
+                            onActivated: sv.p.bgCompression = currentValue
+                            Connections {
+                                target: sv.p
+                                function onBgCompressionChanged() {
+                                    bgCompressionComboBox.currentIndex = bgCompressionComboBox.indexOfValue(sv.p.bgCompression)
+                                }
+                            }
                         }
                     }
                     RowLayout {
@@ -274,10 +280,16 @@ Page {
                         }
                         ComboBox {
                             Layout.fillWidth: true
+                            id: fgCompressionComboBox
                             model: sv.p.fgCompressions
-                            onCountChanged: currentIndex = find(sv.p.fgCompression)
-                            currentIndex: find(sv.p.fgCompression)
-                            onActivated: sv.p.fgCompression = currentText + ""
+                            Component.onCompleted: currentIndex = indexOfValue(sv.p.fgCompression)
+                            onActivated: sv.p.fgCompression = currentValue
+                            Connections {
+                                target: sv.p
+                                function onFgCompressionChanged() {
+                                    fgCompressionComboBox.currentIndex = fgCompressionComboBox.indexOfValue(sv.p.fgCompression)
+                                }
+                            }
                         }
                     }
                     RowLayout {
@@ -357,10 +369,16 @@ Page {
                         }
                         ComboBox {
                             Layout.fillWidth: true
+                            id: ocrLangComboBox
                             model: sv.p.ocrLangs
-                            onCountChanged: currentIndex = find(sv.p.ocrLang)
-                            currentIndex: find(sv.p.ocrLang)
-                            onActivated: sv.p.ocrLang = currentText + ""
+                            Component.onCompleted: currentIndex = indexOfValue(sv.p.ocrLang)
+                            onActivated: sv.p.ocrLang = currentValue
+                            Connections {
+                                target: sv.p
+                                function onOcrLangChanged() {
+                                    ocrLangComboBox.currentIndex = ocrLangComboBox.indexOfValue(sv.p.ocrLang)
+                                }
+                            }
                         }
                     }
                     RowLayout {
