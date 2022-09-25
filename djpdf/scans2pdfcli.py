@@ -115,7 +115,7 @@ def type_dpi(var):
         raise ArgumentTypeError("invalid dpi value: '%s'" % var)
     if d <= 0:
         raise ArgumentTypeError("invalid dpi value: '%s' "
-                                "(must be ≥ 0)" % var)
+                                "(must be > 0)" % var)
     return d
 
 
