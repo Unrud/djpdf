@@ -9,27 +9,24 @@ license: GPL-3.0+
 grade: stable
 adopt-info: djpdf
 
-base: core18
+base: core20
 confinement: strict
 
 architectures:
   - build-on: amd64
 
 environment:
-  TESSDATA_PREFIX: ${SNAP}/share/tessdata
   DJPDF_PLATFORM: xdg-desktop-portal
   # Qt: Prefer x11 to wayland
   QT_QPA_PLATFORM: xcb;wayland
+  # WORKAROUND: Add python modules in Snap to search path
+  PYTHONPATH: ${SNAP}/lib/python3.8/site-packages:${SNAP}/usr/lib/python3/dist-packages
 
 apps:
   djpdf:
-    command: desktop-launch "${SNAP}/bin/scans2pdf-gui"
-    plugs:
-      - desktop
-      - desktop-legacy
-      - x11
-      - wayland
-      - opengl
+    command: bin/scans2pdf-gui
+    extensions:
+      - kde-neon
     common-id: com.github.unrud.djpdf
     desktop: usr/share/applications/com.github.unrud.djpdf.desktop
 
@@ -39,6 +36,9 @@ parts:
     source: https://github.com/agl/jbig2enc/archive/refs/tags/0.29.tar.gz
     source-type: tar
     source-checksum: sha256/bfcf0d0448ee36046af6c776c7271cd5a644855723f0a832d1c0db4de3c21280
+    autotools-configure-parameters:
+      # WORKAROUND: Install to /usr instead of /usr/local because it's not in search paths
+      - --prefix=/usr
     build-packages:
       - g++
       - libleptonica-dev
@@ -50,23 +50,20 @@ parts:
       ./autogen.sh
       snapcraftctl build
 
-  openjpeg:
-    plugin: cmake
-    source: https://github.com/uclouvain/openjpeg/archive/refs/tags/v2.5.0.tar.gz
-    source-type: tar
-    source-checksum: sha256/0333806d6adecc6f7a91243b2b839ff4d2053823634d4f6ed7a59bc87409122a
-
   imagemagick:
     plugin: autotools
     source: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-49.tar.gz
     source-type: tar
     source-checksum: sha256/18863242462733245308281353eeef27e86a8d0f5f805f8f5fb6293d5bc66b5d
-    after: [openjpeg]
+    autotools-configure-parameters:
+      # WORKAROUND: Install to /usr instead of /usr/local because it's not in search paths
+      - --prefix=/usr
     build-packages:
       - libjpeg-dev
       - libpng-dev
       - libtiff-dev
       - libwebp-dev
+      - libopenjp2-7-dev
     stage-packages:
       - libjpeg8
       - libpng16-16
@@ -74,11 +71,15 @@ parts:
       - libwebpmux3
       - libgomp1
       - libwebpdemux2
+      - libopenjp2-7
 
   tesseract:
     plugin: autotools
     source: https://github.com/tesseract-ocr/tesseract/archive/refs/tags/5.2.0.tar.gz
     source-checksum: sha256/eba4deb2f92a3f89a6623812074af8c53b772079525b3c263aa70bbf7b748b3c
+    autotools-configure-parameters:
+      # WORKAROUND: Fake installation location to find dependencies at runtime
+      - --prefix=/snap/djpdf/current/usr
     build-packages:
       - pkg-config
       - libleptonica-dev
@@ -87,6 +88,9 @@ parts:
     override-build: |
       ./autogen.sh
       snapcraftctl build
+    organize:
+      # WORKAROUND: Move files from fake installation location to actual target
+      snap/djpdf/current/usr: usr
 
   tessdata:
     plugin: nil
@@ -116,71 +120,51 @@ parts:
       9cf5d576fcc47564f11265841e5ca839001e7e6f38ff7f7aacf46d15a96b00ff *osd.traineddata' > SHA256SUMS
       sha256sum -c SHA256SUMS
     override-build: |
-      install -Dm0644 -t "${SNAPCRAFT_PART_INSTALL}/share/tessdata" *
-
-  desktop-glib-only:
-    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
-    source-subdir: glib-only
-    plugin: make
-    build-packages:
-      - libglib2.0-dev
-    stage-packages:
-      - libglib2.0-bin
+      install -Dm0644 -t "${SNAPCRAFT_PART_INSTALL}/usr/share/tessdata" *
 
   djpdf:
-    after:
-      - desktop-glib-only
     plugin: python
-    python-version: python3
     source: .
     source-type: git
-    python-packages:
-      - PySide2<5.15
-    build-packages:
-      - imagemagick
     stage-packages:
       - python3-pkg-resources
       - python3-dbus
       - qpdf
-      - libexempi3
-      - libnss3
-      - libxcomposite1
-      - libxcursor1
-      - libxtst6
-      - libxrandr2
-      - libasound2
-      - libglu1-mesa
-      - libgles2-mesa
-      - fontconfig
-      - libxkbcommon0
-      - ttf-ubuntu-font-family
-      - dmz-cursor-theme
-      - light-themes
-      - adwaita-icon-theme
-      - gnome-themes-standard
-      - shared-mime-info
-      - libgdk-pixbuf2.0-0
-      - locales-all
-      - libxslt1.1
-      - fonts-dejavu-core
-      - xfonts-base
-      - xfonts-scalable
-      - libxkbcommon-x11-0
+      - libexempi8
     override-pull: |
       snapcraftctl pull
-      # WORKAROUND: Point icon directly to high resolution version otherwise snapcraft automatically chooses lowest resolution
+      # WORKAROUND: Snap breaks rpath with LD_LIBRARY_PATH.
+      #             QML2_IMPORT_PATH and QT_PLUGIN_PATH environment variables break Qt bundled with PySide2.
+      cat >pyside2-wrapper <<EOF
+      #!/bin/bash
+      unset QML2_IMPORT_PATH QT_PLUGIN_PATH
+      if [ -n "\${LD_LIBRARY_PATH}" ]; then
+          LD_LIBRARY_PATH=":\${LD_LIBRARY_PATH}"
+      fi
+      export LD_LIBRARY_PATH="\${SNAP}/lib/python3.8/site-packages/PySide2/Qt/lib\${LD_LIBRARY_PATH}"
+      exec "\${0}.real"
+      EOF
+      # WORKAROUND: Point icon directly to PNG otherwise snapcraft can't find it
       sed -e 's|Icon=com.github.unrud.djpdf|Icon=/usr/share/icons/hicolor/512x512/apps/com.github.unrud.djpdf.png|' -i desktop/com.github.unrud.djpdf.desktop
     override-build: |
       snapcraftctl build
       install -Dm0644 -t "${SNAPCRAFT_PART_INSTALL}/usr/share/metainfo" desktop/com.github.unrud.djpdf.metainfo.xml
       install -Dm0644 -t "${SNAPCRAFT_PART_INSTALL}/usr/share/applications" desktop/com.github.unrud.djpdf.desktop
-      for s in 16 32 48 64 128 256 512; do
-        convert +set date:create +set date:modify desktop/com.github.unrud.djpdf.png -resize ${s}x${s} com.github.unrud.djpdf_${s}.png || exit 1
-        install -Dm0644 com.github.unrud.djpdf_${s}.png "${SNAPCRAFT_PART_INSTALL}/usr/share/icons/hicolor/${s}x${s}/apps/com.github.unrud.djpdf.png" || exit 1
-      done
-    override-stage: |
+      install -Dm0644 desktop/com.github.unrud.djpdf.png "${SNAPCRAFT_PART_INSTALL}/usr/share/icons/hicolor/512x512/apps/com.github.unrud.djpdf.png"
+      install -Dm0755 -t "${SNAPCRAFT_PART_INSTALL}/bin" pyside2-wrapper
+      # WORKAROUND: Install wrapper for fixing PySide2
+      mv "${SNAPCRAFT_PART_INSTALL}/bin/scans2pdf-gui" "${SNAPCRAFT_PART_INSTALL}/bin/scans2pdf-gui.real"
+      ln -s pyside2-wrapper "${SNAPCRAFT_PART_INSTALL}/bin/scans2pdf-gui"
       # WORKAROUND: Hardcode libexempi path
       libexempi_path="/snap/djpdf/current/$(realpath --relative-base="${SNAPCRAFT_PART_INSTALL}" "$(find "${SNAPCRAFT_PART_INSTALL}" -name 'libexempi.so*' -print -quit)")"
       sed -e "s|[^=]*find_library('exempi')| '$libexempi_path'|" -i "${SNAPCRAFT_PART_INSTALL}"/lib/python3.*/site-packages/libxmp/exempi.py
-      snapcraftctl stage
     parse-info: [usr/share/metainfo/com.github.unrud.djpdf.metainfo.xml]
+    stage:
+      # WORKAROUND: Skip venv from python plugin
+      - -bin/activate
+      - -bin/activate.csh
+      - -bin/activate.fish
+      - -bin/Activate.ps1
+      - -bin/python
+      - -bin/python3
+      - -pyvenv.cfg
