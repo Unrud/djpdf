@@ -17,11 +17,12 @@
  * Copyright 2018 Unrud <unrud@outlook.com>
  */
 
-import QtQuick 2.9
-import QtQuick.Controls 2.2
-import QtQuick.Layouts 1.3
-import QtQuick.Dialogs 1.2
-import djpdf 1.0
+import QtCore
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import QtQuick.Dialogs
+import djpdf
 
 Page {
     FileDialog {
@@ -31,19 +32,18 @@ Page {
             "Images (" + platformIntegration.imageFileExtensions.map(function(s) {return "*." + s}).join(" ") + ")",
             "All files (*)"
         ]
-        folder: shortcuts.home
-        selectMultiple: true
-        onAccepted: pagesModel.extend(openDialog.fileUrls)
+        fileMode: FileDialog.OpenFiles
+        currentFolder: StandardPaths.writableLocation(StandardPaths.HomeLocation)
+        onAccepted: pagesModel.extend(selectedFiles)
     }
 
     FileDialog {
         id: saveDialog
         title: "Save"
-        defaultSuffix: platformIntegration.pdfFileExtension
         nameFilters: [ "PDF (*." + platformIntegration.pdfFileExtension + ")" ]
-        folder: shortcuts.home
-        selectExisting: false
-        onAccepted: pagesModel.save(saveDialog.fileUrl)
+        fileMode: FileDialog.SaveFile
+        currentFolder: StandardPaths.writableLocation(StandardPaths.HomeLocation)
+        onAccepted: pagesModel.save(selectedFile)
     }
 
     Connections {

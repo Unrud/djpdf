@@ -25,13 +25,13 @@ import tempfile
 import traceback
 from argparse import ArgumentParser
 
-from PySide2 import QtQml
-from PySide2.QtGui import QIcon, QImage
-from PySide2.QtCore import (Property, QAbstractListModel, QModelIndex,
+from PySide6 import QtQml
+from PySide6.QtGui import QIcon, QImage
+from PySide6.QtCore import (Property, QAbstractListModel, QModelIndex,
                             QObject, QProcess, QUrl, Qt, Signal, Slot)
-from PySide2.QtQuick import QQuickImageProvider
-from PySide2.QtQml import QQmlApplicationEngine
-from PySide2.QtWidgets import QApplication
+from PySide6.QtQuick import QQuickImageProvider
+from PySide6.QtQml import QQmlApplicationEngine
+from PySide6.QtWidgets import QApplication
 
 from djpdf.scans2pdf import DEFAULT_SETTINGS, find_ocr_languages
 

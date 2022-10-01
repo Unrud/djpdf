@@ -28,7 +28,7 @@ if enable_gui:
     package_data["djpdfgui"] = ["qml/main.qml", "qml/overview.qml",
                                 "qml/detail.qml"]
     console_scripts.append("scans2pdf-gui = djpdfgui.scans2pdfgui:main")
-    install_requires.append("pyside2")
+    install_requires.append("pyside6")
 
 setup(
     name="djpdf",

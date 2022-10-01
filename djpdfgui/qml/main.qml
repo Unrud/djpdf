@@ -17,8 +17,8 @@
  * Copyright 2018 Unrud <unrud@outlook.com>
  */
 
-import QtQuick 2.9
-import QtQuick.Controls 2.2
+import QtQuick
+import QtQuick.Controls
 
 ApplicationWindow {
     SystemPalette { id: paletteActive; colorGroup: SystemPalette.Active }

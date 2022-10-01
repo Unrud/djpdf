@@ -125,6 +125,8 @@ parts:
     plugin: python
     source: .
     source-type: git
+    python-packages:
+      - PySide6<6.4
     stage-packages:
       - python3-pkg-resources
       - python3-dbus

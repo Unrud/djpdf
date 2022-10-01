@@ -17,11 +17,12 @@
  * Copyright 2018 Unrud <unrud@outlook.com>
  */
 
-import QtQuick 2.9
-import QtQuick.Controls 2.2
-import QtQuick.Layouts 1.3
-import QtQuick.Dialogs 1.2
-import djpdf 1.0
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import QtQuick.Dialogs
+import Qt.labs.platform as Labs
+import djpdf
 
 Page {
     id: sv
@@ -60,11 +61,10 @@ Page {
         }
     }
 
-    ColorDialog {
+    Labs.ColorDialog {
         property var fn: null
         id: colorDialog
         title: "Please choose a color"
-        modality: Qt.WindowModal
         onAccepted: fn()
     }
 
@@ -90,7 +90,7 @@ Page {
                             selectByMouse: true
                             placeholderText: "auto"
                             text: sv.p.dpi !== 0 ? sv.p.dpi : ""
-                            validator: RegExpValidator { regExp: /[0-9]*/ }
+                            validator: RegularExpressionValidator { regularExpression: /[0-9]*/ }
                             onEditingFinished: {
                                 if (text === "") {
                                     sv.p.dpi = 0
@@ -464,12 +464,11 @@ Page {
                     onClicked: sv.p.loadUserDefaults()
                 }
                 Button {
-                    MessageDialog {
+                    Labs.MessageDialog {
                         id: saveUserDefaultsDialog
                         title: "Overwrite?"
                         text: "Replace default settings?"
-                        icon: StandardIcon.Question
-                        standardButtons: StandardButton.Yes | StandardButton.No
+                        buttons: Labs.MessageDialog.Yes | Labs.MessageDialog.No
                         onAccepted: sv.p.saveUserDefaults()
                     }
                     Layout.fillWidth: true
