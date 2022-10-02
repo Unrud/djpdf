@@ -16,7 +16,6 @@ architectures:
   - build-on: amd64
 
 environment:
-  DJPDF_PLATFORM: xdg-desktop-portal
   # Qt: Prefer x11 to wayland
   QT_QPA_PLATFORM: xcb;wayland
   # WORKAROUND: Add python modules in Snap to search path

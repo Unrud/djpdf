@@ -22,6 +22,7 @@ import os
 import signal
 import sys
 import tempfile
+import traceback
 from argparse import ArgumentParser
 
 from PySide2 import QtQml
@@ -655,6 +656,12 @@ class QmlXdgDesktopPortalPlatformIntegration(QmlPlatformIntegration):
                              "/org/freedesktop/portal/desktop")
         self._file_chooser = dbus.Interface(
             obj, "org.freedesktop.portal.FileChooser")
+        # Test if method exists
+        try:
+            self._file_chooser.OpenFile(signature="")
+        except dbus.exceptions.DBusException as e:
+            if e.get_dbus_name() != "org.freedesktop.DBus.Error.InvalidArgs":
+                raise
 
     @property
     def _win_id(self):
@@ -736,13 +743,25 @@ def main():
     engine.addImageProvider("thumbnails", thumbnail_image_provider)
     ctx = engine.rootContext()
     pages_model = QmlPagesModel(verbose=args.verbose)
-    if "xdg-desktop-portal" in os.environ.get("DJPDF_PLATFORM", "").split(","):
+    platform_integration = None
+    # Try FileChooser portal
+    try:
         import dbus
         import dbus.mainloop.glib
-        dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
-        bus = dbus.SessionBus()
-        platform_integration = QmlXdgDesktopPortalPlatformIntegration(app, bus)
+    except ModuleNotFoundError:
+        if args.verbose:
+            traceback.print_exc(file=sys.stderr)
     else:
+        try:
+            dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
+            bus = dbus.SessionBus()
+            platform_integration = QmlXdgDesktopPortalPlatformIntegration(
+                app, bus)
+        except dbus.exceptions.DBusException:
+            if args.verbose:
+                traceback.print_exc(file=sys.stderr)
+    # Fallback to Qt file dialogs
+    if platform_integration is None:
         platform_integration = QmlPlatformIntegration(app)
     ctx.setContextProperty("pagesModel", pages_model)
     ctx.setContextProperty("platformIntegration", platform_integration)

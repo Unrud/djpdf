@@ -10,7 +10,6 @@ finish-args:
   - --socket=wayland
   - --device=dri
   - --share=ipc
-  - --env=DJPDF_PLATFORM=xdg-desktop-portal
   # Qt: Prefer x11 to wayland
   - --env=QT_QPA_PLATFORM=xcb;wayland
 cleanup:
