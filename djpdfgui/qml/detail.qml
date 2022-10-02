@@ -74,50 +74,57 @@ Page {
         padding: 5
         ColumnLayout {
             width: scrollView.availableWidth
-            RowLayout {
-                Label {
-                    id: l1
-                    Layout.preferredWidth: sv.leftColumnWidth
-                    text: "DPI:"
-                }
-                TextField {
-                    Layout.fillWidth: true
-                    selectByMouse: true
-                    placeholderText: "auto"
-                    text: sv.p.dpi !== 0 ? sv.p.dpi : ""
-                    validator: RegExpValidator { regExp: /[0-9]*/ }
-                    onEditingFinished: {
-                        if (text === "") {
-                            sv.p.dpi = 0
-                        } else {
-                            sv.p.dpi = parseInt(text)
+
+            Pane {
+                Layout.fillWidth: true
+                ColumnLayout {
+                    anchors.fill: parent
+                    RowLayout {
+                        Label {
+                            id: l1
+                            Layout.preferredWidth: sv.leftColumnWidth
+                            text: "DPI:"
+                        }
+                        TextField {
+                            Layout.fillWidth: true
+                            selectByMouse: true
+                            placeholderText: "auto"
+                            text: sv.p.dpi !== 0 ? sv.p.dpi : ""
+                            validator: RegExpValidator { regExp: /[0-9]*/ }
+                            onEditingFinished: {
+                                if (text === "") {
+                                    sv.p.dpi = 0
+                                } else {
+                                    sv.p.dpi = parseInt(text)
+                                }
+                            }
                         }
                     }
-                }
-            }
-            RowLayout {
-                Label {
-                    id: l2
-                    Layout.preferredWidth: sv.leftColumnWidth
-                    text: "Background color:"
-                }
-                Button {
-                    Layout.fillWidth: true
-                    onClicked: {
-                        colorDialog.fn = function() {
-                            sv.p.bgColor = colorDialog.color
+                    RowLayout {
+                        Label {
+                            id: l2
+                            Layout.preferredWidth: sv.leftColumnWidth
+                            text: "Background color:"
                         }
-                        colorDialog.color = sv.p.bgColor
-                        colorDialog.open()
-                    }
-                    Rectangle {
-                        color: parent.enabled ? paletteActive.buttonText : paletteDisabled.buttonText
-                        anchors.fill: parent
-                        anchors.margins: 5
-                        Rectangle {
-                            color: sv.p.bgColor
-                            anchors.fill: parent
-                            anchors.margins: 1
+                        Button {
+                            Layout.fillWidth: true
+                            onClicked: {
+                                colorDialog.fn = function() {
+                                    sv.p.bgColor = colorDialog.color
+                                }
+                                colorDialog.color = sv.p.bgColor
+                                colorDialog.open()
+                            }
+                            Rectangle {
+                                color: parent.enabled ? paletteActive.buttonText : paletteDisabled.buttonText
+                                anchors.fill: parent
+                                anchors.margins: 5
+                                Rectangle {
+                                    color: sv.p.bgColor
+                                    anchors.fill: parent
+                                    anchors.margins: 1
+                                }
+                            }
                         }
                     }
                 }
