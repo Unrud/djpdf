@@ -220,8 +220,7 @@ modules:
         x-checker-data:
           type: html
           url: https://download.qt.io/official_releases/QtForPython/pyside6/
-          version-pattern: '>PySide6-([\d.]+)-src/<'
-          versions: {'>=': '6.3', '<': '6.4'}
+          version-pattern: '>PySide6-(6\.3(?:\.[\d.]+)?)-src/<'
           url-template: https://download.qt.io/official_releases/QtForPython/pyside6/PySide6-$version-src/pyside-setup-opensource-src-$version.tar.xz
       - type: shell
         commands:
@@ -255,8 +254,8 @@ modules:
   - name: imagemagick
     sources:
       - type: archive
-        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-49.tar.gz
-        sha256: 18863242462733245308281353eeef27e86a8d0f5f805f8f5fb6293d5bc66b5d
+        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-51.tar.gz
+        sha256: 4333ef2fe63f2510988af82b726f5b1919ebd54037ea6674566c69fcceb67e11
         x-checker-data:
           type: json
           url: https://api.github.com/repos/ImageMagick/ImageMagick/releases/latest
@@ -334,8 +333,8 @@ modules:
       - pip3 install --prefix=/app .
     sources:
       - type: archive
-        url: https://files.pythonhosted.org/packages/31/da/2d48d3499b59c7f3c5d5e1c79fcee5537c320c8ab7b7a0cd2db578bc34b3/pytz-2022.4.tar.gz
-        sha256: 48ce799d83b6f8aab2020e369b627446696619e79645419610b9facd909b3174
+        url: https://files.pythonhosted.org/packages/fe/dd/182cc5ed8e64a0d6d6c34fd27391041d542270000825410d294bd6902207/pytz-2022.5.tar.gz
+        sha256: c4d88f472f54d615e9cd582a5004d1e5f624854a6a27a6211591c251f22a6914
         x-checker-data:
           type: pypi
           name: pytz
@@ -404,11 +403,11 @@ modules:
   - name: psutil
     buildsystem: simple
     build-commands:
-      - pip3 install --prefix=/app .
+      - pip3 install --no-build-isolation --prefix=/app .
     sources:
       - type: archive
-        url: https://github.com/giampaolo/psutil/archive/refs/tags/release-5.9.2.tar.gz
-        sha256: 410e9f2e41e326388e72514363b2a9f3b8a3a3dd14a5fd1afbca908fe6c018d0
+        url: https://github.com/giampaolo/psutil/archive/refs/tags/release-5.9.3.tar.gz
+        sha256: c0035e04f509253ecb9256cf3fa1d9023c8470cb37c091db2e3778440adb8ad8
         x-checker-data:
           type: json
           url: https://api.github.com/repos/giampaolo/psutil/tags
