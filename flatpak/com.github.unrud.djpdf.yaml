@@ -498,8 +498,8 @@ modules:
       - pip3 install --prefix=/app .
     sources:
       - type: archive
-        url: https://files.pythonhosted.org/packages/fe/dd/182cc5ed8e64a0d6d6c34fd27391041d542270000825410d294bd6902207/pytz-2022.5.tar.gz
-        sha256: c4d88f472f54d615e9cd582a5004d1e5f624854a6a27a6211591c251f22a6914
+        url: https://files.pythonhosted.org/packages/76/63/1be349ff0a44e4795d9712cc0b2d806f5e063d4d34631b71b832fac715a8/pytz-2022.6.tar.gz
+        sha256: e89512406b793ca39f5971bc999cc538ce125c0e51c27941bef4568b460095e2
         x-checker-data:
           type: pypi
           name: pytz
@@ -531,18 +531,15 @@ modules:
   - name: colorama
     buildsystem: simple
     build-commands:
-      - pip3 install --prefix=/app .
+      - pip3 install --prefix=/app colorama-*.whl
     sources:
-      - type: archive
-        url: https://github.com/tartley/colorama/archive/refs/tags/0.4.5.tar.gz
-        sha256: b6fcb66accc1ef6106b564ca39f616f065f35c9d07bc1c04d2c219b381f5a557
+      - type: file
+        url: https://files.pythonhosted.org/packages/d1/d6/3965ed04c63042e047cb6a3e6ed1a63a35087b6a609aa3a15ed8ac56c221/colorama-0.4.6-py2.py3-none-any.whl
+        sha256: 4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6
         x-checker-data:
-          type: json
-          url: https://api.github.com/repos/tartley/colorama/tags
-          version-query: '[.[].name | select(test("^v?[0-9.]+$"))] | sort_by(sub("^v";
-            "") | split(".") | map(tonumber))[-1]'
-          url-query: '"https://github.com/tartley/colorama/archive/refs/tags/" + $version
-            + ".tar.gz"'
+          type: pypi
+          name: colorama
+          packagetype: bdist_wheel
 
   - name: webcolors
     buildsystem: simple
