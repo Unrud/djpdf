@@ -26,7 +26,7 @@ import traceback
 from argparse import ArgumentParser
 
 from PySide6 import QtQml
-from PySide6.QtGui import QIcon, QImage
+from PySide6.QtGui import QIcon, QImage, QImageReader
 from PySide6.QtCore import (Property, QAbstractListModel, QModelIndex,
                             QObject, QProcess, QUrl, Qt, Signal, Slot)
 from PySide6.QtQuick import QQuickImageProvider
@@ -740,6 +740,8 @@ def main():
     app.setWindowIcon(QIcon.fromTheme("com.github.unrud.djpdf"))
     engine = QQmlApplicationEngine()
     thumbnail_image_provider = ThumbnailImageProvider()
+    # Disable image memory limit to be able to load thumbnails for large images
+    QImageReader.setAllocationLimit(0)
     engine.addImageProvider("thumbnails", thumbnail_image_provider)
     ctx = engine.rootContext()
     pages_model = QmlPagesModel(verbose=args.verbose)
