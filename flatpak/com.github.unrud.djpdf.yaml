@@ -414,8 +414,8 @@ modules:
   - name: imagemagick
     sources:
       - type: archive
-        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-51.tar.gz
-        sha256: 4333ef2fe63f2510988af82b726f5b1919ebd54037ea6674566c69fcceb67e11
+        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-52.tar.gz
+        sha256: bacd6d63f16482f269bf5cfe76d34b9a2b01ec737e9cb41fd2612d37f34698fc
         x-checker-data:
           type: json
           url: https://api.github.com/repos/ImageMagick/ImageMagick/releases/latest
@@ -573,8 +573,8 @@ modules:
       - pip3 install --no-build-isolation --prefix=/app .
     sources:
       - type: archive
-        url: https://github.com/giampaolo/psutil/archive/refs/tags/release-5.9.3.tar.gz
-        sha256: c0035e04f509253ecb9256cf3fa1d9023c8470cb37c091db2e3778440adb8ad8
+        url: https://github.com/giampaolo/psutil/archive/refs/tags/release-5.9.4.tar.gz
+        sha256: 721a5c727ee476f36cd1a4d44b1f6dc29a345a62eedfb1420da4b14422748bdb
         x-checker-data:
           type: json
           url: https://api.github.com/repos/giampaolo/psutil/tags
