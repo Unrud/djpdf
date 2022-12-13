@@ -414,8 +414,8 @@ modules:
   - name: imagemagick
     sources:
       - type: archive
-        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-52.tar.gz
-        sha256: bacd6d63f16482f269bf5cfe76d34b9a2b01ec737e9cb41fd2612d37f34698fc
+        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-54.tar.gz
+        sha256: cca86eec6f40c7b34b43ecebb2a8cd96949969dfb8e19117bb06501783968c20
         x-checker-data:
           type: json
           url: https://api.github.com/repos/ImageMagick/ImageMagick/releases/latest
@@ -430,8 +430,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/qpdf/qpdf/releases/download/v11.1.1/qpdf-11.1.1.tar.gz
-        sha256: 25e8ec60e290cd134405a51920015b6d351d4e0b93b7b736d257f10725f74b5a
+        url: https://github.com/qpdf/qpdf/releases/download/v11.2.0/qpdf-11.2.0.tar.gz
+        sha256: fbd2d75050933487929dbbe1b5c50a238487194bc7263c277d6e49abb90ab7f2
         x-checker-data:
           type: json
           url: https://api.github.com/repos/qpdf/qpdf/releases/latest
@@ -482,15 +482,12 @@ modules:
       - --enable-unittest=no
     sources:
       - type: archive
-        url: https://libopenraw.freedesktop.org/download/exempi-2.6.2.tar.bz2
-        sha256: 4d17d4c93df2a95da3e3172c45b7a5bf317dd31dafd1c7a340169728c7089d1d
+        url: https://libopenraw.freedesktop.org/download/exempi-2.6.3.tar.xz
+        sha256: 80b3aa0b7f54978c6a49cc5f5f1d3b6e9524b59de74ef92b3bf0abeba4c28fb1
         x-checker-data:
           type: html
           url: https://libopenraw.freedesktop.org/exempi/
-          pattern: href="((?:[^"]*/)?exempi-([\d.]+)\.tar\.bz2)"
-      - type: shell
-        commands:
-          - cp /usr/share/gnu-config/config.{guess,sub} .
+          pattern: href="((?:[^"]*/)?exempi-([\d.]+)\.tar\.xz)"
 
   - name: pytz
     buildsystem: simple
