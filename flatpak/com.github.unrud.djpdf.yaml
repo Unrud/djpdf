@@ -414,8 +414,8 @@ modules:
   - name: imagemagick
     sources:
       - type: archive
-        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-54.tar.gz
-        sha256: cca86eec6f40c7b34b43ecebb2a8cd96949969dfb8e19117bb06501783968c20
+        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-55.tar.gz
+        sha256: 77e1535448d6c7f951a8c9d10804246b76044b879adf5bf1f12c836ed9d4b5ec
         x-checker-data:
           type: json
           url: https://api.github.com/repos/ImageMagick/ImageMagick/releases/latest
@@ -442,8 +442,8 @@ modules:
   - name: tesseract
     sources:
       - type: archive
-        url: https://github.com/tesseract-ocr/tesseract/archive/refs/tags/5.2.0.tar.gz
-        sha256: eba4deb2f92a3f89a6623812074af8c53b772079525b3c263aa70bbf7b748b3c
+        url: https://github.com/tesseract-ocr/tesseract/archive/refs/tags/5.3.0.tar.gz
+        sha256: 7e70870f8341e5ea228af2836ce79a36eefa11b01b56177b4a8997f330c014b8
         x-checker-data:
           type: json
           url: https://api.github.com/repos/tesseract-ocr/tesseract/releases/latest
@@ -495,8 +495,8 @@ modules:
       - pip3 install --prefix=/app .
     sources:
       - type: archive
-        url: https://files.pythonhosted.org/packages/76/63/1be349ff0a44e4795d9712cc0b2d806f5e063d4d34631b71b832fac715a8/pytz-2022.6.tar.gz
-        sha256: e89512406b793ca39f5971bc999cc538ce125c0e51c27941bef4568b460095e2
+        url: https://files.pythonhosted.org/packages/6d/37/54f2d7c147e42dc85ffbc6910862bb4f141fb3fc14d9a88efaa1a76c7df2/pytz-2022.7.tar.gz
+        sha256: 7ccfae7b4b2c067464a6733c6261673fdb8fd1be905460396b97a073e9fa683a
         x-checker-data:
           type: pypi
           name: pytz
