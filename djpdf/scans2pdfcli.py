@@ -15,6 +15,7 @@
 
 # Copyright 2015, 2017 Unrud <unrud@outlook.com>
 
+import asyncio
 import copy
 import logging
 import os
@@ -23,21 +24,16 @@ import subprocess
 import sys
 import traceback
 from argparse import ArgumentParser, ArgumentTypeError
+from importlib import metadata
 
 import webcolors
 
 from djpdf.djpdf import CONVERT_CMD, JBIG2_CMD, QPDF_CMD
 from djpdf.scans2pdf import (DEFAULT_SETTINGS, IDENTIFY_CMD, TESSERACT_CMD,
                              build_pdf, find_ocr_languages)
-from djpdf.util import (cli_set_verbosity, cli_setup, compat_asyncio_run,
-                        format_number)
+from djpdf.util import cli_set_verbosity, cli_setup, format_number
 
-if sys.version_info < (3, 8):
-    import importlib_metadata
-else:
-    import importlib.metadata as importlib_metadata
-
-VERSION = importlib_metadata.version("djpdf")
+VERSION = metadata.version("djpdf")
 
 
 def type_fraction(var):
@@ -393,7 +389,7 @@ def main():
     out_file = ns.OUTFILE
 
     try:
-        compat_asyncio_run(build_pdf(pages, out_file))
+        asyncio.run(build_pdf(pages, out_file))
     except Exception:
         logging.debug("Exception occurred:\n%s" % traceback.format_exc())
         logging.fatal("Operation failed")

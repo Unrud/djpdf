@@ -31,8 +31,7 @@ from djpdf.djpdf import (CONVERT_CMD, JOB_MEMORY, PARALLEL_JOBS,
                          RESERVED_MEMORY, SRGB_ICC_RESOURCE,
                          BigTemporaryDirectory, PdfBuilder)
 from djpdf.util import (AsyncCache, MemoryBoundedSemaphore, cli_set_verbosity,
-                        cli_setup, compat_asyncio_run, format_number,
-                        run_command)
+                        cli_setup, format_number, run_command)
 
 if sys.version_info < (3, 9):
     import importlib_resources
@@ -609,8 +608,7 @@ def main():
         sys.stdout.flush()
     try:
         recipe = json.load(sys.stdin)
-        compat_asyncio_run(build_pdf(recipe, args.OUTFILE,
-                                     progress_cb=progress_cb))
+        asyncio.run(build_pdf(recipe, args.OUTFILE, progress_cb=progress_cb))
     except Exception:
         logging.debug("Exception occurred:\n%s" % traceback.format_exc())
         logging.fatal("Operation failed")

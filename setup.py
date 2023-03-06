@@ -21,7 +21,6 @@ console_scripts = ["scans2pdf = djpdf.scans2pdfcli:main",
                    "hocr-json = djpdf.hocr:main"]
 install_requires = ["webcolors", "colorama", "pdfrw", "psutil",
                     "python-xmp-toolkit",
-                    "importlib_metadata; python_version<'3.8'",
                     "importlib_resources>=1.4; python_version<'3.9'"]
 if enable_gui:
     packages.append("djpdfgui")
@@ -36,5 +35,5 @@ setup(
     packages=packages,
     package_data=package_data,
     entry_points={"console_scripts": console_scripts},
-    python_requires=">=3.6",
+    python_requires=">=3.8",
     install_requires=install_requires)
