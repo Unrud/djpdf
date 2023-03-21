@@ -12,8 +12,11 @@ A GUI and command line interface are included.
 
 ## Installation
 
-  * [Flatpak](https://flathub.org/apps/details/com.github.unrud.djpdf)
-  * [Snap](https://snapcraft.io/djpdf)
+<a href='https://flathub.org/apps/details/com.github.unrud.djpdf'><img width='240' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
+
+### Alternative installation methods
+
+  * [Snap Store](https://snapcraft.io/djpdf)
   * Manual:
       * Dependencies: [ImageMagick](http://www.imagemagick.org/), [QPDF](https://github.com/qpdf/qpdf),
         [jbig2enc](https://github.com/agl/jbig2enc), [Tesseract](https://github.com/tesseract-ocr/tesseract)
