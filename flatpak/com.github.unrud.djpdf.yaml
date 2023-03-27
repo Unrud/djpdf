@@ -374,13 +374,13 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://download.qt.io/official_releases/QtForPython/pyside6/PySide6-6.4.2-src/pyside-setup-opensource-src-6.4.2.tar.xz
-        sha256: 1ec9d0936332efd229650cf10fed36cadddff7a613a2ea6e897de4d504c1b505
+        url: https://download.qt.io/official_releases/QtForPython/pyside6/PySide6-6.4.3-src/pyside-setup-everywhere-src-6.4.3.tar.xz
+        sha256: ab344f369eb949354f1069ce24962be5a5f03b93b27da081e3a01e5bc3581d4e
         x-checker-data:
           type: html
           url: https://download.qt.io/official_releases/QtForPython/pyside6/
           version-pattern: '>PySide6-(6\.4(?:\.[\d.]+)?)-src/<'
-          url-template: https://download.qt.io/official_releases/QtForPython/pyside6/PySide6-$version-src/pyside-setup-opensource-src-$version.tar.xz
+          url-template: https://download.qt.io/official_releases/QtForPython/pyside6/PySide6-$version-src/pyside-setup-everywhere-src-$version.tar.xz
       - type: shell
         commands:
           # use qt-include
@@ -409,8 +409,8 @@ modules:
   - name: imagemagick
     sources:
       - type: archive
-        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.1-4.tar.gz
-        sha256: 00af02bd02a8357e9957fbd7209fdddcb6c6aa01721b31444f72ec6fc4cff5ff
+        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.1-5.tar.gz
+        sha256: dd23689304b8cf41572c3af6b0ddccfe21c5b9d9abddaf978f314696408d0750
         x-checker-data:
           type: json
           url: https://api.github.com/repos/ImageMagick/ImageMagick/releases/latest
@@ -490,8 +490,8 @@ modules:
       - pip3 install --prefix=/app .
     sources:
       - type: archive
-        url: https://files.pythonhosted.org/packages/03/3e/dc5c793b62c60d0ca0b7e58f1fdd84d5aaa9f8df23e7589b39cc9ce20a03/pytz-2022.7.1.tar.gz
-        sha256: 01a0681c4b9684a28304615eba55d1ab31ae00bf68ec157ec3708a8182dbbcd0
+        url: https://files.pythonhosted.org/packages/55/71/cb1b0a0035cf479eaf05109ea830323af66d48197bfc759a018f94acc3c4/pytz-2023.2.tar.gz
+        sha256: a27dcf612c05d2ebde626f7d506555f10dfc815b3eddccfaadfc7d99b11c9a07
         x-checker-data:
           type: pypi
           name: pytz
@@ -536,11 +536,11 @@ modules:
   - name: webcolors
     buildsystem: simple
     build-commands:
-      - pip3 install --prefix=/app .
+      - pip3 install --no-build-isolation --prefix=/app .
     sources:
       - type: archive
-        url: https://github.com/ubernostrum/webcolors/archive/refs/tags/1.12.tar.gz
-        sha256: fee37e6319a4985ceab4a35943543c080140ca87ed1c671163ffc39d2c8f2f07
+        url: https://github.com/ubernostrum/webcolors/archive/refs/tags/1.13.tar.gz
+        sha256: 51b5367692d5de19b8422ff5b07d4a2892fe868652d4e131e80250ecf100713a
         x-checker-data:
           type: json
           url: https://api.github.com/repos/ubernostrum/webcolors/tags

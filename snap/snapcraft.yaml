@@ -51,9 +51,9 @@ parts:
 
   imagemagick:
     plugin: autotools
-    source: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.1-4.tar.gz
+    source: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.1-5.tar.gz
     source-type: tar
-    source-checksum: sha256/00af02bd02a8357e9957fbd7209fdddcb6c6aa01721b31444f72ec6fc4cff5ff
+    source-checksum: sha256/dd23689304b8cf41572c3af6b0ddccfe21c5b9d9abddaf978f314696408d0750
     autotools-configure-parameters:
       # WORKAROUND: Install to /usr instead of /usr/local because it's not in search paths
       - --prefix=/usr
