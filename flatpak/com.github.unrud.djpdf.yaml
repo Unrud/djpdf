@@ -409,8 +409,8 @@ modules:
   - name: imagemagick
     sources:
       - type: archive
-        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.1-5.tar.gz
-        sha256: dd23689304b8cf41572c3af6b0ddccfe21c5b9d9abddaf978f314696408d0750
+        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.1-6.tar.gz
+        sha256: 6e7af1e182f81e6b7b92b11e78dfdb0e8d50c1674cf2776c13db9c700750ae20
         x-checker-data:
           type: json
           url: https://api.github.com/repos/ImageMagick/ImageMagick/releases/latest
@@ -437,8 +437,8 @@ modules:
   - name: tesseract
     sources:
       - type: archive
-        url: https://github.com/tesseract-ocr/tesseract/archive/refs/tags/5.3.0.tar.gz
-        sha256: 7e70870f8341e5ea228af2836ce79a36eefa11b01b56177b4a8997f330c014b8
+        url: https://github.com/tesseract-ocr/tesseract/archive/refs/tags/5.3.1.tar.gz
+        sha256: 3761768c02b99358e5118bfabfecc979fa84a399da5fa54c49dd477d926fef43
         x-checker-data:
           type: json
           url: https://api.github.com/repos/tesseract-ocr/tesseract/releases/latest
