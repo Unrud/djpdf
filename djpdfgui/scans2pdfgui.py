@@ -22,7 +22,6 @@ import os
 import signal
 import sys
 import tempfile
-import traceback
 from argparse import ArgumentParser
 
 from PySide6 import QtQml
@@ -44,13 +43,7 @@ QML_RESOURCE = importlib_resources.files("djpdfgui").joinpath("qml")
 IMAGE_FILE_EXTENSIONS = ("bmp", "gif", "jpeg", "jpg", "png", "pnm",
                          "ppm", "pbm", "pgm", "xbm", "xpm", "tif",
                          "tiff", "webp", "jp2")
-IMAGE_MIME_TYPES = ("image/bmp", "image/gif", "image/jpeg", "image/png",
-                    "image/x-portable-anymap", "image/x-portable-pixmap",
-                    "image/x-portable-bitmap", "image/x-portable-graymap",
-                    "image/x-xbitmap", "image/x-xpixmap", "image/tiff",
-                    "image/webp", "image/jp2")
 PDF_FILE_EXTENSION = "pdf"
-PDF_MIME_TYPE = "application/pdf"
 THUMBNAIL_SIZE = 256
 USER_SETTINGS_PATH = os.path.join(
     os.environ.get("XDG_CONFIG_HOME",
@@ -583,6 +576,18 @@ class QmlPagesModel(QAbstractListModel):
         p.write(json.dumps([p._data for p in self._pages]).encode())
         p.closeWriteChannel()
 
+    pdfFileExtensionChanged = Signal()
+
+    @Property(str, notify=pdfFileExtensionChanged)
+    def pdfFileExtension(self):
+        return PDF_FILE_EXTENSION
+
+    imageFileExtensionsChanged = Signal()
+
+    @Property("QStringList", notify=imageFileExtensionsChanged)
+    def imageFileExtensions(self):
+        return IMAGE_FILE_EXTENSIONS
+
     def shutdown(self):
         if self._process:
             self._process.terminate()
@@ -609,127 +614,7 @@ class ThumbnailImageProvider(QQuickImageProvider):
                             min(height, THUMBNAIL_SIZE), Qt.KeepAspectRatio)
 
 
-class QmlPlatformIntegration(QObject):
-
-    def __init__(self, app):
-        super().__init__()
-        self.app = app
-        self.window = None
-
-    pdfFileExtensionChanged = Signal()
-
-    @Property(str, notify=pdfFileExtensionChanged)
-    def pdfFileExtension(self):
-        return PDF_FILE_EXTENSION
-
-    imageFileExtensionsChanged = Signal()
-
-    @Property("QStringList", notify=imageFileExtensionsChanged)
-    def imageFileExtensions(self):
-        return IMAGE_FILE_EXTENSIONS
-
-    enabledChanged = Signal()
-
-    @Property(bool, notify=enabledChanged)
-    def enabled(self):
-        return False
-
-    @Slot()
-    def openOpenDialog(self):
-        raise NotImplementedError
-
-    @Slot()
-    def openSaveDialog(self):
-        raise NotImplementedError
-
-    opened = Signal("QList<QUrl>")
-
-    saved = Signal("QUrl")
-
-
-class QmlXdgDesktopPortalPlatformIntegration(QmlPlatformIntegration):
-
-    def __init__(self, app, bus):
-        super().__init__(app)
-        self._bus = bus
-        obj = bus.get_object("org.freedesktop.portal.Desktop",
-                             "/org/freedesktop/portal/desktop")
-        self._file_chooser = dbus.Interface(
-            obj, "org.freedesktop.portal.FileChooser")
-        # Test if method exists
-        try:
-            self._file_chooser.OpenFile(signature="")
-        except dbus.exceptions.DBusException as e:
-            if e.get_dbus_name() != "org.freedesktop.DBus.Error.InvalidArgs":
-                raise
-
-    @property
-    def _win_id(self):
-        platform = self.app.platformName()
-        if self.window is not None:
-            if platform == "wayland":
-                return b""  # TODO: https://bugreports.qt.io/browse/QTBUG-76983
-            if platform == "xcb":
-                return b"x11:%x" % self.window.winId()
-        return b""
-
-    @Property(bool, notify=QmlPlatformIntegration.enabledChanged)
-    def enabled(self):
-        return True
-
-    def _call_with_response(self, call_fn, callback):
-        def on_response(*args, path=None):
-            if path is not None:
-                responses.append((path, args))
-            # process responses
-            nonlocal response_path
-            if response_path is None:
-                return
-            for path, args in responses:
-                if path != response_path:
-                    continue
-                response_path = None
-                receiver.remove()
-                callback(*args)
-                break
-            responses.clear()
-        responses = []
-        response_path = None
-        receiver = self._bus.add_signal_receiver(
-            on_response, "Response", "org.freedesktop.portal.Request",
-            path_keyword="path")
-        try:
-            response_path = call_fn()
-        except BaseException:
-            receiver.remove()
-            raise
-        on_response()
-
-    @Slot()
-    def openOpenDialog(self):
-        def on_response(result, d):
-            if result == 0:
-                self.opened.emit(d["uris"])
-        options = {"filters": [("Images", [(dbus.UInt32(1), m)
-                                           for m in IMAGE_MIME_TYPES]),
-                               ("All files", [(dbus.UInt32(0), "*")])],
-                   "multiple": True}
-        self._call_with_response(lambda: self._file_chooser.OpenFile(
-            self._win_id, "Open", options, signature="ssa{sv}"), on_response)
-
-    @Slot()
-    def openSaveDialog(self):
-        def on_response(result, d):
-            if result == 0:
-                self.saved.emit(d["uris"][0])
-        options = {"filters": [("PDF", [(dbus.UInt32(1), PDF_MIME_TYPE)])],
-                   "current_name": "Unnamed.%s" % PDF_FILE_EXTENSION}
-        self._call_with_response(lambda: self._file_chooser.SaveFile(
-            self._win_id, "Save", options, signature="ssa{sv}"), on_response)
-
-
 def main():
-    global dbus
     signal.signal(signal.SIGINT, signal.SIG_DFL)
     parser = ArgumentParser()
     parser.add_argument("-v", "--verbose", help="increase output verbosity",
@@ -745,32 +630,10 @@ def main():
     engine.addImageProvider("thumbnails", thumbnail_image_provider)
     ctx = engine.rootContext()
     pages_model = QmlPagesModel(verbose=args.verbose)
-    platform_integration = None
-    # Try FileChooser portal
-    try:
-        import dbus
-        import dbus.mainloop.glib
-    except ModuleNotFoundError:
-        if args.verbose:
-            traceback.print_exc(file=sys.stderr)
-    else:
-        try:
-            dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
-            bus = dbus.SessionBus()
-            platform_integration = QmlXdgDesktopPortalPlatformIntegration(
-                app, bus)
-        except dbus.exceptions.DBusException:
-            if args.verbose:
-                traceback.print_exc(file=sys.stderr)
-    # Fallback to Qt file dialogs
-    if platform_integration is None:
-        platform_integration = QmlPlatformIntegration(app)
     ctx.setContextProperty("pagesModel", pages_model)
-    ctx.setContextProperty("platformIntegration", platform_integration)
     with importlib_resources.as_file(QML_RESOURCE) as qml_dir:
         engine.load(QUrl.fromLocalFile(
             os.path.join(os.fspath(qml_dir), "main.qml")))
-        platform_integration.window = engine.rootObjects()[0]
         rc = app.exec_()
         pages_model.shutdown()
         sys.exit(rc)

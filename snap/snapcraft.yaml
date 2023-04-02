@@ -129,7 +129,6 @@ parts:
       - PySide6<6.5
     stage-packages:
       - python3-pkg-resources
-      - python3-dbus
       - qpdf
       - libexempi8
     override-pull: |

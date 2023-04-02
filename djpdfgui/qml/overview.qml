@@ -29,7 +29,7 @@ Page {
         id: openDialog
         title: "Open"
         nameFilters: [
-            "Images (" + platformIntegration.imageFileExtensions.map(function(s) {return "*." + s}).join(" ") + ")",
+            "Images (" + pagesModel.imageFileExtensions.map(function(s) {return "*." + s}).join(" ") + ")",
             "All files (*)"
         ]
         fileMode: FileDialog.OpenFiles
@@ -40,20 +40,10 @@ Page {
     FileDialog {
         id: saveDialog
         title: "Save"
-        nameFilters: [ "PDF (*." + platformIntegration.pdfFileExtension + ")" ]
+        nameFilters: [ "PDF (*." + pagesModel.pdfFileExtension + ")" ]
         fileMode: FileDialog.SaveFile
         currentFolder: StandardPaths.writableLocation(StandardPaths.HomeLocation)
         onAccepted: pagesModel.save(selectedFile)
-    }
-
-    Connections {
-        target: platformIntegration
-        function onOpened(urls) {
-            pagesModel.extend(urls)
-        }
-        function onSaved(url) {
-            pagesModel.save(url)
-        }
     }
 
     Connections {
@@ -140,13 +130,7 @@ Page {
             anchors.fill: parent
             ToolButton {
                 text: "+"
-                onClicked: {
-                    if (platformIntegration.enabled) {
-                        platformIntegration.openOpenDialog()
-                    } else {
-                        openDialog.open()
-                    }
-                }
+                onClicked: openDialog.open()
             }
             Item {
                 Layout.fillWidth: true
@@ -154,13 +138,7 @@ Page {
             ToolButton {
                 text: "Create"
                 enabled: pagesModel.count > 0
-                onClicked: {
-                    if (platformIntegration.enabled) {
-                        platformIntegration.openSaveDialog()
-                    } else {
-                        saveDialog.open()
-                    }
-                }
+                onClicked: saveDialog.open()
             }
         }
     }
