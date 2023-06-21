@@ -409,8 +409,8 @@ modules:
   - name: imagemagick
     sources:
       - type: archive
-        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.1-8.tar.gz
-        sha256: cac2e4766f2cf1bd301b94ddcc86d6940d52190bfc1f31056eaa39e9cf2abe42
+        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.1-11.tar.gz
+        sha256: 98bb2783da7d5b06e7543529bd07b50d034fba611ff15e8817a0f4f73957d934
         x-checker-data:
           type: json
           url: https://api.github.com/repos/ImageMagick/ImageMagick/releases/latest
@@ -425,8 +425,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/qpdf/qpdf/releases/download/v11.3.0/qpdf-11.3.0.tar.gz
-        sha256: 547cee67de77b5c4ef4917e57d2db9c848cfe3aa950361f68d36367a3a03936e
+        url: https://github.com/qpdf/qpdf/releases/download/v11.4.0/qpdf-11.4.0.tar.gz
+        sha256: b0180971cc1b79b2dfe02ffe28e2c88c47f735888a3a2543dd42b9054ef146e1
         x-checker-data:
           type: json
           url: https://api.github.com/repos/qpdf/qpdf/releases/latest
