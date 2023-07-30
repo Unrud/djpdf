@@ -409,8 +409,8 @@ modules:
   - name: imagemagick
     sources:
       - type: archive
-        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.1-11.tar.gz
-        sha256: 98bb2783da7d5b06e7543529bd07b50d034fba611ff15e8817a0f4f73957d934
+        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.1-14.tar.gz
+        sha256: 7309ed7b66c8aa8f6780529e813db656275dc0893f4770cff2176a2949a282fa
         x-checker-data:
           type: json
           url: https://api.github.com/repos/ImageMagick/ImageMagick/releases/latest
@@ -425,8 +425,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/qpdf/qpdf/releases/download/v11.4.0/qpdf-11.4.0.tar.gz
-        sha256: b0180971cc1b79b2dfe02ffe28e2c88c47f735888a3a2543dd42b9054ef146e1
+        url: https://github.com/qpdf/qpdf/releases/download/v11.5.0/qpdf-11.5.0.tar.gz
+        sha256: 15cb419e72c494a4a4b2e7c0eb9f4e980c8fd4e61ccdea64399e987f4c56c8ee
         x-checker-data:
           type: json
           url: https://api.github.com/repos/qpdf/qpdf/releases/latest
@@ -437,8 +437,8 @@ modules:
   - name: tesseract
     sources:
       - type: archive
-        url: https://github.com/tesseract-ocr/tesseract/archive/refs/tags/5.3.1.tar.gz
-        sha256: 3761768c02b99358e5118bfabfecc979fa84a399da5fa54c49dd477d926fef43
+        url: https://github.com/tesseract-ocr/tesseract/archive/refs/tags/5.3.2.tar.gz
+        sha256: b99d30fed47360d7168c3e25d194a7416ceb1d9e4b232c7f121cc5f77084d3e7
         x-checker-data:
           type: json
           url: https://api.github.com/repos/tesseract-ocr/tesseract/releases/latest
@@ -477,8 +477,8 @@ modules:
       - --enable-unittest=no
     sources:
       - type: archive
-        url: https://libopenraw.freedesktop.org/download/exempi-2.6.3.tar.xz
-        sha256: 80b3aa0b7f54978c6a49cc5f5f1d3b6e9524b59de74ef92b3bf0abeba4c28fb1
+        url: https://libopenraw.freedesktop.org/download/exempi-2.6.4.tar.xz
+        sha256: fa9c2456bf570172f0877c4eb13cd204c62ae1fdf65c3d6b71b41d88e1066f84
         x-checker-data:
           type: html
           url: https://libopenraw.freedesktop.org/exempi/
