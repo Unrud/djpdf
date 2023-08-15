@@ -17,6 +17,7 @@
 
 import contextlib
 import copy
+import gettext
 import json
 import os
 import sys
@@ -613,6 +614,13 @@ class ThumbnailImageProvider(QQuickImageProvider):
                             min(height, THUMBNAIL_SIZE), Qt.KeepAspectRatio)
 
 
+class JsBridge(QObject):
+
+    @Slot(str, result=str)
+    def gettext(self, s):
+        return gettext.gettext(s)
+
+
 def main():
     parser = ArgumentParser()
     parser.add_argument("-v", "--verbose", help="increase output verbosity",
@@ -626,7 +634,10 @@ def main():
     # Disable image memory limit to be able to load thumbnails for large images
     QImageReader.setAllocationLimit(0)
     engine.addImageProvider("thumbnails", thumbnail_image_provider)
+    jsBridge = JsBridge()
+    jsBridgeObj = engine.newQObject(jsBridge)
     ctx = engine.rootContext()
+    engine.globalObject().setProperty("N_", jsBridgeObj.property("gettext"))
     pages_model = QmlPagesModel(verbose=args.verbose)
     try:
         ctx.setContextProperty("pagesModel", pages_model)

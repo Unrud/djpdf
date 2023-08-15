@@ -26,7 +26,7 @@ ApplicationWindow {
     visible: true
     width: 640
     height: 480
-    title: "Scans to PDF"
+    title: N_("Scans to PDF")
 
     StackView {
         id: stack

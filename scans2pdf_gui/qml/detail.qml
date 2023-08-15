@@ -41,7 +41,7 @@ Page {
                 onClicked: stack.pop()
             }
             ToolButton {
-                text: "Remove"
+                text: N_("Remove")
                 highlighted: true
                 onClicked: {
                     stack.pop()
@@ -64,7 +64,7 @@ Page {
     Labs.ColorDialog {
         property var fn: null
         id: colorDialog
-        title: "Please choose a color"
+        title: N_("Please choose a color")
         onAccepted: fn()
     }
 
@@ -83,12 +83,12 @@ Page {
                         Label {
                             id: l1
                             Layout.preferredWidth: sv.leftColumnWidth
-                            text: "DPI:"
+                            text: N_("DPI:")
                         }
                         TextField {
                             Layout.fillWidth: true
                             selectByMouse: true
-                            placeholderText: "auto"
+                            placeholderText: N_("auto")
                             text: sv.p.dpi !== 0 ? sv.p.dpi : ""
                             validator: RegularExpressionValidator { regularExpression: /[0-9]*/ }
                             onEditingFinished: {
@@ -104,7 +104,7 @@ Page {
                         Label {
                             id: l2
                             Layout.preferredWidth: sv.leftColumnWidth
-                            text: "Background color:"
+                            text: N_("Background color:")
                         }
                         Button {
                             Layout.fillWidth: true
@@ -135,7 +135,7 @@ Page {
                 label: RowLayout {
                     width: parent.width
                     Label {
-                        text: "Background"
+                        text: N_("Background")
                         font.bold: true
                     }
                     Switch {
@@ -152,7 +152,7 @@ Page {
                         Label {
                             id: l3
                             Layout.preferredWidth: sv.leftColumnWidth
-                            text: "Resize:"
+                            text: N_("Resize:")
                         }
                         SpinBox {
                             Layout.fillWidth: true
@@ -174,7 +174,7 @@ Page {
                         Label {
                             id: l4
                             Layout.preferredWidth: sv.leftColumnWidth
-                            text: "Compression:"
+                            text: N_("Compression:")
                         }
                         ComboBox {
                             Layout.fillWidth: true
@@ -195,7 +195,7 @@ Page {
                         Label {
                             id: l5
                             Layout.preferredWidth: sv.leftColumnWidth
-                            text: "Quality:"
+                            text: N_("Quality:")
                         }
                         SpinBox {
                             Layout.fillWidth: true
@@ -214,7 +214,7 @@ Page {
                 label: RowLayout {
                     width: parent.width
                     Label {
-                        text: "Foreground"
+                        text: N_("Foreground")
                         font.bold: true
                     }
                     Switch {
@@ -231,7 +231,7 @@ Page {
                         Label {
                             id: l6
                             Layout.preferredWidth: sv.leftColumnWidth
-                            text: "Colors:"
+                            text: N_("Colors:")
                         }
                         ColumnLayout {
                             Layout.fillWidth: true
@@ -261,14 +261,14 @@ Page {
                                     }
                                     Button {
                                         Layout.fillWidth: true
-                                        text: "Remove"
+                                        text: N_("Remove")
                                         onClicked: sv.p.removeFgColor(index)
                                     }
                                 }
                             }
                             Button {
                                 Layout.fillWidth: true
-                                text: sv.p.fgColors.length === 0 ? "No colors" : "Add"
+                                text: sv.p.fgColors.length === 0 ? N_("No colors") : N_("Add")
                                 onClicked: {
                                     colorDialog.fn = function() {
                                         sv.p.addFgColor(colorDialog.color)
@@ -283,7 +283,7 @@ Page {
                         Label {
                             id: l7
                             Layout.preferredWidth: sv.leftColumnWidth
-                            text: "Compression:"
+                            text: N_("Compression:")
                         }
                         ComboBox {
                             Layout.fillWidth: true
@@ -304,7 +304,7 @@ Page {
                         Label {
                             id: l8
                             Layout.preferredWidth: sv.leftColumnWidth
-                            text: "JBIG2 Threshold:"
+                            text: N_("JBIG2 Threshold:")
                         }
                         SpinBox {
                             Layout.fillWidth: true
@@ -337,13 +337,13 @@ Page {
                         Label {
                             Layout.fillWidth: true
                             font.bold: true
-                            text: "Warning"
+                            text: N_("Warning")
                         }
                         Label {
                             Layout.fillWidth: true
                             Layout.maximumWidth: parent.width
                             wrapMode: Label.Wrap
-                            text: "Lossy JBIG2 compression can alter text in a way that is not noticeable as corruption (e.g. the numbers '6' and '8' get replaced)"
+                            text: N_("Lossy JBIG2 compression can alter text in a way that is not noticeable as corruption (e.g. the numbers '6' and '8' get replaced)")
                         }
                     }
                 }
@@ -353,7 +353,7 @@ Page {
                 label: RowLayout {
                     width: parent.width
                     Label {
-                        text: "OCR"
+                        text: N_("OCR")
                         font.bold: true
                     }
                     Switch {
@@ -372,7 +372,7 @@ Page {
                         Label {
                             id: l9
                             Layout.preferredWidth: sv.leftColumnWidth
-                            text: "Language"
+                            text: N_("Language")
                         }
                         ComboBox {
                             Layout.fillWidth: true
@@ -393,7 +393,7 @@ Page {
                         Label {
                             id: l10
                             Layout.preferredWidth: sv.leftColumnWidth
-                            text: "Colors:"
+                            text: N_("Colors:")
                         }
                         ColumnLayout {
                             Layout.fillWidth: true
@@ -422,14 +422,14 @@ Page {
                                     }
                                     Button {
                                         Layout.fillWidth: true
-                                        text: "Remove"
+                                        text: N_("Remove")
                                         onClicked: sv.p.removeOcrColor(index)
                                     }
                                 }
                             }
                             Button {
                                 Layout.fillWidth: true
-                                text: sv.p.ocrColors.length === 0 ? "All colors" : "Add"
+                                text: sv.p.ocrColors.length === 0 ? N_("All colors") : N_("Add")
                                 onClicked: {
                                     colorDialog.fn = function() {
                                         sv.p.addOcrColor(colorDialog.color)
@@ -446,13 +446,13 @@ Page {
                 Button {
                     Layout.fillWidth: true
                     Layout.preferredWidth: (parent.width-parent.spacing) / 2
-                    text: "Apply to all"
+                    text: N_("Apply to all")
                     onClicked: pagesModel.applyToAll(sv.p)
                 }
                 Button {
                     Layout.fillWidth: true
                     Layout.preferredWidth: (parent.width-parent.spacing) / 2
-                    text: "Apply to following"
+                    text: N_("Apply to following")
                     onClicked: pagesModel.applyToFollowing(sv.modelIndex, sv.p)
                 }
             }
@@ -460,20 +460,20 @@ Page {
                 Button {
                     Layout.fillWidth: true
                     Layout.preferredWidth: (parent.width-parent.spacing) / 2
-                    text: "Load default settings"
+                    text: N_("Load default settings")
                     onClicked: sv.p.loadUserDefaults()
                 }
                 Button {
                     Labs.MessageDialog {
                         id: saveUserDefaultsDialog
-                        title: "Overwrite?"
-                        text: "Replace default settings?"
+                        title: N_("Overwrite?")
+                        text: N_("Replace default settings?")
                         buttons: Labs.MessageDialog.Yes | Labs.MessageDialog.No
                         onAccepted: sv.p.saveUserDefaults()
                     }
                     Layout.fillWidth: true
                     Layout.preferredWidth: (parent.width-parent.spacing) / 2
-                    text: "Save default settings"
+                    text: N_("Save default settings")
                     onClicked: saveUserDefaultsDialog.open()
                 }
             }

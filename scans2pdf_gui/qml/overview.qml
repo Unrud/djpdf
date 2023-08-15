@@ -27,10 +27,10 @@ import djpdf
 Page {
     FileDialog {
         id: openDialog
-        title: "Open"
+        title: N_("Open")
         nameFilters: [
-            "Images (" + pagesModel.imageFileExtensions.map(function(s) {return "*." + s}).join(" ") + ")",
-            "All files (*)"
+            `${N_("Images")} (${pagesModel.imageFileExtensions.map(s => `*.${x}`).join(" ")})`,
+            `${N_("All files")} (*)`,
         ]
         fileMode: FileDialog.OpenFiles
         currentFolder: StandardPaths.writableLocation(StandardPaths.HomeLocation)
@@ -39,8 +39,8 @@ Page {
 
     FileDialog {
         id: saveDialog
-        title: "Save"
-        nameFilters: [ "PDF (*." + pagesModel.pdfFileExtension + ")" ]
+        title: N_("Save")
+        nameFilters: [ `${N_("PDF")} (*.${pagesModel.pdfFileExtension})` ]
         fileMode: FileDialog.SaveFile
         currentFolder: StandardPaths.writableLocation(StandardPaths.HomeLocation)
         onAccepted: pagesModel.save(selectedFile)
@@ -70,7 +70,7 @@ Page {
         ColumnLayout {
             anchors.fill: parent
             Label {
-                text: "Failed to create PDF"
+                text: N_("Failed to create PDF")
                 font.bold: true
                 horizontalAlignment: Text.AlignHCenter
                 Layout.fillWidth: true
@@ -86,7 +86,7 @@ Page {
                 }
             }
             Button {
-                text: "OK"
+                text: N_("Close")
                 Layout.alignment: Qt.AlignRight
                 onClicked: errorDialog.close()
             }
@@ -104,7 +104,7 @@ Page {
         ColumnLayout {
             anchors.fill: parent
             Label {
-                text: "Saving..."
+                text: N_("Saving...")
                 font.bold: true
                 horizontalAlignment: Text.AlignHCenter
                 Layout.fillWidth: true
@@ -117,7 +117,7 @@ Page {
                 bottomPadding: 15
             }
             Button {
-                text: "Cancel"
+                text: N_("Cancel")
                 Layout.alignment: Qt.AlignRight
                 onClicked: pagesModel.cancelSaving()
                 enabled: pagesModel.savingCancelable
@@ -136,7 +136,7 @@ Page {
                 Layout.fillWidth: true
             }
             ToolButton {
-                text: "Create"
+                text: N_("Create")
                 enabled: pagesModel.count > 0
                 onClicked: saveDialog.open()
             }
