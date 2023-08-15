@@ -1,0 +1,6 @@
+desktop/com.github.unrud.djpdf.desktop.in
+desktop/com.github.unrud.djpdf.metainfo.xml.in
+scans2pdf_gui/main.py
+scans2pdf_gui/qml/detail.qml
+scans2pdf_gui/qml/main.qml
+scans2pdf_gui/qml/overview.qml

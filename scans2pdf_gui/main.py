@@ -19,7 +19,6 @@ import contextlib
 import copy
 import json
 import os
-import signal
 import sys
 import tempfile
 from argparse import ArgumentParser
@@ -39,7 +38,7 @@ if sys.version_info < (3, 9):
 else:
     import importlib.resources as importlib_resources
 
-QML_RESOURCE = importlib_resources.files("djpdfgui").joinpath("qml")
+QML_RESOURCE = importlib_resources.files("scans2pdf_gui").joinpath("qml")
 IMAGE_FILE_EXTENSIONS = ("bmp", "gif", "jpeg", "jpg", "png", "pnm",
                          "ppm", "pbm", "pgm", "xbm", "xpm", "tif",
                          "tiff", "webp", "jp2")
@@ -615,7 +614,6 @@ class ThumbnailImageProvider(QQuickImageProvider):
 
 
 def main():
-    signal.signal(signal.SIGINT, signal.SIG_DFL)
     parser = ArgumentParser()
     parser.add_argument("-v", "--verbose", help="increase output verbosity",
                         action="store_true")
@@ -630,10 +628,11 @@ def main():
     engine.addImageProvider("thumbnails", thumbnail_image_provider)
     ctx = engine.rootContext()
     pages_model = QmlPagesModel(verbose=args.verbose)
-    ctx.setContextProperty("pagesModel", pages_model)
-    with importlib_resources.as_file(QML_RESOURCE) as qml_dir:
-        engine.load(QUrl.fromLocalFile(
-            os.path.join(os.fspath(qml_dir), "main.qml")))
-        rc = app.exec_()
+    try:
+        ctx.setContextProperty("pagesModel", pages_model)
+        with importlib_resources.as_file(QML_RESOURCE) as qml_dir:
+            engine.load(QUrl.fromLocalFile(
+                os.path.join(os.fspath(qml_dir), "main.qml")))
+            return app.exec_()
+    finally:
         pages_model.shutdown()
-        sys.exit(rc)

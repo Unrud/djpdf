@@ -569,14 +569,11 @@ modules:
     buildsystem: simple
     build-commands:
       - pip3 install --prefix=/app .
-      - install -Dm0644 -t /app/share/metainfo desktop/com.github.unrud.djpdf.metainfo.xml
-      - install -Dm0644 -t /app/share/applications desktop/com.github.unrud.djpdf.desktop
-      - |
-        for res in 16 32 48 64 128 256 512; do
-          convert +set date:create +set date:modify desktop/com.github.unrud.djpdf.png -resize ${res}x${res} com.github.unrud.djpdf_${res}.png || exit 1
-          install -Dm0644 com.github.unrud.djpdf_${res}.png /app/share/icons/hicolor/${res}x${res}/apps/com.github.unrud.djpdf.png || exit 1
-        done
-    sources:
+    sources: &djpdf-sources
       - type: git
         path: ..
         branch: master
+
+  - name: djpdfgui
+    buildsystem: meson
+    sources: *djpdf-sources

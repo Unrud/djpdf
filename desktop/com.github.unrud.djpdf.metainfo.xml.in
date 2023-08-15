@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <!-- Copyright (C) 2023 Unrud <unrud@outlook.com> -->
+  <id>com.github.unrud.djpdf</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <name>Scans to PDF</name>
+  <summary>Create small, searchable PDFs from scanned documents</summary>
+  <description>
+    <p>
+      Create small, searchable PDFs from scanned documents.
+      The program divides images into bitonal foreground images (text)
+      and a color background image, then compresses them separately.
+      An invisible OCR text layer is added, making the PDF searchable.
+    </p>
+    <p>
+      Color and grayscale scans need some preparation for good results.
+      Recommended tools are Scan Tailor or GIMP.
+    </p>
+    <p>
+      A GUI and command line interface are included.
+    </p>
+  </description>
+  <launchable type="desktop-id">com.github.unrud.djpdf.desktop</launchable>
+  <url type="bugtracker">https://github.com/Unrud/djpdf/issues</url>
+  <url type="homepage">https://github.com/Unrud/djpdf</url>
+  <developer_name translatable="no">Unrud</developer_name>
+  <update_contact>unrud_AT_outlook.com</update_contact>
+  <translation type="gettext">djpdfgui</translation>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/Unrud/djpdf/v0.4.3/screenshots/1.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/Unrud/djpdf/v0.4.3/screenshots/2.png</image>
+    </screenshot>
+  </screenshots>
+  <content_rating type="oars-1.1" />
+</component>

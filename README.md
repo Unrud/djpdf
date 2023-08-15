@@ -20,8 +20,8 @@ A GUI and command line interface are included.
   * Manual:
       * Dependencies: [ImageMagick](http://www.imagemagick.org/), [QPDF](https://github.com/qpdf/qpdf),
         [jbig2enc](https://github.com/agl/jbig2enc), [Tesseract](https://github.com/tesseract-ocr/tesseract)
-      * Install: ``pip3 install https://github.com/Unrud/djpdf/archive/master.zip``
-      * Without GUI: ``env DJPDF_SETUP=no-gui pip3 install https://github.com/Unrud/djpdf/archive/master.zip``
+      * Install library and CLI: `pip3 install .`
+      * Install GUI: `meson builddir && meson install -C builddir`
 
 ## Screenshots
 
