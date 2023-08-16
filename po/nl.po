@@ -1,0 +1,199 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the djpdfgui package.
+#
+# Heimen Stoffels <vistausss@fastmail.com>, 2023.
+msgid ""
+msgstr ""
+"Project-Id-Version: djpdfgui\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-16 00:29+0200\n"
+"PO-Revision-Date: 2023-08-16 14:12+0200\n"
+"Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
+"Language-Team: Dutch\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.3.2\n"
+
+#: desktop/com.github.unrud.djpdf.desktop.in:4
+#: desktop/com.github.unrud.djpdf.metainfo.xml.in:7
+#: scans2pdf_gui/qml/main.qml:29
+msgid "Scans to PDF"
+msgstr "Scans-naar-pdf"
+
+#: desktop/com.github.unrud.djpdf.desktop.in:5
+#: desktop/com.github.unrud.djpdf.metainfo.xml.in:8
+msgid "Create small, searchable PDFs from scanned documents"
+msgstr "Maak korte, doorzoekbare pdf-bestanden van gescande documenten"
+
+#: desktop/com.github.unrud.djpdf.metainfo.xml.in:10
+msgid ""
+"Create small, searchable PDFs from scanned documents. The program divides "
+"images into bitonal foreground images (text) and a color background image, "
+"then compresses them separately. An invisible OCR text layer is added, "
+"making the PDF searchable."
+msgstr ""
+"Maak korte, doorzoekbare pdf-bestanden van gescande documenten. Deze "
+"toepassing zet afbeeldingen om naar bitonale voorgrondafbeeldingen (tekst) "
+"en een gekleurde achtergrond. Vervolgens wordt op beide (los van elkaar) "
+"compressie toegepast. Tot slot wordt een onzichtbare ocr-tekstlaag "
+"toegevoegd, waarmee de pdf-bestanden doorzoekbaar worden gemaakt."
+
+#: desktop/com.github.unrud.djpdf.metainfo.xml.in:16
+msgid ""
+"Color and grayscale scans need some preparation for good results. "
+"Recommended tools are Scan Tailor or GIMP."
+msgstr ""
+"Voor het verwerken van kleuren- en grĳswaardenscans is enige voorbereiding "
+"nodig. Aanbevolen hulpmiddelen: Scan Tailor, GIMP."
+
+#: desktop/com.github.unrud.djpdf.metainfo.xml.in:20
+msgid "A GUI and command line interface are included."
+msgstr "Meegeleverd: grafische en terminaltoepassing (cli)."
+
+#: scans2pdf_gui/qml/detail.qml:44 scans2pdf_gui/qml/detail.qml:264
+#: scans2pdf_gui/qml/detail.qml:425
+msgid "Remove"
+msgstr "Verwijderen"
+
+#: scans2pdf_gui/qml/detail.qml:67
+msgid "Please choose a color"
+msgstr "Kies een kleur"
+
+#: scans2pdf_gui/qml/detail.qml:86
+msgid "DPI:"
+msgstr "Dpi:"
+
+#: scans2pdf_gui/qml/detail.qml:91
+msgid "auto"
+msgstr "Automatisch"
+
+#: scans2pdf_gui/qml/detail.qml:107
+msgid "Background color:"
+msgstr "Achtergrondkleur:"
+
+#: scans2pdf_gui/qml/detail.qml:138
+msgid "Background"
+msgstr "Achtergrond"
+
+#: scans2pdf_gui/qml/detail.qml:155
+msgid "Resize:"
+msgstr "Grootte aanpassen:"
+
+#: scans2pdf_gui/qml/detail.qml:177 scans2pdf_gui/qml/detail.qml:286
+msgid "Compression:"
+msgstr "Compressie:"
+
+#: scans2pdf_gui/qml/detail.qml:198
+msgid "Quality:"
+msgstr "Kwaliteit:"
+
+#: scans2pdf_gui/qml/detail.qml:217
+msgid "Foreground"
+msgstr "Voorgrond"
+
+#: scans2pdf_gui/qml/detail.qml:234 scans2pdf_gui/qml/detail.qml:396
+msgid "Colors:"
+msgstr "Kleuren:"
+
+#: scans2pdf_gui/qml/detail.qml:271
+msgid "No colors"
+msgstr "Kleurloos"
+
+#: scans2pdf_gui/qml/detail.qml:271 scans2pdf_gui/qml/detail.qml:432
+msgid "Add"
+msgstr "Toevoegen"
+
+#: scans2pdf_gui/qml/detail.qml:307
+msgid "JBIG2 Threshold:"
+msgstr "JBIG2-drempelwaarde:"
+
+#: scans2pdf_gui/qml/detail.qml:340
+msgid "Warning"
+msgstr "Waarschuwing"
+
+#: scans2pdf_gui/qml/detail.qml:346
+msgid ""
+"Lossy JBIG2 compression can alter text in a way that is not noticeable as "
+"corruption (e.g. the numbers '6' and '8' get replaced)"
+msgstr ""
+"JBIG2-compressie met verlies kan tekst dusdanig aanpassen dat storingen "
+"onzichtbaar worden. Voorbeeld: nummer 6 en 8."
+
+#: scans2pdf_gui/qml/detail.qml:356
+msgid "OCR"
+msgstr "Tekstherkenning"
+
+#: scans2pdf_gui/qml/detail.qml:375
+msgid "Language"
+msgstr "Taal"
+
+#: scans2pdf_gui/qml/detail.qml:432
+msgid "All colors"
+msgstr "Alle kleuren"
+
+#: scans2pdf_gui/qml/detail.qml:449
+msgid "Apply to all"
+msgstr "Toepassen op alles"
+
+#: scans2pdf_gui/qml/detail.qml:455
+msgid "Apply to following"
+msgstr "Toepassen op volgende"
+
+#: scans2pdf_gui/qml/detail.qml:463
+msgid "Load default settings"
+msgstr "Standaardvoorkeuren laden"
+
+#: scans2pdf_gui/qml/detail.qml:469
+msgid "Overwrite?"
+msgstr "Overschrĳven?"
+
+#: scans2pdf_gui/qml/detail.qml:470
+msgid "Replace default settings?"
+msgstr "Wilt u de standaardvoorkeuren vervangen?"
+
+#: scans2pdf_gui/qml/detail.qml:476
+msgid "Save default settings"
+msgstr "Opslaan als standaardvoorkeuren"
+
+#: scans2pdf_gui/qml/overview.qml:30
+msgid "Open"
+msgstr "Openen"
+
+#: scans2pdf_gui/qml/overview.qml:32
+msgid "Images"
+msgstr "Afbeeldingen"
+
+#: scans2pdf_gui/qml/overview.qml:33
+msgid "All files"
+msgstr "Alle bestanden"
+
+#: scans2pdf_gui/qml/overview.qml:42
+msgid "Save"
+msgstr "Opslaan"
+
+#: scans2pdf_gui/qml/overview.qml:43
+msgid "PDF"
+msgstr "Pdf"
+
+#: scans2pdf_gui/qml/overview.qml:73
+msgid "Failed to create PDF"
+msgstr "Het pdf-bestand kan niet worden aangemaakt"
+
+#: scans2pdf_gui/qml/overview.qml:89
+msgid "Close"
+msgstr "Sluiten"
+
+#: scans2pdf_gui/qml/overview.qml:107
+msgid "Saving..."
+msgstr "Bezig met opslaan…"
+
+#: scans2pdf_gui/qml/overview.qml:120
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: scans2pdf_gui/qml/overview.qml:139
+msgid "Create"
+msgstr "Maken"
