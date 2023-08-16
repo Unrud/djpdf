@@ -8,24 +8,28 @@ msgstr ""
 "Project-Id-Version: djpdfgui\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-16 00:29+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2023-08-16 23:52+0000\n"
+"Last-Translator: ovari <ovari123@zoho.com>\n"
+"Language-Team: Hungarian <https://hosted.weblate.org/projects/djpdf/djpdfgui/"
+"hu/>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.0-dev\n"
 
 #: desktop/com.github.unrud.djpdf.desktop.in:4
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:7
 #: scans2pdf_gui/qml/main.qml:29
 msgid "Scans to PDF"
-msgstr ""
+msgstr "PDF-fájlba beolvas"
 
 #: desktop/com.github.unrud.djpdf.desktop.in:5
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:8
 msgid "Create small, searchable PDFs from scanned documents"
 msgstr ""
+"Kisméretű, kereshető PDF-fájlok létrehozása a beolvasott dokumentumokból"
 
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:10
 msgid ""
@@ -34,156 +38,164 @@ msgid ""
 "then compresses them separately. An invisible OCR text layer is added, "
 "making the PDF searchable."
 msgstr ""
+"Kisméretű, kereshető PDF-fájlok létrehozása a beolvasott dokumentumokból. Az "
+"alkalmazás a képeket bitonális előtérképekre (szövegekre) és színes "
+"háttérképekre osztja, majd külön tömöríti őket. Egy láthatatlan OCR "
+"szövegréteg került hozzáadásra, így a PDF-fájl kereshetővé válik."
 
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:16
 msgid ""
 "Color and grayscale scans need some preparation for good results. "
 "Recommended tools are Scan Tailor or GIMP."
 msgstr ""
+"A színes és szürkeárnyalatos szkenneléshez némi előkészület szükséges a jó "
+"eredmény eléréséhez. A Scan Tailor és a GIMP ajánlott eszközök."
 
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:20
 msgid "A GUI and command line interface are included."
-msgstr ""
+msgstr "Grafikus felhasználói felület és parancssori felület tartozik hozzá."
 
 #: scans2pdf_gui/qml/detail.qml:44 scans2pdf_gui/qml/detail.qml:264
 #: scans2pdf_gui/qml/detail.qml:425
 msgid "Remove"
-msgstr ""
+msgstr "Eltávolítás"
 
 #: scans2pdf_gui/qml/detail.qml:67
 msgid "Please choose a color"
-msgstr ""
+msgstr "Szín kijelölése"
 
 #: scans2pdf_gui/qml/detail.qml:86
 msgid "DPI:"
-msgstr ""
+msgstr "Pont/hüvelyk:"
 
 #: scans2pdf_gui/qml/detail.qml:91
 msgid "auto"
-msgstr ""
+msgstr "Önműködő"
 
 #: scans2pdf_gui/qml/detail.qml:107
 msgid "Background color:"
-msgstr ""
+msgstr "Háttérszín:"
 
 #: scans2pdf_gui/qml/detail.qml:138
 msgid "Background"
-msgstr ""
+msgstr "Háttér"
 
 #: scans2pdf_gui/qml/detail.qml:155
 msgid "Resize:"
-msgstr ""
+msgstr "Átméretezés:"
 
 #: scans2pdf_gui/qml/detail.qml:177 scans2pdf_gui/qml/detail.qml:286
 msgid "Compression:"
-msgstr ""
+msgstr "Tömörítés:"
 
 #: scans2pdf_gui/qml/detail.qml:198
 msgid "Quality:"
-msgstr ""
+msgstr "Minőség:"
 
 #: scans2pdf_gui/qml/detail.qml:217
 msgid "Foreground"
-msgstr ""
+msgstr "Előtér"
 
 #: scans2pdf_gui/qml/detail.qml:234 scans2pdf_gui/qml/detail.qml:396
 msgid "Colors:"
-msgstr ""
+msgstr "Színek:"
 
 #: scans2pdf_gui/qml/detail.qml:271
 msgid "No colors"
-msgstr ""
+msgstr "Nincsenek színek"
 
 #: scans2pdf_gui/qml/detail.qml:271 scans2pdf_gui/qml/detail.qml:432
 msgid "Add"
-msgstr ""
+msgstr "Hozzáadás"
 
 #: scans2pdf_gui/qml/detail.qml:307
 msgid "JBIG2 Threshold:"
-msgstr ""
+msgstr "JBIG2-küszöbérték:"
 
 #: scans2pdf_gui/qml/detail.qml:340
 msgid "Warning"
-msgstr ""
+msgstr "Figyelem"
 
 #: scans2pdf_gui/qml/detail.qml:346
 msgid ""
 "Lossy JBIG2 compression can alter text in a way that is not noticeable as "
 "corruption (e.g. the numbers '6' and '8' get replaced)"
 msgstr ""
+"A veszteséges JBIG2-tömörítés olyan módon módosíthatja a szöveget, amely nem "
+"észrevehető sérülésként (például a „6” és „8” számok lecserélődnek)"
 
 #: scans2pdf_gui/qml/detail.qml:356
 msgid "OCR"
-msgstr ""
+msgstr "Optikai karakter felismerés"
 
 #: scans2pdf_gui/qml/detail.qml:375
 msgid "Language"
-msgstr ""
+msgstr "Nyelv"
 
 #: scans2pdf_gui/qml/detail.qml:432
 msgid "All colors"
-msgstr ""
+msgstr "Minden szín"
 
 #: scans2pdf_gui/qml/detail.qml:449
 msgid "Apply to all"
-msgstr ""
+msgstr "Alkalmazás mindre"
 
 #: scans2pdf_gui/qml/detail.qml:455
 msgid "Apply to following"
-msgstr ""
+msgstr "Alkalmazás a következőre"
 
 #: scans2pdf_gui/qml/detail.qml:463
 msgid "Load default settings"
-msgstr ""
+msgstr "Alapértelmezett beállítások betöltése"
 
 #: scans2pdf_gui/qml/detail.qml:469
 msgid "Overwrite?"
-msgstr ""
+msgstr "Felülírás?"
 
 #: scans2pdf_gui/qml/detail.qml:470
 msgid "Replace default settings?"
-msgstr ""
+msgstr "Alapértelmezett beállítások lecserélése?"
 
 #: scans2pdf_gui/qml/detail.qml:476
 msgid "Save default settings"
-msgstr ""
+msgstr "Alapértelmezett beállítások mentése"
 
 #: scans2pdf_gui/qml/overview.qml:30
 msgid "Open"
-msgstr ""
+msgstr "Megnyitás"
 
 #: scans2pdf_gui/qml/overview.qml:32
 msgid "Images"
-msgstr ""
+msgstr "Képek"
 
 #: scans2pdf_gui/qml/overview.qml:33
 msgid "All files"
-msgstr ""
+msgstr "Minden fájl"
 
 #: scans2pdf_gui/qml/overview.qml:42
 msgid "Save"
-msgstr ""
+msgstr "Mentés"
 
 #: scans2pdf_gui/qml/overview.qml:43
 msgid "PDF"
-msgstr ""
+msgstr "PDF-fájl"
 
 #: scans2pdf_gui/qml/overview.qml:73
 msgid "Failed to create PDF"
-msgstr ""
+msgstr "Nem sikerült a PDF-fájl létrehozása"
 
 #: scans2pdf_gui/qml/overview.qml:89
 msgid "Close"
-msgstr ""
+msgstr "Bezárás"
 
 #: scans2pdf_gui/qml/overview.qml:107
 msgid "Saving..."
-msgstr ""
+msgstr "Mentés folyamatban van…"
 
 #: scans2pdf_gui/qml/overview.qml:120
 msgid "Cancel"
-msgstr ""
+msgstr "Mégse"
 
 #: scans2pdf_gui/qml/overview.qml:139
 msgid "Create"
-msgstr ""
+msgstr "Létrehozás"
