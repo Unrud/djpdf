@@ -29,7 +29,7 @@ Page {
         id: openDialog
         title: N_("Open")
         nameFilters: [
-            `${N_("Images")} (${pagesModel.imageFileExtensions.map(s => `*.${x}`).join(" ")})`,
+            `${N_("Images")} (${pagesModel.imageFileExtensions.map(s => `*.${s}`).join(" ")})`,
             `${N_("All files")} (*)`,
         ]
         fileMode: FileDialog.OpenFiles
