@@ -178,7 +178,7 @@ msgid "Close"
 msgstr ""
 
 #: scans2pdf_gui/qml/overview.qml:107
-msgid "Saving..."
+msgid "Saving…"
 msgstr ""
 
 #: scans2pdf_gui/qml/overview.qml:120

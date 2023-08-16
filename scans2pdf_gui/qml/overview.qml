@@ -104,7 +104,7 @@ Page {
         ColumnLayout {
             anchors.fill: parent
             Label {
-                text: N_("Saving...")
+                text: N_("Saving…")
                 font.bold: true
                 horizontalAlignment: Text.AlignHCenter
                 Layout.fillWidth: true

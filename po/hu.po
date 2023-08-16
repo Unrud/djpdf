@@ -189,7 +189,7 @@ msgid "Close"
 msgstr "Bezárás"
 
 #: scans2pdf_gui/qml/overview.qml:107
-msgid "Saving..."
+msgid "Saving…"
 msgstr "Mentés folyamatban van…"
 
 #: scans2pdf_gui/qml/overview.qml:120
