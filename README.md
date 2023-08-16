@@ -1,5 +1,7 @@
 # Scans to PDF
 
+[![Translation status](https://hosted.weblate.org/widgets/djpdf/-/djpdfgui/svg-badge.svg)](https://hosted.weblate.org/engage/djpdf/)
+
 Create small, searchable PDFs from scanned documents.
 The program divides images into bitonal foreground images (text)
 and a color background image, then compresses them separately.
@@ -22,6 +24,10 @@ A GUI and command line interface are included.
         [jbig2enc](https://github.com/agl/jbig2enc), [Tesseract](https://github.com/tesseract-ocr/tesseract)
       * Install library and CLI: `pip3 install .`
       * Install GUI: `meson builddir && meson install -C builddir`
+
+## Translation
+
+We're using [Weblate](https://hosted.weblate.org/engage/djpdf/) to translate the UI. So feel free, to contribute translations over there.
 
 ## Screenshots
 
