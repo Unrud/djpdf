@@ -23,7 +23,7 @@ environment:
 
 apps:
   djpdf:
-    command: bin/scans2pdf-gui
+    command: usr/bin/scans2pdf-gui
     extensions:
       - kde-neon
     common-id: com.github.unrud.djpdf
@@ -163,6 +163,7 @@ parts:
       - -pyvenv.cfg
 
   djpdfgui:
+    after: [djpdf]
     plugin: meson
     source: .
     source-type: git
