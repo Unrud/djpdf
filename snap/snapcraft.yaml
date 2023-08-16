@@ -132,23 +132,8 @@ parts:
       - python3-pkg-resources
       - qpdf
       - libexempi8
-    override-pull: |
-      snapcraftctl pull
-      # WORKAROUND: Snap breaks rpath with LD_LIBRARY_PATH.
-      #             QML2_IMPORT_PATH and QT_PLUGIN_PATH environment variables break Qt bundled with PySide2.
-      cat >pyside2-wrapper <<EOF
-      #!/bin/bash
-      unset QML2_IMPORT_PATH QT_PLUGIN_PATH
-      if [ -n "\${LD_LIBRARY_PATH}" ]; then
-          LD_LIBRARY_PATH=":\${LD_LIBRARY_PATH}"
-      fi
-      export LD_LIBRARY_PATH="\${SNAP}/lib/python3.8/site-packages/PySide2/Qt/lib\${LD_LIBRARY_PATH}"
-      exec "\${0}.real"
-      EOF
     override-build: |
       snapcraftctl build
-      # WORKAROUND: Install wrapper for fixing PySide2
-      install -Dm0755 -t "${SNAPCRAFT_PART_INSTALL}/bin" pyside2-wrapper
       # WORKAROUND: Hardcode libexempi path
       libexempi_path="/snap/djpdf/current/$(realpath --relative-base="${SNAPCRAFT_PART_INSTALL}" "$(find "${SNAPCRAFT_PART_INSTALL}" -name 'libexempi.so*' -print -quit)")"
       sed -e "s|[^=]*find_library('exempi')| '$libexempi_path'|" -i "${SNAPCRAFT_PART_INSTALL}"/lib/python3.*/site-packages/libxmp/exempi.py
@@ -163,7 +148,6 @@ parts:
       - -pyvenv.cfg
 
   djpdfgui:
-    after: [djpdf]
     plugin: meson
     source: .
     source-type: git
@@ -181,9 +165,6 @@ parts:
       snapcraftctl build
       # WORKAROUND: Use python from search path, the path detected by meson doesn't exist when running the Snap
       sed -e '1c#!/usr/bin/env python3' -i "${SNAPCRAFT_PART_INSTALL}/snap/djpdf/current/usr/bin/scans2pdf-gui"
-      # WORKAROUND: Use wrapper for fixing PySide2
-      mv "${SNAPCRAFT_PART_INSTALL}/snap/djpdf/current/usr/bin/scans2pdf-gui" "${SNAPCRAFT_PART_INSTALL}/snap/djpdf/current/usr/bin/scans2pdf-gui.real"
-      ln -s pyside2-wrapper "${SNAPCRAFT_PART_INSTALL}/snap/djpdf/current/usr/bin/scans2pdf-gui"
     organize:
       # WORKAROUND: Move files from fake installation location to actual target
       snap/djpdf/current/usr: usr
