@@ -1,8 +1,11 @@
 [Desktop Entry]
 Type=Application
 Name=Scans to PDF
+Name[hu]=PDF-fájlba beolvas
 Comment=Create small, searchable PDFs from scanned documents
+Comment[hu]=Kisméretű, kereshető PDF-fájlok létrehozása a beolvasott dokumentumokból
 Terminal=false
 Exec=scans2pdf-gui
 Icon=com.github.unrud.djpdf
 Categories=Graphics;Scanning;OCR;
+Categories[hu]=grafika;beolvas;optikai karakter felismerés;
