@@ -341,7 +341,6 @@ Page {
                         }
                         Label {
                             Layout.fillWidth: true
-                            Layout.maximumWidth: parent.width
                             wrapMode: Label.Wrap
                             text: N_("Lossy JBIG2 compression can alter text in a way that is not noticeable as corruption (e.g. the numbers '6' and '8' get replaced)")
                         }
