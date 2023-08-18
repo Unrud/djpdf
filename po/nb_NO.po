@@ -8,24 +8,27 @@ msgstr ""
 "Project-Id-Version: djpdfgui\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-16 00:29+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2023-08-18 22:49+0000\n"
+"Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
+"Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/djpdf/"
+"djpdfgui/nb_NO/>\n"
 "Language: nb_NO\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.0-dev\n"
 
 #: desktop/com.github.unrud.djpdf.desktop.in:4
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:7
 #: scans2pdf_gui/qml/main.qml:29
 msgid "Scans to PDF"
-msgstr ""
+msgstr "Skanner til PDF"
 
 #: desktop/com.github.unrud.djpdf.desktop.in:5
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:8
 msgid "Create small, searchable PDFs from scanned documents"
-msgstr ""
+msgstr "Opprett små, søkbare PDF-er fra skannede dokumenter"
 
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:10
 msgid ""
@@ -48,31 +51,31 @@ msgstr ""
 #: scans2pdf_gui/qml/detail.qml:44 scans2pdf_gui/qml/detail.qml:264
 #: scans2pdf_gui/qml/detail.qml:425
 msgid "Remove"
-msgstr ""
+msgstr "Fjern"
 
 #: scans2pdf_gui/qml/detail.qml:67
 msgid "Please choose a color"
-msgstr ""
+msgstr "Velg en farge"
 
 #: scans2pdf_gui/qml/detail.qml:86
 msgid "DPI:"
-msgstr ""
+msgstr "DPI:"
 
 #: scans2pdf_gui/qml/detail.qml:91
 msgid "auto"
-msgstr ""
+msgstr "auto"
 
 #: scans2pdf_gui/qml/detail.qml:107
 msgid "Background color:"
-msgstr ""
+msgstr "Bakgrunnsfarge:"
 
 #: scans2pdf_gui/qml/detail.qml:138
 msgid "Background"
-msgstr ""
+msgstr "Bakgrunn"
 
 #: scans2pdf_gui/qml/detail.qml:155
 msgid "Resize:"
-msgstr ""
+msgstr "Endre størrelse:"
 
 #: scans2pdf_gui/qml/detail.qml:177 scans2pdf_gui/qml/detail.qml:286
 msgid "Compression:"
@@ -80,31 +83,31 @@ msgstr ""
 
 #: scans2pdf_gui/qml/detail.qml:198
 msgid "Quality:"
-msgstr ""
+msgstr "Kvalitet:"
 
 #: scans2pdf_gui/qml/detail.qml:217
 msgid "Foreground"
-msgstr ""
+msgstr "Forgrunn"
 
 #: scans2pdf_gui/qml/detail.qml:234 scans2pdf_gui/qml/detail.qml:396
 msgid "Colors:"
-msgstr ""
+msgstr "Farger:"
 
 #: scans2pdf_gui/qml/detail.qml:271
 msgid "No colors"
-msgstr ""
+msgstr "Ingen farger"
 
 #: scans2pdf_gui/qml/detail.qml:271 scans2pdf_gui/qml/detail.qml:432
 msgid "Add"
-msgstr ""
+msgstr "Legg til"
 
 #: scans2pdf_gui/qml/detail.qml:307
 msgid "JBIG2 Threshold:"
-msgstr ""
+msgstr "JBIG2-terskel:"
 
 #: scans2pdf_gui/qml/detail.qml:340
 msgid "Warning"
-msgstr ""
+msgstr "Advarsel"
 
 #: scans2pdf_gui/qml/detail.qml:346
 msgid ""
@@ -114,15 +117,15 @@ msgstr ""
 
 #: scans2pdf_gui/qml/detail.qml:356
 msgid "OCR"
-msgstr ""
+msgstr "OCR"
 
 #: scans2pdf_gui/qml/detail.qml:375
 msgid "Language"
-msgstr ""
+msgstr "Språk"
 
 #: scans2pdf_gui/qml/detail.qml:432
 msgid "All colors"
-msgstr ""
+msgstr "Alle farger"
 
 #: scans2pdf_gui/qml/detail.qml:449
 msgid "Apply to all"
@@ -146,44 +149,45 @@ msgstr ""
 
 #: scans2pdf_gui/qml/detail.qml:476
 msgid "Save default settings"
-msgstr ""
+msgstr "Lagre forvalgte innstillinger"
 
 #: scans2pdf_gui/qml/overview.qml:30
 msgid "Open"
-msgstr ""
+msgstr "Åpne"
 
 #: scans2pdf_gui/qml/overview.qml:32
 msgid "Images"
-msgstr ""
+msgstr "Bilder"
 
 #: scans2pdf_gui/qml/overview.qml:33
 msgid "All files"
-msgstr ""
+msgstr "Alle filer"
 
 #: scans2pdf_gui/qml/overview.qml:42
 msgid "Save"
-msgstr ""
+msgstr "Lagre"
 
 #: scans2pdf_gui/qml/overview.qml:43
 msgid "PDF"
-msgstr ""
+msgstr "PDF"
 
 #: scans2pdf_gui/qml/overview.qml:73
+#, fuzzy
 msgid "Failed to create PDF"
-msgstr ""
+msgstr "Klarte ikke å opprette PDF"
 
 #: scans2pdf_gui/qml/overview.qml:89
 msgid "Close"
-msgstr ""
+msgstr "Lukk"
 
 #: scans2pdf_gui/qml/overview.qml:107
 msgid "Saving…"
-msgstr ""
+msgstr "Lagrer …"
 
 #: scans2pdf_gui/qml/overview.qml:120
 msgid "Cancel"
-msgstr ""
+msgstr "Avbryt"
 
 #: scans2pdf_gui/qml/overview.qml:139
 msgid "Create"
-msgstr ""
+msgstr "Opprett"
