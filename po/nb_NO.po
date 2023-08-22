@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: djpdfgui\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-16 00:29+0200\n"
-"PO-Revision-Date: 2023-08-18 22:49+0000\n"
+"PO-Revision-Date: 2023-08-23 08:49+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/djpdf/"
 "djpdfgui/nb_NO/>\n"
@@ -37,16 +37,22 @@ msgid ""
 "then compresses them separately. An invisible OCR text layer is added, "
 "making the PDF searchable."
 msgstr ""
+"Opprett små, søkbare PDF-er fra skannede dokumenter. Programmet deler bilder "
+"inn i bitonale forgrunnsbilder (tekst) og et fargelagt bakgrunnsbilde, og "
+"sammenpakker dem hver for seg. Et usynlig OCR-tekstlag legges til, noe som "
+"gjør PDF-en søkbar."
 
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:16
 msgid ""
 "Color and grayscale scans need some preparation for good results. "
 "Recommended tools are Scan Tailor or GIMP."
 msgstr ""
+"Farge- og gråskalaskanninger trenger litt forberedelse for gode resultat. "
+"Verktøy som «Scan Tailor» eller «GIMP» anbefales."
 
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:20
 msgid "A GUI and command line interface are included."
-msgstr ""
+msgstr "Et grensesnitt og en kommandolinje er inkludert."
 
 #: scans2pdf_gui/qml/detail.qml:44 scans2pdf_gui/qml/detail.qml:264
 #: scans2pdf_gui/qml/detail.qml:425
@@ -79,7 +85,7 @@ msgstr "Endre størrelse:"
 
 #: scans2pdf_gui/qml/detail.qml:177 scans2pdf_gui/qml/detail.qml:286
 msgid "Compression:"
-msgstr ""
+msgstr "Sammenpakking:"
 
 #: scans2pdf_gui/qml/detail.qml:198
 msgid "Quality:"
@@ -114,6 +120,8 @@ msgid ""
 "Lossy JBIG2 compression can alter text in a way that is not noticeable as "
 "corruption (e.g. the numbers '6' and '8' get replaced)"
 msgstr ""
+"Tapsbasert JBIG2-sammenpakking kan forandre tekst som ikke merkes som "
+"forvrengning (f.eks. at «6» erstattes med «8»)"
 
 #: scans2pdf_gui/qml/detail.qml:356
 msgid "OCR"
@@ -128,24 +136,25 @@ msgid "All colors"
 msgstr "Alle farger"
 
 #: scans2pdf_gui/qml/detail.qml:449
+#, fuzzy
 msgid "Apply to all"
-msgstr ""
+msgstr "Bruk for alt"
 
 #: scans2pdf_gui/qml/detail.qml:455
 msgid "Apply to following"
-msgstr ""
+msgstr "Bruk for følgende"
 
 #: scans2pdf_gui/qml/detail.qml:463
 msgid "Load default settings"
-msgstr ""
+msgstr "Last inn forvalgte innstillinger"
 
 #: scans2pdf_gui/qml/detail.qml:469
 msgid "Overwrite?"
-msgstr ""
+msgstr "Overskriv?"
 
 #: scans2pdf_gui/qml/detail.qml:470
 msgid "Replace default settings?"
-msgstr ""
+msgstr "Erstatt forvalgte innstillinger?"
 
 #: scans2pdf_gui/qml/detail.qml:476
 msgid "Save default settings"
