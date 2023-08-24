@@ -1,0 +1,189 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the djpdfgui package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: djpdfgui\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-16 00:29+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: desktop/com.github.unrud.djpdf.desktop.in:4
+#: desktop/com.github.unrud.djpdf.metainfo.xml.in:7
+#: scans2pdf_gui/qml/main.qml:29
+msgid "Scans to PDF"
+msgstr ""
+
+#: desktop/com.github.unrud.djpdf.desktop.in:5
+#: desktop/com.github.unrud.djpdf.metainfo.xml.in:8
+msgid "Create small, searchable PDFs from scanned documents"
+msgstr ""
+
+#: desktop/com.github.unrud.djpdf.metainfo.xml.in:10
+msgid ""
+"Create small, searchable PDFs from scanned documents. The program divides "
+"images into bitonal foreground images (text) and a color background image, "
+"then compresses them separately. An invisible OCR text layer is added, "
+"making the PDF searchable."
+msgstr ""
+
+#: desktop/com.github.unrud.djpdf.metainfo.xml.in:16
+msgid ""
+"Color and grayscale scans need some preparation for good results. "
+"Recommended tools are Scan Tailor or GIMP."
+msgstr ""
+
+#: desktop/com.github.unrud.djpdf.metainfo.xml.in:20
+msgid "A GUI and command line interface are included."
+msgstr ""
+
+#: scans2pdf_gui/qml/detail.qml:44 scans2pdf_gui/qml/detail.qml:264
+#: scans2pdf_gui/qml/detail.qml:425
+msgid "Remove"
+msgstr ""
+
+#: scans2pdf_gui/qml/detail.qml:67
+msgid "Please choose a color"
+msgstr ""
+
+#: scans2pdf_gui/qml/detail.qml:86
+msgid "DPI:"
+msgstr ""
+
+#: scans2pdf_gui/qml/detail.qml:91
+msgid "auto"
+msgstr ""
+
+#: scans2pdf_gui/qml/detail.qml:107
+msgid "Background color:"
+msgstr ""
+
+#: scans2pdf_gui/qml/detail.qml:138
+msgid "Background"
+msgstr ""
+
+#: scans2pdf_gui/qml/detail.qml:155
+msgid "Resize:"
+msgstr ""
+
+#: scans2pdf_gui/qml/detail.qml:177 scans2pdf_gui/qml/detail.qml:286
+msgid "Compression:"
+msgstr ""
+
+#: scans2pdf_gui/qml/detail.qml:198
+msgid "Quality:"
+msgstr ""
+
+#: scans2pdf_gui/qml/detail.qml:217
+msgid "Foreground"
+msgstr ""
+
+#: scans2pdf_gui/qml/detail.qml:234 scans2pdf_gui/qml/detail.qml:396
+msgid "Colors:"
+msgstr ""
+
+#: scans2pdf_gui/qml/detail.qml:271
+msgid "No colors"
+msgstr ""
+
+#: scans2pdf_gui/qml/detail.qml:271 scans2pdf_gui/qml/detail.qml:432
+msgid "Add"
+msgstr ""
+
+#: scans2pdf_gui/qml/detail.qml:307
+msgid "JBIG2 Threshold:"
+msgstr ""
+
+#: scans2pdf_gui/qml/detail.qml:340
+msgid "Warning"
+msgstr ""
+
+#: scans2pdf_gui/qml/detail.qml:346
+msgid ""
+"Lossy JBIG2 compression can alter text in a way that is not noticeable as "
+"corruption (e.g. the numbers '6' and '8' get replaced)"
+msgstr ""
+
+#: scans2pdf_gui/qml/detail.qml:356
+msgid "OCR"
+msgstr ""
+
+#: scans2pdf_gui/qml/detail.qml:375
+msgid "Language"
+msgstr ""
+
+#: scans2pdf_gui/qml/detail.qml:432
+msgid "All colors"
+msgstr ""
+
+#: scans2pdf_gui/qml/detail.qml:449
+msgid "Apply to all"
+msgstr ""
+
+#: scans2pdf_gui/qml/detail.qml:455
+msgid "Apply to following"
+msgstr ""
+
+#: scans2pdf_gui/qml/detail.qml:463
+msgid "Load default settings"
+msgstr ""
+
+#: scans2pdf_gui/qml/detail.qml:469
+msgid "Overwrite?"
+msgstr ""
+
+#: scans2pdf_gui/qml/detail.qml:470
+msgid "Replace default settings?"
+msgstr ""
+
+#: scans2pdf_gui/qml/detail.qml:476
+msgid "Save default settings"
+msgstr ""
+
+#: scans2pdf_gui/qml/overview.qml:30
+msgid "Open"
+msgstr ""
+
+#: scans2pdf_gui/qml/overview.qml:32
+msgid "Images"
+msgstr ""
+
+#: scans2pdf_gui/qml/overview.qml:33
+msgid "All files"
+msgstr ""
+
+#: scans2pdf_gui/qml/overview.qml:42
+msgid "Save"
+msgstr ""
+
+#: scans2pdf_gui/qml/overview.qml:43
+msgid "PDF"
+msgstr ""
+
+#: scans2pdf_gui/qml/overview.qml:73
+msgid "Failed to create PDF"
+msgstr ""
+
+#: scans2pdf_gui/qml/overview.qml:89
+msgid "Close"
+msgstr ""
+
+#: scans2pdf_gui/qml/overview.qml:107
+msgid "Saving…"
+msgstr ""
+
+#: scans2pdf_gui/qml/overview.qml:120
+msgid "Cancel"
+msgstr ""
+
+#: scans2pdf_gui/qml/overview.qml:139
+msgid "Create"
+msgstr ""
