@@ -127,7 +127,7 @@ parts:
     source-type: git
     python-packages:
       # Dependencies for djpdfgui
-      - PySide6<6.5
+      - PySide6<6.6
     stage-packages:
       - python3-pkg-resources
       - qpdf
