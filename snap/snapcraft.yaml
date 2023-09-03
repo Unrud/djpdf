@@ -16,8 +16,6 @@ architectures:
   - build-on: amd64
 
 environment:
-  # Qt: Prefer x11 to wayland
-  QT_QPA_PLATFORM: xcb;wayland
   # WORKAROUND: Add python modules in Snap to search path
   PYTHONPATH: ${SNAP}/lib/python3.8/site-packages:${SNAP}/usr/lib/python3/dist-packages
 
