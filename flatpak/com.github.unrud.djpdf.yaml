@@ -379,8 +379,13 @@ modules:
           url: https://download.qt.io/official_releases/QtForPython/pyside6/
           version-pattern: '>PySide6-(6\.5(?:\.[\d.]+)?)-src/<'
           url-template: https://download.qt.io/official_releases/QtForPython/pyside6/PySide6-$version-src/pyside-setup-everywhere-src-$version.tar.xz
+      - type: file
+        url: https://code.qt.io/cgit/pyside/pyside-setup.git/patch/sources/pyside6?id=63ef7628091c8827e3d0d688220d3ae165587eb2
+        sha256: 7f56a0ab367054c114f42a6cf8d2c49e68b0746a373236db5690101da6807102
+        dest-filename: qt-6.5.3-compatibility.patch
       - type: shell
         commands:
+          - patch -p1 < qt-6.5.3-compatibility.patch
           # use qt-include
           - sed -i 's|\(--include-paths=\)|\1/app/include/qt:|' sources/pyside6/cmake/Macros/PySideModules.cmake
           # fix python module search path
@@ -407,8 +412,8 @@ modules:
   - name: imagemagick
     sources:
       - type: archive
-        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.1-15.tar.gz
-        sha256: 2372192a76af9be43c0543dd7ae6dfbf34b11fc0203583453ce3f9f707c36bcc
+        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.1-19.tar.gz
+        sha256: 5c9548b15752bc258108bcc6bd9880fffe8feb10f836a40d3e49f91cbf6d7b25
         x-checker-data:
           type: json
           url: https://api.github.com/repos/ImageMagick/ImageMagick/releases/latest
@@ -423,8 +428,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/qpdf/qpdf/releases/download/v11.6.0/qpdf-11.6.0.tar.gz
-        sha256: b137500168b49b26da8fe59d99bdd56562d7983b9db965a6a487515a2bf82607
+        url: https://github.com/qpdf/qpdf/releases/download/v11.6.2/qpdf-11.6.2.tar.gz
+        sha256: 9d7011c348abb9ec281dfb0675abcc4a670a14ca4fafd8b945dac5817035acb0
         x-checker-data:
           type: json
           url: https://api.github.com/repos/qpdf/qpdf/releases/latest
@@ -435,8 +440,8 @@ modules:
   - name: tesseract
     sources:
       - type: archive
-        url: https://github.com/tesseract-ocr/tesseract/archive/refs/tags/5.3.2.tar.gz
-        sha256: b99d30fed47360d7168c3e25d194a7416ceb1d9e4b232c7f121cc5f77084d3e7
+        url: https://github.com/tesseract-ocr/tesseract/archive/refs/tags/5.3.3.tar.gz
+        sha256: dc4329f85f41191b2d813b71b528ba6047745813474e583ccce8795ff2ff5681
         x-checker-data:
           type: json
           url: https://api.github.com/repos/tesseract-ocr/tesseract/releases/latest
@@ -488,8 +493,8 @@ modules:
       - pip3 install --prefix=/app .
     sources:
       - type: archive
-        url: https://files.pythonhosted.org/packages/5e/32/12032aa8c673ee16707a9b6cdda2b09c0089131f35af55d443b6a9c69c1d/pytz-2023.3.tar.gz
-        sha256: 1d8ce29db189191fb55338ee6d0387d82ab59f3d00eac103412d64e0ebd0c588
+        url: https://files.pythonhosted.org/packages/69/4f/7bf883f12ad496ecc9514cd9e267b29a68b3e9629661a2bbc24f80eff168/pytz-2023.3.post1.tar.gz
+        sha256: 7b4fddbeb94a1eba4b557da24f19fdf9db575192544270a9101d8509f9f43d7b
         x-checker-data:
           type: pypi
           name: pytz
