@@ -372,20 +372,15 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://download.qt.io/official_releases/QtForPython/pyside6/PySide6-6.5.2-src/pyside-setup-everywhere-src-6.5.2.tar.xz
-        sha256: 90dbf1d14fcd41c98a7cbea44b8a4951e10d0b798e154749756e4946654d1ba8
+        url: https://download.qt.io/official_releases/QtForPython/pyside6/PySide6-6.5.3-src/pyside-setup-everywhere-src-6.5.3.tar.xz
+        sha256: 6606b1634fb2981f9ca7ce2e206cc92c252401de328df4ce23f63e8c998de8d3
         x-checker-data:
           type: html
           url: https://download.qt.io/official_releases/QtForPython/pyside6/
           version-pattern: '>PySide6-(6\.5(?:\.[\d.]+)?)-src/<'
           url-template: https://download.qt.io/official_releases/QtForPython/pyside6/PySide6-$version-src/pyside-setup-everywhere-src-$version.tar.xz
-      - type: file
-        url: https://code.qt.io/cgit/pyside/pyside-setup.git/patch/sources/pyside6?id=63ef7628091c8827e3d0d688220d3ae165587eb2
-        sha256: 7f56a0ab367054c114f42a6cf8d2c49e68b0746a373236db5690101da6807102
-        dest-filename: qt-6.5.3-compatibility.patch
       - type: shell
         commands:
-          - patch -p1 < qt-6.5.3-compatibility.patch
           # use qt-include
           - sed -i 's|\(--include-paths=\)|\1/app/include/qt:|' sources/pyside6/cmake/Macros/PySideModules.cmake
           # fix python module search path
