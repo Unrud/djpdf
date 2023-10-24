@@ -407,8 +407,8 @@ modules:
   - name: imagemagick
     sources:
       - type: archive
-        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.1-19.tar.gz
-        sha256: 5c9548b15752bc258108bcc6bd9880fffe8feb10f836a40d3e49f91cbf6d7b25
+        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.1-21.tar.gz
+        sha256: 09402e5f17c6575ef9f010bb2e21ae1710f1f3426f115ad4317ee9129c32608e
         x-checker-data:
           type: json
           url: https://api.github.com/repos/ImageMagick/ImageMagick/releases/latest
@@ -423,8 +423,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/qpdf/qpdf/releases/download/v11.6.2/qpdf-11.6.2.tar.gz
-        sha256: 9d7011c348abb9ec281dfb0675abcc4a670a14ca4fafd8b945dac5817035acb0
+        url: https://github.com/qpdf/qpdf/releases/download/v11.6.3/qpdf-11.6.3.tar.gz
+        sha256: c394b1b0cff4cd9d13b0f5e16bdf3cf54da424dc434f9d40264b7fe67acd90bc
         x-checker-data:
           type: json
           url: https://api.github.com/repos/qpdf/qpdf/releases/latest
@@ -553,8 +553,8 @@ modules:
       - pip3 install --no-build-isolation --prefix=/app .
     sources:
       - type: archive
-        url: https://github.com/giampaolo/psutil/archive/refs/tags/release-5.9.5.tar.gz
-        sha256: fba07e5d76e129ee1a374ea911e9bfc4161636260e33d055abb2b426ed182429
+        url: https://github.com/giampaolo/psutil/archive/refs/tags/release-5.9.6.tar.gz
+        sha256: fa32d61835811b6ce9990030caba08fb14bd8635b00fd774184c18d82b6ec78f
         x-checker-data:
           type: json
           url: https://api.github.com/repos/giampaolo/psutil/tags
