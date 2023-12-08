@@ -1,9 +1,9 @@
 app-id: com.github.unrud.djpdf
 runtime: org.kde.Platform
-runtime-version: '6.5'
+runtime-version: '6.6'
 sdk: org.kde.Sdk
 sdk-extensions:
-  - org.freedesktop.Sdk.Extension.llvm15
+  - org.freedesktop.Sdk.Extension.llvm17
 command: scans2pdf-gui
 finish-args:
   - --socket=fallback-x11
@@ -349,14 +349,15 @@ modules:
     buildsystem: simple
     build-commands:
       - mkdir -p /app/include/qt
-      - cp -R /usr/include/Qt* /app/include/qt
+      - ln -s /usr/include/Qt* /app/include/qt
 
   - name: pyside6
     buildsystem: cmake-ninja
     builddir: true
     build-options:
-      append-path: /usr/lib/sdk/llvm15/bin
-      append-ld-library-path: /usr/lib/sdk/llvm15/lib
+      append-path: /usr/lib/sdk/llvm17/bin
+      append-ld-library-path: /usr/lib/sdk/llvm17/lib
+      cflags: -I/usr/include/python3.11
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_TESTS=OFF
@@ -372,12 +373,12 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://download.qt.io/official_releases/QtForPython/pyside6/PySide6-6.5.3-src/pyside-setup-everywhere-src-6.5.3.tar.xz
-        sha256: 6606b1634fb2981f9ca7ce2e206cc92c252401de328df4ce23f63e8c998de8d3
+        url: https://download.qt.io/official_releases/QtForPython/pyside6/PySide6-6.6.1-src/pyside-setup-everywhere-src-6.6.1.tar.xz
+        sha256: 341f42483fbe58c88fa5b353eefa83ffcc4ec440bf6e87c1c7ffd278ed54d1ca
         x-checker-data:
           type: html
           url: https://download.qt.io/official_releases/QtForPython/pyside6/
-          version-pattern: '>PySide6-(6\.5(?:\.[\d.]+)?)-src/<'
+          version-pattern: '>PySide6-(6\.6(?:\.[\d.]+)?)-src/<'
           url-template: https://download.qt.io/official_releases/QtForPython/pyside6/PySide6-$version-src/pyside-setup-everywhere-src-$version.tar.xz
       - type: shell
         commands:
@@ -407,8 +408,8 @@ modules:
   - name: imagemagick
     sources:
       - type: archive
-        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.1-21.tar.gz
-        sha256: 09402e5f17c6575ef9f010bb2e21ae1710f1f3426f115ad4317ee9129c32608e
+        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.1-22.tar.gz
+        sha256: 6dc2ac4292319b995c6f46de117cbe33089006371c7f1e1310748dfdfda35441
         x-checker-data:
           type: json
           url: https://api.github.com/repos/ImageMagick/ImageMagick/releases/latest
