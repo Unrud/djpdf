@@ -159,6 +159,7 @@ class RecipeFactory:
     def __init__(self):
         self._cache = []
         self._cache_lock = asyncio.Lock()
+        self._jbig2_warning = True
         self.BLACK = Color(self, (0x00, 0x00, 0x00))
         self.WHITE = Color(self, (0xff, 0xff, 0xff))
 
@@ -379,8 +380,6 @@ class ImageMagickImage:
 
 
 class Jbig2Image:
-    _jbig2_warning = True
-
     def __init__(self, factory, recipe, image_mask=False, mask=None):
         self._factory = factory
         self._cache_lock_acquired = False
@@ -411,8 +410,8 @@ class Jbig2Image:
         self._mask = mask
         self._image_mask = image_mask
         if (self.compression == "jbig2" and self.jbig2_threshold != 1 and
-                Jbig2Image._jbig2_warning):
-            Jbig2Image._jbig2_warning = False
+                self._factory._jbig2_warning):
+            self._factory._jbig2_warning = False
             logging.warning("Lossy JBIG2 compression can alter text "
                             "in a way that is not noticeable as "
                             "corruption (e.g. the numbers '6' and '8' "
