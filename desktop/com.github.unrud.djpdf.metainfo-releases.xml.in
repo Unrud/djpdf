@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <releases>
+  <release version="0.5.3" date="2023-12-18">
+    <description>
+      <ul>
+        <li>Fix PDF conformity (CMap: bfrange &lt; 256)</li>
+      </ul>
+    </description>
+  </release>
   <release version="0.5.2" date="2023-08-24">
     <description>
       <ul>
