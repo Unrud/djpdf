@@ -72,8 +72,8 @@ parts:
 
   tesseract:
     plugin: autotools
-    source: https://github.com/tesseract-ocr/tesseract/archive/refs/tags/5.3.3.tar.gz
-    source-checksum: sha256/dc4329f85f41191b2d813b71b528ba6047745813474e583ccce8795ff2ff5681
+    source: https://github.com/tesseract-ocr/tesseract/archive/refs/tags/5.3.4.tar.gz
+    source-checksum: sha256/141afc12b34a14bb691a939b4b122db0d51bd38feda7f41696822bacea7710c7
     autotools-configure-parameters:
       # WORKAROUND: Fake installation location to find dependencies at runtime
       - --prefix=/snap/djpdf/current/usr

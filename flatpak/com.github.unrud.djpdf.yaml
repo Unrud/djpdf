@@ -436,8 +436,8 @@ modules:
   - name: tesseract
     sources:
       - type: archive
-        url: https://github.com/tesseract-ocr/tesseract/archive/refs/tags/5.3.3.tar.gz
-        sha256: dc4329f85f41191b2d813b71b528ba6047745813474e583ccce8795ff2ff5681
+        url: https://github.com/tesseract-ocr/tesseract/archive/refs/tags/5.3.4.tar.gz
+        sha256: 141afc12b34a14bb691a939b4b122db0d51bd38feda7f41696822bacea7710c7
         x-checker-data:
           type: json
           url: https://api.github.com/repos/tesseract-ocr/tesseract/releases/latest
@@ -554,8 +554,8 @@ modules:
       - pip3 install --no-build-isolation --prefix=/app .
     sources:
       - type: archive
-        url: https://github.com/giampaolo/psutil/archive/refs/tags/release-5.9.7.tar.gz
-        sha256: 2af131e80aafc0694c4f2ab3215f0fca6e39bdf94ca5a88c50e5843a0078f3c6
+        url: https://github.com/giampaolo/psutil/archive/refs/tags/release-5.9.8.tar.gz
+        sha256: 962fbb077209fda6416046b704b51ed17a61edde41a4573886640026e2c53bae
         x-checker-data:
           type: json
           url: https://api.github.com/repos/giampaolo/psutil/tags
