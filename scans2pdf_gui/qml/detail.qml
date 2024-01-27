@@ -82,6 +82,8 @@ Page {
         anchors.fill: parent
         padding: 5
         contentWidth: availableWidth
+        // WORKAROUND: Update contentHeight manually
+        contentHeight: contentChildren.reduce((acc, c) => Math.max(acc, c.implicitHeight), 0)
 
         ColumnLayout {
             anchors.fill: parent
