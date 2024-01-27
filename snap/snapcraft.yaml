@@ -201,6 +201,9 @@ parts:
     source-type: git
     # WORKAROUND: Fake installation location to find dependencies at runtime
     meson-parameters: [--prefix=/snap/djpdf/current/usr]
+    build-snaps:
+      # WORAROUND: gnome sdk contains meson>=0.6.2
+      - gnome-42-2204-sdk
     build-packages:
       - gettext
       - appstream
