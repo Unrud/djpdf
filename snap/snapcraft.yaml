@@ -25,6 +25,8 @@ apps:
     extensions:
       # HINT: Adds plugs and changes environment variables when building and running
       - kde-neon
+      # WORAROUND: gnome sdk contains meson>=0.6.2
+      - gnome
     common-id: com.github.unrud.djpdf
     desktop: usr/share/applications/com.github.unrud.djpdf.desktop
 
