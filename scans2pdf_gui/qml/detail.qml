@@ -21,7 +21,6 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick.Dialogs
-import Qt.labs.platform as Labs
 import djpdf
 
 Page {
@@ -61,19 +60,19 @@ Page {
         }
     }
 
-    Labs.ColorDialog {
+    ColorDialog {
         property var callback: null
         id: colorDialog
         title: N_("Please choose a color")
         onAccepted: {
             const t = callback
             callback = null
-            t?.(color)
+            t?.(selectedColor)
         }
         onRejected: { callback = null }
         function show(callback, color) {
-            this.color = color
             this.callback = callback
+            selectedColor = color
             open()
         }
     }
@@ -430,11 +429,11 @@ Page {
                     onClicked: { sv.p.loadUserDefaults() }
                 }
                 Button {
-                    Labs.MessageDialog {
+                    MessageDialog {
                         id: saveUserDefaultsDialog
                         title: N_("Overwrite?")
                         text: N_("Replace default settings?")
-                        buttons: Labs.MessageDialog.Yes | Labs.MessageDialog.No
+                        buttons: Dialog.Yes | Dialog.No
                         onAccepted: { sv.p.saveUserDefaults() }
                     }
                     Layout.fillWidth: true
