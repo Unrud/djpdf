@@ -295,15 +295,11 @@ Page {
                             from: 40
                             to: 100
                             onValueModified: {
-                                if (90 < value && value < 100) {
-                                    const oldValue = Number(sv.p.fgJbig2Threshold * 100).toFixed(0)
-                                    if (oldValue < value) {
-                                        value = 100
-                                    } else {
-                                        value = 90
-                                    }
+                                let newValue = value / 100
+                                if (0.9 < newValue && newValue < 1) {
+                                    newValue = sv.p.fgJbig2Threshold < newValue ? 1 : 0.9
                                 }
-                                sv.p.fgJbig2Threshold = value / 100
+                                sv.p.fgJbig2Threshold = newValue
                             }
                             value: Number(sv.p.fgJbig2Threshold * 100).toFixed(0)
                             textFromValue: (value, locale) => `${Number(value).toLocaleString(locale, "f", 0)}%`
