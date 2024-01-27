@@ -112,9 +112,8 @@ class QmlPage(QObject):
             return
 
         def set_(key, signal, value):
-            if self._data[key] != value:
-                self._data[key] = value
-                signal.emit()
+            self._data[key] = value
+            signal.emit()
 
         dpi = d.get("dpi")
         if dpi == "auto":

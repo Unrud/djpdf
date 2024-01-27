@@ -29,12 +29,12 @@ Page {
         id: openDialog
         title: N_("Open")
         nameFilters: [
-            `${N_("Images")} (${pagesModel.imageFileExtensions.map(s => `*.${s}`).join(" ")})`,
+            `${N_("Images")} (${pagesModel.imageFileExtensions.map((s) => `*.${s}`).join(" ")})`,
             `${N_("All files")} (*)`,
         ]
         fileMode: FileDialog.OpenFiles
         currentFolder: StandardPaths.writableLocation(StandardPaths.HomeLocation)
-        onAccepted: pagesModel.extend(selectedFiles)
+        onAccepted: { pagesModel.extend(selectedFiles) }
     }
 
     FileDialog {
@@ -43,14 +43,13 @@ Page {
         nameFilters: [ `${N_("PDF")} (*.${pagesModel.pdfFileExtension})` ]
         fileMode: FileDialog.SaveFile
         currentFolder: StandardPaths.writableLocation(StandardPaths.HomeLocation)
-        onAccepted: pagesModel.save(selectedFile)
+        onAccepted: { pagesModel.save(selectedFile) }
     }
 
     Connections {
         target: pagesModel
         function onSavingError(message) {
-            errorDialog.text = message
-            errorDialog.open()
+            errorDialog.show(message)
         }
     }
 
@@ -59,14 +58,17 @@ Page {
 
         id: errorDialog
         parent: stack
-        x: Math.round((parent.width - width) / 2)
-        y: Math.round((parent.height - height) / 2)
+        anchors.centerIn: parent
         modal: true
         focus: true
         width: parent.width * 0.8
         height: Math.min(parent.height * 0.8, implicitHeight)
         closePolicy: Popup.CloseOnEscape
-        onClosed: text = ""
+        onClosed: { text = "" }
+        function show(text) {
+            this.text = text
+            open()
+        }
         ColumnLayout {
             anchors.fill: parent
             Label {
@@ -88,15 +90,14 @@ Page {
             Button {
                 text: N_("Close")
                 Layout.alignment: Qt.AlignRight
-                onClicked: errorDialog.close()
+                onClicked: { errorDialog.close() }
             }
         }
     }
 
     Popup {
         parent: stack
-        x: Math.round((parent.width - width) / 2)
-        y: Math.round((parent.height - height) / 2)
+        anchors.centerIn: parent
         modal: true
         focus: true
         visible: pagesModel.saving
@@ -119,7 +120,7 @@ Page {
             Button {
                 text: N_("Cancel")
                 Layout.alignment: Qt.AlignRight
-                onClicked: pagesModel.cancelSaving()
+                onClicked: { pagesModel.cancelSaving() }
                 enabled: pagesModel.savingCancelable
             }
         }
@@ -130,7 +131,7 @@ Page {
             anchors.fill: parent
             ToolButton {
                 text: "+"
-                onClicked: openDialog.open()
+                onClicked: { openDialog.open() }
             }
             Item {
                 Layout.fillWidth: true
@@ -138,7 +139,7 @@ Page {
             ToolButton {
                 text: N_("Create")
                 enabled: pagesModel.count > 0
-                onClicked: saveDialog.open()
+                onClicked: { saveDialog.open() }
             }
         }
     }
@@ -172,7 +173,7 @@ Page {
                 property DjpdfPage p: model.modelData
                 property bool active: GridView.isCurrentItem && pagesView.activeFocus
 
-                onClicked: stack.push("detail.qml", {p: p, modelIndex: modelIndex})
+                onClicked: { stack.push("detail.qml", {p: p, modelIndex: modelIndex}) }
 
                 onPressed: {
                     pagesView.forceActiveFocus(Qt.MouseFocusReason)
@@ -221,7 +222,7 @@ Page {
                             margins: 6
                         }
                         asynchronous: true
-                        source: "image://thumbnails/" + model.modelData.url
+                        source: `image://thumbnails/${model.modelData.url}`
                         fillMode: Image.PreserveAspectFit
                         verticalAlignment: Image.AlignBottom
                         z: 1
@@ -267,7 +268,7 @@ Page {
                 DropArea {
                     anchors { fill: parent; margins: 5 }
                     keys: [ pagesView.dragKey ]
-                    onEntered: pagesModel.move(drag.source.modelIndex, pageDelegate.modelIndex)
+                    onEntered: (drag) => { pagesModel.move(drag.source.modelIndex, pageDelegate.modelIndex) }
                 }
             }
         }

@@ -38,7 +38,7 @@ Page {
             anchors.fill: parent
             ToolButton {
                 text: "‹"
-                onClicked: stack.pop()
+                onClicked: { stack.pop() }
             }
             ToolButton {
                 text: N_("Remove")
@@ -62,18 +62,29 @@ Page {
     }
 
     Labs.ColorDialog {
-        property var fn: null
+        property var callback: null
         id: colorDialog
         title: N_("Please choose a color")
-        onAccepted: fn()
+        onAccepted: {
+            const t = callback
+            callback = null
+            t?.(color)
+        }
+        onRejected: { callback = null }
+        function show(callback, color) {
+            this.color = color
+            this.callback = callback
+            open()
+        }
     }
 
     ScrollView {
-        id: scrollView
         anchors.fill: parent
         padding: 5
+        contentWidth: availableWidth
+
         ColumnLayout {
-            width: scrollView.availableWidth
+            anchors.fill: parent
 
             Pane {
                 Layout.fillWidth: true
@@ -91,13 +102,7 @@ Page {
                             placeholderText: N_("auto")
                             text: sv.p.dpi !== 0 ? sv.p.dpi : ""
                             validator: RegularExpressionValidator { regularExpression: /[0-9]*/ }
-                            onEditingFinished: {
-                                if (text === "") {
-                                    sv.p.dpi = 0
-                                } else {
-                                    sv.p.dpi = parseInt(text)
-                                }
-                            }
+                            onEditingFinished: { sv.p.dpi = text === "" ? 0 : parseInt(text) }
                         }
                     }
                     RowLayout {
@@ -108,13 +113,7 @@ Page {
                         }
                         Button {
                             Layout.fillWidth: true
-                            onClicked: {
-                                colorDialog.fn = function() {
-                                    sv.p.bgColor = colorDialog.color
-                                }
-                                colorDialog.color = sv.p.bgColor
-                                colorDialog.open()
-                            }
+                            onClicked: { colorDialog.show((color) => { sv.p.bgColor = color }, sv.p.bgColor) }
                             Rectangle {
                                 color: parent.enabled ? paletteActive.buttonText : paletteDisabled.buttonText
                                 anchors.fill: parent
@@ -141,7 +140,7 @@ Page {
                     Switch {
                         Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
                         checked: sv.p.bg
-                        onToggled: sv.p.bg = checked && true
+                        onToggled: { sv.p.bg = checked && true }
                     }
                 }
 
@@ -159,15 +158,10 @@ Page {
                             editable: true
                             from: 1
                             to: 100
-                            onValueModified: sv.p.bgResize = value / 100
+                            onValueModified: { sv.p.bgResize = value / 100 }
                             value: Number(sv.p.bgResize * 100).toFixed(0)
-                            textFromValue: function(value, locale) {
-                                return Number(value).toLocaleString(locale, "f", 0) + "%"
-                            }
-                            valueFromText: function(text, locale) {
-                                text = text.replace(/%$/, "")
-                                return Number.fromLocaleString(locale, text)
-                            }
+                            textFromValue: (value, locale) => `${Number(value).toLocaleString(locale, "f", 0)}%`
+                            valueFromText: (text, locale) => Number.fromLocaleString(locale, text.replace(/%$/, ""))
                         }
                     }
                     RowLayout {
@@ -180,8 +174,8 @@ Page {
                             Layout.fillWidth: true
                             id: bgCompressionComboBox
                             model: sv.p.bgCompressions
-                            Component.onCompleted: currentIndex = indexOfValue(sv.p.bgCompression)
-                            onActivated: sv.p.bgCompression = currentValue
+                            Component.onCompleted: { currentIndex = indexOfValue(sv.p.bgCompression) }
+                            onActivated: { sv.p.bgCompression = currentValue }
                             Connections {
                                 target: sv.p
                                 function onBgCompressionChanged() {
@@ -202,7 +196,7 @@ Page {
                             editable: true
                             from: 1
                             to: 100
-                            onValueModified: sv.p.bgQuality = value
+                            onValueModified: { sv.p.bgQuality = value }
                             value: sv.p.bgQuality
                         }
                     }
@@ -220,7 +214,7 @@ Page {
                     Switch {
                         Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
                         checked: sv.p.fg
-                        onToggled: sv.p.fg = checked && true
+                        onToggled: { sv.p.fg = checked && true }
                     }
                 }
 
@@ -241,13 +235,7 @@ Page {
                                     Layout.fillWidth: true
                                     Button {
                                         Layout.fillWidth: true
-                                        onClicked: {
-                                            colorDialog.fn = function() {
-                                                sv.p.changeFgColor(index, colorDialog.color)
-                                            }
-                                            colorDialog.color = sv.p.fgColors[index]
-                                            colorDialog.open()
-                                        }
+                                        onClicked: { colorDialog.show((color) => { sv.p.changeFgColor(index, color) }, sv.p.fgColors[index]) }
                                         Rectangle {
                                             color: parent.enabled ? paletteActive.buttonText : paletteDisabled.buttonText
                                             anchors.fill: parent
@@ -262,20 +250,14 @@ Page {
                                     Button {
                                         Layout.fillWidth: true
                                         text: N_("Remove")
-                                        onClicked: sv.p.removeFgColor(index)
+                                        onClicked: { sv.p.removeFgColor(index) }
                                     }
                                 }
                             }
                             Button {
                                 Layout.fillWidth: true
                                 text: sv.p.fgColors.length === 0 ? N_("No colors") : N_("Add")
-                                onClicked: {
-                                    colorDialog.fn = function() {
-                                        sv.p.addFgColor(colorDialog.color)
-                                    }
-                                    colorDialog.color = "#ffffff"
-                                    colorDialog.open()
-                                }
+                                onClicked: { colorDialog.show(sv.p.addFgColor, "#ffffff") }
                             }
                         }
                     }
@@ -290,7 +272,7 @@ Page {
                             id: fgCompressionComboBox
                             model: sv.p.fgCompressions
                             Component.onCompleted: currentIndex = indexOfValue(sv.p.fgCompression)
-                            onActivated: sv.p.fgCompression = currentValue
+                            onActivated: { sv.p.fgCompression = currentValue }
                             Connections {
                                 target: sv.p
                                 function onFgCompressionChanged() {
@@ -313,7 +295,7 @@ Page {
                             to: 100
                             onValueModified: {
                                 if (90 < value && value < 100) {
-                                    var oldValue = Number(sv.p.fgJbig2Threshold * 100).toFixed(0)
+                                    const oldValue = Number(sv.p.fgJbig2Threshold * 100).toFixed(0)
                                     if (oldValue < value) {
                                         value = 100
                                     } else {
@@ -323,13 +305,8 @@ Page {
                                 sv.p.fgJbig2Threshold = value / 100
                             }
                             value: Number(sv.p.fgJbig2Threshold * 100).toFixed(0)
-                            textFromValue: function(value, locale) {
-                                return Number(value).toLocaleString(locale, "f", 0) + "%"
-                            }
-                            valueFromText: function(text, locale) {
-                                text = text.replace(/%$/, "")
-                                return Number.fromLocaleString(locale, text)
-                            }
+                            textFromValue: (value, locale) => `${Number(value).toLocaleString(locale, "f", 0)}%`
+                            valueFromText: (text, locale) => Number.fromLocaleString(locale, text.replace(/%$/, ""))
                         }
                     }
                     ColumnLayout {
@@ -358,7 +335,7 @@ Page {
                     Switch {
                         Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
                         checked: sv.p.ocr
-                        onToggled: sv.p.ocr = checked && true
+                        onToggled: { sv.p.ocr = checked && true }
                     }
                 }
                 Layout.fillWidth: true
@@ -378,7 +355,7 @@ Page {
                             id: ocrLangComboBox
                             model: sv.p.ocrLangs
                             Component.onCompleted: currentIndex = indexOfValue(sv.p.ocrLang)
-                            onActivated: sv.p.ocrLang = currentValue
+                            onActivated: { sv.p.ocrLang = currentValue }
                             Connections {
                                 target: sv.p
                                 function onOcrLangChanged() {
@@ -401,13 +378,7 @@ Page {
                                 RowLayout {
                                     Button {
                                         Layout.fillWidth: true
-                                        onClicked: {
-                                            colorDialog.fn = function() {
-                                                sv.p.changeOcrColor(index, colorDialog.color)
-                                            }
-                                            colorDialog.color = sv.p.ocrColors[index]
-                                            colorDialog.open()
-                                        }
+                                        onClicked: { colorDialog.show((color) => { sv.p.changeOcrColor(index, color) }, sv.p.ocrColors[index]) }
                                         Rectangle {
                                             color: parent.enabled ? paletteActive.buttonText : paletteDisabled.buttonText
                                             anchors.fill: parent
@@ -422,20 +393,14 @@ Page {
                                     Button {
                                         Layout.fillWidth: true
                                         text: N_("Remove")
-                                        onClicked: sv.p.removeOcrColor(index)
+                                        onClicked: { sv.p.removeOcrColor(index) }
                                     }
                                 }
                             }
                             Button {
                                 Layout.fillWidth: true
                                 text: sv.p.ocrColors.length === 0 ? N_("All colors") : N_("Add")
-                                onClicked: {
-                                    colorDialog.fn = function() {
-                                        sv.p.addOcrColor(colorDialog.color)
-                                    }
-                                    colorDialog.color = "#ffffff"
-                                    colorDialog.open()
-                                }
+                                onClicked: { colorDialog.show(sv.p.addOcrColor, "#ffffff") }
                             }
                         }
                     }
@@ -446,13 +411,13 @@ Page {
                     Layout.fillWidth: true
                     Layout.preferredWidth: (parent.width-parent.spacing) / 2
                     text: N_("Apply to all")
-                    onClicked: pagesModel.applyToAll(sv.p)
+                    onClicked: { pagesModel.applyToAll(sv.p) }
                 }
                 Button {
                     Layout.fillWidth: true
                     Layout.preferredWidth: (parent.width-parent.spacing) / 2
                     text: N_("Apply to following")
-                    onClicked: pagesModel.applyToFollowing(sv.modelIndex, sv.p)
+                    onClicked: { pagesModel.applyToFollowing(sv.modelIndex, sv.p) }
                 }
             }
             RowLayout {
@@ -460,7 +425,7 @@ Page {
                     Layout.fillWidth: true
                     Layout.preferredWidth: (parent.width-parent.spacing) / 2
                     text: N_("Load default settings")
-                    onClicked: sv.p.loadUserDefaults()
+                    onClicked: { sv.p.loadUserDefaults() }
                 }
                 Button {
                     Labs.MessageDialog {
@@ -468,12 +433,12 @@ Page {
                         title: N_("Overwrite?")
                         text: N_("Replace default settings?")
                         buttons: Labs.MessageDialog.Yes | Labs.MessageDialog.No
-                        onAccepted: sv.p.saveUserDefaults()
+                        onAccepted: { sv.p.saveUserDefaults() }
                     }
                     Layout.fillWidth: true
                     Layout.preferredWidth: (parent.width-parent.spacing) / 2
                     text: N_("Save default settings")
-                    onClicked: saveUserDefaultsDialog.open()
+                    onClicked: { saveUserDefaultsDialog.open() }
                 }
             }
         }
