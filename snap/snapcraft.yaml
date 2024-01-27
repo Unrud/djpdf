@@ -9,7 +9,7 @@ license: GPL-3.0+
 grade: stable
 adopt-info: djpdfgui
 
-base: core20
+base: core22
 confinement: strict
 
 architectures:
@@ -17,12 +17,13 @@ architectures:
 
 environment:
   # WORKAROUND: Add python modules in Snap to search path
-  PYTHONPATH: ${SNAP}/lib/python3.8/site-packages:${SNAP}/usr/lib/python3/dist-packages
+  PYTHONPATH: ${SNAP}/lib/python3.10/site-packages:${SNAP}/usr/lib/python3/dist-packages
 
 apps:
   djpdf:
     command: usr/bin/scans2pdf-gui
     extensions:
+      # HINT: Adds plugs and changes environment variables when building and running
       - kde-neon
     common-id: com.github.unrud.djpdf
     desktop: usr/share/applications/com.github.unrud.djpdf.desktop
@@ -45,7 +46,7 @@ parts:
       - zlib1g
     override-build: |
       ./autogen.sh
-      snapcraftctl build
+      craftctl default
 
   imagemagick:
     plugin: autotools
@@ -80,11 +81,13 @@ parts:
     build-packages:
       - pkg-config
       - libleptonica-dev
+      - libcurl4-openssl-dev
     stage-packages:
       - liblept5
+      - libcurl4
     override-build: |
       ./autogen.sh
-      snapcraftctl build
+      craftctl default
     organize:
       # WORKAROUND: Move files from fake installation location to actual target
       snap/djpdf/current/usr: usr
@@ -117,7 +120,7 @@ parts:
       9cf5d576fcc47564f11265841e5ca839001e7e6f38ff7f7aacf46d15a96b00ff *osd.traineddata' > SHA256SUMS
       sha256sum -c SHA256SUMS
     override-build: |
-      install -Dm0644 -t "${SNAPCRAFT_PART_INSTALL}/usr/share/tessdata" *
+      install -Dm0644 -t "${CRAFT_PART_INSTALL}/usr/share/tessdata" *
 
   djpdf:
     plugin: python
@@ -125,16 +128,16 @@ parts:
     source-type: git
     python-packages:
       # Dependencies for djpdfgui
-      - PySide6<6.6
+      - PySide6<6.7
     stage-packages:
       - python3-pkg-resources
       - qpdf
       - libexempi8
     override-build: |
-      snapcraftctl build
+      craftctl default
       # WORKAROUND: Hardcode libexempi path
-      libexempi_path="/snap/djpdf/current/$(realpath --relative-base="${SNAPCRAFT_PART_INSTALL}" "$(find "${SNAPCRAFT_PART_INSTALL}" -name 'libexempi.so*' -print -quit)")"
-      sed -e "s|[^=]*find_library('exempi')| '$libexempi_path'|" -i "${SNAPCRAFT_PART_INSTALL}"/lib/python3.*/site-packages/libxmp/exempi.py
+      libexempi_path="/snap/djpdf/current/$(realpath --relative-base="${CRAFT_PART_INSTALL}" "$(find "${CRAFT_PART_INSTALL}" -name 'libexempi.so*' -print -quit)")"
+      sed -e "s|[^=]*find_library('exempi')| '$libexempi_path'|" -i "${CRAFT_PART_INSTALL}"/lib/python3.*/site-packages/libxmp/exempi.py
     stage:
       # WORKAROUND: Skip venv from python plugin
       - -bin/activate
@@ -145,7 +148,52 @@ parts:
       - -bin/python3
       - -pyvenv.cfg
 
+  ninja:
+    # Copied from gnome-42-2204-sdk
+    plugin: nil
+    source: https://github.com/ninja-build/ninja.git
+    source-tag: 'v1.11.1'
+    source-depth: 1
+    override-build: |
+      rm -rf build
+      rm -f ninja
+      rm -f ninja_bootstrap
+      sed -i 's_^#!/usr/bin/env python$_#!/usr/bin/env python3_g' configure.py
+      ./configure.py --bootstrap
+      mv ninja ninja_bootstrap
+      rm -rf build
+      ./ninja_bootstrap
+      rm -f ninja_bootstrap
+      mkdir -p $CRAFT_PART_INSTALL/usr/bin
+      mv ninja $CRAFT_PART_INSTALL/usr/bin/
+    build-packages:
+      - python3
+    override-stage: |
+      # NOP
+
+  meson-deps:
+    # Copied from gnome-42-2204-sdk
+    after: [ ninja ]
+    plugin: nil
+    source: https://github.com/mesonbuild/meson.git
+    source-tag: '1.2.3'
+    source-depth: 1
+    override-build: |
+      python3 -m pip install .
+      mkdir -p $CRAFT_PART_INSTALL/usr/lib/python3/dist-packages
+      rm -rf $CRAFT_PART_INSTALL/usr/lib/python3/dist-packages/meson*
+      python3 -m pip install --target=$CRAFT_PART_INSTALL/usr .
+      mv $CRAFT_PART_INSTALL/usr/meson* $CRAFT_PART_INSTALL/usr/lib/python3/dist-packages/
+      sed -i "s%^#!/usr/bin/python3$%#!/usr/bin/env python3%g" /usr/local/bin/meson
+      sed -i "s%^#!/usr/bin/python3$%#!/usr/bin/env python3%g" $CRAFT_PART_INSTALL/usr/bin/meson
+    build-packages:
+      - python3-pip
+    override-stage: |
+      # NOP
+
   djpdfgui:
+    # WORKAROUND: meson in repository too old
+    after: [ meson-deps ]
     plugin: meson
     source: .
     source-type: git
@@ -156,13 +204,13 @@ parts:
       - appstream
       - graphicsmagick-imagemagick-compat
     override-pull: |
-      snapcraftctl pull
+      craftctl default
       # WORKAROUND: Point icon directly to PNG otherwise snapcraft can't find it
       sed -e 's|Icon=com.github.unrud.djpdf|Icon=/usr/share/icons/hicolor/512x512/apps/com.github.unrud.djpdf.png|' -i desktop/com.github.unrud.djpdf.desktop.in
     override-build: |
-      snapcraftctl build
+      craftctl default
       # WORKAROUND: Use python from search path, the path detected by meson doesn't exist when running the Snap
-      sed -e '1c#!/usr/bin/env python3' -i "${SNAPCRAFT_PART_INSTALL}/snap/djpdf/current/usr/bin/scans2pdf-gui"
+      sed -e '1c#!/usr/bin/env python3' -i "${CRAFT_PART_INSTALL}/snap/djpdf/current/usr/bin/scans2pdf-gui"
     organize:
       # WORKAROUND: Move files from fake installation location to actual target
       snap/djpdf/current/usr: usr
