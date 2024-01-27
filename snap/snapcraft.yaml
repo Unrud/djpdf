@@ -205,6 +205,7 @@ parts:
       # WORAROUND: gnome sdk contains meson>=0.6.2
       - gnome-42-2204-sdk
     build-packages:
+      - meson
       - gettext
       - appstream
       - graphicsmagick-imagemagick-compat
