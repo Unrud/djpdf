@@ -373,8 +373,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://download.qt.io/official_releases/QtForPython/pyside6/PySide6-6.6.1-src/pyside-setup-everywhere-src-6.6.1.tar.xz
-        sha256: 341f42483fbe58c88fa5b353eefa83ffcc4ec440bf6e87c1c7ffd278ed54d1ca
+        url: https://download.qt.io/official_releases/QtForPython/pyside6/PySide6-6.6.2-src/pyside-setup-everywhere-src-6.6.2.tar.xz
+        sha256: 14620b694d7af4c978443016292d3d2108ba5dc105f4170e3b71eadcaf04c9f0
         x-checker-data:
           type: html
           url: https://download.qt.io/official_releases/QtForPython/pyside6/
@@ -408,8 +408,8 @@ modules:
   - name: imagemagick
     sources:
       - type: archive
-        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.1-27.tar.gz
-        sha256: 51114819ebed50b9f62403b6f7618ec3251dcaea1b1f5893728fbee02ceb3cfa
+        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.1-29.tar.gz
+        sha256: 27bd25f945efdd7e38f6f9845a7c0a391fdb732f652dda140b743769c5f106e8
         x-checker-data:
           type: json
           url: https://api.github.com/repos/ImageMagick/ImageMagick/releases/latest
@@ -424,8 +424,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/qpdf/qpdf/releases/download/v11.8.0/qpdf-11.8.0.tar.gz
-        sha256: d9321f5fbc50251803630a5604ddc5ed9a4d93bc023d9a7436a302e7c9741259
+        url: https://github.com/qpdf/qpdf/releases/download/v11.9.0/qpdf-11.9.0.tar.gz
+        sha256: 9f5d6335bb7292cc24a7194d281fc77be2bbf86873e8807b85aeccfbff66082f
         x-checker-data:
           type: json
           url: https://api.github.com/repos/qpdf/qpdf/releases/latest
@@ -489,8 +489,8 @@ modules:
       - pip3 install --prefix=/app .
     sources:
       - type: archive
-        url: https://files.pythonhosted.org/packages/69/4f/7bf883f12ad496ecc9514cd9e267b29a68b3e9629661a2bbc24f80eff168/pytz-2023.3.post1.tar.gz
-        sha256: 7b4fddbeb94a1eba4b557da24f19fdf9db575192544270a9101d8509f9f43d7b
+        url: https://files.pythonhosted.org/packages/90/26/9f1f00a5d021fff16dee3de13d43e5e978f3d58928e129c3a62cf7eb9738/pytz-2024.1.tar.gz
+        sha256: 2a29735ea9c18baf14b448846bde5a48030ed267578472d8955cd0e7443a9812
         x-checker-data:
           type: pypi
           name: pytz
