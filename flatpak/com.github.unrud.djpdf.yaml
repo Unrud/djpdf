@@ -500,9 +500,16 @@ modules:
     build-commands:
       - pip3 install --prefix=/app .
     sources:
-      - type: git
-        url: https://github.com/python-xmp-toolkit/python-xmp-toolkit
-        commit: 5692bdf8dac3581a0d5fb3c5aeb29be0ab6a54fc
+      - type: archive
+        url: https://github.com/python-xmp-toolkit/python-xmp-toolkit/archive/refs/tags/v2.0.2.tar.gz
+        sha256: d3c0bac6b7b2233274dbf95e8fc6247697d277676b3cdf6b79c0df5d10ed4c5b
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/python-xmp-toolkit/python-xmp-toolkit/tags
+          version-query: '[.[].name | select(test("^v?[0-9.]+$"))] | sort_by(sub("^v";
+            "") | split(".") | map(tonumber))[-1]'
+          url-query: '"https://github.com/python-xmp-toolkit/python-xmp-toolkit/archive/refs/tags/"
+            + $version + ".tar.gz"'
 
   - name: pdfrw
     buildsystem: simple
