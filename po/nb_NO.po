@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: djpdfgui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-16 00:29+0200\n"
+"POT-Creation-Date: 2024-06-23 16:47+0200\n"
 "PO-Revision-Date: 2023-08-23 08:49+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/djpdf/"
@@ -28,6 +28,11 @@ msgstr "Skanner til PDF"
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:8
 msgid "Create small, searchable PDFs from scanned documents"
 msgstr "Opprett små, søkbare PDF-er fra skannede dokumenter"
+
+#. TRANSLATORS: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: desktop/com.github.unrud.djpdf.desktop.in:11
+msgid "OCR;convert;PDF;image;"
+msgstr ""
 
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:10
 msgid ""
@@ -53,24 +58,24 @@ msgstr ""
 msgid "A GUI and command line interface are included."
 msgstr "Et grensesnitt og en kommandolinje er inkludert."
 
-#: scans2pdf_gui/qml/detail.qml:44 scans2pdf_gui/qml/detail.qml:264
-#: scans2pdf_gui/qml/detail.qml:425
+#: scans2pdf_gui/qml/detail.qml:43 scans2pdf_gui/qml/detail.qml:253
+#: scans2pdf_gui/qml/detail.qml:392
 msgid "Remove"
 msgstr "Fjern"
 
-#: scans2pdf_gui/qml/detail.qml:67
+#: scans2pdf_gui/qml/detail.qml:66
 msgid "Please choose a color"
 msgstr "Velg en farge"
 
-#: scans2pdf_gui/qml/detail.qml:86
+#: scans2pdf_gui/qml/detail.qml:98
 msgid "DPI:"
 msgstr "DPI:"
 
-#: scans2pdf_gui/qml/detail.qml:91
+#: scans2pdf_gui/qml/detail.qml:103
 msgid "auto"
 msgstr "auto"
 
-#: scans2pdf_gui/qml/detail.qml:107
+#: scans2pdf_gui/qml/detail.qml:113
 msgid "Background color:"
 msgstr "Bakgrunnsfarge:"
 
@@ -82,39 +87,39 @@ msgstr "Bakgrunn"
 msgid "Resize:"
 msgstr "Endre størrelse:"
 
-#: scans2pdf_gui/qml/detail.qml:177 scans2pdf_gui/qml/detail.qml:286
+#: scans2pdf_gui/qml/detail.qml:172 scans2pdf_gui/qml/detail.qml:269
 msgid "Compression:"
 msgstr "Sammenpakking:"
 
-#: scans2pdf_gui/qml/detail.qml:198
+#: scans2pdf_gui/qml/detail.qml:193
 msgid "Quality:"
 msgstr "Kvalitet:"
 
-#: scans2pdf_gui/qml/detail.qml:217
+#: scans2pdf_gui/qml/detail.qml:212
 msgid "Foreground"
 msgstr "Forgrunn"
 
-#: scans2pdf_gui/qml/detail.qml:234 scans2pdf_gui/qml/detail.qml:396
+#: scans2pdf_gui/qml/detail.qml:229 scans2pdf_gui/qml/detail.qml:369
 msgid "Colors:"
 msgstr "Farger:"
 
-#: scans2pdf_gui/qml/detail.qml:271
+#: scans2pdf_gui/qml/detail.qml:260
 msgid "No colors"
 msgstr "Ingen farger"
 
-#: scans2pdf_gui/qml/detail.qml:271 scans2pdf_gui/qml/detail.qml:432
+#: scans2pdf_gui/qml/detail.qml:260 scans2pdf_gui/qml/detail.qml:399
 msgid "Add"
 msgstr "Legg til"
 
-#: scans2pdf_gui/qml/detail.qml:307
+#: scans2pdf_gui/qml/detail.qml:290
 msgid "JBIG2 Threshold:"
 msgstr "JBIG2-terskel:"
 
-#: scans2pdf_gui/qml/detail.qml:340
+#: scans2pdf_gui/qml/detail.qml:314
 msgid "Warning"
 msgstr "Advarsel"
 
-#: scans2pdf_gui/qml/detail.qml:346
+#: scans2pdf_gui/qml/detail.qml:319
 msgid ""
 "Lossy JBIG2 compression can alter text in a way that is not noticeable as "
 "corruption (e.g. the numbers '6' and '8' get replaced)"
@@ -122,40 +127,40 @@ msgstr ""
 "Tapsbasert JBIG2-sammenpakking kan forandre tekst som ikke merkes som "
 "forvrengning (f.eks. at «6» erstattes med «8»)"
 
-#: scans2pdf_gui/qml/detail.qml:356
+#: scans2pdf_gui/qml/detail.qml:329
 msgid "OCR"
 msgstr "OCR"
 
-#: scans2pdf_gui/qml/detail.qml:375
+#: scans2pdf_gui/qml/detail.qml:348
 msgid "Language"
 msgstr "Språk"
 
-#: scans2pdf_gui/qml/detail.qml:432
+#: scans2pdf_gui/qml/detail.qml:399
 msgid "All colors"
 msgstr "Alle farger"
 
-#: scans2pdf_gui/qml/detail.qml:449
+#: scans2pdf_gui/qml/detail.qml:410
 #, fuzzy
 msgid "Apply to all"
 msgstr "Bruk for alt"
 
-#: scans2pdf_gui/qml/detail.qml:455
+#: scans2pdf_gui/qml/detail.qml:416
 msgid "Apply to following"
 msgstr "Bruk for følgende"
 
-#: scans2pdf_gui/qml/detail.qml:463
+#: scans2pdf_gui/qml/detail.qml:424
 msgid "Load default settings"
 msgstr "Last inn forvalgte innstillinger"
 
-#: scans2pdf_gui/qml/detail.qml:469
+#: scans2pdf_gui/qml/detail.qml:430
 msgid "Overwrite?"
 msgstr "Overskriv?"
 
-#: scans2pdf_gui/qml/detail.qml:470
+#: scans2pdf_gui/qml/detail.qml:431
 msgid "Replace default settings?"
 msgstr "Erstatt forvalgte innstillinger?"
 
-#: scans2pdf_gui/qml/detail.qml:476
+#: scans2pdf_gui/qml/detail.qml:437
 msgid "Save default settings"
 msgstr "Lagre forvalgte innstillinger"
 
@@ -179,23 +184,23 @@ msgstr "Lagre"
 msgid "PDF"
 msgstr "PDF"
 
-#: scans2pdf_gui/qml/overview.qml:73
+#: scans2pdf_gui/qml/overview.qml:75
 #, fuzzy
 msgid "Failed to create PDF"
 msgstr "Klarte ikke å opprette PDF"
 
-#: scans2pdf_gui/qml/overview.qml:89
+#: scans2pdf_gui/qml/overview.qml:91
 msgid "Close"
 msgstr "Lukk"
 
-#: scans2pdf_gui/qml/overview.qml:107
+#: scans2pdf_gui/qml/overview.qml:108
 msgid "Saving…"
 msgstr "Lagrer …"
 
-#: scans2pdf_gui/qml/overview.qml:120
+#: scans2pdf_gui/qml/overview.qml:121
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: scans2pdf_gui/qml/overview.qml:139
+#: scans2pdf_gui/qml/overview.qml:140
 msgid "Create"
 msgstr "Opprett"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: djpdfgui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-16 00:29+0200\n"
+"POT-Creation-Date: 2024-06-23 16:47+0200\n"
 "PO-Revision-Date: 2023-08-24 18:34+0000\n"
 "Last-Translator: Unrud <unrud@outlook.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/djpdf/djpdfgui/de/"
@@ -28,6 +28,11 @@ msgstr "Scans zu PDF"
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:8
 msgid "Create small, searchable PDFs from scanned documents"
 msgstr "Erstelle kleine, durchsuchbare PDFs aus gescannten Dokumenten"
+
+#. TRANSLATORS: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: desktop/com.github.unrud.djpdf.desktop.in:11
+msgid "OCR;convert;PDF;image;"
+msgstr ""
 
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:10
 msgid ""
@@ -54,24 +59,24 @@ msgid "A GUI and command line interface are included."
 msgstr ""
 "Eine grafische Oberfläche und ein Kommandozeilen-Werkzeug sind enthalten."
 
-#: scans2pdf_gui/qml/detail.qml:44 scans2pdf_gui/qml/detail.qml:264
-#: scans2pdf_gui/qml/detail.qml:425
+#: scans2pdf_gui/qml/detail.qml:43 scans2pdf_gui/qml/detail.qml:253
+#: scans2pdf_gui/qml/detail.qml:392
 msgid "Remove"
 msgstr "Entfernen"
 
-#: scans2pdf_gui/qml/detail.qml:67
+#: scans2pdf_gui/qml/detail.qml:66
 msgid "Please choose a color"
 msgstr "Wähle eine Farbe"
 
-#: scans2pdf_gui/qml/detail.qml:86
+#: scans2pdf_gui/qml/detail.qml:98
 msgid "DPI:"
 msgstr "DPI:"
 
-#: scans2pdf_gui/qml/detail.qml:91
+#: scans2pdf_gui/qml/detail.qml:103
 msgid "auto"
 msgstr "auto"
 
-#: scans2pdf_gui/qml/detail.qml:107
+#: scans2pdf_gui/qml/detail.qml:113
 msgid "Background color:"
 msgstr "Hintergrundfarbe:"
 
@@ -83,39 +88,39 @@ msgstr "Hintergrund"
 msgid "Resize:"
 msgstr "Größe ändern:"
 
-#: scans2pdf_gui/qml/detail.qml:177 scans2pdf_gui/qml/detail.qml:286
+#: scans2pdf_gui/qml/detail.qml:172 scans2pdf_gui/qml/detail.qml:269
 msgid "Compression:"
 msgstr "Komprimierung:"
 
-#: scans2pdf_gui/qml/detail.qml:198
+#: scans2pdf_gui/qml/detail.qml:193
 msgid "Quality:"
 msgstr "Qualität:"
 
-#: scans2pdf_gui/qml/detail.qml:217
+#: scans2pdf_gui/qml/detail.qml:212
 msgid "Foreground"
 msgstr "Vordergrund"
 
-#: scans2pdf_gui/qml/detail.qml:234 scans2pdf_gui/qml/detail.qml:396
+#: scans2pdf_gui/qml/detail.qml:229 scans2pdf_gui/qml/detail.qml:369
 msgid "Colors:"
 msgstr "Farben:"
 
-#: scans2pdf_gui/qml/detail.qml:271
+#: scans2pdf_gui/qml/detail.qml:260
 msgid "No colors"
 msgstr "Keine Farben"
 
-#: scans2pdf_gui/qml/detail.qml:271 scans2pdf_gui/qml/detail.qml:432
+#: scans2pdf_gui/qml/detail.qml:260 scans2pdf_gui/qml/detail.qml:399
 msgid "Add"
 msgstr "Hinzufügen"
 
-#: scans2pdf_gui/qml/detail.qml:307
+#: scans2pdf_gui/qml/detail.qml:290
 msgid "JBIG2 Threshold:"
 msgstr "JBIG2 Schwellenwert:"
 
-#: scans2pdf_gui/qml/detail.qml:340
+#: scans2pdf_gui/qml/detail.qml:314
 msgid "Warning"
 msgstr "Warnung"
 
-#: scans2pdf_gui/qml/detail.qml:346
+#: scans2pdf_gui/qml/detail.qml:319
 msgid ""
 "Lossy JBIG2 compression can alter text in a way that is not noticeable as "
 "corruption (e.g. the numbers '6' and '8' get replaced)"
@@ -124,39 +129,39 @@ msgstr ""
 "nicht als Verfälschung erkennbar ist (z.B. die Zahlen '6' und '8' werden "
 "ersetzt)"
 
-#: scans2pdf_gui/qml/detail.qml:356
+#: scans2pdf_gui/qml/detail.qml:329
 msgid "OCR"
 msgstr "OCR"
 
-#: scans2pdf_gui/qml/detail.qml:375
+#: scans2pdf_gui/qml/detail.qml:348
 msgid "Language"
 msgstr "Sprache"
 
-#: scans2pdf_gui/qml/detail.qml:432
+#: scans2pdf_gui/qml/detail.qml:399
 msgid "All colors"
 msgstr "Alle Farben"
 
-#: scans2pdf_gui/qml/detail.qml:449
+#: scans2pdf_gui/qml/detail.qml:410
 msgid "Apply to all"
 msgstr "Auf alle übernehmen"
 
-#: scans2pdf_gui/qml/detail.qml:455
+#: scans2pdf_gui/qml/detail.qml:416
 msgid "Apply to following"
 msgstr "Auf folgende übernehmen"
 
-#: scans2pdf_gui/qml/detail.qml:463
+#: scans2pdf_gui/qml/detail.qml:424
 msgid "Load default settings"
 msgstr "Standard-Einstellungen laden"
 
-#: scans2pdf_gui/qml/detail.qml:469
+#: scans2pdf_gui/qml/detail.qml:430
 msgid "Overwrite?"
 msgstr "Überschreiben?"
 
-#: scans2pdf_gui/qml/detail.qml:470
+#: scans2pdf_gui/qml/detail.qml:431
 msgid "Replace default settings?"
 msgstr "Standard-Einstellungen ersetzen?"
 
-#: scans2pdf_gui/qml/detail.qml:476
+#: scans2pdf_gui/qml/detail.qml:437
 msgid "Save default settings"
 msgstr "Standard-Einstellungen speichern"
 
@@ -180,22 +185,22 @@ msgstr "Speichern"
 msgid "PDF"
 msgstr "PDF"
 
-#: scans2pdf_gui/qml/overview.qml:73
+#: scans2pdf_gui/qml/overview.qml:75
 msgid "Failed to create PDF"
 msgstr "Erstellung von PDF fehlgeschlagen"
 
-#: scans2pdf_gui/qml/overview.qml:89
+#: scans2pdf_gui/qml/overview.qml:91
 msgid "Close"
 msgstr "Schließen"
 
-#: scans2pdf_gui/qml/overview.qml:107
+#: scans2pdf_gui/qml/overview.qml:108
 msgid "Saving…"
 msgstr "Speichern…"
 
-#: scans2pdf_gui/qml/overview.qml:120
+#: scans2pdf_gui/qml/overview.qml:121
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: scans2pdf_gui/qml/overview.qml:139
+#: scans2pdf_gui/qml/overview.qml:140
 msgid "Create"
 msgstr "Erstellen"
