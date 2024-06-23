@@ -1,6 +1,6 @@
 app-id: com.github.unrud.djpdf
 runtime: org.kde.Platform
-runtime-version: '6.6'
+runtime-version: '6.7'
 sdk: org.kde.Sdk
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.llvm17
@@ -373,12 +373,12 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://download.qt.io/official_releases/QtForPython/pyside6/PySide6-6.6.2-src/pyside-setup-everywhere-src-6.6.2.tar.xz
-        sha256: 14620b694d7af4c978443016292d3d2108ba5dc105f4170e3b71eadcaf04c9f0
+        url: https://download.qt.io/official_releases/QtForPython/pyside6/PySide6-6.7.2-src/pyside-setup-everywhere-src-6.7.2.tar.xz
+        sha256: 3a2b0d0d6e78c9aa5ddc7f06ca4b6f11a3fe14560baeb148eea53b5d98e368c7
         x-checker-data:
           type: html
           url: https://download.qt.io/official_releases/QtForPython/pyside6/
-          version-pattern: '>PySide6-(6\.6(?:\.[\d.]+)?)-src/<'
+          version-pattern: '>PySide6-(6\.7(?:\.[\d.]+)?)-src/<'
           url-template: https://download.qt.io/official_releases/QtForPython/pyside6/PySide6-$version-src/pyside-setup-everywhere-src-$version.tar.xz
       - type: shell
         commands:
@@ -424,8 +424,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/qpdf/qpdf/releases/download/v11.9.0/qpdf-11.9.0.tar.gz
-        sha256: 9f5d6335bb7292cc24a7194d281fc77be2bbf86873e8807b85aeccfbff66082f
+        url: https://github.com/qpdf/qpdf/releases/download/v11.9.1/qpdf-11.9.1.tar.gz
+        sha256: 2ba4d248f9567a27c146b9772ef5dc93bd9622317978455ffe91b259340d13d1
         x-checker-data:
           type: json
           url: https://api.github.com/repos/qpdf/qpdf/releases/latest
@@ -436,8 +436,8 @@ modules:
   - name: tesseract
     sources:
       - type: archive
-        url: https://github.com/tesseract-ocr/tesseract/archive/refs/tags/5.3.4.tar.gz
-        sha256: 141afc12b34a14bb691a939b4b122db0d51bd38feda7f41696822bacea7710c7
+        url: https://github.com/tesseract-ocr/tesseract/archive/refs/tags/5.4.1.tar.gz
+        sha256: c4bc2a81c12a472f445b7c2fb4705a08bd643ef467f51ec84f0e148bd368051b
         x-checker-data:
           type: json
           url: https://api.github.com/repos/tesseract-ocr/tesseract/releases/latest
@@ -538,8 +538,8 @@ modules:
       - pip3 install --no-build-isolation --prefix=/app .
     sources:
       - type: archive
-        url: https://github.com/ubernostrum/webcolors/archive/refs/tags/1.13.tar.gz
-        sha256: 51b5367692d5de19b8422ff5b07d4a2892fe868652d4e131e80250ecf100713a
+        url: https://github.com/ubernostrum/webcolors/archive/refs/tags/24.6.0.tar.gz
+        sha256: 923fea7ef85b3d32112a92d58c0263511110b21a3e85f725a795b65f46ccb3d0
         x-checker-data:
           type: json
           url: https://api.github.com/repos/ubernostrum/webcolors/tags
@@ -554,8 +554,8 @@ modules:
       - pip3 install --no-build-isolation --prefix=/app .
     sources:
       - type: archive
-        url: https://github.com/giampaolo/psutil/archive/refs/tags/release-5.9.8.tar.gz
-        sha256: 962fbb077209fda6416046b704b51ed17a61edde41a4573886640026e2c53bae
+        url: https://github.com/giampaolo/psutil/archive/refs/tags/release-6.0.0.tar.gz
+        sha256: 187588c10ff4804b91e0c947d6b1a4006dbb633261c0f869865de518603c5d5e
         x-checker-data:
           type: json
           url: https://api.github.com/repos/giampaolo/psutil/tags

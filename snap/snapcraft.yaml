@@ -73,8 +73,8 @@ parts:
 
   tesseract:
     plugin: autotools
-    source: https://github.com/tesseract-ocr/tesseract/archive/refs/tags/5.3.4.tar.gz
-    source-checksum: sha256/141afc12b34a14bb691a939b4b122db0d51bd38feda7f41696822bacea7710c7
+    source: https://github.com/tesseract-ocr/tesseract/archive/refs/tags/5.4.1.tar.gz
+    source-checksum: sha256/c4bc2a81c12a472f445b7c2fb4705a08bd643ef467f51ec84f0e148bd368051b
     autotools-configure-parameters:
       # WORKAROUND: Fake installation location to find dependencies at runtime
       - --prefix=/snap/djpdf/current/usr
@@ -128,7 +128,7 @@ parts:
     source-type: git
     python-packages:
       # Dependencies for djpdfgui
-      - PySide6<6.7
+      - PySide6<6.8
     stage-packages:
       - python3-pkg-resources
       - qpdf
