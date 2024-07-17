@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: djpdfgui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-23 16:47+0200\n"
+"POT-Creation-Date: 2024-07-17 03:33+0200\n"
 "PO-Revision-Date: 2023-08-16 14:12+0200\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch\n"
@@ -30,7 +30,7 @@ msgstr "Maak korte, doorzoekbare pdf-bestanden van gescande documenten"
 
 #. TRANSLATORS: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: desktop/com.github.unrud.djpdf.desktop.in:11
-msgid "OCR;convert;PDF;image;"
+msgid "djpdf;OCR;convert;PDF;image;"
 msgstr ""
 
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:10

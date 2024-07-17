@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: djpdfgui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-23 16:47+0200\n"
+"POT-Creation-Date: 2024-07-17 03:33+0200\n"
 "PO-Revision-Date: 2023-08-16 23:52+0000\n"
 "Last-Translator: ovari <ovari123@zoho.com>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/djpdf/djpdfgui/"
@@ -32,7 +32,7 @@ msgstr ""
 
 #. TRANSLATORS: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: desktop/com.github.unrud.djpdf.desktop.in:11
-msgid "OCR;convert;PDF;image;"
+msgid "djpdf;OCR;convert;PDF;image;"
 msgstr ""
 
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:10
