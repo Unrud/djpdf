@@ -408,8 +408,8 @@ modules:
   - name: imagemagick
     sources:
       - type: archive
-        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.1-35.tar.gz
-        sha256: 438db932abbf4f08d57e89dfbfdb82403b2ced8568ded5cd0f879d8e6fb7eaf4
+        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.1-37.tar.gz
+        sha256: 7d294d20ce2b7bbcf39ee3b07a60bf2b45d659adaf3c1263df4a8b31bd9af443
         x-checker-data:
           type: json
           url: https://api.github.com/repos/ImageMagick/ImageMagick/releases/latest
@@ -545,8 +545,8 @@ modules:
       - pip3 install --no-build-isolation --prefix=/app .
     sources:
       - type: archive
-        url: https://github.com/ubernostrum/webcolors/archive/refs/tags/24.6.0.tar.gz
-        sha256: 923fea7ef85b3d32112a92d58c0263511110b21a3e85f725a795b65f46ccb3d0
+        url: https://github.com/ubernostrum/webcolors/archive/refs/tags/24.8.0.tar.gz
+        sha256: 0659fd0e6b7997cf54b5e22d39bd41eb9f09a925242bd77b4bbf7c7a1b193fbe
         x-checker-data:
           type: json
           url: https://api.github.com/repos/ubernostrum/webcolors/tags
