@@ -2,13 +2,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the djpdfgui package.
 # Unrud <unrud@outlook.com>, 2023.
+# ssantos <ssantos@web.de>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: djpdfgui\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-17 03:33+0200\n"
-"PO-Revision-Date: 2023-08-24 18:34+0000\n"
-"Last-Translator: Unrud <unrud@outlook.com>\n"
+"PO-Revision-Date: 2024-10-20 19:15+0000\n"
+"Last-Translator: ssantos <ssantos@web.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/djpdf/djpdfgui/de/"
 ">\n"
 "Language: de\n"
@@ -16,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.0\n"
+"X-Generator: Weblate 5.8-rc\n"
 
 #: desktop/com.github.unrud.djpdf.desktop.in:4
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:7
@@ -32,7 +33,7 @@ msgstr "Erstelle kleine, durchsuchbare PDFs aus gescannten Dokumenten"
 #. TRANSLATORS: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: desktop/com.github.unrud.djpdf.desktop.in:11
 msgid "djpdf;OCR;convert;PDF;image;"
-msgstr ""
+msgstr "djpdf;OCR;konvertieren;PDF;Bild;"
 
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:10
 msgid ""
