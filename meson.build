@@ -1,5 +1,5 @@
 project('djpdfgui',
-  version: '0.5.7',
+  version: '0.5.8',
   meson_version: '>= 0.62.0',
   default_options: ['warning_level=2', 'werror=false'],
 )
