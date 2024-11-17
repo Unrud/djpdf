@@ -408,8 +408,8 @@ modules:
   - name: imagemagick
     sources:
       - type: archive
-        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.1-37.tar.gz
-        sha256: 7d294d20ce2b7bbcf39ee3b07a60bf2b45d659adaf3c1263df4a8b31bd9af443
+        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.1-41.tar.gz
+        sha256: cabf2516dce66da56dd4e3071453b808eefaf4326a93292d2a222a4ea623d601
         x-checker-data:
           type: json
           url: https://api.github.com/repos/ImageMagick/ImageMagick/releases/latest
@@ -436,8 +436,8 @@ modules:
   - name: tesseract
     sources:
       - type: archive
-        url: https://github.com/tesseract-ocr/tesseract/archive/refs/tags/5.4.1.tar.gz
-        sha256: c4bc2a81c12a472f445b7c2fb4705a08bd643ef467f51ec84f0e148bd368051b
+        url: https://github.com/tesseract-ocr/tesseract/archive/refs/tags/5.5.0.tar.gz
+        sha256: f2fb34ca035b6d087a42875a35a7a5c4155fa9979c6132365b1e5a28ebc3fc11
         x-checker-data:
           type: json
           url: https://api.github.com/repos/tesseract-ocr/tesseract/releases/latest
@@ -489,8 +489,8 @@ modules:
       - pip3 install --prefix=/app .
     sources:
       - type: archive
-        url: https://files.pythonhosted.org/packages/90/26/9f1f00a5d021fff16dee3de13d43e5e978f3d58928e129c3a62cf7eb9738/pytz-2024.1.tar.gz
-        sha256: 2a29735ea9c18baf14b448846bde5a48030ed267578472d8955cd0e7443a9812
+        url: https://files.pythonhosted.org/packages/3a/31/3c70bf7603cc2dca0f19bdc53b4537a797747a58875b552c8c413d963a3f/pytz-2024.2.tar.gz
+        sha256: 2aa355083c50a0f93fa581709deac0c9ad65cca8a9e9beac660adcbd493c798a
         x-checker-data:
           type: pypi
           name: pytz
@@ -529,7 +529,7 @@ modules:
   - name: colorama
     buildsystem: simple
     build-commands:
-      - pip3 install --prefix=/app colorama-*.whl
+      - pip3 install --prefix=/app *.whl
     sources:
       - type: file
         url: https://files.pythonhosted.org/packages/d1/d6/3965ed04c63042e047cb6a3e6ed1a63a35087b6a609aa3a15ed8ac56c221/colorama-0.4.6-py2.py3-none-any.whl
@@ -542,18 +542,15 @@ modules:
   - name: webcolors
     buildsystem: simple
     build-commands:
-      - pip3 install --no-build-isolation --prefix=/app .
+      - pip3 install --prefix=/app *.whl
     sources:
-      - type: archive
-        url: https://github.com/ubernostrum/webcolors/archive/refs/tags/24.8.0.tar.gz
-        sha256: 0659fd0e6b7997cf54b5e22d39bd41eb9f09a925242bd77b4bbf7c7a1b193fbe
+      - type: file
+        url: https://files.pythonhosted.org/packages/60/e8/c0e05e4684d13459f93d312077a9a2efbe04d59c393bc2b8802248c908d4/webcolors-24.11.1-py3-none-any.whl
+        sha256: 515291393b4cdf0eb19c155749a096f779f7d909f7cceea072791cb9095b92e9
         x-checker-data:
-          type: json
-          url: https://api.github.com/repos/ubernostrum/webcolors/tags
-          version-query: '[.[].name | select(test("^v?[0-9.]+$"))] | sort_by(sub("^v";
-            "") | split(".") | map(tonumber))[-1]'
-          url-query: '"https://github.com/ubernostrum/webcolors/archive/refs/tags/"
-            + $version + ".tar.gz"'
+          type: pypi
+          name: webcolors
+          packagetype: bdist_wheel
 
   - name: psutil
     buildsystem: simple
@@ -561,8 +558,8 @@ modules:
       - pip3 install --no-build-isolation --prefix=/app .
     sources:
       - type: archive
-        url: https://github.com/giampaolo/psutil/archive/refs/tags/release-6.0.0.tar.gz
-        sha256: 187588c10ff4804b91e0c947d6b1a4006dbb633261c0f869865de518603c5d5e
+        url: https://github.com/giampaolo/psutil/archive/refs/tags/release-6.1.0.tar.gz
+        sha256: 0ffb8a92fac0e89c10b0beb152acae27975fd488d0b9938e441106f319e7599c
         x-checker-data:
           type: json
           url: https://api.github.com/repos/giampaolo/psutil/tags
