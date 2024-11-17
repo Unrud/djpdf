@@ -43,8 +43,10 @@ def main():
         makedirs(dirname(meta_path), exist_ok=True)
         with open(meta_path, 'w') as f:
             f.write(metainfo_tpl.format(id=id_, name=name, title=title))
-        run(['appstream-compose', f'--basename={id_}', f'--prefix={base_path}',
-             '--origin=flatpak', id_], check=True)
+        run(['appstreamcli', 'compose', f'--components={id_}', '--prefix=/',
+             f'--origin={id_}', f'--result-root={base_path}',
+             f'--data-dir={join(base_path, 'share/app-info/xmls')}',
+             base_path], check=True)
         dst_path = join(base_path, TESSDATA_RELPATH, name + '.traineddata')
         makedirs(dirname(dst_path), exist_ok=True)
         move(src_path, dst_path)
