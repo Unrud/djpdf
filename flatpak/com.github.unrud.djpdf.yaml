@@ -71,8 +71,12 @@ add-extensions:
     autodelete: true}
   com.github.unrud.djpdf.OCR.Dan: {directory: extensions/ocr/Dan, bundle: true, no-autodownload: true,
     autodelete: true}
+  com.github.unrud.djpdf.OCR.DanFrak: {directory: extensions/ocr/DanFrak, bundle: true,
+    no-autodownload: true, autodelete: true}
   com.github.unrud.djpdf.OCR.Deu: {directory: extensions/ocr/Deu, bundle: true, no-autodownload: false,
     autodelete: true}
+  com.github.unrud.djpdf.OCR.DeuFrak: {directory: extensions/ocr/DeuFrak, bundle: true,
+    no-autodownload: true, autodelete: true}
   com.github.unrud.djpdf.OCR.Div: {directory: extensions/ocr/Div, bundle: true, no-autodownload: true,
     autodelete: true}
   com.github.unrud.djpdf.OCR.Dzo: {directory: extensions/ocr/Dzo, bundle: true, no-autodownload: true,
@@ -215,6 +219,8 @@ add-extensions:
     autodelete: true}
   com.github.unrud.djpdf.OCR.Slk: {directory: extensions/ocr/Slk, bundle: true, no-autodownload: true,
     autodelete: true}
+  com.github.unrud.djpdf.OCR.SlkFrak: {directory: extensions/ocr/SlkFrak, bundle: true,
+    no-autodownload: true, autodelete: true}
   com.github.unrud.djpdf.OCR.Slv: {directory: extensions/ocr/Slv, bundle: true, no-autodownload: true,
     autodelete: true}
   com.github.unrud.djpdf.OCR.Snd: {directory: extensions/ocr/Snd, bundle: true, no-autodownload: true,
@@ -244,6 +250,8 @@ add-extensions:
   com.github.unrud.djpdf.OCR.Tel: {directory: extensions/ocr/Tel, bundle: true, no-autodownload: true,
     autodelete: true}
   com.github.unrud.djpdf.OCR.Tgk: {directory: extensions/ocr/Tgk, bundle: true, no-autodownload: true,
+    autodelete: true}
+  com.github.unrud.djpdf.OCR.Tgl: {directory: extensions/ocr/Tgl, bundle: true, no-autodownload: true,
     autodelete: true}
   com.github.unrud.djpdf.OCR.Tha: {directory: extensions/ocr/Tha, bundle: true, no-autodownload: true,
     autodelete: true}
@@ -343,6 +351,8 @@ add-extensions:
     bundle: true, no-autodownload: true, autodelete: true}
   com.github.unrud.djpdf.OCR.ScriptVietnamese: {directory: extensions/ocr/ScriptVietnamese,
     bundle: true, no-autodownload: true, autodelete: true}
+  com.github.unrud.djpdf.OCR.Equ: {directory: extensions/ocr/Equ, bundle: true, no-autodownload: true,
+    autodelete: true}
 modules:
   - name: qt-include
     # https://bugreports.qt.io/browse/PYSIDE-787
@@ -454,13 +464,13 @@ modules:
       - install -Dm0755 tesseract-wrapper.py /app/bin/tesseract
     sources:
       - type: archive
-        url: https://github.com/tesseract-ocr/tessdata_best/archive/refs/tags/4.1.0.tar.gz
-        sha256: bb05b738298ae73e7130e2913ed002b49d94cd1cea508e63be1928fe47770b32
+        url: https://github.com/tesseract-ocr/tessdata/archive/refs/tags/4.1.0.tar.gz
+        sha256: 990fffb9b7a9b52dc9a2d053a9ef6852ca2b72bd8dfb22988b0b990a700fd3c7
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/tesseract-ocr/tessdata_best/releases/latest
+          url: https://api.github.com/repos/tesseract-ocr/tessdata/releases/latest
           version-query: .tag_name
-          url-query: '"https://github.com/tesseract-ocr/tessdata_best/archive/refs/tags/"
+          url-query: '"https://github.com/tesseract-ocr/tessdata/archive/refs/tags/"
             + $version + ".tar.gz"'
       - type: file
         path: ocr-extensions-installer.py

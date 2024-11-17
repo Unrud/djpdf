@@ -22,7 +22,9 @@
   "cos": {"t": "Corsican", "m": "no-auto"},
   "cym": {"t": "Welsh", "m": "no-auto"},
   "dan": {"t": "Danish", "m": "no-auto"},
+  "dan_frak": {"t": "Danish - Fraktur", "m": "no-auto"},
   "deu": {"t": "German", "m": "auto"},
+  "deu_frak": {"t": "German - Fraktur", "m": "no-auto"},
   "div": {"t": "Divehi", "m": "no-auto"},
   "dzo": {"t": "Dzongkha", "m": "no-auto"},
   "ell": {"t": "Greek, Modern (1453-)", "m": "no-auto"},
@@ -95,6 +97,7 @@
   "san": {"t": "Sanskrit", "m": "no-auto"},
   "sin": {"t": "Sinhala; Sinhalese", "m": "no-auto"},
   "slk": {"t": "Slovak", "m": "no-auto"},
+  "slk_frak": {"t": "Slovak - Fraktur", "m": "no-auto"},
   "slv": {"t": "Slovenian", "m": "no-auto"},
   "snd": {"t": "Sindhi", "m": "no-auto"},
   "spa": {"t": "Spanish; Castilian", "m": "auto"},
@@ -110,6 +113,7 @@
   "tat": {"t": "Tatar", "m": "no-auto"},
   "tel": {"t": "Telugu", "m": "no-auto"},
   "tgk": {"t": "Tajik", "m": "no-auto"},
+  "tgl": {"t": "Tagalog", "m": "no-auto"},
   "tha": {"t": "Thai", "m": "no-auto"},
   "tir": {"t": "Tigrinya", "m": "no-auto"},
   "ton": {"t": "Tonga", "m": "no-auto"},
@@ -159,5 +163,6 @@
   "script/Thai": {"t": "Thai script", "m": "no-auto"},
   "script/Tibetan": {"t": "Tibetan script", "m": "no-auto"},
   "script/Vietnamese": {"t": "Vietnamese script", "m": "no-auto"},
+  "equ": {"t": "Math / equation detection", "m": "no-auto"},
   "osd": {"t": "Orientation and script detection module", "m": "include"}
 }
