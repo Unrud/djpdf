@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="djpdf",
-    version="0.5.8",
+    version="0.5.9",
     packages=["djpdf"],
     package_data={"djpdf": ["argyllcms-srgb.icm", "tesseract-pdf.ttf",
                             "to-unicode.cmap"]},

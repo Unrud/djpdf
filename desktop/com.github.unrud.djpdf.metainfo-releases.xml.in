@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <releases>
+  <release version="0.5.9" date="2024-12-29">
+    <description>
+      <ul>
+        <li>Add Tamil translation</li>
+        <li>Update Estonian translation</li>
+      </ul>
+    </description>
+  </release>
   <release version="0.5.8" date="2024-11-17">
     <description>
       <ul>
