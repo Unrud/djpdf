@@ -7,29 +7,35 @@ msgstr ""
 "Project-Id-Version: djpdfgui\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-17 03:33+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2025-02-02 10:02+0000\n"
+"Last-Translator: Сергей <asvmail.as@gmail.com>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/djpdf/djpdfgui/"
+"ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 5.10-dev\n"
 
 #: desktop/com.github.unrud.djpdf.desktop.in:4
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:7
 #: scans2pdf_gui/qml/main.qml:29
 msgid "Scans to PDF"
-msgstr ""
+msgstr "Сканирование в PDF"
 
 #: desktop/com.github.unrud.djpdf.desktop.in:5
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:8
 msgid "Create small, searchable PDFs from scanned documents"
 msgstr ""
+"Создание из отсканированных документов небольших PDF-файлов с возможностью "
+"поиска по их содержимому"
 
 #. TRANSLATORS: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: desktop/com.github.unrud.djpdf.desktop.in:11
 msgid "djpdf;OCR;convert;PDF;image;"
-msgstr ""
+msgstr "djpdf;OCR;convert;PDF;image;изображение;конвертировать;распознавание;"
 
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:10
 msgid ""
@@ -38,156 +44,167 @@ msgid ""
 "then compresses them separately. An invisible OCR text layer is added, "
 "making the PDF searchable."
 msgstr ""
+"Создание из отсканированных документов небольших PDF-файлов с возможностью "
+"поиска по их содержимому. Программа разделяет изображение на битональный "
+"слой переднего плана (текст) и цветовое фоновое изображение, затем по "
+"отдельности их сжимает. Добавляется невидимый текстовый слой OCR, что делает "
+"возможным поиск по содержимому документа PDF."
 
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:16
 msgid ""
 "Color and grayscale scans need some preparation for good results. "
 "Recommended tools are Scan Tailor or GIMP."
 msgstr ""
+"Для получения хороших результатов цветные и в градациях серого сканы требуют "
+"некоторой предварительной подготовки. Рекомендуемые инструменты - это Scan "
+"Tailor или Gimp."
 
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:20
 msgid "A GUI and command line interface are included."
-msgstr ""
+msgstr "В комплект входит графический интерфейс и интерфейс командной строки."
 
 #: scans2pdf_gui/qml/detail.qml:43 scans2pdf_gui/qml/detail.qml:253
 #: scans2pdf_gui/qml/detail.qml:392
 msgid "Remove"
-msgstr ""
+msgstr "Удалить"
 
 #: scans2pdf_gui/qml/detail.qml:66
 msgid "Please choose a color"
-msgstr ""
+msgstr "Выберите цвет"
 
 #: scans2pdf_gui/qml/detail.qml:98
 msgid "DPI:"
-msgstr ""
+msgstr "DPI:"
 
 #: scans2pdf_gui/qml/detail.qml:103
 msgid "auto"
-msgstr ""
+msgstr "авто"
 
 #: scans2pdf_gui/qml/detail.qml:113
 msgid "Background color:"
-msgstr ""
+msgstr "Цвет фона:"
 
 #: scans2pdf_gui/qml/detail.qml:138
 msgid "Background"
-msgstr ""
+msgstr "Фон"
 
 #: scans2pdf_gui/qml/detail.qml:155
 msgid "Resize:"
-msgstr ""
+msgstr "Размер:"
 
 #: scans2pdf_gui/qml/detail.qml:172 scans2pdf_gui/qml/detail.qml:269
 msgid "Compression:"
-msgstr ""
+msgstr "Сжатие:"
 
 #: scans2pdf_gui/qml/detail.qml:193
 msgid "Quality:"
-msgstr ""
+msgstr "Качество:"
 
 #: scans2pdf_gui/qml/detail.qml:212
 msgid "Foreground"
-msgstr ""
+msgstr "Передний план"
 
 #: scans2pdf_gui/qml/detail.qml:229 scans2pdf_gui/qml/detail.qml:369
 msgid "Colors:"
-msgstr ""
+msgstr "Цвета:"
 
 #: scans2pdf_gui/qml/detail.qml:260
 msgid "No colors"
-msgstr ""
+msgstr "Нет цвета"
 
 #: scans2pdf_gui/qml/detail.qml:260 scans2pdf_gui/qml/detail.qml:399
 msgid "Add"
-msgstr ""
+msgstr "Добавить"
 
 #: scans2pdf_gui/qml/detail.qml:290
 msgid "JBIG2 Threshold:"
-msgstr ""
+msgstr "Порог сжатия JBIG2:"
 
 #: scans2pdf_gui/qml/detail.qml:314
 msgid "Warning"
-msgstr ""
+msgstr "Предупреждение"
 
 #: scans2pdf_gui/qml/detail.qml:319
 msgid ""
 "Lossy JBIG2 compression can alter text in a way that is not noticeable as "
 "corruption (e.g. the numbers '6' and '8' get replaced)"
 msgstr ""
+"Режим сжатия «Lossy JBIG2» может привести к изменению текста таким образом, "
+"что некоторые различия не будут заметны (например, цифры «6» и «8» могут "
+"заменяться)"
 
 #: scans2pdf_gui/qml/detail.qml:329
 msgid "OCR"
-msgstr ""
+msgstr "OCR"
 
 #: scans2pdf_gui/qml/detail.qml:348
 msgid "Language"
-msgstr ""
+msgstr "Язык"
 
 #: scans2pdf_gui/qml/detail.qml:399
 msgid "All colors"
-msgstr ""
+msgstr "Все цвета"
 
 #: scans2pdf_gui/qml/detail.qml:410
 msgid "Apply to all"
-msgstr ""
+msgstr "Применить ко всем"
 
 #: scans2pdf_gui/qml/detail.qml:416
 msgid "Apply to following"
-msgstr ""
+msgstr "Применить ко всем за текущей"
 
 #: scans2pdf_gui/qml/detail.qml:424
 msgid "Load default settings"
-msgstr ""
+msgstr "Загрузить настройки по умолчанию"
 
 #: scans2pdf_gui/qml/detail.qml:430
 msgid "Overwrite?"
-msgstr ""
+msgstr "Переписать?"
 
 #: scans2pdf_gui/qml/detail.qml:431
 msgid "Replace default settings?"
-msgstr ""
+msgstr "Заменить настройки по умолчанию?"
 
 #: scans2pdf_gui/qml/detail.qml:437
 msgid "Save default settings"
-msgstr ""
+msgstr "Сохранить настройки по умолчанию"
 
 #: scans2pdf_gui/qml/overview.qml:30
 msgid "Open"
-msgstr ""
+msgstr "Открыть"
 
 #: scans2pdf_gui/qml/overview.qml:32
 msgid "Images"
-msgstr ""
+msgstr "Изображения"
 
 #: scans2pdf_gui/qml/overview.qml:33
 msgid "All files"
-msgstr ""
+msgstr "Все файлы"
 
 #: scans2pdf_gui/qml/overview.qml:42
 msgid "Save"
-msgstr ""
+msgstr "Сохранить"
 
 #: scans2pdf_gui/qml/overview.qml:43
 msgid "PDF"
-msgstr ""
+msgstr "PDF"
 
 #: scans2pdf_gui/qml/overview.qml:75
 msgid "Failed to create PDF"
-msgstr ""
+msgstr "Не удалось создать PDF"
 
 #: scans2pdf_gui/qml/overview.qml:91
 msgid "Close"
-msgstr ""
+msgstr "Закрыть"
 
 #: scans2pdf_gui/qml/overview.qml:108
 msgid "Saving…"
-msgstr ""
+msgstr "Сохранение…"
 
 #: scans2pdf_gui/qml/overview.qml:121
 msgid "Cancel"
-msgstr ""
+msgstr "Отменить"
 
 #: scans2pdf_gui/qml/overview.qml:140
 msgid "Create"
-msgstr ""
+msgstr "Создать"
