@@ -383,8 +383,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://download.qt.io/official_releases/QtForPython/pyside6/PySide6-6.8.0.2-src/pyside-setup-everywhere-src-6.8.0.tar.xz
-        sha256: 1a1a219a8f327e340d258275fad3a9f261b8f04bc57041747e73dd6ad252b4e1
+        url: https://download.qt.io/official_releases/QtForPython/pyside6/PySide6-6.8.3-src/pyside-setup-everywhere-src-6.8.3.tar.xz
+        sha256: d2c896f7f1a6a7ea4c9f98cfe317272fd139703ddf612b86999f09e48aeef0e6
         x-checker-data:
           type: html
           url: https://download.qt.io/official_releases/QtForPython/pyside6/
@@ -418,8 +418,8 @@ modules:
   - name: imagemagick
     sources:
       - type: archive
-        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.1-43.tar.gz
-        sha256: ceb972266b23dc7c1cfce0da5a7f0c9acfb4dc81f40eb542a49476fedbc2618f
+        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.1-47.tar.gz
+        sha256: 818e21a248986f15a6ba0221ab3ccbaed3d3abee4a6feb4609c6f2432a30d7ed
         x-checker-data:
           type: json
           url: https://api.github.com/repos/ImageMagick/ImageMagick/releases/latest
@@ -434,8 +434,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/qpdf/qpdf/releases/download/v11.9.1/qpdf-11.9.1.tar.gz
-        sha256: 2ba4d248f9567a27c146b9772ef5dc93bd9622317978455ffe91b259340d13d1
+        url: https://github.com/qpdf/qpdf/releases/download/v12.1.0/qpdf-12.1.0.tar.gz
+        sha256: 991edd3f6158d86a8779481a02bd7d90d0ff1d52bea46abe8186295ae0bf09fa
         x-checker-data:
           type: json
           url: https://api.github.com/repos/qpdf/qpdf/releases/latest
@@ -486,8 +486,8 @@ modules:
       - --enable-unittest=no
     sources:
       - type: archive
-        url: https://libopenraw.freedesktop.org/download/exempi-2.6.5.tar.xz
-        sha256: ff538114e82c51e5287064dfbec7d9790ac91479bf2390bcc6408fad4d77fb12
+        url: https://libopenraw.freedesktop.org/download/exempi-2.6.6.tar.xz
+        sha256: 900fb9957be2095c78e5111b99c49378adac58161a358f52f93c55126f34eb8f
         x-checker-data:
           type: html
           url: https://libopenraw.freedesktop.org/exempi/
@@ -499,8 +499,8 @@ modules:
       - pip3 install --prefix=/app .
     sources:
       - type: archive
-        url: https://files.pythonhosted.org/packages/3a/31/3c70bf7603cc2dca0f19bdc53b4537a797747a58875b552c8c413d963a3f/pytz-2024.2.tar.gz
-        sha256: 2aa355083c50a0f93fa581709deac0c9ad65cca8a9e9beac660adcbd493c798a
+        url: https://files.pythonhosted.org/packages/f8/bf/abbd3cdfb8fbc7fb3d4d38d320f2441b1e7cbe29be4f23797b4a2b5d8aac/pytz-2025.2.tar.gz
+        sha256: 360b9e3dbb49a209c21ad61809c7fb453643e048b38924c765813546746e81c3
         x-checker-data:
           type: pypi
           name: pytz
@@ -568,8 +568,8 @@ modules:
       - pip3 install --no-build-isolation --prefix=/app .
     sources:
       - type: archive
-        url: https://github.com/giampaolo/psutil/archive/refs/tags/release-6.1.1.tar.gz
-        sha256: 8a3fad3310797351aafe6bc5872cb4795f0879ba88fc92680658293c4712befd
+        url: https://github.com/giampaolo/psutil/archive/refs/tags/release-7.0.0.tar.gz
+        sha256: a3c736187215d1f94ebe18ee6b14202d1b89c165c2eaad159f55cdfb494f7a1c
         x-checker-data:
           type: json
           url: https://api.github.com/repos/giampaolo/psutil/tags
