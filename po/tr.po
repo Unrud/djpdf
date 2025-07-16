@@ -42,9 +42,8 @@ msgid ""
 "making the PDF searchable."
 msgstr ""
 "Program, görüntüleri ikiye ayırır: ikitonlu ön plan görüntüsü (metin) ve "
-"renkli arka plan görüntüsü. Bu katmanlar ayrı ayrı sıkıştırılır. PDF'ye "
-"görünmez bir OCR metin katmanı eklenir ve bu sayede belge aranabilir hâle "
-"gelir."
+"renkli arka plan görüntüsü. Bu katmanlar ayrı sıkıştırılır. PDF'ye görünmez "
+"bir OCR metin katmanı eklenir ve bu sayede belge aranabilir hâle gelir."
 
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:16
 msgid ""
@@ -125,19 +124,19 @@ msgid ""
 "corruption (e.g. the numbers '6' and '8' get replaced)"
 msgstr ""
 "Kayıplı JBIG2 sıkıştırması, metni fark edilmesi zor bir şekilde bozabilir — "
-"örneğin '6' ve '8' gibi rakamlar birbirinin yerine geçebilir."
+"örneğin '6' ve '8' gibi rakamlar birbirinin yerine geçebilir"
 
 #: scans2pdf_gui/qml/detail.qml:329
 msgid "OCR"
-msgstr ""
+msgstr "OCR"
 
 #: scans2pdf_gui/qml/detail.qml:348
 msgid "Language"
-msgstr ""
+msgstr "Dil"
 
 #: scans2pdf_gui/qml/detail.qml:399
 msgid "All colors"
-msgstr ""
+msgstr "Tüm renkler"
 
 #: scans2pdf_gui/qml/detail.qml:410
 msgid "Apply to all"
