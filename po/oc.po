@@ -7,30 +7,33 @@ msgstr ""
 "Project-Id-Version: djpdfgui\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-17 03:33+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2025-07-21 08:29+0000\n"
+"Last-Translator: Quentin PAGÈS <quentinantonin@free.fr>\n"
+"Language-Team: Occitan <https://hosted.weblate.org/projects/djpdf/djpdfgui/"
+"oc/>\n"
 "Language: oc\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.13-dev\n"
 
 #: desktop/com.github.unrud.djpdf.desktop.in:4
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:7
 #: scans2pdf_gui/qml/main.qml:29
 msgid "Scans to PDF"
-msgstr ""
+msgstr "Numerizar en PDF"
 
 #: desktop/com.github.unrud.djpdf.desktop.in:5
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:8
 msgid "Create small, searchable PDFs from scanned documents"
 msgstr ""
+"Crear de pichons fichièrs PDF cercables a partir de documents numerizats"
 
 #. TRANSLATORS: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: desktop/com.github.unrud.djpdf.desktop.in:11
 msgid "djpdf;OCR;convert;PDF;image;"
-msgstr ""
+msgstr "djpf;OCR;ROC;convertir;PDF;imatge;"
 
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:10
 msgid ""
@@ -39,156 +42,166 @@ msgid ""
 "then compresses them separately. An invisible OCR text layer is added, "
 "making the PDF searchable."
 msgstr ""
+"Creatz de fichièrs PDF pichons e amb capacitat de cercar tèxte dins los "
+"documents numerizats. Lo programa dividís los imatges en imatges bitonals de "
+"primièr plan (tèxte) e un imatge de fons en color, e puèi los comprimís "
+"separadament. S'ajusta un jaç de tèxte OCR invisibla, çò que permet de "
+"realizar de recèrcas dins lo PDF."
 
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:16
 msgid ""
 "Color and grayscale scans need some preparation for good results. "
 "Recommended tools are Scan Tailor or GIMP."
 msgstr ""
+"Los nivèls de colors e de grises demandan una cèrta preparacion per de bons "
+"resultats. Los espleches recomandats son Scan Tailor o GIMP."
 
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:20
 msgid "A GUI and command line interface are included."
 msgstr ""
+"Una interfàcia grafica e una interfàcia en linha de comandas son inclusas."
 
 #: scans2pdf_gui/qml/detail.qml:43 scans2pdf_gui/qml/detail.qml:253
 #: scans2pdf_gui/qml/detail.qml:392
 msgid "Remove"
-msgstr ""
+msgstr "Suprimir"
 
 #: scans2pdf_gui/qml/detail.qml:66
 msgid "Please choose a color"
-msgstr ""
+msgstr "Causir una color"
 
 #: scans2pdf_gui/qml/detail.qml:98
 msgid "DPI:"
-msgstr ""
+msgstr "PPP :"
 
 #: scans2pdf_gui/qml/detail.qml:103
 msgid "auto"
-msgstr ""
+msgstr "automatic"
 
 #: scans2pdf_gui/qml/detail.qml:113
 msgid "Background color:"
-msgstr ""
+msgstr "Color de fons :"
 
 #: scans2pdf_gui/qml/detail.qml:138
 msgid "Background"
-msgstr ""
+msgstr "Fons"
 
 #: scans2pdf_gui/qml/detail.qml:155
 msgid "Resize:"
-msgstr ""
+msgstr "Retalhar :"
 
 #: scans2pdf_gui/qml/detail.qml:172 scans2pdf_gui/qml/detail.qml:269
 msgid "Compression:"
-msgstr ""
+msgstr "Compression :"
 
 #: scans2pdf_gui/qml/detail.qml:193
 msgid "Quality:"
-msgstr ""
+msgstr "Qualitat :"
 
 #: scans2pdf_gui/qml/detail.qml:212
 msgid "Foreground"
-msgstr ""
+msgstr "Primièr plan"
 
 #: scans2pdf_gui/qml/detail.qml:229 scans2pdf_gui/qml/detail.qml:369
 msgid "Colors:"
-msgstr ""
+msgstr "Colors :"
 
 #: scans2pdf_gui/qml/detail.qml:260
 msgid "No colors"
-msgstr ""
+msgstr "Cap de color"
 
 #: scans2pdf_gui/qml/detail.qml:260 scans2pdf_gui/qml/detail.qml:399
 msgid "Add"
-msgstr ""
+msgstr "Apondre"
 
 #: scans2pdf_gui/qml/detail.qml:290
 msgid "JBIG2 Threshold:"
-msgstr ""
+msgstr "Sulhet JBIG2 :"
 
 #: scans2pdf_gui/qml/detail.qml:314
 msgid "Warning"
-msgstr ""
+msgstr "Avertiment"
 
 #: scans2pdf_gui/qml/detail.qml:319
 msgid ""
 "Lossy JBIG2 compression can alter text in a way that is not noticeable as "
 "corruption (e.g. the numbers '6' and '8' get replaced)"
 msgstr ""
+"La compression JBIG2 amb pèrdas pòt alterar lo tèxte d'un biais que se nòta "
+"pas coma corrupcion (per exemple, los nombres « 6 » e « 8 » son remplaçats)"
 
 #: scans2pdf_gui/qml/detail.qml:329
 msgid "OCR"
-msgstr ""
+msgstr "ROC"
 
 #: scans2pdf_gui/qml/detail.qml:348
 msgid "Language"
-msgstr ""
+msgstr "Lenga"
 
 #: scans2pdf_gui/qml/detail.qml:399
 msgid "All colors"
-msgstr ""
+msgstr "Totas las colors"
 
 #: scans2pdf_gui/qml/detail.qml:410
 msgid "Apply to all"
-msgstr ""
+msgstr "Aplicar a tot"
 
 #: scans2pdf_gui/qml/detail.qml:416
 msgid "Apply to following"
-msgstr ""
+msgstr "Aplicar al seguent"
 
 #: scans2pdf_gui/qml/detail.qml:424
 msgid "Load default settings"
-msgstr ""
+msgstr "Cargar los paramètres per defaut"
 
 #: scans2pdf_gui/qml/detail.qml:430
 msgid "Overwrite?"
-msgstr ""
+msgstr "Subrecargar ?"
 
 #: scans2pdf_gui/qml/detail.qml:431
 msgid "Replace default settings?"
-msgstr ""
+msgstr "Remplaçar los paramètres per defaut ?"
 
 #: scans2pdf_gui/qml/detail.qml:437
 msgid "Save default settings"
-msgstr ""
+msgstr "Enregistrar los paramètres per defaut"
 
 #: scans2pdf_gui/qml/overview.qml:30
 msgid "Open"
-msgstr ""
+msgstr "Dobrir"
 
 #: scans2pdf_gui/qml/overview.qml:32
 msgid "Images"
-msgstr ""
+msgstr "Imatges"
 
 #: scans2pdf_gui/qml/overview.qml:33
 msgid "All files"
-msgstr ""
+msgstr "Totes los fichièrs"
 
 #: scans2pdf_gui/qml/overview.qml:42
 msgid "Save"
-msgstr ""
+msgstr "Enregistrar"
 
 #: scans2pdf_gui/qml/overview.qml:43
 msgid "PDF"
-msgstr ""
+msgstr "PDF"
 
 #: scans2pdf_gui/qml/overview.qml:75
 msgid "Failed to create PDF"
-msgstr ""
+msgstr "Fracàs de la creacion del PDF"
 
 #: scans2pdf_gui/qml/overview.qml:91
 msgid "Close"
-msgstr ""
+msgstr "Tampar"
 
 #: scans2pdf_gui/qml/overview.qml:108
 msgid "Saving…"
-msgstr ""
+msgstr "Enregistrament…"
 
 #: scans2pdf_gui/qml/overview.qml:121
 msgid "Cancel"
-msgstr ""
+msgstr "Anullar"
 
 #: scans2pdf_gui/qml/overview.qml:140
 msgid "Create"
-msgstr ""
+msgstr "Crear"
