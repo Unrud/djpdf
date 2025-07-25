@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: djpdfgui\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-17 03:33+0200\n"
-"PO-Revision-Date: 2025-07-17 10:02+0000\n"
+"PO-Revision-Date: 2025-07-26 00:27+0000\n"
 "Last-Translator: İbrahim Halil KANKAYA <kankayaibrahim@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/djpdf/djpdfgui/"
 "tr/>\n"
@@ -140,64 +140,64 @@ msgstr "Tüm renkler"
 
 #: scans2pdf_gui/qml/detail.qml:410
 msgid "Apply to all"
-msgstr ""
+msgstr "Tümüne uygula"
 
 #: scans2pdf_gui/qml/detail.qml:416
 msgid "Apply to following"
-msgstr ""
+msgstr "Aşağıdakilere uygula"
 
 #: scans2pdf_gui/qml/detail.qml:424
 msgid "Load default settings"
-msgstr ""
+msgstr "Varsayılan ayarları yükle"
 
 #: scans2pdf_gui/qml/detail.qml:430
 msgid "Overwrite?"
-msgstr ""
+msgstr "Üzerine yaz?"
 
 #: scans2pdf_gui/qml/detail.qml:431
 msgid "Replace default settings?"
-msgstr ""
+msgstr "Varsayılan ayarları değiştir?"
 
 #: scans2pdf_gui/qml/detail.qml:437
 msgid "Save default settings"
-msgstr ""
+msgstr "Varsayılan ayarları kaydet"
 
 #: scans2pdf_gui/qml/overview.qml:30
 msgid "Open"
-msgstr ""
+msgstr "Açık"
 
 #: scans2pdf_gui/qml/overview.qml:32
 msgid "Images"
-msgstr ""
+msgstr "Görüntüler"
 
 #: scans2pdf_gui/qml/overview.qml:33
 msgid "All files"
-msgstr ""
+msgstr "Tüm dosyalar"
 
 #: scans2pdf_gui/qml/overview.qml:42
 msgid "Save"
-msgstr ""
+msgstr "Kaydet"
 
 #: scans2pdf_gui/qml/overview.qml:43
 msgid "PDF"
-msgstr ""
+msgstr "PDF"
 
 #: scans2pdf_gui/qml/overview.qml:75
 msgid "Failed to create PDF"
-msgstr ""
+msgstr "PDF oluşturulamadı"
 
 #: scans2pdf_gui/qml/overview.qml:91
 msgid "Close"
-msgstr ""
+msgstr "Kapat"
 
 #: scans2pdf_gui/qml/overview.qml:108
 msgid "Saving…"
-msgstr ""
+msgstr "Kaydediliyor…"
 
 #: scans2pdf_gui/qml/overview.qml:121
 msgid "Cancel"
-msgstr ""
+msgstr "İptal et"
 
 #: scans2pdf_gui/qml/overview.qml:140
 msgid "Create"
-msgstr ""
+msgstr "Oluştur"
