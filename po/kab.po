@@ -7,14 +7,16 @@ msgstr ""
 "Project-Id-Version: djpdfgui\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-17 03:33+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2025-09-19 08:01+0000\n"
+"Last-Translator: ButterflyOfFire <boffire@users.noreply.hosted.weblate.org>\n"
+"Language-Team: Kabyle <https://hosted.weblate.org/projects/djpdf/djpdfgui/"
+"kab/>\n"
 "Language: kab\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.14-dev\n"
 
 #: desktop/com.github.unrud.djpdf.desktop.in:4
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:7
@@ -53,27 +55,27 @@ msgstr ""
 #: scans2pdf_gui/qml/detail.qml:43 scans2pdf_gui/qml/detail.qml:253
 #: scans2pdf_gui/qml/detail.qml:392
 msgid "Remove"
-msgstr ""
+msgstr "Kkes"
 
 #: scans2pdf_gui/qml/detail.qml:66
 msgid "Please choose a color"
-msgstr ""
+msgstr "Txil, fren yiwen n yini"
 
 #: scans2pdf_gui/qml/detail.qml:98
 msgid "DPI:"
-msgstr ""
+msgstr "DPI:"
 
 #: scans2pdf_gui/qml/detail.qml:103
 msgid "auto"
-msgstr ""
+msgstr "awurman"
 
 #: scans2pdf_gui/qml/detail.qml:113
 msgid "Background color:"
-msgstr ""
+msgstr "Ini n uɣawas n deffir:"
 
 #: scans2pdf_gui/qml/detail.qml:138
 msgid "Background"
-msgstr ""
+msgstr "Aɣawas n deffir"
 
 #: scans2pdf_gui/qml/detail.qml:155
 msgid "Resize:"
@@ -81,27 +83,27 @@ msgstr ""
 
 #: scans2pdf_gui/qml/detail.qml:172 scans2pdf_gui/qml/detail.qml:269
 msgid "Compression:"
-msgstr ""
+msgstr "Askussem:"
 
 #: scans2pdf_gui/qml/detail.qml:193
 msgid "Quality:"
-msgstr ""
+msgstr "Taɣara:"
 
 #: scans2pdf_gui/qml/detail.qml:212
 msgid "Foreground"
-msgstr ""
+msgstr "Aɣawas amezwaru"
 
 #: scans2pdf_gui/qml/detail.qml:229 scans2pdf_gui/qml/detail.qml:369
 msgid "Colors:"
-msgstr ""
+msgstr "Initen:"
 
 #: scans2pdf_gui/qml/detail.qml:260
 msgid "No colors"
-msgstr ""
+msgstr "Mebla initen"
 
 #: scans2pdf_gui/qml/detail.qml:260 scans2pdf_gui/qml/detail.qml:399
 msgid "Add"
-msgstr ""
+msgstr "Rnu"
 
 #: scans2pdf_gui/qml/detail.qml:290
 msgid "JBIG2 Threshold:"
@@ -109,7 +111,7 @@ msgstr ""
 
 #: scans2pdf_gui/qml/detail.qml:314
 msgid "Warning"
-msgstr ""
+msgstr "Asmigel"
 
 #: scans2pdf_gui/qml/detail.qml:319
 msgid ""
@@ -119,15 +121,15 @@ msgstr ""
 
 #: scans2pdf_gui/qml/detail.qml:329
 msgid "OCR"
-msgstr ""
+msgstr "OCR"
 
 #: scans2pdf_gui/qml/detail.qml:348
 msgid "Language"
-msgstr ""
+msgstr "Tutlayt"
 
 #: scans2pdf_gui/qml/detail.qml:399
 msgid "All colors"
-msgstr ""
+msgstr "Akk initen"
 
 #: scans2pdf_gui/qml/detail.qml:410
 msgid "Apply to all"
@@ -155,23 +157,23 @@ msgstr ""
 
 #: scans2pdf_gui/qml/overview.qml:30
 msgid "Open"
-msgstr ""
+msgstr "Ldi"
 
 #: scans2pdf_gui/qml/overview.qml:32
 msgid "Images"
-msgstr ""
+msgstr "Tugniwin"
 
 #: scans2pdf_gui/qml/overview.qml:33
 msgid "All files"
-msgstr ""
+msgstr "Akk ifuyla"
 
 #: scans2pdf_gui/qml/overview.qml:42
 msgid "Save"
-msgstr ""
+msgstr "Sekles"
 
 #: scans2pdf_gui/qml/overview.qml:43
 msgid "PDF"
-msgstr ""
+msgstr "PDF"
 
 #: scans2pdf_gui/qml/overview.qml:75
 msgid "Failed to create PDF"
@@ -179,16 +181,16 @@ msgstr ""
 
 #: scans2pdf_gui/qml/overview.qml:91
 msgid "Close"
-msgstr ""
+msgstr "Mdel"
 
 #: scans2pdf_gui/qml/overview.qml:108
 msgid "Saving…"
-msgstr ""
+msgstr "Asekles…"
 
 #: scans2pdf_gui/qml/overview.qml:121
 msgid "Cancel"
-msgstr ""
+msgstr "Semmet"
 
 #: scans2pdf_gui/qml/overview.qml:140
 msgid "Create"
-msgstr ""
+msgstr "Snulfu-d"
