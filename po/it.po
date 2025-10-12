@@ -7,30 +7,32 @@ msgstr ""
 "Project-Id-Version: djpdfgui\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-17 03:33+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2025-10-13 07:07+0000\n"
+"Last-Translator: albanobattistella <albanobattistella@gmail.com>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/djpdf/djpdfgui/"
+"it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.14-dev\n"
 
 #: desktop/com.github.unrud.djpdf.desktop.in:4
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:7
 #: scans2pdf_gui/qml/main.qml:29
 msgid "Scans to PDF"
-msgstr ""
+msgstr "Scansioni in PDF"
 
 #: desktop/com.github.unrud.djpdf.desktop.in:5
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:8
 msgid "Create small, searchable PDFs from scanned documents"
-msgstr ""
+msgstr "Crea PDF di piccole dimensioni e ricercabili da documenti scansionati"
 
 #. TRANSLATORS: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: desktop/com.github.unrud.djpdf.desktop.in:11
 msgid "djpdf;OCR;convert;PDF;image;"
-msgstr ""
+msgstr "djpdf;OCR;convertire;PDF;immagine;"
 
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:10
 msgid ""
@@ -39,156 +41,166 @@ msgid ""
 "then compresses them separately. An invisible OCR text layer is added, "
 "making the PDF searchable."
 msgstr ""
+"Crea PDF di piccole dimensioni e ricercabili da documenti scansionati. Il "
+"programma divide le immagini in immagini in primo piano (testo) bitonali e "
+"un'immagine di sfondo a colori, quindi le comprime separatamente. Viene "
+"aggiunto un livello di testo OCR invisibile, rendendo il PDF ricercabile."
 
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:16
 msgid ""
 "Color and grayscale scans need some preparation for good results. "
 "Recommended tools are Scan Tailor or GIMP."
 msgstr ""
+"Le scansioni a colori e in scala di grigi richiedono una certa preparazione "
+"per ottenere buoni risultati. Gli strumenti consigliati sono Scan Tailor o "
+"GIMP."
 
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:20
 msgid "A GUI and command line interface are included."
-msgstr ""
+msgstr "Sono incluse un'interfaccia GUI e una interfaccia a riga di comando."
 
 #: scans2pdf_gui/qml/detail.qml:43 scans2pdf_gui/qml/detail.qml:253
 #: scans2pdf_gui/qml/detail.qml:392
 msgid "Remove"
-msgstr ""
+msgstr "Rimuovi"
 
 #: scans2pdf_gui/qml/detail.qml:66
 msgid "Please choose a color"
-msgstr ""
+msgstr "Si prega di scegliere un colore"
 
 #: scans2pdf_gui/qml/detail.qml:98
 msgid "DPI:"
-msgstr ""
+msgstr "DPI:"
 
 #: scans2pdf_gui/qml/detail.qml:103
 msgid "auto"
-msgstr ""
+msgstr "auto"
 
 #: scans2pdf_gui/qml/detail.qml:113
 msgid "Background color:"
-msgstr ""
+msgstr "Colore di sfondo:"
 
 #: scans2pdf_gui/qml/detail.qml:138
 msgid "Background"
-msgstr ""
+msgstr "Sfondo"
 
 #: scans2pdf_gui/qml/detail.qml:155
 msgid "Resize:"
-msgstr ""
+msgstr "Ridimensiona:"
 
 #: scans2pdf_gui/qml/detail.qml:172 scans2pdf_gui/qml/detail.qml:269
 msgid "Compression:"
-msgstr ""
+msgstr "Compressione:"
 
 #: scans2pdf_gui/qml/detail.qml:193
 msgid "Quality:"
-msgstr ""
+msgstr "Qualità:"
 
 #: scans2pdf_gui/qml/detail.qml:212
 msgid "Foreground"
-msgstr ""
+msgstr "Primo piano"
 
 #: scans2pdf_gui/qml/detail.qml:229 scans2pdf_gui/qml/detail.qml:369
 msgid "Colors:"
-msgstr ""
+msgstr "Colori:"
 
 #: scans2pdf_gui/qml/detail.qml:260
 msgid "No colors"
-msgstr ""
+msgstr "Nessun colore"
 
 #: scans2pdf_gui/qml/detail.qml:260 scans2pdf_gui/qml/detail.qml:399
 msgid "Add"
-msgstr ""
+msgstr "Aggiungi"
 
 #: scans2pdf_gui/qml/detail.qml:290
 msgid "JBIG2 Threshold:"
-msgstr ""
+msgstr "Soglia JBIG2:"
 
 #: scans2pdf_gui/qml/detail.qml:314
 msgid "Warning"
-msgstr ""
+msgstr "Attenzione"
 
 #: scans2pdf_gui/qml/detail.qml:319
 msgid ""
 "Lossy JBIG2 compression can alter text in a way that is not noticeable as "
 "corruption (e.g. the numbers '6' and '8' get replaced)"
 msgstr ""
+"La compressione JBIG2 con perdita di dati può alterare il testo in un modo "
+"che non è percepibile come corruzione "
+"(ad esempio, i numeri \"6\" e \"8\" vengono sostituiti)"
 
 #: scans2pdf_gui/qml/detail.qml:329
 msgid "OCR"
-msgstr ""
+msgstr "OCR"
 
 #: scans2pdf_gui/qml/detail.qml:348
 msgid "Language"
-msgstr ""
+msgstr "Lingua"
 
 #: scans2pdf_gui/qml/detail.qml:399
 msgid "All colors"
-msgstr ""
+msgstr "Tutti i colori"
 
 #: scans2pdf_gui/qml/detail.qml:410
 msgid "Apply to all"
-msgstr ""
+msgstr "Applica a tutti"
 
 #: scans2pdf_gui/qml/detail.qml:416
 msgid "Apply to following"
-msgstr ""
+msgstr "Applicare al seguente"
 
 #: scans2pdf_gui/qml/detail.qml:424
 msgid "Load default settings"
-msgstr ""
+msgstr "Carica le impostazioni predefinite"
 
 #: scans2pdf_gui/qml/detail.qml:430
 msgid "Overwrite?"
-msgstr ""
+msgstr "Sovrascrivere?"
 
 #: scans2pdf_gui/qml/detail.qml:431
 msgid "Replace default settings?"
-msgstr ""
+msgstr "Sostituire le impostazioni predefinite?"
 
 #: scans2pdf_gui/qml/detail.qml:437
 msgid "Save default settings"
-msgstr ""
+msgstr "Salva le impostazioni predefinite"
 
 #: scans2pdf_gui/qml/overview.qml:30
 msgid "Open"
-msgstr ""
+msgstr "Apri"
 
 #: scans2pdf_gui/qml/overview.qml:32
 msgid "Images"
-msgstr ""
+msgstr "Immagini"
 
 #: scans2pdf_gui/qml/overview.qml:33
 msgid "All files"
-msgstr ""
+msgstr "Tutti i file"
 
 #: scans2pdf_gui/qml/overview.qml:42
 msgid "Save"
-msgstr ""
+msgstr "Salva"
 
 #: scans2pdf_gui/qml/overview.qml:43
 msgid "PDF"
-msgstr ""
+msgstr "PDF"
 
 #: scans2pdf_gui/qml/overview.qml:75
 msgid "Failed to create PDF"
-msgstr ""
+msgstr "Impossibile creare il PDF"
 
 #: scans2pdf_gui/qml/overview.qml:91
 msgid "Close"
-msgstr ""
+msgstr "Chiudi"
 
 #: scans2pdf_gui/qml/overview.qml:108
 msgid "Saving…"
-msgstr ""
+msgstr "Salvataggio…"
 
 #: scans2pdf_gui/qml/overview.qml:121
 msgid "Cancel"
-msgstr ""
+msgstr "Annulla"
 
 #: scans2pdf_gui/qml/overview.qml:140
 msgid "Create"
-msgstr ""
+msgstr "Crea"
