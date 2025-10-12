@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <releases>
+  <release version="0.5.11" date="2025-10-12">
+    <description>
+      <ul>
+        <li>Add Kabyle translation</li>
+        <li>Add Occitan translation</li>
+        <li>Add Turkish translation</li>
+      </ul>
+    </description>
+  </release>
   <release version="0.5.10" date="2025-04-26">
     <description>
       <ul>
