@@ -1,9 +1,7 @@
 app-id: com.github.unrud.djpdf
 runtime: org.kde.Platform
-runtime-version: '6.8'
+runtime-version: '6.9'
 sdk: org.kde.Sdk
-sdk-extensions:
-  - org.freedesktop.Sdk.Extension.llvm19
 command: scans2pdf-gui
 finish-args:
   - --socket=fallback-x11
@@ -383,12 +381,12 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://download.qt.io/official_releases/QtForPython/pyside6/PySide6-6.8.3-src/pyside-setup-everywhere-src-6.8.3.tar.xz
-        sha256: d2c896f7f1a6a7ea4c9f98cfe317272fd139703ddf612b86999f09e48aeef0e6
+        url: https://download.qt.io/official_releases/QtForPython/pyside6/PySide6-6.9.3-src/pyside-setup-everywhere-src-6.9.3.tar.xz
+        sha256: 7cd2d5abb98f2e6f442b0e41f5fcf930e7312ae4b17f681316b1adc7b63bb172
         x-checker-data:
           type: html
           url: https://download.qt.io/official_releases/QtForPython/pyside6/
-          version-pattern: '>PySide6-(6\.8\.[\d.]*)-src/<'
+          version-pattern: '>PySide6-(6\.9\.[\d.]*)-src/<'
           url-template: https://download.qt.io/official_releases/QtForPython/pyside6/PySide6-$version-src/pyside-setup-everywhere-src-$version0.$version1.$version2.tar.xz
       - type: shell
         commands:
@@ -418,8 +416,8 @@ modules:
   - name: imagemagick
     sources:
       - type: archive
-        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.1-47.tar.gz
-        sha256: 818e21a248986f15a6ba0221ab3ccbaed3d3abee4a6feb4609c6f2432a30d7ed
+        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.2-5.tar.gz
+        sha256: 9ecb0c491c372de74579fc37b53e84d7a22a1bf02efb5bf940f811d3d0005e7f
         x-checker-data:
           type: json
           url: https://api.github.com/repos/ImageMagick/ImageMagick/releases/latest
@@ -568,8 +566,8 @@ modules:
       - pip3 install --no-build-isolation --prefix=/app .
     sources:
       - type: archive
-        url: https://github.com/giampaolo/psutil/archive/refs/tags/release-7.0.0.tar.gz
-        sha256: a3c736187215d1f94ebe18ee6b14202d1b89c165c2eaad159f55cdfb494f7a1c
+        url: https://github.com/giampaolo/psutil/archive/refs/tags/release-7.1.0.tar.gz
+        sha256: c359700138947e6c734af06110779f2d8234168e8fcba562ca1453be6af085c2
         x-checker-data:
           type: json
           url: https://api.github.com/repos/giampaolo/psutil/tags
