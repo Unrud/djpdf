@@ -2,6 +2,8 @@ app-id: com.github.unrud.djpdf
 runtime: org.kde.Platform
 runtime-version: '6.9'
 sdk: org.kde.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.llvm19
 command: scans2pdf-gui
 finish-args:
   - --socket=fallback-x11
