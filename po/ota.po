@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: djpdfgui\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-17 03:33+0200\n"
-"PO-Revision-Date: 2025-10-23 12:02+0000\n"
+"PO-Revision-Date: 2025-10-24 14:02+0000\n"
 "Last-Translator: bgo-eiu <huyaqoob+toolforge@gmail.com>\n"
 "Language-Team: Turkish (Ottoman) <https://hosted.weblate.org/projects/djpdf/"
 "djpdfgui/ota/>\n"
@@ -129,7 +129,7 @@ msgstr "دیل"
 
 #: scans2pdf_gui/qml/detail.qml:399
 msgid "All colors"
-msgstr ""
+msgstr "توم رنگلر"
 
 #: scans2pdf_gui/qml/detail.qml:410
 msgid "Apply to all"
