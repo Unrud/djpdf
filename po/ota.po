@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: djpdfgui\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-17 03:33+0200\n"
-"PO-Revision-Date: 2025-10-24 14:02+0000\n"
+"PO-Revision-Date: 2025-10-30 12:02+0000\n"
 "Last-Translator: bgo-eiu <huyaqoob+toolforge@gmail.com>\n"
 "Language-Team: Turkish (Ottoman) <https://hosted.weblate.org/projects/djpdf/"
 "djpdfgui/ota/>\n"
@@ -27,12 +27,12 @@ msgstr "پی.دی.ایف‌یە تارە"
 #: desktop/com.github.unrud.djpdf.desktop.in:5
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:8
 msgid "Create small, searchable PDFs from scanned documents"
-msgstr ""
+msgstr "طارانمیش بلگەلردن كوچوك، آراڭابیلیر پی.دی.ایف.لر اولوشدرین"
 
 #. TRANSLATORS: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: desktop/com.github.unrud.djpdf.desktop.in:11
 msgid "djpdf;OCR;convert;PDF;image;"
-msgstr ""
+msgstr "djpdf;OCR;convert;PDF;image;"
 
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:10
 msgid ""
@@ -41,16 +41,21 @@ msgid ""
 "then compresses them separately. An invisible OCR text layer is added, "
 "making the PDF searchable."
 msgstr ""
+"پروغرام، گوروندیلری ایكیە آیریر: ایكیتونلی اوڭ پلان گوروندیسی (متن) و رنگلی "
+"آرقا پلان گوروندیسی. بو قاتمانلر آیری صیقیشدریلیر. پی.دی.ایف.یە گورونمز بر "
+"او.سی.آر. متن قاتمانی أكلەنیر و بو صایەدە بلگە آراڭابیلیر حالە گلیر."
 
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:16
 msgid ""
 "Color and grayscale scans need some preparation for good results. "
 "Recommended tools are Scan Tailor or GIMP."
 msgstr ""
+"رنگلی و گری طونلامەلی طارامەلر ایچین اییی صوڭوچلر ألدە ایتمك آدینە بازی اوڭ "
+"ایشلەملر گركلیدر. اوڭریلەن آراچلر «Scan Tailor» ویا «GIMP»در."
 
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:20
 msgid "A GUI and command line interface are included."
-msgstr ""
+msgstr "غرافیكسل آراییز (گی.یو.آئی.) و قوموت صاتری آراییزی داخلدر."
 
 #: scans2pdf_gui/qml/detail.qml:43 scans2pdf_gui/qml/detail.qml:253
 #: scans2pdf_gui/qml/detail.qml:392
@@ -59,7 +64,7 @@ msgstr "قالدر"
 
 #: scans2pdf_gui/qml/detail.qml:66
 msgid "Please choose a color"
-msgstr ""
+msgstr "لطفاً بر رنگ سچن"
 
 #: scans2pdf_gui/qml/detail.qml:98
 msgid "DPI:"
@@ -107,7 +112,7 @@ msgstr "أكلە"
 
 #: scans2pdf_gui/qml/detail.qml:290
 msgid "JBIG2 Threshold:"
-msgstr ""
+msgstr "«JBIG2» أشیكی:"
 
 #: scans2pdf_gui/qml/detail.qml:314
 msgid "Warning"
@@ -118,6 +123,8 @@ msgid ""
 "Lossy JBIG2 compression can alter text in a way that is not noticeable as "
 "corruption (e.g. the numbers '6' and '8' get replaced)"
 msgstr ""
+"غائبلی «JBIG2» صیقیشدرمەسی، متنی فرق أدیلمەسی زور بر شكلدە بوزابیلر — "
+"اورنكین '۶' و '۸' گبی رقملر بربرنڭ یرینە گچەبیلر"
 
 #: scans2pdf_gui/qml/detail.qml:329
 msgid "OCR"
@@ -133,15 +140,15 @@ msgstr "توم رنگلر"
 
 #: scans2pdf_gui/qml/detail.qml:410
 msgid "Apply to all"
-msgstr ""
+msgstr "تومونە اویغولا"
 
 #: scans2pdf_gui/qml/detail.qml:416
 msgid "Apply to following"
-msgstr ""
+msgstr "آشاغیدەكیلرە ایغولا"
 
 #: scans2pdf_gui/qml/detail.qml:424
 msgid "Load default settings"
-msgstr ""
+msgstr "وارصاییلان آیرلری یوكلە"
 
 #: scans2pdf_gui/qml/detail.qml:430
 msgid "Overwrite?"
@@ -149,11 +156,11 @@ msgstr "اوزرینە یاز؟"
 
 #: scans2pdf_gui/qml/detail.qml:431
 msgid "Replace default settings?"
-msgstr ""
+msgstr "وارصاییلان آیرلری دگیشدیر؟"
 
 #: scans2pdf_gui/qml/detail.qml:437
 msgid "Save default settings"
-msgstr ""
+msgstr "وارصاییلان آیرلری قید ایت"
 
 #: scans2pdf_gui/qml/overview.qml:30
 msgid "Open"
@@ -165,7 +172,7 @@ msgstr "گوروندیلر"
 
 #: scans2pdf_gui/qml/overview.qml:33
 msgid "All files"
-msgstr ""
+msgstr "توم دوسیەلر"
 
 #: scans2pdf_gui/qml/overview.qml:42
 msgid "Save"
@@ -177,7 +184,7 @@ msgstr "پی.دی.ایف"
 
 #: scans2pdf_gui/qml/overview.qml:75
 msgid "Failed to create PDF"
-msgstr ""
+msgstr "پی.دی.ایف. اولوشدریلامەدی"
 
 #: scans2pdf_gui/qml/overview.qml:91
 msgid "Close"
