@@ -7,30 +7,34 @@ msgstr ""
 "Project-Id-Version: djpdfgui\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-17 03:33+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2025-11-05 22:51+0000\n"
+"Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
+"Language-Team: Czech <https://hosted.weblate.org/projects/djpdf/djpdfgui/cs/>"
+"\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
+"X-Generator: Weblate 5.15-dev\n"
 
 #: desktop/com.github.unrud.djpdf.desktop.in:4
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:7
 #: scans2pdf_gui/qml/main.qml:29
 msgid "Scans to PDF"
-msgstr ""
+msgstr "Skenuje do PDF"
 
 #: desktop/com.github.unrud.djpdf.desktop.in:5
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:8
 msgid "Create small, searchable PDFs from scanned documents"
 msgstr ""
+"Vytvářejte z naskenovaných dokumentů malé PDF soubory, ve kterých půjde "
+"vyhledávat"
 
 #. TRANSLATORS: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: desktop/com.github.unrud.djpdf.desktop.in:11
 msgid "djpdf;OCR;convert;PDF;image;"
-msgstr ""
+msgstr "djpdf;OCR;převést;PDF;obrázek;"
 
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:10
 msgid ""
@@ -39,156 +43,165 @@ msgid ""
 "then compresses them separately. An invisible OCR text layer is added, "
 "making the PDF searchable."
 msgstr ""
+"Vytvářejte z naskenovaných dokumentů malé PDF soubory, ve kterých půjde "
+"vyhledávat. Aplikace rozdělí obrázky do dvoutónových obrázků na popředí "
+"(text) a barevného obrázku na pozadí a poté je zkomprimuje každý zvlášť. "
+"Dále je přidána neviditelná OCR vrstva, díky čemuž půjde v PDF vyhledávat."
 
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:16
 msgid ""
 "Color and grayscale scans need some preparation for good results. "
 "Recommended tools are Scan Tailor or GIMP."
 msgstr ""
+"Pro dobré výsledky je u barevných skenů a také u těch ve stupních šedi "
+"potřebná určitá příprava. Doporučené nástroje jsou Scan Tailor nebo GIMP."
 
 #: desktop/com.github.unrud.djpdf.metainfo.xml.in:20
 msgid "A GUI and command line interface are included."
 msgstr ""
+"Obsaženo je grafické uživatelské rozhraní a také nástroj pro příkazový řádek."
 
 #: scans2pdf_gui/qml/detail.qml:43 scans2pdf_gui/qml/detail.qml:253
 #: scans2pdf_gui/qml/detail.qml:392
 msgid "Remove"
-msgstr ""
+msgstr "Odebrat"
 
 #: scans2pdf_gui/qml/detail.qml:66
 msgid "Please choose a color"
-msgstr ""
+msgstr "Vyberte barvu"
 
 #: scans2pdf_gui/qml/detail.qml:98
 msgid "DPI:"
-msgstr ""
+msgstr "DPI:"
 
 #: scans2pdf_gui/qml/detail.qml:103
 msgid "auto"
-msgstr ""
+msgstr "automaticky"
 
 #: scans2pdf_gui/qml/detail.qml:113
 msgid "Background color:"
-msgstr ""
+msgstr "Barva pozadí:"
 
 #: scans2pdf_gui/qml/detail.qml:138
 msgid "Background"
-msgstr ""
+msgstr "Pozadí"
 
 #: scans2pdf_gui/qml/detail.qml:155
 msgid "Resize:"
-msgstr ""
+msgstr "Změnit rozlišení:"
 
 #: scans2pdf_gui/qml/detail.qml:172 scans2pdf_gui/qml/detail.qml:269
 msgid "Compression:"
-msgstr ""
+msgstr "Komprese:"
 
 #: scans2pdf_gui/qml/detail.qml:193
 msgid "Quality:"
-msgstr ""
+msgstr "Kvalita:"
 
 #: scans2pdf_gui/qml/detail.qml:212
 msgid "Foreground"
-msgstr ""
+msgstr "Popředí"
 
 #: scans2pdf_gui/qml/detail.qml:229 scans2pdf_gui/qml/detail.qml:369
 msgid "Colors:"
-msgstr ""
+msgstr "Barvy:"
 
 #: scans2pdf_gui/qml/detail.qml:260
 msgid "No colors"
-msgstr ""
+msgstr "Žádné barvy"
 
 #: scans2pdf_gui/qml/detail.qml:260 scans2pdf_gui/qml/detail.qml:399
 msgid "Add"
-msgstr ""
+msgstr "Přidat"
 
 #: scans2pdf_gui/qml/detail.qml:290
 msgid "JBIG2 Threshold:"
-msgstr ""
+msgstr "JBIG2 práh:"
 
 #: scans2pdf_gui/qml/detail.qml:314
 msgid "Warning"
-msgstr ""
+msgstr "Varování"
 
 #: scans2pdf_gui/qml/detail.qml:319
 msgid ""
 "Lossy JBIG2 compression can alter text in a way that is not noticeable as "
 "corruption (e.g. the numbers '6' and '8' get replaced)"
 msgstr ""
+"Ztrátová JBIG2 komprese může text pozměnit způsobem, že nebude zřejmé, že se "
+"jedná o poškození (např. číslice „6“ a „8“ budou nahrazeny)"
 
 #: scans2pdf_gui/qml/detail.qml:329
 msgid "OCR"
-msgstr ""
+msgstr "OCR"
 
 #: scans2pdf_gui/qml/detail.qml:348
 msgid "Language"
-msgstr ""
+msgstr "Jazyk"
 
 #: scans2pdf_gui/qml/detail.qml:399
 msgid "All colors"
-msgstr ""
+msgstr "Všechny barvy"
 
 #: scans2pdf_gui/qml/detail.qml:410
 msgid "Apply to all"
-msgstr ""
+msgstr "Uplatnit na vše"
 
 #: scans2pdf_gui/qml/detail.qml:416
 msgid "Apply to following"
-msgstr ""
+msgstr "Uplatnit na následující"
 
 #: scans2pdf_gui/qml/detail.qml:424
 msgid "Load default settings"
-msgstr ""
+msgstr "Načíst výchozí nastavení"
 
 #: scans2pdf_gui/qml/detail.qml:430
 msgid "Overwrite?"
-msgstr ""
+msgstr "Přepsat?"
 
 #: scans2pdf_gui/qml/detail.qml:431
 msgid "Replace default settings?"
-msgstr ""
+msgstr "Nahradit výchozí nastavení?"
 
 #: scans2pdf_gui/qml/detail.qml:437
 msgid "Save default settings"
-msgstr ""
+msgstr "Uložit výchozí nastavení"
 
 #: scans2pdf_gui/qml/overview.qml:30
 msgid "Open"
-msgstr ""
+msgstr "Otevřít"
 
 #: scans2pdf_gui/qml/overview.qml:32
 msgid "Images"
-msgstr ""
+msgstr "Obrázky"
 
 #: scans2pdf_gui/qml/overview.qml:33
 msgid "All files"
-msgstr ""
+msgstr "Všechny soubory"
 
 #: scans2pdf_gui/qml/overview.qml:42
 msgid "Save"
-msgstr ""
+msgstr "Uložit"
 
 #: scans2pdf_gui/qml/overview.qml:43
 msgid "PDF"
-msgstr ""
+msgstr "PDF"
 
 #: scans2pdf_gui/qml/overview.qml:75
 msgid "Failed to create PDF"
-msgstr ""
+msgstr "Nepodařilo se vytvořit PDF"
 
 #: scans2pdf_gui/qml/overview.qml:91
 msgid "Close"
-msgstr ""
+msgstr "Zavřít"
 
 #: scans2pdf_gui/qml/overview.qml:108
 msgid "Saving…"
-msgstr ""
+msgstr "Ukládání…"
 
 #: scans2pdf_gui/qml/overview.qml:121
 msgid "Cancel"
-msgstr ""
+msgstr "Zrušit"
 
 #: scans2pdf_gui/qml/overview.qml:140
 msgid "Create"
-msgstr ""
+msgstr "Vytvořit"
