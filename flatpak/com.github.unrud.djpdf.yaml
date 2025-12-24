@@ -418,8 +418,8 @@ modules:
   - name: imagemagick
     sources:
       - type: archive
-        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.2-5.tar.gz
-        sha256: 9ecb0c491c372de74579fc37b53e84d7a22a1bf02efb5bf940f811d3d0005e7f
+        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.2-11.tar.gz
+        sha256: 968047363963bf84917543acb77a869abc2f72e8d9a4e5f62380879c4fd925a4
         x-checker-data:
           type: json
           url: https://api.github.com/repos/ImageMagick/ImageMagick/releases/latest
@@ -496,7 +496,7 @@ modules:
   - name: pytz
     buildsystem: simple
     build-commands:
-      - pip3 install --prefix=/app .
+      - pip3 install --no-build-isolation --prefix=/app .
     sources:
       - type: archive
         url: https://files.pythonhosted.org/packages/f8/bf/abbd3cdfb8fbc7fb3d4d38d320f2441b1e7cbe29be4f23797b4a2b5d8aac/pytz-2025.2.tar.gz
@@ -508,23 +508,20 @@ modules:
   - name: xmp-toolkit
     buildsystem: simple
     build-commands:
-      - pip3 install --prefix=/app .
+      - pip3 install --prefix=/app *.whl
     sources:
-      - type: archive
-        url: https://github.com/python-xmp-toolkit/python-xmp-toolkit/archive/refs/tags/v2.0.2.tar.gz
-        sha256: d3c0bac6b7b2233274dbf95e8fc6247697d277676b3cdf6b79c0df5d10ed4c5b
+      - type: file
+        url: https://files.pythonhosted.org/packages/00/12/a1e57376289c8a949e079b011c8a1272da12317825a5669fa4488af98260/python_xmp_toolkit-2.1.0-py2.py3-none-any.whl
+        sha256: 62b51dbbf04009030cb0f0871f1ff7e1e30a2ef8d159daf62c3079290f75a0ed
         x-checker-data:
-          type: json
-          url: https://api.github.com/repos/python-xmp-toolkit/python-xmp-toolkit/tags
-          version-query: '[.[].name | select(test("^v?[0-9.]+$"))] | sort_by(sub("^v";
-            "") | split(".") | map(tonumber))[-1]'
-          url-query: '"https://github.com/python-xmp-toolkit/python-xmp-toolkit/archive/refs/tags/"
-            + $version + ".tar.gz"'
+          type: pypi
+          name: python-xmp-toolkit
+          packagetype: bdist_wheel
 
   - name: pdfrw
     buildsystem: simple
     build-commands:
-      - pip3 install --prefix=/app .
+      - pip3 install --no-build-isolation --prefix=/app .
     sources:
       - type: archive
         url: https://github.com/pmaupin/pdfrw/archive/refs/tags/v0.4.tar.gz
@@ -555,8 +552,8 @@ modules:
       - pip3 install --prefix=/app *.whl
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/60/e8/c0e05e4684d13459f93d312077a9a2efbe04d59c393bc2b8802248c908d4/webcolors-24.11.1-py3-none-any.whl
-        sha256: 515291393b4cdf0eb19c155749a096f779f7d909f7cceea072791cb9095b92e9
+        url: https://files.pythonhosted.org/packages/e2/cc/e097523dd85c9cf5d354f78310927f1656c422bd7b2613b2db3e3f9a0f2c/webcolors-25.10.0-py3-none-any.whl
+        sha256: 032c727334856fc0b968f63daa252a1ac93d33db2f5267756623c210e57a4f1d
         x-checker-data:
           type: pypi
           name: webcolors
@@ -568,8 +565,8 @@ modules:
       - pip3 install --no-build-isolation --prefix=/app .
     sources:
       - type: archive
-        url: https://github.com/giampaolo/psutil/archive/refs/tags/release-7.1.0.tar.gz
-        sha256: c359700138947e6c734af06110779f2d8234168e8fcba562ca1453be6af085c2
+        url: https://github.com/giampaolo/psutil/archive/refs/tags/release-7.2.0.tar.gz
+        sha256: bd94006722c0c643c10f4a9c74788ecd95124039fd19b8b6fe9a642e3ba80eed
         x-checker-data:
           type: json
           url: https://api.github.com/repos/giampaolo/psutil/tags
@@ -581,7 +578,7 @@ modules:
   - name: djpdf
     buildsystem: simple
     build-commands:
-      - pip3 install --prefix=/app .
+      - pip3 install --no-build-isolation --prefix=/app .
     sources: &djpdf-sources
       - type: git
         path: ..
