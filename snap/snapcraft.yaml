@@ -50,9 +50,9 @@ parts:
 
   imagemagick:
     plugin: autotools
-    source: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.2-11.tar.gz
+    source: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.2-12.tar.gz
     source-type: tar
-    source-checksum: sha256/968047363963bf84917543acb77a869abc2f72e8d9a4e5f62380879c4fd925a4
+    source-checksum: sha256/521fa7a8c0f664a3f5cf7437cbcc219f12bd6d5fe0c1fb014f212fa145076e60
     autotools-configure-parameters:
       # WORKAROUND: Install to /usr instead of /usr/local because it's not in search paths
       - --prefix=/usr
@@ -73,8 +73,8 @@ parts:
 
   tesseract:
     plugin: autotools
-    source: https://github.com/tesseract-ocr/tesseract/archive/refs/tags/5.5.1.tar.gz
-    source-checksum: sha256/a7a3f2a7420cb6a6a94d80c24163e183cf1d2f1bed2df3bbc397c81808a57237
+    source: https://github.com/tesseract-ocr/tesseract/archive/refs/tags/5.5.2.tar.gz
+    source-checksum: sha256/6235ea0dae45ea137f59c09320406f5888383741924d98855bd2ce0d16b54f21
     autotools-configure-parameters:
       # WORKAROUND: Fake installation location to find dependencies at runtime
       - --prefix=/snap/djpdf/current/usr
