@@ -565,8 +565,8 @@ modules:
       - pip3 install --no-build-isolation --prefix=/app .
     sources:
       - type: archive
-        url: https://github.com/giampaolo/psutil/archive/refs/tags/release-7.2.0.tar.gz
-        sha256: bd94006722c0c643c10f4a9c74788ecd95124039fd19b8b6fe9a642e3ba80eed
+        url: https://github.com/giampaolo/psutil/archive/refs/tags/release-7.2.1.tar.gz
+        sha256: 221eca326a94fc0c6aff9cfe7b9e053b54bd72678f5006c6d930e8cb26f04b25
         x-checker-data:
           type: json
           url: https://api.github.com/repos/giampaolo/psutil/tags
