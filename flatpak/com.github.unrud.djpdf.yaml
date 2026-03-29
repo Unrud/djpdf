@@ -1,9 +1,9 @@
 app-id: com.github.unrud.djpdf
 runtime: org.kde.Platform
-runtime-version: '6.9'
+runtime-version: '6.10'
 sdk: org.kde.Sdk
 sdk-extensions:
-  - org.freedesktop.Sdk.Extension.llvm19
+  - org.freedesktop.Sdk.Extension.llvm21
 command: scans2pdf-gui
 finish-args:
   - --socket=fallback-x11
@@ -365,30 +365,29 @@ modules:
     buildsystem: cmake-ninja
     builddir: true
     build-options:
-      append-path: /usr/lib/sdk/llvm19/bin
-      append-ld-library-path: /usr/lib/sdk/llvm19/lib
-      cflags: -I/usr/include/python3.12
+      append-path: /usr/lib/sdk/llvm21/bin
+      append-ld-library-path: /usr/lib/sdk/llvm21/lib
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_TESTS=OFF
     post-install:
       # Make packages discoverable by pip
       - |
-        libpath=$(ls -d /app/lib/python*/site-packages) || exit 1
+        libpath=$(ls -d /app/lib/python3.*/site-packages) || exit $?
         for pkg in PySide6 shiboken6; do
-          version=$(python3 -c "import ${pkg}; print(${pkg}.__version__)") || exit 1
-          printf 'Metadata-Version: 1.0\nName: %s\nVersion: %s\n' "${pkg}" "${version}" > "${libpath}/${pkg}.egg-info" || exit 1
+          version=$(python3 -c "import ${pkg}; print(${pkg}.__version__)") || exit $?
+          printf 'Metadata-Version: 1.0\nName: %s\nVersion: %s\n' "${pkg}" "${version}" > "${libpath}/${pkg}.egg-info" || exit $?
         done
     cleanup:
       - /bin
     sources:
       - type: archive
-        url: https://download.qt.io/official_releases/QtForPython/pyside6/PySide6-6.9.3-src/pyside-setup-everywhere-src-6.9.3.tar.xz
-        sha256: 7cd2d5abb98f2e6f442b0e41f5fcf930e7312ae4b17f681316b1adc7b63bb172
+        url: https://download.qt.io/official_releases/QtForPython/pyside6/PySide6-6.10.2-src/pyside-setup-everywhere-src-6.10.2.tar.xz
+        sha256: 05eec38bb71bffff8860786e3c0766cc4b86affc72439bd246c54889bdcb7400
         x-checker-data:
           type: html
           url: https://download.qt.io/official_releases/QtForPython/pyside6/
-          version-pattern: '>PySide6-(6\.9\.[\d.]*)-src/<'
+          version-pattern: '>PySide6-(6\.10\.[\d.]*)-src/<'
           url-template: https://download.qt.io/official_releases/QtForPython/pyside6/PySide6-$version-src/pyside-setup-everywhere-src-$version0.$version1.$version2.tar.xz
       - type: shell
         commands:
@@ -418,8 +417,8 @@ modules:
   - name: imagemagick
     sources:
       - type: archive
-        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.2-13.tar.gz
-        sha256: 3617bffe497690ffe5b731227d026db1150e138ddb129481a1e202442e558512
+        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.2-18.tar.gz
+        sha256: 2db8a1f9bac19831c76574e4fd514ecb80a71a49911ee5dc8c1f3fb6d9d550df
         x-checker-data:
           type: json
           url: https://api.github.com/repos/ImageMagick/ImageMagick/releases/latest
@@ -499,8 +498,8 @@ modules:
       - pip3 install --no-build-isolation --prefix=/app .
     sources:
       - type: archive
-        url: https://files.pythonhosted.org/packages/f8/bf/abbd3cdfb8fbc7fb3d4d38d320f2441b1e7cbe29be4f23797b4a2b5d8aac/pytz-2025.2.tar.gz
-        sha256: 360b9e3dbb49a209c21ad61809c7fb453643e048b38924c765813546746e81c3
+        url: https://files.pythonhosted.org/packages/56/db/b8721d71d945e6a8ac63c0fc900b2067181dbb50805958d4d4661cf7d277/pytz-2026.1.post1.tar.gz
+        sha256: 3378dde6a0c3d26719182142c56e60c7f9af7e968076f31aae569d72a0358ee1
         x-checker-data:
           type: pypi
           name: pytz
@@ -565,12 +564,12 @@ modules:
       - pip3 install --no-build-isolation --prefix=/app .
     sources:
       - type: archive
-        url: https://github.com/giampaolo/psutil/archive/refs/tags/release-7.2.1.tar.gz
-        sha256: 221eca326a94fc0c6aff9cfe7b9e053b54bd72678f5006c6d930e8cb26f04b25
+        url: https://github.com/giampaolo/psutil/archive/refs/tags/v7.2.2.tar.gz
+        sha256: fb49da760f2eda16205830653768fc8027fc86c68996d88b57134122aa08f7a1
         x-checker-data:
           type: json
           url: https://api.github.com/repos/giampaolo/psutil/tags
-          version-query: '[.[].name | select(test("^release-[0-9.]+$"))] | sort_by(sub("^release-";
+          version-query: '[.[].name | select(test("^v[0-9.]+$"))] | sort_by(sub("^v";
             "") | split(".") | map(tonumber))[-1]'
           url-query: '"https://github.com/giampaolo/psutil/archive/refs/tags/" + $version
             + ".tar.gz"'
