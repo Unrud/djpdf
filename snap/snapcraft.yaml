@@ -31,9 +31,9 @@ apps:
 parts:
   jbig2enc:
     plugin: autotools
-    source: https://github.com/agl/jbig2enc/archive/refs/tags/0.30.tar.gz
+    source: https://github.com/agl/jbig2enc/archive/refs/tags/0.31.tar.gz
     source-type: tar
-    source-checksum: sha256/4468442f666edc2cc4d38b11cde2123071a94edc3b403ebe60eb20ea3b2cc67b
+    source-checksum: sha256/35c255e44a9b1c4cbe27d2c84594a43d6666645156a2d186ba60f8832566141d
     autotools-configure-parameters:
       # WORKAROUND: Install to /usr instead of /usr/local because it's not in search paths
       - --prefix=/usr
@@ -50,9 +50,9 @@ parts:
 
   imagemagick:
     plugin: autotools
-    source: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.2-18.tar.gz
+    source: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.2-21.tar.gz
     source-type: tar
-    source-checksum: sha256/2db8a1f9bac19831c76574e4fd514ecb80a71a49911ee5dc8c1f3fb6d9d550df
+    source-checksum: sha256/4ba5b81797910efa93e65fb5a02b496284b8069d64513c6d2687c80d180dd70f
     autotools-configure-parameters:
       # WORKAROUND: Install to /usr instead of /usr/local because it's not in search paths
       - --prefix=/usr
