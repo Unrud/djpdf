@@ -407,8 +407,8 @@ modules:
   - name: jbig2enc
     sources:
       - type: archive
-        url: https://github.com/agl/jbig2enc/archive/refs/tags/0.31.tar.gz
-        sha256: 35c255e44a9b1c4cbe27d2c84594a43d6666645156a2d186ba60f8832566141d
+        url: https://github.com/agl/jbig2enc/archive/refs/tags/0.32.tar.gz
+        sha256: 5b3b1c48617e5b1608f916a78038ea867a2c9eb20c2ff34a78a48a243f655c2a
         x-checker-data:
           type: json
           url: https://api.github.com/repos/agl/jbig2enc/releases/latest
@@ -419,8 +419,8 @@ modules:
   - name: imagemagick
     sources:
       - type: archive
-        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.2-23.tar.gz
-        sha256: f129f7d87fc21da453d032dd291b80ea13faf2497f13ef8279d97759ed7d5c46
+        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.2-26.tar.gz
+        sha256: d63594e334e1c410f600fb9370d78d49e4dc6f315722ca4ba083e864e5c354cb
         x-checker-data:
           type: json
           url: https://api.github.com/repos/ImageMagick/ImageMagick/releases/latest
