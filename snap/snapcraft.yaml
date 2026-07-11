@@ -1,30 +1,31 @@
-# Build by running "snapcraft".
+# Build by running `snapcraft pack`.
 
 # WARNING:
 # Snapcraft uses caching for already build steps but it's buggy and can cause strange problems.
-# Clean the cache by running "snapcraft clean".
+# Clean the cache by running `snapcraft clean`.
 
 name: djpdf
 license: GPL-3.0+
 grade: stable
 adopt-info: djpdfgui
 
-base: core22
+base: core24
 confinement: strict
 
-architectures:
-  - build-on: amd64
+platforms:
+  amd64:
+  arm64:
 
 environment:
   # WORKAROUND: Add python modules in Snap to search path
-  PYTHONPATH: ${SNAP}/lib/python3.10/site-packages:${SNAP}/usr/lib/python3/dist-packages
+  PYTHONPATH: ${SNAP}/kf6/lib/python3.12/site-packages:${SNAP}/kf6/usr/lib/python3/dist-packages:${SNAP}/lib/python3.12/site-packages:${SNAP}/usr/lib/python3/dist-packages
 
 apps:
   djpdf:
     command: usr/bin/scans2pdf-gui
     extensions:
       # HINT: Adds plugs and changes environment variables when building and running
-      - kde-neon
+      - kde-neon-6
     common-id: com.github.unrud.djpdf
     desktop: usr/share/applications/com.github.unrud.djpdf.desktop
 
@@ -62,10 +63,12 @@ parts:
       - libtiff-dev
       - libwebp-dev
       - libopenjp2-7-dev
+      - libxext-dev
+      - libxt-dev
     stage-packages:
       - libjpeg8
       - libpng16-16
-      - libtiff5
+      - libtiff6
       - libwebpmux3
       - libgomp1
       - libwebpdemux2
@@ -126,9 +129,6 @@ parts:
     plugin: python
     source: .
     source-type: git
-    python-packages:
-      # Dependencies for djpdfgui
-      - PySide6<6.8
     stage-packages:
       - python3-pkg-resources
       - qpdf
@@ -146,46 +146,23 @@ parts:
       - -bin/Activate.ps1
       - -bin/python
       - -bin/python3
+      - -bin/python3.12
+      - -bin/pip
+      - -bin/pip3
+      - -bin/pip3.12
       - -pyvenv.cfg
 
-  meson-deps:
-    # Copied from gnome-42-2204-sdk
-    plugin: nil
-    source: https://github.com/mesonbuild/meson.git
-    source-tag: '1.2.3'
-    source-depth: 1
-    override-build: |
-      python3 -m pip install .
-      mkdir -p $CRAFT_PART_INSTALL/usr/lib/python3/dist-packages
-      rm -rf $CRAFT_PART_INSTALL/usr/lib/python3/dist-packages/meson*
-      python3 -m pip install --target=$CRAFT_PART_INSTALL/usr .
-      mv $CRAFT_PART_INSTALL/usr/meson* $CRAFT_PART_INSTALL/usr/lib/python3/dist-packages/
-      sed -i "s%^#!/usr/bin/python3$%#!/usr/bin/env python3%g" /usr/local/bin/meson
-      sed -i "s%^#!/usr/bin/python3$%#!/usr/bin/env python3%g" $CRAFT_PART_INSTALL/usr/bin/meson
-    build-packages:
-      - python3-pip
-    prime: []
-
   djpdfgui:
-    # WORKAROUND: meson in repository too old
-    after: [ meson-deps ]
     plugin: meson
     source: .
     source-type: git
     # WORKAROUND: Fake installation location to find dependencies at runtime
     meson-parameters: [--prefix=/snap/djpdf/current/usr]
     build-packages:
-      - ninja-build
+      - meson
       - gettext
       - appstream
-      - graphicsmagick-imagemagick-compat
-    stage-packages:
-      # WORKAROUND: Dependencies required for Qt
-      - libxcb-cursor0
-    override-pull: |
-      craftctl default
-      # WORKAROUND: Point icon directly to PNG otherwise snapcraft can't find it
-      sed -e 's|Icon=com.github.unrud.djpdf|Icon=/usr/share/icons/hicolor/512x512/apps/com.github.unrud.djpdf.png|' -i desktop/com.github.unrud.djpdf.desktop.in
+      - imagemagick
     override-build: |
       craftctl default
       # WORKAROUND: Use python from search path, the path detected by meson doesn't exist when running the Snap
