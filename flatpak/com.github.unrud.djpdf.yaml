@@ -10,6 +10,10 @@ finish-args:
   - --socket=wayland
   - --device=dri
   - --share=ipc
+build-options:
+  env:
+    - BASEAPP_REMOVE_WEBENGINE=1
+    - BASEAPP_DISABLE_NUMPY=1
 cleanup:
   - '*.a'
   - '*.la'
@@ -18,6 +22,8 @@ cleanup:
   - /lib/pkgconfig
   - /share/doc
   - /share/man
+cleanup-commands:
+  - /app/cleanup-BaseApp.sh
 add-extensions:
   com.github.unrud.djpdf.OCR:
     directory: extensions/ocr
